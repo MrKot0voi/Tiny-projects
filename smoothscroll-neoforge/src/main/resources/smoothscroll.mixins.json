@@ -7,6 +7,8 @@
   "package": "smsk.smoothscroll.mixin",
   "client": [
     "Hotbar.HotbarMixin",
-    "Hotbar.MouseMixin"
+    "Hotbar.MouseMixin",
+    "Widgets.ScrollableWidgetMixin",
+    "Widgets.TextFieldWidgetMixin"
   ]
 }
