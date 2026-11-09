@@ -1,5 +1,8 @@
 name: build smoothscroll (neoforge 1.21.11)
 
+permissions:
+  contents: write
+
 on:
   push:
     paths:
@@ -35,13 +38,19 @@ jobs:
           gradle createMinecraftArtifacts --no-daemon -q || true
           bash tools/dump-signatures.sh build/signatures || true
 
-      - name: Upload signatures
+      - name: Commit signatures (diagnostics)
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: mc-signatures
-          path: smoothscroll-neoforge/build/signatures/**
-          if-no-files-found: warn
+        continue-on-error: true
+        run: |
+          rm -rf diag/sigs
+          mkdir -p diag/sigs
+          cp -r build/signatures/. diag/sigs/ 2>/dev/null || true
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f smoothscroll-neoforge/diag
+          git commit -m "[skip ci] диагностика сигнатур Mojang" || echo "nothing to commit"
+          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"
 
       - name: Build
         run: gradle build --stacktrace --no-daemon
