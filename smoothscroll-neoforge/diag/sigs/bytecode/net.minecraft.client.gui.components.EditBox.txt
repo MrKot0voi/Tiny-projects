@@ -1,0 +1,1770 @@
+Compiled from "EditBox.java"
+public class net.minecraft.client.gui.components.EditBox extends net.minecraft.client.gui.components.AbstractWidget {
+  private static final net.minecraft.client.gui.components.WidgetSprites SPRITES;
+    descriptor: Lnet/minecraft/client/gui/components/WidgetSprites;
+
+  public static final int BACKWARDS;
+    descriptor: I
+
+  public static final int FORWARDS;
+    descriptor: I
+
+  private static final int CURSOR_INSERT_WIDTH;
+    descriptor: I
+
+  private static final java.lang.String CURSOR_APPEND_CHARACTER;
+    descriptor: Ljava/lang/String;
+
+  public static final int DEFAULT_TEXT_COLOR;
+    descriptor: I
+
+  public static final net.minecraft.network.chat.Style DEFAULT_HINT_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+
+  public static final net.minecraft.network.chat.Style SEARCH_HINT_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+
+  private static final int CURSOR_BLINK_INTERVAL_MS;
+    descriptor: I
+
+  private final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+
+  private java.lang.String value;
+    descriptor: Ljava/lang/String;
+
+  private int maxLength;
+    descriptor: I
+
+  private boolean bordered;
+    descriptor: Z
+
+  private boolean canLoseFocus;
+    descriptor: Z
+
+  private boolean isEditable;
+    descriptor: Z
+
+  private boolean centered;
+    descriptor: Z
+
+  private boolean textShadow;
+    descriptor: Z
+
+  private boolean invertHighlightedTextColor;
+    descriptor: Z
+
+  private int displayPos;
+    descriptor: I
+
+  private int cursorPos;
+    descriptor: I
+
+  private int highlightPos;
+    descriptor: I
+
+  private int textColor;
+    descriptor: I
+
+  private int textColorUneditable;
+    descriptor: I
+
+  private java.lang.String suggestion;
+    descriptor: Ljava/lang/String;
+
+  private java.util.function.Consumer<java.lang.String> responder;
+    descriptor: Ljava/util/function/Consumer;
+
+  private java.util.function.Predicate<java.lang.String> filter;
+    descriptor: Ljava/util/function/Predicate;
+
+  private final java.util.List<net.minecraft.client.gui.components.EditBox$TextFormatter> formatters;
+    descriptor: Ljava/util/List;
+
+  private net.minecraft.network.chat.Component hint;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  private long focusedTime;
+    descriptor: J
+
+  private int textX;
+    descriptor: I
+
+  private int textY;
+    descriptor: I
+
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/Font;IILnet/minecraft/network/chat/Component;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iconst_0
+         3: iconst_0
+         4: iload_2
+         5: iload_3
+         6: aload         4
+         8: invokespecial #1                  // Method "<init>":(Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/network/chat/Component;)V
+        11: return
+
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, int, int, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/network/chat/Component;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: iload_3
+         4: iload         4
+         6: iload         5
+         8: aconst_null
+         9: aload         6
+        11: invokespecial #7                  // Method "<init>":(Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/client/gui/components/EditBox;Lnet/minecraft/network/chat/Component;)V
+        14: return
+
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, int, int, net.minecraft.client.gui.components.EditBox, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/client/gui/components/EditBox;Lnet/minecraft/network/chat/Component;)V
+    Code:
+         0: aload_0
+         1: iload_2
+         2: iload_3
+         3: iload         4
+         5: iload         5
+         7: aload         7
+         9: invokespecial #10                 // Method net/minecraft/client/gui/components/AbstractWidget."<init>":(IIIILnet/minecraft/network/chat/Component;)V
+        12: aload_0
+        13: ldc           #15                 // String
+        15: putfield      #17                 // Field value:Ljava/lang/String;
+        18: aload_0
+        19: bipush        32
+        21: putfield      #21                 // Field maxLength:I
+        24: aload_0
+        25: iconst_1
+        26: putfield      #25                 // Field bordered:Z
+        29: aload_0
+        30: iconst_1
+        31: putfield      #29                 // Field canLoseFocus:Z
+        34: aload_0
+        35: iconst_1
+        36: putfield      #32                 // Field isEditable:Z
+        39: aload_0
+        40: iconst_0
+        41: putfield      #35                 // Field centered:Z
+        44: aload_0
+        45: iconst_1
+        46: putfield      #38                 // Field textShadow:Z
+        49: aload_0
+        50: iconst_1
+        51: putfield      #41                 // Field invertHighlightedTextColor:Z
+        54: aload_0
+        55: ldc           #44                 // int -2039584
+        57: putfield      #45                 // Field textColor:I
+        60: aload_0
+        61: ldc           #48                 // int -9408400
+        63: putfield      #49                 // Field textColorUneditable:I
+        66: aload_0
+        67: invokedynamic #52,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+        72: putfield      #56                 // Field filter:Ljava/util/function/Predicate;
+        75: aload_0
+        76: new           #60                 // class java/util/ArrayList
+        79: dup
+        80: invokespecial #62                 // Method java/util/ArrayList."<init>":()V
+        83: putfield      #65                 // Field formatters:Ljava/util/List;
+        86: aload_0
+        87: invokestatic  #69                 // Method net/minecraft/util/Util.getMillis:()J
+        90: putfield      #75                 // Field focusedTime:J
+        93: aload_0
+        94: aload_1
+        95: putfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        98: aload         6
+       100: ifnull        112
+       103: aload_0
+       104: aload         6
+       106: invokevirtual #83                 // Method getValue:()Ljava/lang/String;
+       109: invokevirtual #87                 // Method setValue:(Ljava/lang/String;)V
+       112: aload_0
+       113: invokevirtual #91                 // Method updateTextPosition:()V
+       116: return
+
+  public void setResponder(java.util.function.Consumer<java.lang.String>);
+    descriptor: (Ljava/util/function/Consumer;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #94                 // Field responder:Ljava/util/function/Consumer;
+         5: return
+
+  public void addFormatter(net.minecraft.client.gui.components.EditBox$TextFormatter);
+    descriptor: (Lnet/minecraft/client/gui/components/EditBox$TextFormatter;)V
+    Code:
+         0: aload_0
+         1: getfield      #65                 // Field formatters:Ljava/util/List;
+         4: aload_1
+         5: invokeinterface #98,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        10: pop
+        11: return
+
+  protected net.minecraft.network.chat.MutableComponent createNarrationMessage();
+    descriptor: ()Lnet/minecraft/network/chat/MutableComponent;
+    Code:
+         0: aload_0
+         1: invokevirtual #104                // Method getMessage:()Lnet/minecraft/network/chat/Component;
+         4: astore_1
+         5: ldc           #108                // String gui.narrate.editBox
+         7: iconst_2
+         8: anewarray     #110                // class java/lang/Object
+        11: dup
+        12: iconst_0
+        13: aload_1
+        14: aastore
+        15: dup
+        16: iconst_1
+        17: aload_0
+        18: getfield      #17                 // Field value:Ljava/lang/String;
+        21: aastore
+        22: invokestatic  #112                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;
+        25: areturn
+
+  public void setValue(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: getfield      #56                 // Field filter:Ljava/util/function/Predicate;
+         4: aload_1
+         5: invokeinterface #118,  2          // InterfaceMethod java/util/function/Predicate.test:(Ljava/lang/Object;)Z
+        10: ifeq          63
+        13: aload_1
+        14: invokevirtual #122                // Method java/lang/String.length:()I
+        17: aload_0
+        18: getfield      #21                 // Field maxLength:I
+        21: if_icmple     40
+        24: aload_0
+        25: aload_1
+        26: iconst_0
+        27: aload_0
+        28: getfield      #21                 // Field maxLength:I
+        31: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        34: putfield      #17                 // Field value:Ljava/lang/String;
+        37: goto          45
+        40: aload_0
+        41: aload_1
+        42: putfield      #17                 // Field value:Ljava/lang/String;
+        45: aload_0
+        46: iconst_0
+        47: invokevirtual #132                // Method moveCursorToEnd:(Z)V
+        50: aload_0
+        51: aload_0
+        52: getfield      #136                // Field cursorPos:I
+        55: invokevirtual #139                // Method setHighlightPos:(I)V
+        58: aload_0
+        59: aload_1
+        60: invokevirtual #143                // Method onValueChange:(Ljava/lang/String;)V
+        63: return
+
+  public java.lang.String getValue();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field value:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getHighlighted();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: getfield      #136                // Field cursorPos:I
+         4: aload_0
+         5: getfield      #146                // Field highlightPos:I
+         8: invokestatic  #149                // Method java/lang/Math.min:(II)I
+        11: istore_1
+        12: aload_0
+        13: getfield      #136                // Field cursorPos:I
+        16: aload_0
+        17: getfield      #146                // Field highlightPos:I
+        20: invokestatic  #155                // Method java/lang/Math.max:(II)I
+        23: istore_2
+        24: aload_0
+        25: getfield      #17                 // Field value:Ljava/lang/String;
+        28: iload_1
+        29: iload_2
+        30: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        33: areturn
+
+  public void setX(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokespecial #158                // Method net/minecraft/client/gui/components/AbstractWidget.setX:(I)V
+         5: aload_0
+         6: invokevirtual #91                 // Method updateTextPosition:()V
+         9: return
+
+  public void setY(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokespecial #161                // Method net/minecraft/client/gui/components/AbstractWidget.setY:(I)V
+         5: aload_0
+         6: invokevirtual #91                 // Method updateTextPosition:()V
+         9: return
+
+  public void setFilter(java.util.function.Predicate<java.lang.String>);
+    descriptor: (Ljava/util/function/Predicate;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #56                 // Field filter:Ljava/util/function/Predicate;
+         5: return
+
+  public void insertText(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: getfield      #136                // Field cursorPos:I
+         4: aload_0
+         5: getfield      #146                // Field highlightPos:I
+         8: invokestatic  #149                // Method java/lang/Math.min:(II)I
+        11: istore_2
+        12: aload_0
+        13: getfield      #136                // Field cursorPos:I
+        16: aload_0
+        17: getfield      #146                // Field highlightPos:I
+        20: invokestatic  #155                // Method java/lang/Math.max:(II)I
+        23: istore_3
+        24: aload_0
+        25: getfield      #21                 // Field maxLength:I
+        28: aload_0
+        29: getfield      #17                 // Field value:Ljava/lang/String;
+        32: invokevirtual #122                // Method java/lang/String.length:()I
+        35: isub
+        36: iload_2
+        37: iload_3
+        38: isub
+        39: isub
+        40: istore        4
+        42: iload         4
+        44: ifle          166
+        47: aload_1
+        48: invokestatic  #164                // Method net/minecraft/util/StringUtil.filterText:(Ljava/lang/String;)Ljava/lang/String;
+        51: astore        5
+        53: aload         5
+        55: invokevirtual #122                // Method java/lang/String.length:()I
+        58: istore        6
+        60: iload         4
+        62: iload         6
+        64: if_icmpge     99
+        67: aload         5
+        69: iload         4
+        71: iconst_1
+        72: isub
+        73: invokevirtual #170                // Method java/lang/String.charAt:(I)C
+        76: invokestatic  #174                // Method java/lang/Character.isHighSurrogate:(C)Z
+        79: ifeq          85
+        82: iinc          4, -1
+        85: aload         5
+        87: iconst_0
+        88: iload         4
+        90: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        93: astore        5
+        95: iload         4
+        97: istore        6
+        99: new           #180                // class java/lang/StringBuilder
+       102: dup
+       103: aload_0
+       104: getfield      #17                 // Field value:Ljava/lang/String;
+       107: invokespecial #182                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+       110: iload_2
+       111: iload_3
+       112: aload         5
+       114: invokevirtual #184                // Method java/lang/StringBuilder.replace:(IILjava/lang/String;)Ljava/lang/StringBuilder;
+       117: invokevirtual #188                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       120: astore        7
+       122: aload_0
+       123: getfield      #56                 // Field filter:Ljava/util/function/Predicate;
+       126: aload         7
+       128: invokeinterface #118,  2          // InterfaceMethod java/util/function/Predicate.test:(Ljava/lang/Object;)Z
+       133: ifeq          166
+       136: aload_0
+       137: aload         7
+       139: putfield      #17                 // Field value:Ljava/lang/String;
+       142: aload_0
+       143: iload_2
+       144: iload         6
+       146: iadd
+       147: invokevirtual #191                // Method setCursorPosition:(I)V
+       150: aload_0
+       151: aload_0
+       152: getfield      #136                // Field cursorPos:I
+       155: invokevirtual #139                // Method setHighlightPos:(I)V
+       158: aload_0
+       159: aload_0
+       160: getfield      #17                 // Field value:Ljava/lang/String;
+       163: invokevirtual #143                // Method onValueChange:(Ljava/lang/String;)V
+       166: return
+
+  private void onValueChange(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: getfield      #94                 // Field responder:Ljava/util/function/Consumer;
+         4: ifnull        17
+         7: aload_0
+         8: getfield      #94                 // Field responder:Ljava/util/function/Consumer;
+        11: aload_1
+        12: invokeinterface #194,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        17: aload_0
+        18: invokevirtual #91                 // Method updateTextPosition:()V
+        21: return
+
+  private void deleteText(int, boolean);
+    descriptor: (IZ)V
+    Code:
+         0: iload_2
+         1: ifeq          12
+         4: aload_0
+         5: iload_1
+         6: invokevirtual #200                // Method deleteWords:(I)V
+         9: goto          17
+        12: aload_0
+        13: iload_1
+        14: invokevirtual #203                // Method deleteChars:(I)V
+        17: return
+
+  public void deleteWords(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field value:Ljava/lang/String;
+         4: invokevirtual #206                // Method java/lang/String.isEmpty:()Z
+         7: ifne          39
+        10: aload_0
+        11: getfield      #146                // Field highlightPos:I
+        14: aload_0
+        15: getfield      #136                // Field cursorPos:I
+        18: if_icmpeq     30
+        21: aload_0
+        22: ldc           #15                 // String
+        24: invokevirtual #210                // Method insertText:(Ljava/lang/String;)V
+        27: goto          39
+        30: aload_0
+        31: aload_0
+        32: iload_1
+        33: invokevirtual #213                // Method getWordPosition:(I)I
+        36: invokevirtual #217                // Method deleteCharsToPos:(I)V
+        39: return
+
+  public void deleteChars(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: aload_0
+         2: iload_1
+         3: invokevirtual #220                // Method getCursorPos:(I)I
+         6: invokevirtual #217                // Method deleteCharsToPos:(I)V
+         9: return
+
+  public void deleteCharsToPos(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field value:Ljava/lang/String;
+         4: invokevirtual #206                // Method java/lang/String.isEmpty:()Z
+         7: ifne          100
+        10: aload_0
+        11: getfield      #146                // Field highlightPos:I
+        14: aload_0
+        15: getfield      #136                // Field cursorPos:I
+        18: if_icmpeq     30
+        21: aload_0
+        22: ldc           #15                 // String
+        24: invokevirtual #210                // Method insertText:(Ljava/lang/String;)V
+        27: goto          100
+        30: iload_1
+        31: aload_0
+        32: getfield      #136                // Field cursorPos:I
+        35: invokestatic  #149                // Method java/lang/Math.min:(II)I
+        38: istore_2
+        39: iload_1
+        40: aload_0
+        41: getfield      #136                // Field cursorPos:I
+        44: invokestatic  #155                // Method java/lang/Math.max:(II)I
+        47: istore_3
+        48: iload_2
+        49: iload_3
+        50: if_icmpeq     100
+        53: new           #180                // class java/lang/StringBuilder
+        56: dup
+        57: aload_0
+        58: getfield      #17                 // Field value:Ljava/lang/String;
+        61: invokespecial #182                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+        64: iload_2
+        65: iload_3
+        66: invokevirtual #223                // Method java/lang/StringBuilder.delete:(II)Ljava/lang/StringBuilder;
+        69: invokevirtual #188                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        72: astore        4
+        74: aload_0
+        75: getfield      #56                 // Field filter:Ljava/util/function/Predicate;
+        78: aload         4
+        80: invokeinterface #118,  2          // InterfaceMethod java/util/function/Predicate.test:(Ljava/lang/Object;)Z
+        85: ifeq          100
+        88: aload_0
+        89: aload         4
+        91: putfield      #17                 // Field value:Ljava/lang/String;
+        94: aload_0
+        95: iload_2
+        96: iconst_0
+        97: invokevirtual #227                // Method moveCursorTo:(IZ)V
+       100: return
+
+  public int getWordPosition(int);
+    descriptor: (I)I
+    Code:
+         0: aload_0
+         1: iload_1
+         2: aload_0
+         3: invokevirtual #231                // Method getCursorPosition:()I
+         6: invokevirtual #234                // Method getWordPosition:(II)I
+         9: ireturn
+
+  private int getWordPosition(int, int);
+    descriptor: (II)I
+    Code:
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: iconst_1
+         4: invokevirtual #236                // Method getWordPosition:(IIZ)I
+         7: ireturn
+
+  private int getWordPosition(int, int, boolean);
+    descriptor: (IIZ)I
+    Code:
+         0: iload_2
+         1: istore        4
+         3: iload_1
+         4: ifge          11
+         7: iconst_1
+         8: goto          12
+        11: iconst_0
+        12: istore        5
+        14: iload_1
+        15: invokestatic  #239                // Method java/lang/Math.abs:(I)I
+        18: istore        6
+        20: iconst_0
+        21: istore        7
+        23: iload         7
+        25: iload         6
+        27: if_icmpge     168
+        30: iload         5
+        32: ifne          104
+        35: aload_0
+        36: getfield      #17                 // Field value:Ljava/lang/String;
+        39: invokevirtual #122                // Method java/lang/String.length:()I
+        42: istore        8
+        44: aload_0
+        45: getfield      #17                 // Field value:Ljava/lang/String;
+        48: bipush        32
+        50: iload         4
+        52: invokevirtual #242                // Method java/lang/String.indexOf:(II)I
+        55: istore        4
+        57: iload         4
+        59: iconst_m1
+        60: if_icmpne     70
+        63: iload         8
+        65: istore        4
+        67: goto          101
+        70: iload_3
+        71: ifeq          101
+        74: iload         4
+        76: iload         8
+        78: if_icmpge     101
+        81: aload_0
+        82: getfield      #17                 // Field value:Ljava/lang/String;
+        85: iload         4
+        87: invokevirtual #170                // Method java/lang/String.charAt:(I)C
+        90: bipush        32
+        92: if_icmpne     101
+        95: iinc          4, 1
+        98: goto          70
+       101: goto          162
+       104: iload_3
+       105: ifeq          135
+       108: iload         4
+       110: ifle          135
+       113: aload_0
+       114: getfield      #17                 // Field value:Ljava/lang/String;
+       117: iload         4
+       119: iconst_1
+       120: isub
+       121: invokevirtual #170                // Method java/lang/String.charAt:(I)C
+       124: bipush        32
+       126: if_icmpne     135
+       129: iinc          4, -1
+       132: goto          104
+       135: iload         4
+       137: ifle          162
+       140: aload_0
+       141: getfield      #17                 // Field value:Ljava/lang/String;
+       144: iload         4
+       146: iconst_1
+       147: isub
+       148: invokevirtual #170                // Method java/lang/String.charAt:(I)C
+       151: bipush        32
+       153: if_icmpeq     162
+       156: iinc          4, -1
+       159: goto          135
+       162: iinc          7, 1
+       165: goto          23
+       168: iload         4
+       170: ireturn
+
+  public void moveCursor(int, boolean);
+    descriptor: (IZ)V
+    Code:
+         0: aload_0
+         1: aload_0
+         2: iload_1
+         3: invokevirtual #220                // Method getCursorPos:(I)I
+         6: iload_2
+         7: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        10: return
+
+  private int getCursorPos(int);
+    descriptor: (I)I
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field value:Ljava/lang/String;
+         4: aload_0
+         5: getfield      #136                // Field cursorPos:I
+         8: iload_1
+         9: invokestatic  #245                // Method net/minecraft/util/Util.offsetByCodepoints:(Ljava/lang/String;II)I
+        12: ireturn
+
+  public void moveCursorTo(int, boolean);
+    descriptor: (IZ)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokevirtual #191                // Method setCursorPosition:(I)V
+         5: iload_2
+         6: ifne          17
+         9: aload_0
+        10: aload_0
+        11: getfield      #136                // Field cursorPos:I
+        14: invokevirtual #139                // Method setHighlightPos:(I)V
+        17: aload_0
+        18: aload_0
+        19: getfield      #17                 // Field value:Ljava/lang/String;
+        22: invokevirtual #143                // Method onValueChange:(Ljava/lang/String;)V
+        25: return
+
+  public void setCursorPosition(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: iconst_0
+         3: aload_0
+         4: getfield      #17                 // Field value:Ljava/lang/String;
+         7: invokevirtual #122                // Method java/lang/String.length:()I
+        10: invokestatic  #249                // Method net/minecraft/util/Mth.clamp:(III)I
+        13: putfield      #136                // Field cursorPos:I
+        16: aload_0
+        17: aload_0
+        18: getfield      #136                // Field cursorPos:I
+        21: invokevirtual #255                // Method scrollTo:(I)V
+        24: return
+
+  public void moveCursorToStart(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: iload_1
+         3: invokevirtual #227                // Method moveCursorTo:(IZ)V
+         6: return
+
+  public void moveCursorToEnd(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: aload_0
+         2: getfield      #17                 // Field value:Ljava/lang/String;
+         5: invokevirtual #122                // Method java/lang/String.length:()I
+         8: iload_1
+         9: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        12: return
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+    Code:
+         0: aload_0
+         1: invokevirtual #258                // Method isActive:()Z
+         4: ifeq          307
+         7: aload_0
+         8: invokevirtual #261                // Method isFocused:()Z
+        11: ifeq          307
+        14: aload_1
+        15: invokevirtual #264                // Method net/minecraft/client/input/KeyEvent.key:()I
+        18: tableswitch   { // 259 to 269
+                     259: 76
+                     260: 94
+                     261: 201
+                     262: 219
+                     263: 253
+                     264: 94
+                     265: 94
+                     266: 94
+                     267: 94
+                     268: 287
+                     269: 297
+                 default: 94
+            }
+        76: aload_0
+        77: getfield      #32                 // Field isEditable:Z
+        80: ifeq          92
+        83: aload_0
+        84: iconst_m1
+        85: aload_1
+        86: invokevirtual #269                // Method net/minecraft/client/input/KeyEvent.hasControlDownWithQuirk:()Z
+        89: invokevirtual #272                // Method deleteText:(IZ)V
+        92: iconst_1
+        93: ireturn
+        94: aload_1
+        95: invokevirtual #275                // Method net/minecraft/client/input/KeyEvent.isSelectAll:()Z
+        98: ifeq          113
+       101: aload_0
+       102: iconst_0
+       103: invokevirtual #132                // Method moveCursorToEnd:(Z)V
+       106: aload_0
+       107: iconst_0
+       108: invokevirtual #139                // Method setHighlightPos:(I)V
+       111: iconst_1
+       112: ireturn
+       113: aload_1
+       114: invokevirtual #278                // Method net/minecraft/client/input/KeyEvent.isCopy:()Z
+       117: ifeq          135
+       120: invokestatic  #281                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       123: getfield      #287                // Field net/minecraft/client/Minecraft.keyboardHandler:Lnet/minecraft/client/KeyboardHandler;
+       126: aload_0
+       127: invokevirtual #291                // Method getHighlighted:()Ljava/lang/String;
+       130: invokevirtual #294                // Method net/minecraft/client/KeyboardHandler.setClipboard:(Ljava/lang/String;)V
+       133: iconst_1
+       134: ireturn
+       135: aload_1
+       136: invokevirtual #299                // Method net/minecraft/client/input/KeyEvent.isPaste:()Z
+       139: ifeq          164
+       142: aload_0
+       143: invokevirtual #302                // Method isEditable:()Z
+       146: ifeq          162
+       149: aload_0
+       150: invokestatic  #281                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       153: getfield      #287                // Field net/minecraft/client/Minecraft.keyboardHandler:Lnet/minecraft/client/KeyboardHandler;
+       156: invokevirtual #304                // Method net/minecraft/client/KeyboardHandler.getClipboard:()Ljava/lang/String;
+       159: invokevirtual #210                // Method insertText:(Ljava/lang/String;)V
+       162: iconst_1
+       163: ireturn
+       164: aload_1
+       165: invokevirtual #307                // Method net/minecraft/client/input/KeyEvent.isCut:()Z
+       168: ifeq          199
+       171: invokestatic  #281                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       174: getfield      #287                // Field net/minecraft/client/Minecraft.keyboardHandler:Lnet/minecraft/client/KeyboardHandler;
+       177: aload_0
+       178: invokevirtual #291                // Method getHighlighted:()Ljava/lang/String;
+       181: invokevirtual #294                // Method net/minecraft/client/KeyboardHandler.setClipboard:(Ljava/lang/String;)V
+       184: aload_0
+       185: invokevirtual #302                // Method isEditable:()Z
+       188: ifeq          197
+       191: aload_0
+       192: ldc           #15                 // String
+       194: invokevirtual #210                // Method insertText:(Ljava/lang/String;)V
+       197: iconst_1
+       198: ireturn
+       199: iconst_0
+       200: ireturn
+       201: aload_0
+       202: getfield      #32                 // Field isEditable:Z
+       205: ifeq          217
+       208: aload_0
+       209: iconst_1
+       210: aload_1
+       211: invokevirtual #269                // Method net/minecraft/client/input/KeyEvent.hasControlDownWithQuirk:()Z
+       214: invokevirtual #272                // Method deleteText:(IZ)V
+       217: iconst_1
+       218: ireturn
+       219: aload_1
+       220: invokevirtual #269                // Method net/minecraft/client/input/KeyEvent.hasControlDownWithQuirk:()Z
+       223: ifeq          242
+       226: aload_0
+       227: aload_0
+       228: iconst_1
+       229: invokevirtual #213                // Method getWordPosition:(I)I
+       232: aload_1
+       233: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       236: invokevirtual #227                // Method moveCursorTo:(IZ)V
+       239: goto          251
+       242: aload_0
+       243: iconst_1
+       244: aload_1
+       245: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       248: invokevirtual #313                // Method moveCursor:(IZ)V
+       251: iconst_1
+       252: ireturn
+       253: aload_1
+       254: invokevirtual #269                // Method net/minecraft/client/input/KeyEvent.hasControlDownWithQuirk:()Z
+       257: ifeq          276
+       260: aload_0
+       261: aload_0
+       262: iconst_m1
+       263: invokevirtual #213                // Method getWordPosition:(I)I
+       266: aload_1
+       267: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       270: invokevirtual #227                // Method moveCursorTo:(IZ)V
+       273: goto          285
+       276: aload_0
+       277: iconst_m1
+       278: aload_1
+       279: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       282: invokevirtual #313                // Method moveCursor:(IZ)V
+       285: iconst_1
+       286: ireturn
+       287: aload_0
+       288: aload_1
+       289: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       292: invokevirtual #316                // Method moveCursorToStart:(Z)V
+       295: iconst_1
+       296: ireturn
+       297: aload_0
+       298: aload_1
+       299: invokevirtual #310                // Method net/minecraft/client/input/KeyEvent.hasShiftDown:()Z
+       302: invokevirtual #132                // Method moveCursorToEnd:(Z)V
+       305: iconst_1
+       306: ireturn
+       307: iconst_0
+       308: ireturn
+
+  public boolean canConsumeInput();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: invokevirtual #258                // Method isActive:()Z
+         4: ifeq          25
+         7: aload_0
+         8: invokevirtual #261                // Method isFocused:()Z
+        11: ifeq          25
+        14: aload_0
+        15: invokevirtual #302                // Method isEditable:()Z
+        18: ifeq          25
+        21: iconst_1
+        22: goto          26
+        25: iconst_0
+        26: ireturn
+
+  public boolean charTyped(net.minecraft.client.input.CharacterEvent);
+    descriptor: (Lnet/minecraft/client/input/CharacterEvent;)Z
+    Code:
+         0: aload_0
+         1: invokevirtual #319                // Method canConsumeInput:()Z
+         4: ifne          9
+         7: iconst_0
+         8: ireturn
+         9: aload_1
+        10: invokevirtual #322                // Method net/minecraft/client/input/CharacterEvent.isAllowedChatCharacter:()Z
+        13: ifeq          33
+        16: aload_0
+        17: getfield      #32                 // Field isEditable:Z
+        20: ifeq          31
+        23: aload_0
+        24: aload_1
+        25: invokevirtual #327                // Method net/minecraft/client/input/CharacterEvent.codepointAsString:()Ljava/lang/String;
+        28: invokevirtual #210                // Method insertText:(Ljava/lang/String;)V
+        31: iconst_1
+        32: ireturn
+        33: iconst_0
+        34: ireturn
+
+  private int findClickedPositionInText(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)I
+    Code:
+         0: aload_1
+         1: invokevirtual #330                // Method net/minecraft/client/input/MouseButtonEvent.x:()D
+         4: invokestatic  #336                // Method net/minecraft/util/Mth.floor:(D)I
+         7: aload_0
+         8: getfield      #340                // Field textX:I
+        11: isub
+        12: aload_0
+        13: invokevirtual #343                // Method getInnerWidth:()I
+        16: invokestatic  #149                // Method java/lang/Math.min:(II)I
+        19: istore_2
+        20: aload_0
+        21: getfield      #17                 // Field value:Ljava/lang/String;
+        24: aload_0
+        25: getfield      #346                // Field displayPos:I
+        28: invokevirtual #349                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        31: astore_3
+        32: aload_0
+        33: getfield      #346                // Field displayPos:I
+        36: aload_0
+        37: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        40: aload_3
+        41: iload_2
+        42: invokevirtual #352                // Method net/minecraft/client/gui/Font.plainSubstrByWidth:(Ljava/lang/String;I)Ljava/lang/String;
+        45: invokevirtual #122                // Method java/lang/String.length:()I
+        48: iadd
+        49: ireturn
+
+  private void selectWord(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #358                // Method findClickedPositionInText:(Lnet/minecraft/client/input/MouseButtonEvent;)I
+         5: istore_2
+         6: aload_0
+         7: iconst_m1
+         8: iload_2
+         9: invokevirtual #234                // Method getWordPosition:(II)I
+        12: istore_3
+        13: aload_0
+        14: iconst_1
+        15: iload_2
+        16: invokevirtual #234                // Method getWordPosition:(II)I
+        19: istore        4
+        21: aload_0
+        22: iload_3
+        23: iconst_0
+        24: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        27: aload_0
+        28: iload         4
+        30: iconst_1
+        31: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        34: return
+
+  public void onClick(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)V
+    Code:
+         0: iload_2
+         1: ifeq          12
+         4: aload_0
+         5: aload_1
+         6: invokevirtual #362                // Method selectWord:(Lnet/minecraft/client/input/MouseButtonEvent;)V
+         9: goto          25
+        12: aload_0
+        13: aload_0
+        14: aload_1
+        15: invokevirtual #358                // Method findClickedPositionInText:(Lnet/minecraft/client/input/MouseButtonEvent;)I
+        18: aload_1
+        19: invokevirtual #366                // Method net/minecraft/client/input/MouseButtonEvent.hasShiftDown:()Z
+        22: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        25: return
+
+  protected void onDrag(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)V
+    Code:
+         0: aload_0
+         1: aload_0
+         2: aload_1
+         3: invokevirtual #358                // Method findClickedPositionInText:(Lnet/minecraft/client/input/MouseButtonEvent;)I
+         6: iconst_1
+         7: invokevirtual #227                // Method moveCursorTo:(IZ)V
+        10: return
+
+  public void playDownSound(net.minecraft.client.sounds.SoundManager);
+    descriptor: (Lnet/minecraft/client/sounds/SoundManager;)V
+    Code:
+         0: return
+
+  public void renderWidget(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+    Code:
+         0: aload_0
+         1: invokevirtual #367                // Method isVisible:()Z
+         4: ifeq          671
+         7: aload_0
+         8: invokevirtual #370                // Method isBordered:()Z
+        11: ifeq          55
+        14: getstatic     #373                // Field SPRITES:Lnet/minecraft/client/gui/components/WidgetSprites;
+        17: aload_0
+        18: invokevirtual #258                // Method isActive:()Z
+        21: aload_0
+        22: invokevirtual #261                // Method isFocused:()Z
+        25: invokevirtual #377                // Method net/minecraft/client/gui/components/WidgetSprites.get:(ZZ)Lnet/minecraft/resources/Identifier;
+        28: astore        5
+        30: aload_1
+        31: getstatic     #383                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+        34: aload         5
+        36: aload_0
+        37: invokevirtual #389                // Method getX:()I
+        40: aload_0
+        41: invokevirtual #392                // Method getY:()I
+        44: aload_0
+        45: invokevirtual #395                // Method getWidth:()I
+        48: aload_0
+        49: invokevirtual #398                // Method getHeight:()I
+        52: invokevirtual #401                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+        55: aload_0
+        56: getfield      #32                 // Field isEditable:Z
+        59: ifeq          69
+        62: aload_0
+        63: getfield      #45                 // Field textColor:I
+        66: goto          73
+        69: aload_0
+        70: getfield      #49                 // Field textColorUneditable:I
+        73: istore        5
+        75: aload_0
+        76: getfield      #136                // Field cursorPos:I
+        79: aload_0
+        80: getfield      #346                // Field displayPos:I
+        83: isub
+        84: istore        6
+        86: aload_0
+        87: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        90: aload_0
+        91: getfield      #17                 // Field value:Ljava/lang/String;
+        94: aload_0
+        95: getfield      #346                // Field displayPos:I
+        98: invokevirtual #349                // Method java/lang/String.substring:(I)Ljava/lang/String;
+       101: aload_0
+       102: invokevirtual #343                // Method getInnerWidth:()I
+       105: invokevirtual #352                // Method net/minecraft/client/gui/Font.plainSubstrByWidth:(Ljava/lang/String;I)Ljava/lang/String;
+       108: astore        7
+       110: iload         6
+       112: iflt          129
+       115: iload         6
+       117: aload         7
+       119: invokevirtual #122                // Method java/lang/String.length:()I
+       122: if_icmpgt     129
+       125: iconst_1
+       126: goto          130
+       129: iconst_0
+       130: istore        8
+       132: aload_0
+       133: invokevirtual #261                // Method isFocused:()Z
+       136: ifeq          169
+       139: invokestatic  #69                 // Method net/minecraft/util/Util.getMillis:()J
+       142: aload_0
+       143: getfield      #75                 // Field focusedTime:J
+       146: lsub
+       147: ldc2_w        #407                // long 300l
+       150: ldiv
+       151: ldc2_w        #409                // long 2l
+       154: lrem
+       155: lconst_0
+       156: lcmp
+       157: ifne          169
+       160: iload         8
+       162: ifeq          169
+       165: iconst_1
+       166: goto          170
+       169: iconst_0
+       170: istore        9
+       172: aload_0
+       173: getfield      #340                // Field textX:I
+       176: istore        10
+       178: aload_0
+       179: getfield      #146                // Field highlightPos:I
+       182: aload_0
+       183: getfield      #346                // Field displayPos:I
+       186: isub
+       187: iconst_0
+       188: aload         7
+       190: invokevirtual #122                // Method java/lang/String.length:()I
+       193: invokestatic  #249                // Method net/minecraft/util/Mth.clamp:(III)I
+       196: istore        11
+       198: aload         7
+       200: invokevirtual #206                // Method java/lang/String.isEmpty:()Z
+       203: ifne          276
+       206: iload         8
+       208: ifeq          222
+       211: aload         7
+       213: iconst_0
+       214: iload         6
+       216: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       219: goto          224
+       222: aload         7
+       224: astore        12
+       226: aload_0
+       227: aload         12
+       229: aload_0
+       230: getfield      #346                // Field displayPos:I
+       233: invokevirtual #411                // Method applyFormat:(Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+       236: astore        13
+       238: aload_1
+       239: aload_0
+       240: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       243: aload         13
+       245: iload         10
+       247: aload_0
+       248: getfield      #415                // Field textY:I
+       251: iload         5
+       253: aload_0
+       254: getfield      #38                 // Field textShadow:Z
+       257: invokevirtual #418                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;IIIZ)V
+       260: iload         10
+       262: aload_0
+       263: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       266: aload         13
+       268: invokevirtual #422                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/util/FormattedCharSequence;)I
+       271: iconst_1
+       272: iadd
+       273: iadd
+       274: istore        10
+       276: aload_0
+       277: getfield      #136                // Field cursorPos:I
+       280: aload_0
+       281: getfield      #17                 // Field value:Ljava/lang/String;
+       284: invokevirtual #122                // Method java/lang/String.length:()I
+       287: if_icmplt     304
+       290: aload_0
+       291: getfield      #17                 // Field value:Ljava/lang/String;
+       294: invokevirtual #122                // Method java/lang/String.length:()I
+       297: aload_0
+       298: invokevirtual #426                // Method getMaxLength:()I
+       301: if_icmplt     308
+       304: iconst_1
+       305: goto          309
+       308: iconst_0
+       309: istore        12
+       311: iload         10
+       313: istore        13
+       315: iload         8
+       317: ifne          346
+       320: iload         6
+       322: ifle          337
+       325: aload_0
+       326: getfield      #340                // Field textX:I
+       329: aload_0
+       330: getfield      #429                // Field width:I
+       333: iadd
+       334: goto          341
+       337: aload_0
+       338: getfield      #340                // Field textX:I
+       341: istore        13
+       343: goto          360
+       346: iload         12
+       348: ifeq          360
+       351: iload         10
+       353: iconst_1
+       354: isub
+       355: istore        13
+       357: iinc          10, -1
+       360: aload         7
+       362: invokevirtual #206                // Method java/lang/String.isEmpty:()Z
+       365: ifne          418
+       368: iload         8
+       370: ifeq          418
+       373: iload         6
+       375: aload         7
+       377: invokevirtual #122                // Method java/lang/String.length:()I
+       380: if_icmpge     418
+       383: aload_1
+       384: aload_0
+       385: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       388: aload_0
+       389: aload         7
+       391: iload         6
+       393: invokevirtual #349                // Method java/lang/String.substring:(I)Ljava/lang/String;
+       396: aload_0
+       397: getfield      #136                // Field cursorPos:I
+       400: invokevirtual #411                // Method applyFormat:(Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+       403: iload         10
+       405: aload_0
+       406: getfield      #415                // Field textY:I
+       409: iload         5
+       411: aload_0
+       412: getfield      #38                 // Field textShadow:Z
+       415: invokevirtual #418                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;IIIZ)V
+       418: aload_0
+       419: getfield      #431                // Field hint:Lnet/minecraft/network/chat/Component;
+       422: ifnull        460
+       425: aload         7
+       427: invokevirtual #206                // Method java/lang/String.isEmpty:()Z
+       430: ifeq          460
+       433: aload_0
+       434: invokevirtual #261                // Method isFocused:()Z
+       437: ifne          460
+       440: aload_1
+       441: aload_0
+       442: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       445: aload_0
+       446: getfield      #431                // Field hint:Lnet/minecraft/network/chat/Component;
+       449: iload         10
+       451: aload_0
+       452: getfield      #415                // Field textY:I
+       455: iload         5
+       457: invokevirtual #435                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+       460: iload         12
+       462: ifne          499
+       465: aload_0
+       466: getfield      #438                // Field suggestion:Ljava/lang/String;
+       469: ifnull        499
+       472: aload_1
+       473: aload_0
+       474: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       477: aload_0
+       478: getfield      #438                // Field suggestion:Ljava/lang/String;
+       481: iload         13
+       483: iconst_1
+       484: isub
+       485: aload_0
+       486: getfield      #415                // Field textY:I
+       489: ldc_w         #441                // int -8355712
+       492: aload_0
+       493: getfield      #38                 // Field textShadow:Z
+       496: invokevirtual #442                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)V
+       499: iload         11
+       501: iload         6
+       503: if_icmpeq     581
+       506: aload_0
+       507: getfield      #340                // Field textX:I
+       510: aload_0
+       511: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       514: aload         7
+       516: iconst_0
+       517: iload         11
+       519: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       522: invokevirtual #445                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+       525: iadd
+       526: istore        14
+       528: aload_1
+       529: iload         13
+       531: aload_0
+       532: invokevirtual #389                // Method getX:()I
+       535: aload_0
+       536: getfield      #429                // Field width:I
+       539: iadd
+       540: invokestatic  #149                // Method java/lang/Math.min:(II)I
+       543: aload_0
+       544: getfield      #415                // Field textY:I
+       547: iconst_1
+       548: isub
+       549: iload         14
+       551: iconst_1
+       552: isub
+       553: aload_0
+       554: invokevirtual #389                // Method getX:()I
+       557: aload_0
+       558: getfield      #429                // Field width:I
+       561: iadd
+       562: invokestatic  #149                // Method java/lang/Math.min:(II)I
+       565: aload_0
+       566: getfield      #415                // Field textY:I
+       569: iconst_1
+       570: iadd
+       571: bipush        9
+       573: iadd
+       574: aload_0
+       575: getfield      #41                 // Field invertHighlightedTextColor:Z
+       578: invokevirtual #448                // Method net/minecraft/client/gui/GuiGraphics.textHighlight:(IIIIZ)V
+       581: iload         9
+       583: ifeq          644
+       586: iload         12
+       588: ifeq          621
+       591: aload_1
+       592: iload         13
+       594: aload_0
+       595: getfield      #415                // Field textY:I
+       598: iconst_1
+       599: isub
+       600: iload         13
+       602: iconst_1
+       603: iadd
+       604: aload_0
+       605: getfield      #415                // Field textY:I
+       608: iconst_1
+       609: iadd
+       610: bipush        9
+       612: iadd
+       613: iload         5
+       615: invokevirtual #452                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+       618: goto          644
+       621: aload_1
+       622: aload_0
+       623: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+       626: ldc_w         #456                // String _
+       629: iload         13
+       631: aload_0
+       632: getfield      #415                // Field textY:I
+       635: iload         5
+       637: aload_0
+       638: getfield      #38                 // Field textShadow:Z
+       641: invokevirtual #442                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)V
+       644: aload_0
+       645: invokevirtual #458                // Method isHovered:()Z
+       648: ifeq          671
+       651: aload_1
+       652: aload_0
+       653: invokevirtual #302                // Method isEditable:()Z
+       656: ifeq          665
+       659: getstatic     #461                // Field com/mojang/blaze3d/platform/cursor/CursorTypes.IBEAM:Lcom/mojang/blaze3d/platform/cursor/CursorType;
+       662: goto          668
+       665: getstatic     #467                // Field com/mojang/blaze3d/platform/cursor/CursorTypes.NOT_ALLOWED:Lcom/mojang/blaze3d/platform/cursor/CursorType;
+       668: invokevirtual #470                // Method net/minecraft/client/gui/GuiGraphics.requestCursor:(Lcom/mojang/blaze3d/platform/cursor/CursorType;)V
+       671: return
+
+  private net.minecraft.util.FormattedCharSequence applyFormat(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+    Code:
+         0: aload_0
+         1: getfield      #65                 // Field formatters:Ljava/util/List;
+         4: invokeinterface #474,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+         9: astore_3
+        10: aload_3
+        11: invokeinterface #478,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        16: ifeq          52
+        19: aload_3
+        20: invokeinterface #483,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        25: checkcast     #487                // class net/minecraft/client/gui/components/EditBox$TextFormatter
+        28: astore        4
+        30: aload         4
+        32: aload_1
+        33: iload_2
+        34: invokeinterface #489,  3          // InterfaceMethod net/minecraft/client/gui/components/EditBox$TextFormatter.format:(Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+        39: astore        5
+        41: aload         5
+        43: ifnull        49
+        46: aload         5
+        48: areturn
+        49: goto          10
+        52: aload_1
+        53: getstatic     #492                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        56: invokestatic  #498                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+        59: areturn
+
+  private void updateTextPosition();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+         4: ifnull        108
+         7: aload_0
+         8: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        11: aload_0
+        12: getfield      #17                 // Field value:Ljava/lang/String;
+        15: aload_0
+        16: getfield      #346                // Field displayPos:I
+        19: invokevirtual #349                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        22: aload_0
+        23: invokevirtual #343                // Method getInnerWidth:()I
+        26: invokevirtual #352                // Method net/minecraft/client/gui/Font.plainSubstrByWidth:(Ljava/lang/String;I)Ljava/lang/String;
+        29: astore_1
+        30: aload_0
+        31: aload_0
+        32: invokevirtual #389                // Method getX:()I
+        35: aload_0
+        36: invokevirtual #504                // Method isCentered:()Z
+        39: ifeq          60
+        42: aload_0
+        43: invokevirtual #395                // Method getWidth:()I
+        46: aload_0
+        47: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        50: aload_1
+        51: invokevirtual #445                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+        54: isub
+        55: iconst_2
+        56: idiv
+        57: goto          72
+        60: aload_0
+        61: getfield      #25                 // Field bordered:Z
+        64: ifeq          71
+        67: iconst_4
+        68: goto          72
+        71: iconst_0
+        72: iadd
+        73: putfield      #340                // Field textX:I
+        76: aload_0
+        77: aload_0
+        78: getfield      #25                 // Field bordered:Z
+        81: ifeq          101
+        84: aload_0
+        85: invokevirtual #392                // Method getY:()I
+        88: aload_0
+        89: getfield      #507                // Field height:I
+        92: bipush        8
+        94: isub
+        95: iconst_2
+        96: idiv
+        97: iadd
+        98: goto          105
+       101: aload_0
+       102: invokevirtual #392                // Method getY:()I
+       105: putfield      #415                // Field textY:I
+       108: return
+
+  public void setMaxLength(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #21                 // Field maxLength:I
+         5: aload_0
+         6: getfield      #17                 // Field value:Ljava/lang/String;
+         9: invokevirtual #122                // Method java/lang/String.length:()I
+        12: iload_1
+        13: if_icmple     37
+        16: aload_0
+        17: aload_0
+        18: getfield      #17                 // Field value:Ljava/lang/String;
+        21: iconst_0
+        22: iload_1
+        23: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        26: putfield      #17                 // Field value:Ljava/lang/String;
+        29: aload_0
+        30: aload_0
+        31: getfield      #17                 // Field value:Ljava/lang/String;
+        34: invokevirtual #143                // Method onValueChange:(Ljava/lang/String;)V
+        37: return
+
+  private int getMaxLength();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #21                 // Field maxLength:I
+         4: ireturn
+
+  public int getCursorPosition();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #136                // Field cursorPos:I
+         4: ireturn
+
+  public boolean isBordered();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #25                 // Field bordered:Z
+         4: ireturn
+
+  public void setBordered(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #25                 // Field bordered:Z
+         5: aload_0
+         6: invokevirtual #91                 // Method updateTextPosition:()V
+         9: return
+
+  public void setTextColor(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #45                 // Field textColor:I
+         5: return
+
+  public void setTextColorUneditable(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #49                 // Field textColorUneditable:I
+         5: return
+
+  public void setFocused(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field canLoseFocus:Z
+         4: ifne          11
+         7: iload_1
+         8: ifeq          27
+        11: aload_0
+        12: iload_1
+        13: invokespecial #510                // Method net/minecraft/client/gui/components/AbstractWidget.setFocused:(Z)V
+        16: iload_1
+        17: ifeq          27
+        20: aload_0
+        21: invokestatic  #69                 // Method net/minecraft/util/Util.getMillis:()J
+        24: putfield      #75                 // Field focusedTime:J
+        27: return
+
+  private boolean isEditable();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #32                 // Field isEditable:Z
+         4: ireturn
+
+  public void setEditable(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #32                 // Field isEditable:Z
+         5: return
+
+  private boolean isCentered();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field centered:Z
+         4: ireturn
+
+  public void setCentered(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #35                 // Field centered:Z
+         5: aload_0
+         6: invokevirtual #91                 // Method updateTextPosition:()V
+         9: return
+
+  public void setTextShadow(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #38                 // Field textShadow:Z
+         5: return
+
+  public void setInvertHighlightedTextColor(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #41                 // Field invertHighlightedTextColor:Z
+         5: return
+
+  public int getInnerWidth();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokevirtual #370                // Method isBordered:()Z
+         4: ifeq          17
+         7: aload_0
+         8: getfield      #429                // Field width:I
+        11: bipush        8
+        13: isub
+        14: goto          21
+        17: aload_0
+        18: getfield      #429                // Field width:I
+        21: ireturn
+
+  public void setHighlightPos(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: iconst_0
+         3: aload_0
+         4: getfield      #17                 // Field value:Ljava/lang/String;
+         7: invokevirtual #122                // Method java/lang/String.length:()I
+        10: invokestatic  #249                // Method net/minecraft/util/Mth.clamp:(III)I
+        13: putfield      #146                // Field highlightPos:I
+        16: aload_0
+        17: aload_0
+        18: getfield      #146                // Field highlightPos:I
+        21: invokevirtual #255                // Method scrollTo:(I)V
+        24: return
+
+  private void scrollTo(int);
+    descriptor: (I)V
+    Code:
+         0: aload_0
+         1: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+         4: ifnull        158
+         7: aload_0
+         8: aload_0
+         9: getfield      #346                // Field displayPos:I
+        12: aload_0
+        13: getfield      #17                 // Field value:Ljava/lang/String;
+        16: invokevirtual #122                // Method java/lang/String.length:()I
+        19: invokestatic  #149                // Method java/lang/Math.min:(II)I
+        22: putfield      #346                // Field displayPos:I
+        25: aload_0
+        26: invokevirtual #343                // Method getInnerWidth:()I
+        29: istore_2
+        30: aload_0
+        31: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        34: aload_0
+        35: getfield      #17                 // Field value:Ljava/lang/String;
+        38: aload_0
+        39: getfield      #346                // Field displayPos:I
+        42: invokevirtual #349                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        45: iload_2
+        46: invokevirtual #352                // Method net/minecraft/client/gui/Font.plainSubstrByWidth:(Ljava/lang/String;I)Ljava/lang/String;
+        49: astore_3
+        50: aload_3
+        51: invokevirtual #122                // Method java/lang/String.length:()I
+        54: aload_0
+        55: getfield      #346                // Field displayPos:I
+        58: iadd
+        59: istore        4
+        61: iload_1
+        62: aload_0
+        63: getfield      #346                // Field displayPos:I
+        66: if_icmpne     94
+        69: aload_0
+        70: aload_0
+        71: getfield      #346                // Field displayPos:I
+        74: aload_0
+        75: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        78: aload_0
+        79: getfield      #17                 // Field value:Ljava/lang/String;
+        82: iload_2
+        83: iconst_1
+        84: invokevirtual #513                // Method net/minecraft/client/gui/Font.plainSubstrByWidth:(Ljava/lang/String;IZ)Ljava/lang/String;
+        87: invokevirtual #122                // Method java/lang/String.length:()I
+        90: isub
+        91: putfield      #346                // Field displayPos:I
+        94: iload_1
+        95: iload         4
+        97: if_icmple     116
+       100: aload_0
+       101: dup
+       102: getfield      #346                // Field displayPos:I
+       105: iload_1
+       106: iload         4
+       108: isub
+       109: iadd
+       110: putfield      #346                // Field displayPos:I
+       113: goto          139
+       116: iload_1
+       117: aload_0
+       118: getfield      #346                // Field displayPos:I
+       121: if_icmpgt     139
+       124: aload_0
+       125: aload_0
+       126: getfield      #346                // Field displayPos:I
+       129: aload_0
+       130: getfield      #346                // Field displayPos:I
+       133: iload_1
+       134: isub
+       135: isub
+       136: putfield      #346                // Field displayPos:I
+       139: aload_0
+       140: aload_0
+       141: getfield      #346                // Field displayPos:I
+       144: iconst_0
+       145: aload_0
+       146: getfield      #17                 // Field value:Ljava/lang/String;
+       149: invokevirtual #122                // Method java/lang/String.length:()I
+       152: invokestatic  #249                // Method net/minecraft/util/Mth.clamp:(III)I
+       155: putfield      #346                // Field displayPos:I
+       158: return
+
+  public void setCanLoseFocus(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #29                 // Field canLoseFocus:Z
+         5: return
+
+  public boolean isVisible();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #516                // Field visible:Z
+         4: ireturn
+
+  public void setVisible(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #516                // Field visible:Z
+         5: return
+
+  public void setSuggestion(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #438                // Field suggestion:Ljava/lang/String;
+         5: return
+
+  public int getScreenX(int);
+    descriptor: (I)I
+    Code:
+         0: iload_1
+         1: aload_0
+         2: getfield      #17                 // Field value:Ljava/lang/String;
+         5: invokevirtual #122                // Method java/lang/String.length:()I
+         8: if_icmple     18
+        11: aload_0
+        12: invokevirtual #389                // Method getX:()I
+        15: goto          39
+        18: aload_0
+        19: invokevirtual #389                // Method getX:()I
+        22: aload_0
+        23: getfield      #79                 // Field font:Lnet/minecraft/client/gui/Font;
+        26: aload_0
+        27: getfield      #17                 // Field value:Ljava/lang/String;
+        30: iconst_0
+        31: iload_1
+        32: invokevirtual #128                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        35: invokevirtual #445                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+        38: iadd
+        39: ireturn
+
+  public void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+    Code:
+         0: aload_1
+         1: getstatic     #519                // Field net/minecraft/client/gui/narration/NarratedElementType.TITLE:Lnet/minecraft/client/gui/narration/NarratedElementType;
+         4: aload_0
+         5: invokevirtual #525                // Method createNarrationMessage:()Lnet/minecraft/network/chat/MutableComponent;
+         8: invokeinterface #529,  3          // InterfaceMethod net/minecraft/client/gui/narration/NarrationElementOutput.add:(Lnet/minecraft/client/gui/narration/NarratedElementType;Lnet/minecraft/network/chat/Component;)V
+        13: return
+
+  public void setHint(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+    Code:
+         0: aload_1
+         1: invokeinterface #534,  1          // InterfaceMethod net/minecraft/network/chat/Component.getStyle:()Lnet/minecraft/network/chat/Style;
+         6: getstatic     #492                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+         9: invokevirtual #538                // Method net/minecraft/network/chat/Style.equals:(Ljava/lang/Object;)Z
+        12: istore_2
+        13: aload_0
+        14: iload_2
+        15: ifeq          33
+        18: aload_1
+        19: invokeinterface #541,  1          // InterfaceMethod net/minecraft/network/chat/Component.copy:()Lnet/minecraft/network/chat/MutableComponent;
+        24: getstatic     #544                // Field DEFAULT_HINT_STYLE:Lnet/minecraft/network/chat/Style;
+        27: invokevirtual #547                // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/network/chat/Style;)Lnet/minecraft/network/chat/MutableComponent;
+        30: goto          34
+        33: aload_1
+        34: putfield      #431                // Field hint:Lnet/minecraft/network/chat/Component;
+        37: return
+
+  public boolean getTextShadow();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #38                 // Field textShadow:Z
+         4: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: new           #378                // class net/minecraft/client/gui/components/WidgetSprites
+         3: dup
+         4: ldc_w         #553                // String widget/text_field
+         7: invokestatic  #555                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+        10: ldc_w         #561                // String widget/text_field_highlighted
+        13: invokestatic  #555                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+        16: invokespecial #563                // Method net/minecraft/client/gui/components/WidgetSprites."<init>":(Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;)V
+        19: putstatic     #373                // Field SPRITES:Lnet/minecraft/client/gui/components/WidgetSprites;
+        22: getstatic     #492                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        25: getstatic     #566                // Field net/minecraft/ChatFormatting.DARK_GRAY:Lnet/minecraft/ChatFormatting;
+        28: invokevirtual #572                // Method net/minecraft/network/chat/Style.withColor:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;
+        31: putstatic     #544                // Field DEFAULT_HINT_STYLE:Lnet/minecraft/network/chat/Style;
+        34: getstatic     #492                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        37: iconst_2
+        38: anewarray     #567                // class net/minecraft/ChatFormatting
+        41: dup
+        42: iconst_0
+        43: getstatic     #576                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+        46: aastore
+        47: dup
+        48: iconst_1
+        49: getstatic     #579                // Field net/minecraft/ChatFormatting.ITALIC:Lnet/minecraft/ChatFormatting;
+        52: aastore
+        53: invokevirtual #582                // Method net/minecraft/network/chat/Style.applyFormats:([Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;
+        56: putstatic     #586                // Field SEARCH_HINT_STYLE:Lnet/minecraft/network/chat/Style;
+        59: return
+}

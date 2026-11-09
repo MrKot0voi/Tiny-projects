@@ -1,0 +1,1192 @@
+Compiled from "CommandSuggestions.java"
+public class net.minecraft.client.gui.components.CommandSuggestions {
+  private static final java.util.regex.Pattern WHITESPACE_PATTERN;
+    descriptor: Ljava/util/regex/Pattern;
+
+  private static final net.minecraft.network.chat.Style UNPARSED_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+
+  private static final net.minecraft.network.chat.Style LITERAL_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+
+  private static final java.util.List<net.minecraft.network.chat.Style> ARGUMENT_STYLES;
+    descriptor: Ljava/util/List;
+
+  final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+
+  private final net.minecraft.client.gui.screens.Screen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+
+  final net.minecraft.client.gui.components.EditBox input;
+    descriptor: Lnet/minecraft/client/gui/components/EditBox;
+
+  final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+
+  private final boolean commandsOnly;
+    descriptor: Z
+
+  private final boolean onlyShowIfCursorPastError;
+    descriptor: Z
+
+  final int lineStartOffset;
+    descriptor: I
+
+  final int suggestionLineLimit;
+    descriptor: I
+
+  final boolean anchorToBottom;
+    descriptor: Z
+
+  final int fillColor;
+    descriptor: I
+
+  private final java.util.List<net.minecraft.util.FormattedCharSequence> commandUsage;
+    descriptor: Ljava/util/List;
+
+  private int commandUsagePosition;
+    descriptor: I
+
+  private int commandUsageWidth;
+    descriptor: I
+
+  private com.mojang.brigadier.ParseResults<net.minecraft.client.multiplayer.ClientSuggestionProvider> currentParse;
+    descriptor: Lcom/mojang/brigadier/ParseResults;
+
+  private java.util.concurrent.CompletableFuture<com.mojang.brigadier.suggestion.Suggestions> pendingSuggestions;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
+
+  private net.minecraft.client.gui.components.CommandSuggestions$SuggestionsList suggestions;
+    descriptor: Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+
+  private boolean allowSuggestions;
+    descriptor: Z
+
+  boolean keepSuggestions;
+    descriptor: Z
+
+  private boolean allowHiding;
+    descriptor: Z
+
+  public net.minecraft.client.gui.components.CommandSuggestions(net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.components.EditBox, net.minecraft.client.gui.Font, boolean, boolean, int, int, boolean, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/gui/components/EditBox;Lnet/minecraft/client/gui/Font;ZZIIZI)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+         8: putfield      #13                 // Field commandUsage:Ljava/util/List;
+        11: aload_0
+        12: iconst_1
+        13: putfield      #19                 // Field allowHiding:Z
+        16: aload_0
+        17: aload_1
+        18: putfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+        21: aload_0
+        22: aload_2
+        23: putfield      #27                 // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+        26: aload_0
+        27: aload_3
+        28: putfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        31: aload_0
+        32: aload         4
+        34: putfield      #35                 // Field font:Lnet/minecraft/client/gui/Font;
+        37: aload_0
+        38: iload         5
+        40: putfield      #39                 // Field commandsOnly:Z
+        43: aload_0
+        44: iload         6
+        46: putfield      #42                 // Field onlyShowIfCursorPastError:Z
+        49: aload_0
+        50: iload         7
+        52: putfield      #45                 // Field lineStartOffset:I
+        55: aload_0
+        56: iload         8
+        58: putfield      #49                 // Field suggestionLineLimit:I
+        61: aload_0
+        62: iload         9
+        64: putfield      #52                 // Field anchorToBottom:Z
+        67: aload_0
+        68: iload         10
+        70: putfield      #55                 // Field fillColor:I
+        73: aload_3
+        74: aload_0
+        75: invokedynamic #58,  0             // InvokeDynamic #0:format:(Lnet/minecraft/client/gui/components/CommandSuggestions;)Lnet/minecraft/client/gui/components/EditBox$TextFormatter;
+        80: invokevirtual #62                 // Method net/minecraft/client/gui/components/EditBox.addFormatter:(Lnet/minecraft/client/gui/components/EditBox$TextFormatter;)V
+        83: return
+
+  public void setAllowSuggestions(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #68                 // Field allowSuggestions:Z
+         5: iload_1
+         6: ifne          14
+         9: aload_0
+        10: aconst_null
+        11: putfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        14: return
+
+  public void setAllowHiding(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #19                 // Field allowHiding:Z
+         5: return
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        11
+         7: iconst_1
+         8: goto          12
+        11: iconst_0
+        12: istore_2
+        13: iload_2
+        14: ifeq          30
+        17: aload_0
+        18: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        21: aload_1
+        22: invokevirtual #75                 // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.keyPressed:(Lnet/minecraft/client/input/KeyEvent;)Z
+        25: ifeq          30
+        28: iconst_1
+        29: ireturn
+        30: aload_0
+        31: getfield      #27                 // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+        34: invokevirtual #81                 // Method net/minecraft/client/gui/screens/Screen.getFocused:()Lnet/minecraft/client/gui/components/events/GuiEventListener;
+        37: aload_0
+        38: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        41: if_acmpne     62
+        44: aload_1
+        45: invokevirtual #87                 // Method net/minecraft/client/input/KeyEvent.isCycleFocus:()Z
+        48: ifeq          62
+        51: aload_0
+        52: getfield      #19                 // Field allowHiding:Z
+        55: ifeq          64
+        58: iload_2
+        59: ifne          64
+        62: iconst_0
+        63: ireturn
+        64: aload_0
+        65: iconst_1
+        66: invokevirtual #93                 // Method showSuggestions:(Z)V
+        69: iconst_1
+        70: ireturn
+
+  public boolean mouseScrolled(double);
+    descriptor: (D)Z
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        29
+         7: aload_0
+         8: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        11: dload_1
+        12: ldc2_w        #97                 // double -1.0d
+        15: dconst_1
+        16: invokestatic  #99                 // Method net/minecraft/util/Mth.clamp:(DDD)D
+        19: invokevirtual #105                // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.mouseScrolled:(D)Z
+        22: ifeq          29
+        25: iconst_1
+        26: goto          30
+        29: iconst_0
+        30: ireturn
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        31
+         7: aload_0
+         8: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        11: aload_1
+        12: invokevirtual #109                // Method net/minecraft/client/input/MouseButtonEvent.x:()D
+        15: d2i
+        16: aload_1
+        17: invokevirtual #115                // Method net/minecraft/client/input/MouseButtonEvent.y:()D
+        20: d2i
+        21: invokevirtual #118                // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.mouseClicked:(II)Z
+        24: ifeq          31
+        27: iconst_1
+        28: goto          32
+        31: iconst_0
+        32: ireturn
+
+  public void showSuggestions(boolean);
+    descriptor: (Z)V
+    Code:
+         0: aload_0
+         1: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+         4: ifnull        175
+         7: aload_0
+         8: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+        11: invokevirtual #126                // Method java/util/concurrent/CompletableFuture.isDone:()Z
+        14: ifeq          175
+        17: aload_0
+        18: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+        21: invokevirtual #131                // Method java/util/concurrent/CompletableFuture.join:()Ljava/lang/Object;
+        24: checkcast     #135                // class com/mojang/brigadier/suggestion/Suggestions
+        27: astore_2
+        28: aload_2
+        29: invokevirtual #137                // Method com/mojang/brigadier/suggestion/Suggestions.isEmpty:()Z
+        32: ifne          175
+        35: iconst_0
+        36: istore_3
+        37: aload_2
+        38: invokevirtual #140                // Method com/mojang/brigadier/suggestion/Suggestions.getList:()Ljava/util/List;
+        41: invokeinterface #144,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        46: astore        4
+        48: aload         4
+        50: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        55: ifeq          90
+        58: aload         4
+        60: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        65: checkcast     #158                // class com/mojang/brigadier/suggestion/Suggestion
+        68: astore        5
+        70: iload_3
+        71: aload_0
+        72: getfield      #35                 // Field font:Lnet/minecraft/client/gui/Font;
+        75: aload         5
+        77: invokevirtual #160                // Method com/mojang/brigadier/suggestion/Suggestion.getText:()Ljava/lang/String;
+        80: invokevirtual #164                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+        83: invokestatic  #170                // Method java/lang/Math.max:(II)I
+        86: istore_3
+        87: goto          48
+        90: aload_0
+        91: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        94: aload_2
+        95: invokevirtual #176                // Method com/mojang/brigadier/suggestion/Suggestions.getRange:()Lcom/mojang/brigadier/context/StringRange;
+        98: invokevirtual #180                // Method com/mojang/brigadier/context/StringRange.getStart:()I
+       101: invokevirtual #186                // Method net/minecraft/client/gui/components/EditBox.getScreenX:(I)I
+       104: iconst_0
+       105: aload_0
+       106: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       109: iconst_0
+       110: invokevirtual #186                // Method net/minecraft/client/gui/components/EditBox.getScreenX:(I)I
+       113: aload_0
+       114: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       117: invokevirtual #190                // Method net/minecraft/client/gui/components/EditBox.getInnerWidth:()I
+       120: iadd
+       121: iload_3
+       122: isub
+       123: invokestatic  #193                // Method net/minecraft/util/Mth.clamp:(III)I
+       126: istore        4
+       128: aload_0
+       129: getfield      #52                 // Field anchorToBottom:Z
+       132: ifeq          148
+       135: aload_0
+       136: getfield      #27                 // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+       139: getfield      #196                // Field net/minecraft/client/gui/screens/Screen.height:I
+       142: bipush        12
+       144: isub
+       145: goto          150
+       148: bipush        72
+       150: istore        5
+       152: aload_0
+       153: new           #76                 // class net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList
+       156: dup
+       157: aload_0
+       158: iload         4
+       160: iload         5
+       162: iload_3
+       163: aload_0
+       164: aload_2
+       165: invokevirtual #199                // Method sortSuggestions:(Lcom/mojang/brigadier/suggestion/Suggestions;)Ljava/util/List;
+       168: iload_1
+       169: invokespecial #203                // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList."<init>":(Lnet/minecraft/client/gui/components/CommandSuggestions;IIILjava/util/List;Z)V
+       172: putfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+       175: return
+
+  public boolean isVisible();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        11
+         7: iconst_1
+         8: goto          12
+        11: iconst_0
+        12: ireturn
+
+  public net.minecraft.network.chat.Component getUsageNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        38
+         7: aload_0
+         8: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        11: getfield      #206                // Field net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.tabCycles:Z
+        14: ifeq          38
+        17: aload_0
+        18: getfield      #19                 // Field allowHiding:Z
+        21: ifeq          32
+        24: ldc           #209                // String narration.suggestion.usage.cycle.hidable
+        26: invokestatic  #211                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+        29: goto          37
+        32: ldc           #217                // String narration.suggestion.usage.cycle.fixed
+        34: invokestatic  #211                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+        37: areturn
+        38: aload_0
+        39: getfield      #19                 // Field allowHiding:Z
+        42: ifeq          53
+        45: ldc           #219                // String narration.suggestion.usage.fill.hidable
+        47: invokestatic  #211                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+        50: goto          58
+        53: ldc           #221                // String narration.suggestion.usage.fill.fixed
+        55: invokestatic  #211                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+        58: areturn
+
+  public void hide();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: aconst_null
+         2: putfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         5: return
+
+  private java.util.List<com.mojang.brigadier.suggestion.Suggestion> sortSuggestions(com.mojang.brigadier.suggestion.Suggestions);
+    descriptor: (Lcom/mojang/brigadier/suggestion/Suggestions;)Ljava/util/List;
+    Code:
+         0: aload_0
+         1: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+         4: invokevirtual #223                // Method net/minecraft/client/gui/components/EditBox.getValue:()Ljava/lang/String;
+         7: iconst_0
+         8: aload_0
+         9: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        12: invokevirtual #226                // Method net/minecraft/client/gui/components/EditBox.getCursorPosition:()I
+        15: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        18: astore_2
+        19: aload_2
+        20: invokestatic  #235                // Method getLastWordIndex:(Ljava/lang/String;)I
+        23: istore_3
+        24: aload_2
+        25: iload_3
+        26: invokevirtual #238                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        29: getstatic     #241                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+        32: invokevirtual #247                // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+        35: astore        4
+        37: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+        40: astore        5
+        42: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+        45: astore        6
+        47: aload_1
+        48: invokevirtual #140                // Method com/mojang/brigadier/suggestion/Suggestions.getList:()Ljava/util/List;
+        51: invokeinterface #144,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        56: astore        7
+        58: aload         7
+        60: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        65: ifeq          137
+        68: aload         7
+        70: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        75: checkcast     #158                // class com/mojang/brigadier/suggestion/Suggestion
+        78: astore        8
+        80: aload         8
+        82: invokevirtual #160                // Method com/mojang/brigadier/suggestion/Suggestion.getText:()Ljava/lang/String;
+        85: aload         4
+        87: invokevirtual #251                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+        90: ifne          124
+        93: aload         8
+        95: invokevirtual #160                // Method com/mojang/brigadier/suggestion/Suggestion.getText:()Ljava/lang/String;
+        98: aload         4
+       100: invokedynamic #255,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       105: invokevirtual #251                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+       108: ifne          124
+       111: aload         6
+       113: aload         8
+       115: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       120: pop
+       121: goto          134
+       124: aload         5
+       126: aload         8
+       128: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       133: pop
+       134: goto          58
+       137: aload         5
+       139: aload         6
+       141: invokeinterface #263,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+       146: pop
+       147: aload         5
+       149: areturn
+
+  public void updateCommandInfo();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+         4: invokevirtual #223                // Method net/minecraft/client/gui/components/EditBox.getValue:()Ljava/lang/String;
+         7: astore_1
+         8: aload_0
+         9: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        12: ifnull        39
+        15: aload_0
+        16: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        19: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+        22: invokeinterface #277,  1          // InterfaceMethod com/mojang/brigadier/ImmutableStringReader.getString:()Ljava/lang/String;
+        27: aload_1
+        28: invokevirtual #282                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        31: ifne          39
+        34: aload_0
+        35: aconst_null
+        36: putfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        39: aload_0
+        40: getfield      #285                // Field keepSuggestions:Z
+        43: ifne          59
+        46: aload_0
+        47: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        50: aconst_null
+        51: invokevirtual #288                // Method net/minecraft/client/gui/components/EditBox.setSuggestion:(Ljava/lang/String;)V
+        54: aload_0
+        55: aconst_null
+        56: putfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        59: aload_0
+        60: getfield      #13                 // Field commandUsage:Ljava/util/List;
+        63: invokeinterface #292,  1          // InterfaceMethod java/util/List.clear:()V
+        68: new           #295                // class com/mojang/brigadier/StringReader
+        71: dup
+        72: aload_1
+        73: invokespecial #297                // Method com/mojang/brigadier/StringReader."<init>":(Ljava/lang/String;)V
+        76: astore_2
+        77: aload_2
+        78: invokevirtual #299                // Method com/mojang/brigadier/StringReader.canRead:()Z
+        81: ifeq          97
+        84: aload_2
+        85: invokevirtual #302                // Method com/mojang/brigadier/StringReader.peek:()C
+        88: bipush        47
+        90: if_icmpne     97
+        93: iconst_1
+        94: goto          98
+        97: iconst_0
+        98: istore_3
+        99: iload_3
+       100: ifeq          107
+       103: aload_2
+       104: invokevirtual #306                // Method com/mojang/brigadier/StringReader.skip:()V
+       107: aload_0
+       108: getfield      #39                 // Field commandsOnly:Z
+       111: ifne          118
+       114: iload_3
+       115: ifeq          122
+       118: iconst_1
+       119: goto          123
+       122: iconst_0
+       123: istore        4
+       125: aload_0
+       126: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       129: invokevirtual #226                // Method net/minecraft/client/gui/components/EditBox.getCursorPosition:()I
+       132: istore        5
+       134: iload         4
+       136: ifeq          254
+       139: aload_0
+       140: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+       143: getfield      #309                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+       146: getfield      #315                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+       149: invokevirtual #321                // Method net/minecraft/client/multiplayer/ClientPacketListener.getCommands:()Lcom/mojang/brigadier/CommandDispatcher;
+       152: astore        6
+       154: aload_0
+       155: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       158: ifnonnull     184
+       161: aload_0
+       162: aload         6
+       164: aload_2
+       165: aload_0
+       166: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+       169: getfield      #309                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+       172: getfield      #315                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+       175: invokevirtual #327                // Method net/minecraft/client/multiplayer/ClientPacketListener.getSuggestionsProvider:()Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;
+       178: invokevirtual #331                // Method com/mojang/brigadier/CommandDispatcher.parse:(Lcom/mojang/brigadier/StringReader;Ljava/lang/Object;)Lcom/mojang/brigadier/ParseResults;
+       181: putfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       184: aload_0
+       185: getfield      #42                 // Field onlyShowIfCursorPastError:Z
+       188: ifeq          198
+       191: aload_2
+       192: invokevirtual #337                // Method com/mojang/brigadier/StringReader.getCursor:()I
+       195: goto          199
+       198: iconst_1
+       199: istore        7
+       201: iload         5
+       203: iload         7
+       205: if_icmplt     251
+       208: aload_0
+       209: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+       212: ifnull        222
+       215: aload_0
+       216: getfield      #285                // Field keepSuggestions:Z
+       219: ifne          251
+       222: aload_0
+       223: aload         6
+       225: aload_0
+       226: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       229: iload         5
+       231: invokevirtual #340                // Method com/mojang/brigadier/CommandDispatcher.getCompletionSuggestions:(Lcom/mojang/brigadier/ParseResults;I)Ljava/util/concurrent/CompletableFuture;
+       234: putfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+       237: aload_0
+       238: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+       241: aload_0
+       242: invokedynamic #344,  0            // InvokeDynamic #2:run:(Lnet/minecraft/client/gui/components/CommandSuggestions;)Ljava/lang/Runnable;
+       247: invokevirtual #348                // Method java/util/concurrent/CompletableFuture.thenRun:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+       250: pop
+       251: goto          308
+       254: aload_1
+       255: iconst_0
+       256: iload         5
+       258: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       261: astore        6
+       263: aload         6
+       265: invokestatic  #235                // Method getLastWordIndex:(Ljava/lang/String;)I
+       268: istore        7
+       270: aload_0
+       271: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+       274: getfield      #309                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+       277: getfield      #315                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+       280: invokevirtual #327                // Method net/minecraft/client/multiplayer/ClientPacketListener.getSuggestionsProvider:()Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;
+       283: invokevirtual #352                // Method net/minecraft/client/multiplayer/ClientSuggestionProvider.getCustomTabSugggestions:()Ljava/util/Collection;
+       286: astore        8
+       288: aload_0
+       289: aload         8
+       291: new           #358                // class com/mojang/brigadier/suggestion/SuggestionsBuilder
+       294: dup
+       295: aload         6
+       297: iload         7
+       299: invokespecial #360                // Method com/mojang/brigadier/suggestion/SuggestionsBuilder."<init>":(Ljava/lang/String;I)V
+       302: invokestatic  #363                // InterfaceMethod net/minecraft/commands/SharedSuggestionProvider.suggest:(Ljava/lang/Iterable;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+       305: putfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+       308: return
+
+  private static int getLastWordIndex(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+    Code:
+         0: aload_0
+         1: invokestatic  #369                // Method com/google/common/base/Strings.isNullOrEmpty:(Ljava/lang/String;)Z
+         4: ifeq          9
+         7: iconst_0
+         8: ireturn
+         9: iconst_0
+        10: istore_1
+        11: getstatic     #374                // Field WHITESPACE_PATTERN:Ljava/util/regex/Pattern;
+        14: aload_0
+        15: invokevirtual #378                // Method java/util/regex/Pattern.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+        18: astore_2
+        19: aload_2
+        20: invokevirtual #384                // Method java/util/regex/Matcher.find:()Z
+        23: ifeq          34
+        26: aload_2
+        27: invokevirtual #389                // Method java/util/regex/Matcher.end:()I
+        30: istore_1
+        31: goto          19
+        34: iload_1
+        35: ireturn
+
+  private static net.minecraft.util.FormattedCharSequence getExceptionMessage(com.mojang.brigadier.exceptions.CommandSyntaxException);
+    descriptor: (Lcom/mojang/brigadier/exceptions/CommandSyntaxException;)Lnet/minecraft/util/FormattedCharSequence;
+    Code:
+         0: aload_0
+         1: invokevirtual #392                // Method com/mojang/brigadier/exceptions/CommandSyntaxException.getRawMessage:()Lcom/mojang/brigadier/Message;
+         4: invokestatic  #398                // Method net/minecraft/network/chat/ComponentUtils.fromMessage:(Lcom/mojang/brigadier/Message;)Lnet/minecraft/network/chat/Component;
+         7: astore_1
+         8: aload_0
+         9: invokevirtual #404                // Method com/mojang/brigadier/exceptions/CommandSyntaxException.getContext:()Ljava/lang/String;
+        12: astore_2
+        13: aload_2
+        14: ifnonnull     26
+        17: aload_1
+        18: invokeinterface #407,  1          // InterfaceMethod net/minecraft/network/chat/Component.getVisualOrderText:()Lnet/minecraft/util/FormattedCharSequence;
+        23: goto          57
+        26: ldc_w         #411                // String command.context.parse_error
+        29: iconst_3
+        30: anewarray     #2                  // class java/lang/Object
+        33: dup
+        34: iconst_0
+        35: aload_1
+        36: aastore
+        37: dup
+        38: iconst_1
+        39: aload_0
+        40: invokevirtual #413                // Method com/mojang/brigadier/exceptions/CommandSyntaxException.getCursor:()I
+        43: invokestatic  #414                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        46: aastore
+        47: dup
+        48: iconst_2
+        49: aload_2
+        50: aastore
+        51: invokestatic  #420                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;
+        54: invokevirtual #423                // Method net/minecraft/network/chat/MutableComponent.getVisualOrderText:()Lnet/minecraft/util/FormattedCharSequence;
+        57: areturn
+
+  private void updateUsageInfo();
+    descriptor: ()V
+    Code:
+         0: iconst_0
+         1: istore_1
+         2: aload_0
+         3: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+         6: invokevirtual #226                // Method net/minecraft/client/gui/components/EditBox.getCursorPosition:()I
+         9: aload_0
+        10: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        13: invokevirtual #223                // Method net/minecraft/client/gui/components/EditBox.getValue:()Ljava/lang/String;
+        16: invokevirtual #426                // Method java/lang/String.length:()I
+        19: if_icmpne     200
+        22: aload_0
+        23: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+        26: invokevirtual #131                // Method java/util/concurrent/CompletableFuture.join:()Ljava/lang/Object;
+        29: checkcast     #135                // class com/mojang/brigadier/suggestion/Suggestions
+        32: invokevirtual #137                // Method com/mojang/brigadier/suggestion/Suggestions.isEmpty:()Z
+        35: ifeq          183
+        38: aload_0
+        39: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        42: invokevirtual #429                // Method com/mojang/brigadier/ParseResults.getExceptions:()Ljava/util/Map;
+        45: invokeinterface #433,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+        50: ifne          183
+        53: iconst_0
+        54: istore_2
+        55: aload_0
+        56: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        59: invokevirtual #429                // Method com/mojang/brigadier/ParseResults.getExceptions:()Ljava/util/Map;
+        62: invokeinterface #436,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+        67: invokeinterface #440,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        72: astore_3
+        73: aload_3
+        74: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        79: ifeq          145
+        82: aload_3
+        83: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        88: checkcast     #443                // class java/util/Map$Entry
+        91: astore        4
+        93: aload         4
+        95: invokeinterface #445,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       100: checkcast     #393                // class com/mojang/brigadier/exceptions/CommandSyntaxException
+       103: astore        5
+       105: aload         5
+       107: invokevirtual #447                // Method com/mojang/brigadier/exceptions/CommandSyntaxException.getType:()Lcom/mojang/brigadier/exceptions/CommandExceptionType;
+       110: getstatic     #451                // Field com/mojang/brigadier/exceptions/CommandSyntaxException.BUILT_IN_EXCEPTIONS:Lcom/mojang/brigadier/exceptions/BuiltInExceptionProvider;
+       113: invokeinterface #455,  1          // InterfaceMethod com/mojang/brigadier/exceptions/BuiltInExceptionProvider.literalIncorrect:()Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+       118: if_acmpne     127
+       121: iinc          2, 1
+       124: goto          142
+       127: aload_0
+       128: getfield      #13                 // Field commandUsage:Ljava/util/List;
+       131: aload         5
+       133: invokestatic  #461                // Method getExceptionMessage:(Lcom/mojang/brigadier/exceptions/CommandSyntaxException;)Lnet/minecraft/util/FormattedCharSequence;
+       136: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       141: pop
+       142: goto          73
+       145: iload_2
+       146: ifle          180
+       149: aload_0
+       150: getfield      #13                 // Field commandUsage:Ljava/util/List;
+       153: getstatic     #451                // Field com/mojang/brigadier/exceptions/CommandSyntaxException.BUILT_IN_EXCEPTIONS:Lcom/mojang/brigadier/exceptions/BuiltInExceptionProvider;
+       156: invokeinterface #465,  1          // InterfaceMethod com/mojang/brigadier/exceptions/BuiltInExceptionProvider.dispatcherUnknownArgument:()Lcom/mojang/brigadier/exceptions/SimpleCommandExceptionType;
+       161: aload_0
+       162: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       165: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+       168: invokevirtual #469                // Method com/mojang/brigadier/exceptions/SimpleCommandExceptionType.createWithContext:(Lcom/mojang/brigadier/ImmutableStringReader;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
+       171: invokestatic  #461                // Method getExceptionMessage:(Lcom/mojang/brigadier/exceptions/CommandSyntaxException;)Lnet/minecraft/util/FormattedCharSequence;
+       174: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       179: pop
+       180: goto          200
+       183: aload_0
+       184: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       187: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+       190: invokeinterface #475,  1          // InterfaceMethod com/mojang/brigadier/ImmutableStringReader.canRead:()Z
+       195: ifeq          200
+       198: iconst_1
+       199: istore_1
+       200: aload_0
+       201: iconst_0
+       202: putfield      #476                // Field commandUsagePosition:I
+       205: aload_0
+       206: aload_0
+       207: getfield      #27                 // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+       210: getfield      #479                // Field net/minecraft/client/gui/screens/Screen.width:I
+       213: putfield      #481                // Field commandUsageWidth:I
+       216: aload_0
+       217: getfield      #13                 // Field commandUsage:Ljava/util/List;
+       220: invokeinterface #484,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       225: ifeq          262
+       228: aload_0
+       229: getstatic     #485                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+       232: invokevirtual #491                // Method fillNodeUsage:(Lnet/minecraft/ChatFormatting;)Z
+       235: ifne          262
+       238: iload_1
+       239: ifeq          262
+       242: aload_0
+       243: getfield      #13                 // Field commandUsage:Ljava/util/List;
+       246: aload_0
+       247: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+       250: invokestatic  #495                // Method net/minecraft/commands/Commands.getParseException:(Lcom/mojang/brigadier/ParseResults;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
+       253: invokestatic  #461                // Method getExceptionMessage:(Lcom/mojang/brigadier/exceptions/CommandSyntaxException;)Lnet/minecraft/util/FormattedCharSequence;
+       256: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       261: pop
+       262: aload_0
+       263: aconst_null
+       264: putfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+       267: aload_0
+       268: getfield      #68                 // Field allowSuggestions:Z
+       271: ifeq          301
+       274: aload_0
+       275: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+       278: getfield      #501                // Field net/minecraft/client/Minecraft.options:Lnet/minecraft/client/Options;
+       281: invokevirtual #505                // Method net/minecraft/client/Options.autoSuggestions:()Lnet/minecraft/client/OptionInstance;
+       284: invokevirtual #511                // Method net/minecraft/client/OptionInstance.get:()Ljava/lang/Object;
+       287: checkcast     #516                // class java/lang/Boolean
+       290: invokevirtual #518                // Method java/lang/Boolean.booleanValue:()Z
+       293: ifeq          301
+       296: aload_0
+       297: iconst_0
+       298: invokevirtual #93                 // Method showSuggestions:(Z)V
+       301: return
+
+  private boolean fillNodeUsage(net.minecraft.ChatFormatting);
+    descriptor: (Lnet/minecraft/ChatFormatting;)Z
+    Code:
+         0: aload_0
+         1: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+         4: invokevirtual #521                // Method com/mojang/brigadier/ParseResults.getContext:()Lcom/mojang/brigadier/context/CommandContextBuilder;
+         7: astore_2
+         8: aload_2
+         9: aload_0
+        10: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+        13: invokevirtual #226                // Method net/minecraft/client/gui/components/EditBox.getCursorPosition:()I
+        16: invokevirtual #524                // Method com/mojang/brigadier/context/CommandContextBuilder.findSuggestionContext:(I)Lcom/mojang/brigadier/context/SuggestionContext;
+        19: astore_3
+        20: aload_0
+        21: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+        24: getfield      #309                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+        27: getfield      #315                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+        30: invokevirtual #321                // Method net/minecraft/client/multiplayer/ClientPacketListener.getCommands:()Lcom/mojang/brigadier/CommandDispatcher;
+        33: aload_3
+        34: getfield      #530                // Field com/mojang/brigadier/context/SuggestionContext.parent:Lcom/mojang/brigadier/tree/CommandNode;
+        37: aload_0
+        38: getfield      #23                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+        41: getfield      #309                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+        44: getfield      #315                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+        47: invokevirtual #327                // Method net/minecraft/client/multiplayer/ClientPacketListener.getSuggestionsProvider:()Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;
+        50: invokevirtual #536                // Method com/mojang/brigadier/CommandDispatcher.getSmartUsage:(Lcom/mojang/brigadier/tree/CommandNode;Ljava/lang/Object;)Ljava/util/Map;
+        53: astore        4
+        55: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+        58: astore        5
+        60: iconst_0
+        61: istore        6
+        63: getstatic     #540                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        66: aload_1
+        67: invokevirtual #546                // Method net/minecraft/network/chat/Style.withColor:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;
+        70: astore        7
+        72: aload         4
+        74: invokeinterface #436,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+        79: invokeinterface #440,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        84: astore        8
+        86: aload         8
+        88: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        93: ifeq          171
+        96: aload         8
+        98: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       103: checkcast     #443                // class java/util/Map$Entry
+       106: astore        9
+       108: aload         9
+       110: invokeinterface #550,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+       115: instanceof    #553                // class com/mojang/brigadier/tree/LiteralCommandNode
+       118: ifne          168
+       121: aload         5
+       123: aload         9
+       125: invokeinterface #445,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       130: checkcast     #230                // class java/lang/String
+       133: aload         7
+       135: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       138: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       143: pop
+       144: iload         6
+       146: aload_0
+       147: getfield      #35                 // Field font:Lnet/minecraft/client/gui/Font;
+       150: aload         9
+       152: invokeinterface #445,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       157: checkcast     #230                // class java/lang/String
+       160: invokevirtual #164                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+       163: invokestatic  #170                // Method java/lang/Math.max:(II)I
+       166: istore        6
+       168: goto          86
+       171: aload         5
+       173: invokeinterface #484,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       178: ifne          239
+       181: aload_0
+       182: getfield      #13                 // Field commandUsage:Ljava/util/List;
+       185: aload         5
+       187: invokeinterface #263,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+       192: pop
+       193: aload_0
+       194: aload_0
+       195: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       198: aload_3
+       199: getfield      #561                // Field com/mojang/brigadier/context/SuggestionContext.startPos:I
+       202: invokevirtual #186                // Method net/minecraft/client/gui/components/EditBox.getScreenX:(I)I
+       205: iconst_0
+       206: aload_0
+       207: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       210: iconst_0
+       211: invokevirtual #186                // Method net/minecraft/client/gui/components/EditBox.getScreenX:(I)I
+       214: aload_0
+       215: getfield      #31                 // Field input:Lnet/minecraft/client/gui/components/EditBox;
+       218: invokevirtual #190                // Method net/minecraft/client/gui/components/EditBox.getInnerWidth:()I
+       221: iadd
+       222: iload         6
+       224: isub
+       225: invokestatic  #193                // Method net/minecraft/util/Mth.clamp:(III)I
+       228: putfield      #476                // Field commandUsagePosition:I
+       231: aload_0
+       232: iload         6
+       234: putfield      #481                // Field commandUsageWidth:I
+       237: iconst_1
+       238: ireturn
+       239: iconst_0
+       240: ireturn
+
+  private net.minecraft.util.FormattedCharSequence formatChat(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+    Code:
+         0: aload_0
+         1: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+         4: ifnull        19
+         7: aload_0
+         8: getfield      #267                // Field currentParse:Lcom/mojang/brigadier/ParseResults;
+        11: aload_1
+        12: iload_2
+        13: invokestatic  #564                // Method formatText:(Lcom/mojang/brigadier/ParseResults;Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+        16: goto          20
+        19: aconst_null
+        20: areturn
+
+  static java.lang.String calculateSuggestionSuffix(java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokevirtual #251                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+         5: ifeq          19
+         8: aload_1
+         9: aload_0
+        10: invokevirtual #426                // Method java/lang/String.length:()I
+        13: invokevirtual #238                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        16: goto          20
+        19: aconst_null
+        20: areturn
+
+  private static net.minecraft.util.FormattedCharSequence formatText(com.mojang.brigadier.ParseResults<net.minecraft.client.multiplayer.ClientSuggestionProvider>, java.lang.String, int);
+    descriptor: (Lcom/mojang/brigadier/ParseResults;Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+    Code:
+         0: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+         3: astore_3
+         4: iconst_0
+         5: istore        4
+         7: iconst_m1
+         8: istore        5
+        10: aload_0
+        11: invokevirtual #521                // Method com/mojang/brigadier/ParseResults.getContext:()Lcom/mojang/brigadier/context/CommandContextBuilder;
+        14: invokevirtual #568                // Method com/mojang/brigadier/context/CommandContextBuilder.getLastChild:()Lcom/mojang/brigadier/context/CommandContextBuilder;
+        17: astore        6
+        19: aload         6
+        21: invokevirtual #571                // Method com/mojang/brigadier/context/CommandContextBuilder.getArguments:()Ljava/util/Map;
+        24: invokeinterface #574,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+        29: invokeinterface #577,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        34: astore        7
+        36: aload         7
+        38: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        43: ifeq          188
+        46: aload         7
+        48: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        53: checkcast     #580                // class com/mojang/brigadier/context/ParsedArgument
+        56: astore        8
+        58: iinc          5, 1
+        61: iload         5
+        63: getstatic     #582                // Field ARGUMENT_STYLES:Ljava/util/List;
+        66: invokeinterface #585,  1          // InterfaceMethod java/util/List.size:()I
+        71: if_icmplt     77
+        74: iconst_0
+        75: istore        5
+        77: aload         8
+        79: invokevirtual #588                // Method com/mojang/brigadier/context/ParsedArgument.getRange:()Lcom/mojang/brigadier/context/StringRange;
+        82: invokevirtual #180                // Method com/mojang/brigadier/context/StringRange.getStart:()I
+        85: iload_2
+        86: isub
+        87: iconst_0
+        88: invokestatic  #170                // Method java/lang/Math.max:(II)I
+        91: istore        9
+        93: iload         9
+        95: aload_1
+        96: invokevirtual #426                // Method java/lang/String.length:()I
+        99: if_icmplt     105
+       102: goto          188
+       105: aload         8
+       107: invokevirtual #588                // Method com/mojang/brigadier/context/ParsedArgument.getRange:()Lcom/mojang/brigadier/context/StringRange;
+       110: invokevirtual #589                // Method com/mojang/brigadier/context/StringRange.getEnd:()I
+       113: iload_2
+       114: isub
+       115: aload_1
+       116: invokevirtual #426                // Method java/lang/String.length:()I
+       119: invokestatic  #592                // Method java/lang/Math.min:(II)I
+       122: istore        10
+       124: iload         10
+       126: ifle          185
+       129: aload_3
+       130: aload_1
+       131: iload         4
+       133: iload         9
+       135: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       138: getstatic     #595                // Field LITERAL_STYLE:Lnet/minecraft/network/chat/Style;
+       141: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       144: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       149: pop
+       150: aload_3
+       151: aload_1
+       152: iload         9
+       154: iload         10
+       156: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       159: getstatic     #582                // Field ARGUMENT_STYLES:Ljava/util/List;
+       162: iload         5
+       164: invokeinterface #598,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       169: checkcast     #541                // class net/minecraft/network/chat/Style
+       172: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       175: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       180: pop
+       181: iload         10
+       183: istore        4
+       185: goto          36
+       188: aload_0
+       189: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+       192: invokeinterface #475,  1          // InterfaceMethod com/mojang/brigadier/ImmutableStringReader.canRead:()Z
+       197: ifeq          293
+       200: aload_0
+       201: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+       204: invokeinterface #601,  1          // InterfaceMethod com/mojang/brigadier/ImmutableStringReader.getCursor:()I
+       209: iload_2
+       210: isub
+       211: iconst_0
+       212: invokestatic  #170                // Method java/lang/Math.max:(II)I
+       215: istore        7
+       217: iload         7
+       219: aload_1
+       220: invokevirtual #426                // Method java/lang/String.length:()I
+       223: if_icmpge     293
+       226: iload         7
+       228: aload_0
+       229: invokevirtual #271                // Method com/mojang/brigadier/ParseResults.getReader:()Lcom/mojang/brigadier/ImmutableStringReader;
+       232: invokeinterface #602,  1          // InterfaceMethod com/mojang/brigadier/ImmutableStringReader.getRemainingLength:()I
+       237: iadd
+       238: aload_1
+       239: invokevirtual #426                // Method java/lang/String.length:()I
+       242: invokestatic  #592                // Method java/lang/Math.min:(II)I
+       245: istore        8
+       247: aload_3
+       248: aload_1
+       249: iload         4
+       251: iload         7
+       253: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       256: getstatic     #595                // Field LITERAL_STYLE:Lnet/minecraft/network/chat/Style;
+       259: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       262: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       267: pop
+       268: aload_3
+       269: aload_1
+       270: iload         7
+       272: iload         8
+       274: invokevirtual #229                // Method java/lang/String.substring:(II)Ljava/lang/String;
+       277: getstatic     #605                // Field UNPARSED_STYLE:Lnet/minecraft/network/chat/Style;
+       280: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       283: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       288: pop
+       289: iload         8
+       291: istore        4
+       293: aload_3
+       294: aload_1
+       295: iload         4
+       297: invokevirtual #238                // Method java/lang/String.substring:(I)Ljava/lang/String;
+       300: getstatic     #595                // Field LITERAL_STYLE:Lnet/minecraft/network/chat/Style;
+       303: invokestatic  #555                // InterfaceMethod net/minecraft/util/FormattedCharSequence.forward:(Ljava/lang/String;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/util/FormattedCharSequence;
+       306: invokeinterface #259,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       311: pop
+       312: aload_3
+       313: invokestatic  #608                // InterfaceMethod net/minecraft/util/FormattedCharSequence.composite:(Ljava/util/List;)Lnet/minecraft/util/FormattedCharSequence;
+       316: areturn
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: iload_3
+         4: invokevirtual #612                // Method renderSuggestions:(Lnet/minecraft/client/gui/GuiGraphics;II)Z
+         7: ifne          15
+        10: aload_0
+        11: aload_1
+        12: invokevirtual #616                // Method renderUsage:(Lnet/minecraft/client/gui/GuiGraphics;)V
+        15: return
+
+  public boolean renderSuggestions(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)Z
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        19
+         7: aload_0
+         8: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        11: aload_1
+        12: iload_2
+        13: iload_3
+        14: invokevirtual #620                // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.render:(Lnet/minecraft/client/gui/GuiGraphics;II)V
+        17: iconst_1
+        18: ireturn
+        19: iconst_0
+        20: ireturn
+
+  public void renderUsage(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+    Code:
+         0: iconst_0
+         1: istore_2
+         2: aload_0
+         3: getfield      #13                 // Field commandUsage:Ljava/util/List;
+         6: invokeinterface #144,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        11: astore_3
+        12: aload_3
+        13: invokeinterface #150,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        18: ifeq          126
+        21: aload_3
+        22: invokeinterface #155,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        27: checkcast     #556                // class net/minecraft/util/FormattedCharSequence
+        30: astore        4
+        32: aload_0
+        33: getfield      #52                 // Field anchorToBottom:Z
+        36: ifeq          60
+        39: aload_0
+        40: getfield      #27                 // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+        43: getfield      #196                // Field net/minecraft/client/gui/screens/Screen.height:I
+        46: bipush        14
+        48: isub
+        49: bipush        13
+        51: isub
+        52: bipush        12
+        54: iload_2
+        55: imul
+        56: isub
+        57: goto          67
+        60: bipush        72
+        62: bipush        12
+        64: iload_2
+        65: imul
+        66: iadd
+        67: istore        5
+        69: aload_1
+        70: aload_0
+        71: getfield      #476                // Field commandUsagePosition:I
+        74: iconst_1
+        75: isub
+        76: iload         5
+        78: aload_0
+        79: getfield      #476                // Field commandUsagePosition:I
+        82: aload_0
+        83: getfield      #481                // Field commandUsageWidth:I
+        86: iadd
+        87: iconst_1
+        88: iadd
+        89: iload         5
+        91: bipush        12
+        93: iadd
+        94: aload_0
+        95: getfield      #55                 // Field fillColor:I
+        98: invokevirtual #624                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+       101: aload_1
+       102: aload_0
+       103: getfield      #35                 // Field font:Lnet/minecraft/client/gui/Font;
+       106: aload         4
+       108: aload_0
+       109: getfield      #476                // Field commandUsagePosition:I
+       112: iload         5
+       114: iconst_2
+       115: iadd
+       116: iconst_m1
+       117: invokevirtual #630                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V
+       120: iinc          2, 1
+       123: goto          12
+       126: return
+
+  public net.minecraft.network.chat.Component getNarrationMessage();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+         4: ifnull        28
+         7: getstatic     #634                // Field net/minecraft/network/chat/CommonComponents.NEW_LINE:Lnet/minecraft/network/chat/Component;
+        10: invokeinterface #640,  1          // InterfaceMethod net/minecraft/network/chat/Component.copy:()Lnet/minecraft/network/chat/MutableComponent;
+        15: aload_0
+        16: getfield      #71                 // Field suggestions:Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+        19: invokevirtual #644                // Method net/minecraft/client/gui/components/CommandSuggestions$SuggestionsList.getNarrationMessage:()Lnet/minecraft/network/chat/Component;
+        22: invokevirtual #648                // Method net/minecraft/network/chat/MutableComponent.append:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;
+        25: goto          31
+        28: getstatic     #652                // Field net/minecraft/network/chat/CommonComponents.EMPTY:Lnet/minecraft/network/chat/Component;
+        31: areturn
+
+  private void lambda$updateCommandInfo$0();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #122                // Field pendingSuggestions:Ljava/util/concurrent/CompletableFuture;
+         4: invokevirtual #126                // Method java/util/concurrent/CompletableFuture.isDone:()Z
+         7: ifeq          14
+        10: aload_0
+        11: invokevirtual #654                // Method updateUsageInfo:()V
+        14: return
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: ldc_w         #657                // String (\\s+)
+         3: invokestatic  #659                // Method java/util/regex/Pattern.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern;
+         6: putstatic     #374                // Field WHITESPACE_PATTERN:Ljava/util/regex/Pattern;
+         9: getstatic     #540                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        12: getstatic     #663                // Field net/minecraft/ChatFormatting.RED:Lnet/minecraft/ChatFormatting;
+        15: invokevirtual #546                // Method net/minecraft/network/chat/Style.withColor:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;
+        18: putstatic     #605                // Field UNPARSED_STYLE:Lnet/minecraft/network/chat/Style;
+        21: getstatic     #540                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        24: getstatic     #485                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+        27: invokevirtual #546                // Method net/minecraft/network/chat/Style.withColor:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/Style;
+        30: putstatic     #595                // Field LITERAL_STYLE:Lnet/minecraft/network/chat/Style;
+        33: iconst_5
+        34: anewarray     #486                // class net/minecraft/ChatFormatting
+        37: dup
+        38: iconst_0
+        39: getstatic     #666                // Field net/minecraft/ChatFormatting.AQUA:Lnet/minecraft/ChatFormatting;
+        42: aastore
+        43: dup
+        44: iconst_1
+        45: getstatic     #669                // Field net/minecraft/ChatFormatting.YELLOW:Lnet/minecraft/ChatFormatting;
+        48: aastore
+        49: dup
+        50: iconst_2
+        51: getstatic     #672                // Field net/minecraft/ChatFormatting.GREEN:Lnet/minecraft/ChatFormatting;
+        54: aastore
+        55: dup
+        56: iconst_3
+        57: getstatic     #675                // Field net/minecraft/ChatFormatting.LIGHT_PURPLE:Lnet/minecraft/ChatFormatting;
+        60: aastore
+        61: dup
+        62: iconst_4
+        63: getstatic     #678                // Field net/minecraft/ChatFormatting.GOLD:Lnet/minecraft/ChatFormatting;
+        66: aastore
+        67: invokestatic  #681                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+        70: getstatic     #540                // Field net/minecraft/network/chat/Style.EMPTY:Lnet/minecraft/network/chat/Style;
+        73: dup
+        74: invokestatic  #687                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        77: pop
+        78: invokedynamic #693,  0            // InvokeDynamic #3:apply:(Lnet/minecraft/network/chat/Style;)Ljava/util/function/Function;
+        83: invokeinterface #697,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        88: invokestatic  #701                // Method com/google/common/collect/ImmutableList.toImmutableList:()Ljava/util/stream/Collector;
+        91: invokeinterface #707,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+        96: checkcast     #145                // class java/util/List
+        99: putstatic     #582                // Field ARGUMENT_STYLES:Ljava/util/List;
+       102: return
+}
