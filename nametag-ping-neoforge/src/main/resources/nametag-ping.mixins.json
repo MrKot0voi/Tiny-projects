@@ -6,7 +6,8 @@
     "EntityRendererMixin",
     "EntityRenderStateAccessor",
     "TextDisplayEntityRenderStateAccessor",
-    "TextDisplayEntityRendererMixin"
+    "TextDisplayEntityRendererMixin",
+    "TextDisplayAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

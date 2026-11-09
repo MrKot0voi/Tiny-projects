@@ -40,7 +40,7 @@ public abstract class TextDisplayEntityRendererMixin {
             return;
         }
 
-        Component baseText = entity.getText();
+        Component baseText = ((TextDisplayAccessor) entity).ping_nametag$getText();
         String baseTextValue = baseText == null ? "" : baseText.getString();
         if (baseTextValue.isEmpty()) {
             return;
@@ -97,7 +97,7 @@ public abstract class TextDisplayEntityRendererMixin {
         Component modifiedText = ping_nametag$appendSuffixToTopLine(baseText, suffix);
 
         ((TextDisplayEntityRenderStateAccessor) renderState).ping_nametag$setTextLines(
-                splitLines(modifiedText, entity.getLineWidth())
+                splitLines(modifiedText, ((TextDisplayAccessor) entity).ping_nametag$getLineWidth())
         );
     }
 
