@@ -23,3 +23,10 @@ while read -r c; do
   javap -p -s -cp "$MC" "$c" > "$OUT/$(echo "$c" | tr '$' '_').txt" 2>/dev/null || echo "fail: $c" >> "$OUT/errors.txt"
 done < "$OUT/candidates.txt"
 echo "dumped: $(ls "$OUT" | wc -l) files"
+
+# Байткод ключевых классов (нужен для порядка вызовов и ordinal'ов в миксинах).
+mkdir -p "$OUT/bytecode"
+for c in net.minecraft.client.gui.Gui net.minecraft.client.gui.components.EditBox net.minecraft.client.gui.components.AbstractScrollArea net.minecraft.client.gui.components.CommandSuggestions net.minecraft.client.ScrollWheelHandler net.minecraft.client.MouseHandler net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen net.minecraft.client.gui.screens.inventory.AbstractContainerScreen net.minecraft.client.gui.components.ChatComponent; do
+  javap -p -s -c -cp "$MC" "$c" > "$OUT/bytecode/$(echo "$c" | tr '$' '_').txt" 2>/dev/null || echo "fail: $c" >> "$OUT/errors.txt"
+done
+echo "bytecode: $(ls "$OUT/bytecode" | wc -l) files"
