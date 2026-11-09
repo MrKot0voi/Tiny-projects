@@ -17,7 +17,7 @@ if [ -z "$MC" ]; then
   exit 0
 fi
 unzip -Z1 "$MC" | grep -E '^net/minecraft/' | sed 's/\.class$//; s#/#.#g' > "$OUT/all-classes.txt"
-grep -E 'ChatComponent|CommandSuggestions|CreativeModeInventoryScreen|AbstractScrollWidget|AbstractContainerScreen|EditBox|AbstractWidget|ScreenRectangle|MouseHandler|DeltaTracker|GuiGraphics|\.Gui(\$.*)?$|\.Minecraft$|ItemPicker|RenderPipelines|Scroll|SelectionList|Inventory$|Font$|Matrix3x2|ARGB|ColorHelper' "$OUT/all-classes.txt" > "$OUT/candidates.txt"
+grep -E 'MouseButtonEvent|CharacterEvent|KeyEvent|ChatComponent|CommandSuggestions|CreativeModeInventoryScreen|AbstractScrollWidget|AbstractContainerScreen|EditBox|AbstractWidget|ScreenRectangle|MouseHandler|DeltaTracker|GuiGraphics|\.Gui(\$.*)?$|\.Minecraft$|ItemPicker|RenderPipelines|Scroll|SelectionList|Inventory$|Font$|Matrix3x2|ARGB|ColorHelper' "$OUT/all-classes.txt" > "$OUT/candidates.txt"
 wc -l "$OUT/candidates.txt"
 while read -r c; do
   javap -p -s -cp "$MC" "$c" > "$OUT/$(echo "$c" | tr '$' '_').txt" 2>/dev/null || echo "fail: $c" >> "$OUT/errors.txt"
