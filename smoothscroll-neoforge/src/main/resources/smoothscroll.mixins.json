@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "compatibilityLevel": "JAVA_21",
+  "package": "smsk.smoothscroll.mixin",
+  "client": []
+}
