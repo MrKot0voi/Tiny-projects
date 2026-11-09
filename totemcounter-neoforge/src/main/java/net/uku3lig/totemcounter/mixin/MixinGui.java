@@ -22,7 +22,7 @@ public class MixinGui {
     @Final
     private Minecraft minecraft;
 
-    @Inject(method = "renderPlayerHealth", at = @At("RETURN"))
+    @Inject(method = "renderHealthLevel", at = @At("RETURN"))
     private void renderCounter(GuiGraphics graphics, CallbackInfo ci) {
         if (minecraft.player == null) return;
         if (!TotemCounterConfig.get().isDisplayEnabled()) return;

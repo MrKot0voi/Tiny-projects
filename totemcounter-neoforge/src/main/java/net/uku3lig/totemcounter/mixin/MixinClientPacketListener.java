@@ -18,7 +18,7 @@ import java.util.UUID;
 public class MixinClientPacketListener {
     @Shadow private ClientLevel level;
 
-    @Inject(method = "handleEntityEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/ParticleEngine;createTrackingEmitter(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/particles/ParticleOptions;I)V"))
+    @Inject(method = "handleEntityEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/ParticleEngine;createTrackingEmitter(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/particles/ParticleOptions;)V"))
     public void updateCounter(ClientboundEntityEventPacket packet, CallbackInfo ci) {
         Entity entity = packet.getEntity(level);
         if (entity instanceof RemotePlayer player) {
