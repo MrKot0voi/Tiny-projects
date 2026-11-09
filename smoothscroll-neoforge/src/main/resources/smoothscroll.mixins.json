@@ -5,5 +5,8 @@
   },
   "compatibilityLevel": "JAVA_21",
   "package": "smsk.smoothscroll.mixin",
-  "client": []
+  "client": [
+    "Hotbar.HotbarMixin",
+    "Hotbar.MouseMixin"
+  ]
 }
