@@ -1,0 +1,189 @@
+Compiled from "AbstractWidget.java"
+public abstract class net.minecraft.client.gui.components.AbstractWidget implements net.minecraft.client.gui.components.Renderable,net.minecraft.client.gui.components.events.GuiEventListener,net.minecraft.client.gui.layouts.LayoutElement,net.minecraft.client.gui.narration.NarratableEntry {
+  protected int width;
+    descriptor: I
+  protected int height;
+    descriptor: I
+  private int x;
+    descriptor: I
+  private int y;
+    descriptor: I
+  protected net.minecraft.network.chat.Component message;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  protected boolean isHovered;
+    descriptor: Z
+  public boolean active;
+    descriptor: Z
+  public boolean visible;
+    descriptor: Z
+  protected float alpha;
+    descriptor: F
+  private int tabOrderGroup;
+    descriptor: I
+  private boolean focused;
+    descriptor: Z
+  private final net.minecraft.client.gui.components.WidgetTooltipHolder tooltip;
+    descriptor: Lnet/minecraft/client/gui/components/WidgetTooltipHolder;
+  public static final int UNSET_FG_COLOR;
+    descriptor: I
+  protected int packedFGColor;
+    descriptor: I
+  public net.minecraft.client.gui.components.AbstractWidget(int, int, int, int, net.minecraft.network.chat.Component);
+    descriptor: (IIIILnet/minecraft/network/chat/Component;)V
+
+  public int getHeight();
+    descriptor: ()I
+
+  public final void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  protected void handleCursor(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  public void setTooltip(net.minecraft.client.gui.components.Tooltip);
+    descriptor: (Lnet/minecraft/client/gui/components/Tooltip;)V
+
+  public void setTooltipDelay(java.time.Duration);
+    descriptor: (Ljava/time/Duration;)V
+
+  protected net.minecraft.network.chat.MutableComponent createNarrationMessage();
+    descriptor: ()Lnet/minecraft/network/chat/MutableComponent;
+
+  public static net.minecraft.network.chat.MutableComponent wrapDefaultNarrationMessage(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;
+
+  protected abstract void renderWidget(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public void renderScrollingStringOverContents(net.minecraft.client.gui.ActiveTextCollector, net.minecraft.network.chat.Component, int);
+    descriptor: (Lnet/minecraft/client/gui/ActiveTextCollector;Lnet/minecraft/network/chat/Component;I)V
+
+  public void onClick(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)V
+
+  public void onRelease(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)V
+
+  protected void onDrag(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)V
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+
+  protected boolean isValidClickButton(net.minecraft.client.input.MouseButtonInfo);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonInfo;)Z
+
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)Z
+
+  public net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  public boolean isMouseOver(double, double);
+    descriptor: (DD)Z
+
+  public void playDownSound(net.minecraft.client.sounds.SoundManager);
+    descriptor: (Lnet/minecraft/client/sounds/SoundManager;)V
+
+  public static void playButtonClickSound(net.minecraft.client.sounds.SoundManager);
+    descriptor: (Lnet/minecraft/client/sounds/SoundManager;)V
+
+  public int getWidth();
+    descriptor: ()I
+
+  public void setWidth(int);
+    descriptor: (I)V
+
+  public void setHeight(int);
+    descriptor: (I)V
+
+  public void setAlpha(float);
+    descriptor: (F)V
+
+  public float getAlpha();
+    descriptor: ()F
+
+  public void setMessage(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public net.minecraft.network.chat.Component getMessage();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public boolean isFocused();
+    descriptor: ()Z
+
+  public boolean isHovered();
+    descriptor: ()Z
+
+  public boolean isHoveredOrFocused();
+    descriptor: ()Z
+
+  public boolean isActive();
+    descriptor: ()Z
+
+  public void setFocused(boolean);
+    descriptor: (Z)V
+
+  public int getFGColor();
+    descriptor: ()I
+
+  public void setFGColor(int);
+    descriptor: (I)V
+
+  public void clearFGColor();
+    descriptor: ()V
+
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority narrationPriority();
+    descriptor: ()Lnet/minecraft/client/gui/narration/NarratableEntry$NarrationPriority;
+
+  public final void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  protected abstract void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  protected void defaultButtonNarrationText(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  public int getX();
+    descriptor: ()I
+
+  public void setX(int);
+    descriptor: (I)V
+
+  public int getY();
+    descriptor: ()I
+
+  public void setY(int);
+    descriptor: (I)V
+
+  public int getRight();
+    descriptor: ()I
+
+  public int getBottom();
+    descriptor: ()I
+
+  public void visitWidgets(java.util.function.Consumer<net.minecraft.client.gui.components.AbstractWidget>);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  public void setSize(int, int);
+    descriptor: (II)V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  private boolean areCoordinatesInRectangle(double, double);
+    descriptor: (DD)Z
+
+  public void setRectangle(int, int, int, int);
+    descriptor: (IIII)V
+
+  public int getTabOrderGroup();
+    descriptor: ()I
+
+  public void setTabOrderGroup(int);
+    descriptor: (I)V
+}

@@ -1,0 +1,13 @@
+Compiled from "TransferableSelectionList.java"
+public abstract class net.minecraft.client.gui.screens.packs.TransferableSelectionList$Entry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraft.client.gui.screens.packs.TransferableSelectionList$Entry> {
+  final net.minecraft.client.gui.screens.packs.TransferableSelectionList this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;
+  public net.minecraft.client.gui.screens.packs.TransferableSelectionList$Entry(net.minecraft.client.gui.screens.packs.TransferableSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;)V
+
+  public int getWidth();
+    descriptor: ()I
+
+  public abstract java.lang.String getPackId();
+    descriptor: ()Ljava/lang/String;
+}

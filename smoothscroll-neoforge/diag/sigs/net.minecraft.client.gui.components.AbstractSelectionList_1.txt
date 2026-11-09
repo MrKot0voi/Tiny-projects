@@ -1,0 +1,7 @@
+Compiled from "AbstractSelectionList.java"
+class net.minecraft.client.gui.components.AbstractSelectionList$1 {
+  static final int[] $SwitchMap$net$minecraft$client$gui$navigation$ScreenDirection;
+    descriptor: [I
+  static {};
+    descriptor: ()V
+}

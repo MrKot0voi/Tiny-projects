@@ -1,0 +1,5 @@
+Compiled from "EditBox.java"
+public interface net.minecraft.client.gui.components.EditBox$TextFormatter {
+  public abstract net.minecraft.util.FormattedCharSequence format(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+}

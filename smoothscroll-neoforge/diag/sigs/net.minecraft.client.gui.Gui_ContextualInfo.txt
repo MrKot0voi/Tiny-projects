@@ -1,0 +1,27 @@
+Compiled from "Gui.java"
+final class net.minecraft.client.gui.Gui$ContextualInfo extends java.lang.Enum<net.minecraft.client.gui.Gui$ContextualInfo> {
+  public static final net.minecraft.client.gui.Gui$ContextualInfo EMPTY;
+    descriptor: Lnet/minecraft/client/gui/Gui$ContextualInfo;
+  public static final net.minecraft.client.gui.Gui$ContextualInfo EXPERIENCE;
+    descriptor: Lnet/minecraft/client/gui/Gui$ContextualInfo;
+  public static final net.minecraft.client.gui.Gui$ContextualInfo LOCATOR;
+    descriptor: Lnet/minecraft/client/gui/Gui$ContextualInfo;
+  public static final net.minecraft.client.gui.Gui$ContextualInfo JUMPABLE_VEHICLE;
+    descriptor: Lnet/minecraft/client/gui/Gui$ContextualInfo;
+  private static final net.minecraft.client.gui.Gui$ContextualInfo[] $VALUES;
+    descriptor: [Lnet/minecraft/client/gui/Gui$ContextualInfo;
+  public static net.minecraft.client.gui.Gui$ContextualInfo[] values();
+    descriptor: ()[Lnet/minecraft/client/gui/Gui$ContextualInfo;
+
+  public static net.minecraft.client.gui.Gui$ContextualInfo valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/client/gui/Gui$ContextualInfo;
+
+  private net.minecraft.client.gui.Gui$ContextualInfo();
+    descriptor: (Ljava/lang/String;I)V
+
+  private static net.minecraft.client.gui.Gui$ContextualInfo[] $values();
+    descriptor: ()[Lnet/minecraft/client/gui/Gui$ContextualInfo;
+
+  static {};
+    descriptor: ()V
+}

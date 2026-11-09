@@ -1,0 +1,20 @@
+Compiled from "ChatSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$MessageHeadingEntry extends net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry {
+  private static final int FACE_SIZE;
+    descriptor: I
+  private static final int PADDING;
+    descriptor: I
+  private final net.minecraft.network.chat.Component heading;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final java.util.function.Supplier<net.minecraft.world.entity.player.PlayerSkin> skin;
+    descriptor: Ljava/util/function/Supplier;
+  private final boolean canReport;
+    descriptor: Z
+  final net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList this$1;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;
+  public net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$MessageHeadingEntry(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList, com.mojang.authlib.GameProfile, net.minecraft.network.chat.Component, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;Lcom/mojang/authlib/GameProfile;Lnet/minecraft/network/chat/Component;Z)V
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+}

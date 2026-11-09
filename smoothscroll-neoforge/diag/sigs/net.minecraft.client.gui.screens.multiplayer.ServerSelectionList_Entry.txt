@@ -1,0 +1,14 @@
+Compiled from "ServerSelectionList.java"
+public abstract class net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry> implements java.lang.AutoCloseable {
+  public net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  abstract boolean matches(net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/multiplayer/ServerSelectionList$Entry;)Z
+
+  public abstract void join();
+    descriptor: ()V
+}

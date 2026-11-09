@@ -1,0 +1,16 @@
+Compiled from "ObjectSelectionList.java"
+public abstract class net.minecraft.client.gui.components.ObjectSelectionList<E extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<E>> extends net.minecraft.client.gui.components.AbstractSelectionList<E> {
+  private static final net.minecraft.network.chat.Component USAGE_NARRATION;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public net.minecraft.client.gui.components.ObjectSelectionList(net.minecraft.client.Minecraft, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;IIII)V
+
+  public net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  public void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  static {};
+    descriptor: ()V
+}

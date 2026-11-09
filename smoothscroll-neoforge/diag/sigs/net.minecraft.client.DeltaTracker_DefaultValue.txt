@@ -1,0 +1,16 @@
+Compiled from "DeltaTracker.java"
+public class net.minecraft.client.DeltaTracker$DefaultValue implements net.minecraft.client.DeltaTracker {
+  private final float value;
+    descriptor: F
+  net.minecraft.client.DeltaTracker$DefaultValue(float);
+    descriptor: (F)V
+
+  public float getGameTimeDeltaTicks();
+    descriptor: ()F
+
+  public float getGameTimeDeltaPartialTick(boolean);
+    descriptor: (Z)F
+
+  public float getRealtimeDeltaTicks();
+    descriptor: ()F
+}

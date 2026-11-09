@@ -1,0 +1,222 @@
+Compiled from "AbstractContainerScreen.java"
+public abstract class net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<T extends net.minecraft.world.inventory.AbstractContainerMenu> extends net.minecraft.client.gui.screens.Screen implements net.minecraft.client.gui.screens.inventory.MenuAccess<T> {
+  public static final net.minecraft.resources.Identifier INVENTORY_LOCATION;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier SLOT_HIGHLIGHT_BACK_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier SLOT_HIGHLIGHT_FRONT_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  protected static final int BACKGROUND_TEXTURE_WIDTH;
+    descriptor: I
+  protected static final int BACKGROUND_TEXTURE_HEIGHT;
+    descriptor: I
+  private static final float SNAPBACK_SPEED;
+    descriptor: F
+  private static final int QUICKDROP_DELAY;
+    descriptor: I
+  protected int imageWidth;
+    descriptor: I
+  protected int imageHeight;
+    descriptor: I
+  protected int titleLabelX;
+    descriptor: I
+  protected int titleLabelY;
+    descriptor: I
+  protected int inventoryLabelX;
+    descriptor: I
+  protected int inventoryLabelY;
+    descriptor: I
+  private final java.util.List<net.minecraft.client.gui.ItemSlotMouseAction> itemSlotMouseActions;
+    descriptor: Ljava/util/List;
+  protected final T menu;
+    descriptor: Lnet/minecraft/world/inventory/AbstractContainerMenu;
+  protected final net.minecraft.network.chat.Component playerInventoryTitle;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  protected net.minecraft.world.inventory.Slot hoveredSlot;
+    descriptor: Lnet/minecraft/world/inventory/Slot;
+  private net.minecraft.world.inventory.Slot clickedSlot;
+    descriptor: Lnet/minecraft/world/inventory/Slot;
+  private net.minecraft.world.inventory.Slot quickdropSlot;
+    descriptor: Lnet/minecraft/world/inventory/Slot;
+  private net.minecraft.world.inventory.Slot lastClickSlot;
+    descriptor: Lnet/minecraft/world/inventory/Slot;
+  private net.minecraft.client.gui.screens.inventory.AbstractContainerScreen$SnapbackData snapbackData;
+    descriptor: Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen$SnapbackData;
+  protected int leftPos;
+    descriptor: I
+  protected int topPos;
+    descriptor: I
+  private boolean isSplittingStack;
+    descriptor: Z
+  private net.minecraft.world.item.ItemStack draggingItem;
+    descriptor: Lnet/minecraft/world/item/ItemStack;
+  private long quickdropTime;
+    descriptor: J
+  protected final java.util.Set<net.minecraft.world.inventory.Slot> quickCraftSlots;
+    descriptor: Ljava/util/Set;
+  protected boolean isQuickCrafting;
+    descriptor: Z
+  private int quickCraftingType;
+    descriptor: I
+  private int quickCraftingButton;
+    descriptor: I
+  private boolean skipNextRelease;
+    descriptor: Z
+  private int quickCraftingRemainder;
+    descriptor: I
+  private boolean doubleclick;
+    descriptor: Z
+  private net.minecraft.world.item.ItemStack lastQuickMoved;
+    descriptor: Lnet/minecraft/world/item/ItemStack;
+  protected int slotColor;
+    descriptor: I
+  public net.minecraft.client.gui.screens.inventory.AbstractContainerScreen(T, net.minecraft.world.entity.player.Inventory, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/network/chat/Component;)V
+
+  protected void init();
+    descriptor: ()V
+
+  protected void addItemSlotMouseAction(net.minecraft.client.gui.ItemSlotMouseAction);
+    descriptor: (Lnet/minecraft/client/gui/ItemSlotMouseAction;)V
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public void renderContents(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public void renderCarriedItem(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  public void renderSnapbackItem(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  protected void renderSlots(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  public void renderBackground(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public boolean mouseScrolled(double, double, double, double);
+    descriptor: (DDDD)Z
+
+  private void renderSlotHighlightBack(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  private void renderSlotHighlightFront(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  protected void renderTooltip(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  private boolean showTooltipWithItemInHand(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Z
+
+  protected java.util.List<net.minecraft.network.chat.Component> getTooltipFromContainerItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;
+
+  private void renderFloatingItem(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.item.ItemStack, int, int, java.lang.String);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V
+
+  protected void renderLabels(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  protected abstract void renderBg(net.minecraft.client.gui.GuiGraphics, float, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;FII)V
+
+  protected void renderSlot(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.inventory.Slot, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;II)V
+
+  protected void renderSlotContents(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.Slot, java.lang.String);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/inventory/Slot;Ljava/lang/String;)V
+
+  private void recalculateQuickCraftRemaining();
+    descriptor: ()V
+
+  private net.minecraft.world.inventory.Slot getHoveredSlot(double, double);
+    descriptor: (DD)Lnet/minecraft/world/inventory/Slot;
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  private void checkHotbarMouseClicked(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)V
+
+  protected boolean hasClickedOutside(double, double, int, int);
+    descriptor: (DDII)Z
+
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)Z
+
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+
+  public void clearDraggingState();
+    descriptor: ()V
+
+  private boolean isHovering(net.minecraft.world.inventory.Slot, double, double);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;DD)Z
+
+  protected boolean isHovering(int, int, int, int, double, double);
+    descriptor: (IIIIDD)Z
+
+  private void onStopHovering(net.minecraft.world.inventory.Slot);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;)V
+
+  protected void slotClicked(net.minecraft.world.inventory.Slot, int, int, net.minecraft.world.inventory.ClickType);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
+
+  void onMouseClickAction(net.minecraft.world.inventory.Slot, net.minecraft.world.inventory.ClickType);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/world/inventory/ClickType;)V
+
+  protected void handleSlotStateChanged(int, int, boolean);
+    descriptor: (IIZ)V
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  protected boolean checkHotbarKeyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public void removed();
+    descriptor: ()V
+
+  public boolean isPauseScreen();
+    descriptor: ()Z
+
+  public boolean isInGameUi();
+    descriptor: ()Z
+
+  public final void tick();
+    descriptor: ()V
+
+  protected void containerTick();
+    descriptor: ()V
+
+  public T getMenu();
+    descriptor: ()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+
+  public net.minecraft.world.inventory.Slot getSlotUnderMouse();
+    descriptor: ()Lnet/minecraft/world/inventory/Slot;
+
+  public int getGuiLeft();
+    descriptor: ()I
+
+  public int getGuiTop();
+    descriptor: ()I
+
+  public int getXSize();
+    descriptor: ()I
+
+  public int getYSize();
+    descriptor: ()I
+
+  public int getSlotColor(int);
+    descriptor: (I)I
+
+  public void onClose();
+    descriptor: ()V
+
+  static {};
+    descriptor: ()V
+}

@@ -1,0 +1,83 @@
+Compiled from "AbstractSelectionList.java"
+public abstract class net.minecraft.client.gui.components.AbstractSelectionList$Entry<E extends net.minecraft.client.gui.components.AbstractSelectionList$Entry<E>> implements net.minecraft.client.gui.components.events.GuiEventListener, net.minecraft.client.gui.layouts.LayoutElement {
+  public static final int CONTENT_PADDING;
+    descriptor: I
+  private int x;
+    descriptor: I
+  private int y;
+    descriptor: I
+  private int width;
+    descriptor: I
+  private int height;
+    descriptor: I
+  protected net.minecraft.client.gui.components.AbstractSelectionList<E> list;
+    descriptor: Lnet/minecraft/client/gui/components/AbstractSelectionList;
+  protected net.minecraft.client.gui.components.AbstractSelectionList$Entry();
+    descriptor: ()V
+
+  public void setFocused(boolean);
+    descriptor: (Z)V
+
+  public boolean isFocused();
+    descriptor: ()Z
+
+  public abstract void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  public boolean isMouseOver(double, double);
+    descriptor: (DD)Z
+
+  public void setX(int);
+    descriptor: (I)V
+
+  public void setY(int);
+    descriptor: (I)V
+
+  public void setWidth(int);
+    descriptor: (I)V
+
+  public void setHeight(int);
+    descriptor: (I)V
+
+  public int getContentX();
+    descriptor: ()I
+
+  public int getContentY();
+    descriptor: ()I
+
+  public int getContentHeight();
+    descriptor: ()I
+
+  public int getContentYMiddle();
+    descriptor: ()I
+
+  public int getContentBottom();
+    descriptor: ()I
+
+  public int getContentWidth();
+    descriptor: ()I
+
+  public int getContentXMiddle();
+    descriptor: ()I
+
+  public int getContentRight();
+    descriptor: ()I
+
+  public int getX();
+    descriptor: ()I
+
+  public int getY();
+    descriptor: ()I
+
+  public int getWidth();
+    descriptor: ()I
+
+  public int getHeight();
+    descriptor: ()I
+
+  public void visitWidgets(java.util.function.Consumer<net.minecraft.client.gui.components.AbstractWidget>);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+}

@@ -1,0 +1,79 @@
+Compiled from "ServerSelectionList.java"
+public class net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$OnlineServerEntry extends net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry implements net.minecraft.client.gui.components.SelectableEntry {
+  private static final int ICON_SIZE;
+    descriptor: I
+  private static final int SPACING;
+    descriptor: I
+  private static final int STATUS_ICON_WIDTH;
+    descriptor: I
+  private static final int STATUS_ICON_HEIGHT;
+    descriptor: I
+  private final net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/multiplayer/JoinMultiplayerScreen;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.multiplayer.ServerData serverData;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData;
+  private final net.minecraft.client.gui.screens.FaviconTexture icon;
+    descriptor: Lnet/minecraft/client/gui/screens/FaviconTexture;
+  private byte[] lastIconBytes;
+    descriptor: [B
+  private java.util.List<net.minecraft.network.chat.Component> onlinePlayersTooltip;
+    descriptor: Ljava/util/List;
+  private net.minecraft.resources.Identifier statusIcon;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private net.minecraft.network.chat.Component statusIconTooltip;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  final net.minecraft.client.gui.screens.multiplayer.ServerSelectionList this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/multiplayer/ServerSelectionList;
+  protected net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$OnlineServerEntry(net.minecraft.client.gui.screens.multiplayer.ServerSelectionList, net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen, net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/gui/screens/multiplayer/ServerSelectionList;Lnet/minecraft/client/gui/screens/multiplayer/JoinMultiplayerScreen;Lnet/minecraft/client/multiplayer/ServerData;)V
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  private void refreshStatus();
+    descriptor: ()V
+
+  public void updateServerList();
+    descriptor: ()V
+
+  protected void drawIcon(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/resources/Identifier;)V
+
+  private boolean uploadServerIcon(byte[]);
+    descriptor: ([B)Z
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public void join();
+    descriptor: ()V
+
+  private void swap(int, int);
+    descriptor: (II)V
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public net.minecraft.client.multiplayer.ServerData getServerData();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData;
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public void close();
+    descriptor: ()V
+
+  boolean matches(net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/multiplayer/ServerSelectionList$Entry;)Z
+
+  private void lambda$renderContent$2();
+    descriptor: ()V
+
+  private void lambda$renderContent$1();
+    descriptor: ()V
+
+  private void lambda$renderContent$0();
+    descriptor: ()V
+}

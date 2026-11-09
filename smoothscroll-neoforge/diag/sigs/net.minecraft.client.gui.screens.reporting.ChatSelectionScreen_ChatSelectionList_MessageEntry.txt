@@ -1,0 +1,67 @@
+Compiled from "ChatSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$MessageEntry extends net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry {
+  private static final int CHECKMARK_WIDTH;
+    descriptor: I
+  private static final int CHECKMARK_HEIGHT;
+    descriptor: I
+  private static final int INDENT_AMOUNT;
+    descriptor: I
+  private static final int TAG_MARGIN_LEFT;
+    descriptor: I
+  private final int chatId;
+    descriptor: I
+  private final net.minecraft.network.chat.FormattedText text;
+    descriptor: Lnet/minecraft/network/chat/FormattedText;
+  private final net.minecraft.network.chat.Component narration;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final java.util.List<net.minecraft.util.FormattedCharSequence> hoverText;
+    descriptor: Ljava/util/List;
+  private final net.minecraft.client.GuiMessageTag$Icon tagIcon;
+    descriptor: Lnet/minecraft/client/GuiMessageTag$Icon;
+  private final java.util.List<net.minecraft.util.FormattedCharSequence> tagHoverText;
+    descriptor: Ljava/util/List;
+  private final boolean canReport;
+    descriptor: Z
+  private final boolean playerMessage;
+    descriptor: Z
+  final net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList this$1;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;
+  public net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$MessageEntry(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList, int, net.minecraft.network.chat.Component, net.minecraft.network.chat.Component, net.minecraft.client.GuiMessageTag, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;ILnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/GuiMessageTag;ZZ)V
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  private void renderTag(net.minecraft.client.gui.GuiGraphics, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIIII)V
+
+  private void renderSelectedCheckmark(net.minecraft.client.gui.GuiGraphics, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;III)V
+
+  private int getMaximumTextWidth();
+    descriptor: ()I
+
+  private int getTextIndent();
+    descriptor: ()I
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public boolean isSelected();
+    descriptor: ()Z
+
+  public boolean canSelect();
+    descriptor: ()Z
+
+  public boolean canReport();
+    descriptor: ()Z
+
+  private boolean toggleReport();
+    descriptor: ()Z
+}

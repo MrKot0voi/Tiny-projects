@@ -1,0 +1,8 @@
+Compiled from "CreativeModeInventoryScreen.java"
+class net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen$CustomCreativeSlot extends net.minecraft.world.inventory.Slot {
+  public net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen$CustomCreativeSlot(net.minecraft.world.Container, int, int, int);
+    descriptor: (Lnet/minecraft/world/Container;III)V
+
+  public boolean mayPickup(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Z
+}

@@ -1,0 +1,59 @@
+Compiled from "ChatSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry> implements net.minecraft.client.gui.screens.reporting.ChatSelectionLogFiller$Output {
+  public static final int ITEM_HEIGHT;
+    descriptor: I
+  private net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Heading previousHeading;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList$Heading;
+  final net.minecraft.client.gui.screens.reporting.ChatSelectionScreen this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen;
+  public net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen, net.minecraft.client.Minecraft, int);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen;Lnet/minecraft/client/Minecraft;I)V
+
+  public void setScrollAmount(double);
+    descriptor: (D)V
+
+  public void acceptMessage(int, net.minecraft.client.multiplayer.chat.LoggedChatMessage$Player);
+    descriptor: (ILnet/minecraft/client/multiplayer/chat/LoggedChatMessage$Player;)V
+
+  private void updateHeading(net.minecraft.client.multiplayer.chat.LoggedChatMessage$Player, boolean);
+    descriptor: (Lnet/minecraft/client/multiplayer/chat/LoggedChatMessage$Player;Z)V
+
+  public void acceptDivider(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public int getRowWidth();
+    descriptor: ()I
+
+  public int getMaxVisibleEntries();
+    descriptor: ()I
+
+  protected void renderItem(net.minecraft.client.gui.GuiGraphics, int, int, float, net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIFLnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList$Entry;)V
+
+  private boolean shouldHighlightEntry(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList$Entry;)Z
+
+  protected net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry nextEntry(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList$Entry;
+
+  public void setSelected(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList$Entry;)V
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public int getFooterTop();
+    descriptor: ()I
+
+  protected void renderItem(net.minecraft.client.gui.GuiGraphics, int, int, float, net.minecraft.client.gui.components.AbstractSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIFLnet/minecraft/client/gui/components/AbstractSelectionList$Entry;)V
+
+  protected net.minecraft.client.gui.components.AbstractSelectionList$Entry nextEntry(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/components/AbstractSelectionList$Entry;
+
+  public void setSelected(net.minecraft.client.gui.components.AbstractSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/components/AbstractSelectionList$Entry;)V
+
+  static net.minecraft.client.Minecraft access$800(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;)Lnet/minecraft/client/Minecraft;
+}

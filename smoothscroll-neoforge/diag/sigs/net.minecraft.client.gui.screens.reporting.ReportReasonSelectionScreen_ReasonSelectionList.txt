@@ -1,0 +1,22 @@
+Compiled from "ReportReasonSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry> {
+  final net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen;
+  public net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList(net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen, net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen;Lnet/minecraft/client/Minecraft;)V
+
+  public net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry findEntry(net.minecraft.client.multiplayer.chat.report.ReportReason);
+    descriptor: (Lnet/minecraft/client/multiplayer/chat/report/ReportReason;)Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen$ReasonSelectionList$Entry;
+
+  public int getRowWidth();
+    descriptor: ()I
+
+  public void setSelected(net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen$ReasonSelectionList$Entry;)V
+
+  public void setSelected(net.minecraft.client.gui.components.AbstractSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/components/AbstractSelectionList$Entry;)V
+
+  private static boolean lambda$findEntry$0(net.minecraft.client.multiplayer.chat.report.ReportReason, net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/multiplayer/chat/report/ReportReason;Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen$ReasonSelectionList$Entry;)Z
+}

@@ -1,0 +1,19 @@
+Compiled from "GuiGraphics.java"
+class net.minecraft.client.gui.GuiGraphics$ScissorStack {
+  private final java.util.Deque<net.minecraft.client.gui.navigation.ScreenRectangle> stack;
+    descriptor: Ljava/util/Deque;
+  net.minecraft.client.gui.GuiGraphics$ScissorStack();
+    descriptor: ()V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle push(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle pop();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle peek();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public boolean containsPoint(int, int);
+    descriptor: (II)Z
+}

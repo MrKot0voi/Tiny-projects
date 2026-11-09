@@ -1,0 +1,25 @@
+Compiled from "LanguageSelectScreen.java"
+class net.minecraft.client.gui.screens.options.LanguageSelectScreen$LanguageSelectionList extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraft.client.gui.screens.options.LanguageSelectScreen$LanguageSelectionList$Entry> {
+  final net.minecraft.client.gui.screens.options.LanguageSelectScreen this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/options/LanguageSelectScreen;
+  public net.minecraft.client.gui.screens.options.LanguageSelectScreen$LanguageSelectionList(net.minecraft.client.gui.screens.options.LanguageSelectScreen, net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/gui/screens/options/LanguageSelectScreen;Lnet/minecraft/client/Minecraft;)V
+
+  void filterEntries(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public int getRowWidth();
+    descriptor: ()I
+
+  private net.minecraft.client.gui.screens.options.LanguageSelectScreen$LanguageSelectionList$Entry lambda$filterEntries$2(java.util.Map$Entry);
+    descriptor: (Ljava/util/Map$Entry;)Lnet/minecraft/client/gui/screens/options/LanguageSelectScreen$LanguageSelectionList$Entry;
+
+  private static boolean lambda$filterEntries$1(java.lang.String, java.util.Map$Entry);
+    descriptor: (Ljava/lang/String;Ljava/util/Map$Entry;)Z
+
+  private void lambda$new$0(java.lang.String, java.lang.String, net.minecraft.client.resources.language.LanguageInfo);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/client/resources/language/LanguageInfo;)V
+
+  static int access$100(net.minecraft.client.gui.screens.options.LanguageSelectScreen$LanguageSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/options/LanguageSelectScreen$LanguageSelectionList;)I
+}

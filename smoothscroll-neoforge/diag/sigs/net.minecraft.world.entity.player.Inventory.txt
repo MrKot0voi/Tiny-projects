@@ -1,0 +1,183 @@
+Compiled from "Inventory.java"
+public class net.minecraft.world.entity.player.Inventory implements net.minecraft.world.Container,net.minecraft.world.Nameable {
+  public static final int POP_TIME_DURATION;
+    descriptor: I
+  public static final int INVENTORY_SIZE;
+    descriptor: I
+  public static final int SELECTION_SIZE;
+    descriptor: I
+  public static final int SLOT_OFFHAND;
+    descriptor: I
+  public static final int SLOT_BODY_ARMOR;
+    descriptor: I
+  public static final int SLOT_SADDLE;
+    descriptor: I
+  public static final int NOT_FOUND_INDEX;
+    descriptor: I
+  public static final it.unimi.dsi.fastutil.ints.Int2ObjectMap<net.minecraft.world.entity.EquipmentSlot> EQUIPMENT_SLOT_MAPPING;
+    descriptor: Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+  private static final net.minecraft.network.chat.Component DEFAULT_NAME;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> items;
+    descriptor: Lnet/minecraft/core/NonNullList;
+  private int selected;
+    descriptor: I
+  public final net.minecraft.world.entity.player.Player player;
+    descriptor: Lnet/minecraft/world/entity/player/Player;
+  private final net.minecraft.world.entity.EntityEquipment equipment;
+    descriptor: Lnet/minecraft/world/entity/EntityEquipment;
+  private int timesChanged;
+    descriptor: I
+  public net.minecraft.world.entity.player.Inventory(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.EntityEquipment);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/EntityEquipment;)V
+
+  public int getSelectedSlot();
+    descriptor: ()I
+
+  public void setSelectedSlot(int);
+    descriptor: (I)V
+
+  public net.minecraft.world.item.ItemStack getSelectedItem();
+    descriptor: ()Lnet/minecraft/world/item/ItemStack;
+
+  public net.minecraft.world.item.ItemStack setSelectedItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;
+
+  public static int getSelectionSize();
+    descriptor: ()I
+
+  public net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> getNonEquipmentItems();
+    descriptor: ()Lnet/minecraft/core/NonNullList;
+
+  private boolean hasRemainingSpaceForItem(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z
+
+  public int getFreeSlot();
+    descriptor: ()I
+
+  public void addAndPickItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)V
+
+  public void pickSlot(int);
+    descriptor: (I)V
+
+  public static boolean isHotbarSlot(int);
+    descriptor: (I)Z
+
+  public int findSlotMatchingItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)I
+
+  public static boolean isUsableForCrafting(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Z
+
+  public int findSlotMatchingCraftingIngredient(net.minecraft.core.Holder<net.minecraft.world.item.Item>, net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/core/Holder;Lnet/minecraft/world/item/ItemStack;)I
+
+  public int getSuitableHotbarSlot();
+    descriptor: ()I
+
+  public int clearOrCountMatchingItems(java.util.function.Predicate<net.minecraft.world.item.ItemStack>, int, net.minecraft.world.Container);
+    descriptor: (Ljava/util/function/Predicate;ILnet/minecraft/world/Container;)I
+
+  private int addResource(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)I
+
+  private int addResource(int, net.minecraft.world.item.ItemStack);
+    descriptor: (ILnet/minecraft/world/item/ItemStack;)I
+
+  public int getSlotWithRemainingSpace(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)I
+
+  public void tick();
+    descriptor: ()V
+
+  public boolean add(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Z
+
+  public boolean add(int, net.minecraft.world.item.ItemStack);
+    descriptor: (ILnet/minecraft/world/item/ItemStack;)Z
+
+  public void placeItemBackInInventory(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)V
+
+  public void placeItemBackInInventory(net.minecraft.world.item.ItemStack, boolean);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Z)V
+
+  public net.minecraft.network.protocol.game.ClientboundSetPlayerInventoryPacket createInventoryUpdatePacket(int);
+    descriptor: (I)Lnet/minecraft/network/protocol/game/ClientboundSetPlayerInventoryPacket;
+
+  public net.minecraft.world.item.ItemStack removeItem(int, int);
+    descriptor: (II)Lnet/minecraft/world/item/ItemStack;
+
+  public void removeItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)V
+
+  public net.minecraft.world.item.ItemStack removeItemNoUpdate(int);
+    descriptor: (I)Lnet/minecraft/world/item/ItemStack;
+
+  public void setItem(int, net.minecraft.world.item.ItemStack);
+    descriptor: (ILnet/minecraft/world/item/ItemStack;)V
+
+  public void save(net.minecraft.world.level.storage.ValueOutput$TypedOutputList<net.minecraft.world.ItemStackWithSlot>);
+    descriptor: (Lnet/minecraft/world/level/storage/ValueOutput$TypedOutputList;)V
+
+  public void load(net.minecraft.world.level.storage.ValueInput$TypedInputList<net.minecraft.world.ItemStackWithSlot>);
+    descriptor: (Lnet/minecraft/world/level/storage/ValueInput$TypedInputList;)V
+
+  public int getContainerSize();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public net.minecraft.world.item.ItemStack getItem(int);
+    descriptor: (I)Lnet/minecraft/world/item/ItemStack;
+
+  public net.minecraft.network.chat.Component getName();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public void dropAll();
+    descriptor: ()V
+
+  public void setChanged();
+    descriptor: ()V
+
+  public int getTimesChanged();
+    descriptor: ()I
+
+  public boolean stillValid(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Z
+
+  public boolean contains(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Z
+
+  public boolean contains(net.minecraft.tags.TagKey<net.minecraft.world.item.Item>);
+    descriptor: (Lnet/minecraft/tags/TagKey;)Z
+
+  public boolean contains(java.util.function.Predicate<net.minecraft.world.item.ItemStack>);
+    descriptor: (Ljava/util/function/Predicate;)Z
+
+  public void replaceWith(net.minecraft.world.entity.player.Inventory);
+    descriptor: (Lnet/minecraft/world/entity/player/Inventory;)V
+
+  public void clearContent();
+    descriptor: ()V
+
+  public void fillStackedContents(net.minecraft.world.entity.player.StackedItemContents);
+    descriptor: (Lnet/minecraft/world/entity/player/StackedItemContents;)V
+
+  public net.minecraft.world.item.ItemStack removeFromSelected(boolean);
+    descriptor: (Z)Lnet/minecraft/world/item/ItemStack;
+
+  private static java.lang.String lambda$add$2(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
+  private static java.lang.String lambda$add$1(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
+  private static java.lang.String lambda$add$0(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
+  static {};
+    descriptor: ()V
+}

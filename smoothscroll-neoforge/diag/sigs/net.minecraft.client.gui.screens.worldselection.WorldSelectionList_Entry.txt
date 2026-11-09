@@ -1,0 +1,11 @@
+Compiled from "WorldSelectionList.java"
+public abstract class net.minecraft.client.gui.screens.worldselection.WorldSelectionList$Entry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraft.client.gui.screens.worldselection.WorldSelectionList$Entry> implements java.lang.AutoCloseable {
+  public net.minecraft.client.gui.screens.worldselection.WorldSelectionList$Entry();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  public net.minecraft.world.level.storage.LevelSummary getLevelSummary();
+    descriptor: ()Lnet/minecraft/world/level/storage/LevelSummary;
+}

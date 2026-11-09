@@ -1,0 +1,31 @@
+Compiled from "GuiGraphics.java"
+class net.minecraft.client.gui.GuiGraphics$RenderingTextCollector implements net.minecraft.client.gui.ActiveTextCollector, java.util.function.Consumer<net.minecraft.network.chat.Style> {
+  private net.minecraft.client.gui.ActiveTextCollector$Parameters defaultParameters;
+    descriptor: Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+  private final net.minecraft.client.gui.GuiGraphics$HoveredTextEffects hoveredTextEffects;
+    descriptor: Lnet/minecraft/client/gui/GuiGraphics$HoveredTextEffects;
+  private final java.util.function.Consumer<net.minecraft.network.chat.Style> additionalConsumer;
+    descriptor: Ljava/util/function/Consumer;
+  final net.minecraft.client.gui.GuiGraphics this$0;
+    descriptor: Lnet/minecraft/client/gui/GuiGraphics;
+  net.minecraft.client.gui.GuiGraphics$RenderingTextCollector(net.minecraft.client.gui.ActiveTextCollector$Parameters, net.minecraft.client.gui.GuiGraphics$HoveredTextEffects, java.util.function.Consumer<net.minecraft.network.chat.Style>);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;Lnet/minecraft/client/gui/GuiGraphics$HoveredTextEffects;Ljava/util/function/Consumer;)V
+
+  public net.minecraft.client.gui.ActiveTextCollector$Parameters defaultParameters();
+    descriptor: ()Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+
+  public void defaultParameters(net.minecraft.client.gui.ActiveTextCollector$Parameters);
+    descriptor: (Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;)V
+
+  public void accept(net.minecraft.network.chat.Style);
+    descriptor: (Lnet/minecraft/network/chat/Style;)V
+
+  public void accept(net.minecraft.client.gui.TextAlignment, int, int, net.minecraft.client.gui.ActiveTextCollector$Parameters, net.minecraft.util.FormattedCharSequence);
+    descriptor: (Lnet/minecraft/client/gui/TextAlignment;IILnet/minecraft/client/gui/ActiveTextCollector$Parameters;Lnet/minecraft/util/FormattedCharSequence;)V
+
+  public void acceptScrolling(net.minecraft.network.chat.Component, int, int, int, int, int, net.minecraft.client.gui.ActiveTextCollector$Parameters);
+    descriptor: (Lnet/minecraft/network/chat/Component;IIIIILnet/minecraft/client/gui/ActiveTextCollector$Parameters;)V
+
+  public void accept(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+}

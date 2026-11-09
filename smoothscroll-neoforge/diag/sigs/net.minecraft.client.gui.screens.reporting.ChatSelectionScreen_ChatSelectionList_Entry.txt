@@ -1,0 +1,20 @@
+Compiled from "ChatSelectionScreen.java"
+public abstract class net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry> {
+  public net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry();
+    descriptor: ()V
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public boolean isSelected();
+    descriptor: ()Z
+
+  public boolean canSelect();
+    descriptor: ()Z
+
+  public boolean canReport();
+    descriptor: ()Z
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+}

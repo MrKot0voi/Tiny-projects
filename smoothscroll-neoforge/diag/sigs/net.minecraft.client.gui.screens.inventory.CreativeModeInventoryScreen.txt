@@ -1,0 +1,199 @@
+Compiled from "CreativeModeInventoryScreen.java"
+public class net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen extends net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen$ItemPickerMenu> {
+  private static final net.minecraft.resources.Identifier SCROLLER_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier SCROLLER_DISABLED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier[] UNSELECTED_TOP_TABS;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier[] SELECTED_TOP_TABS;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier[] UNSELECTED_BOTTOM_TABS;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier[] SELECTED_BOTTOM_TABS;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+  private static final int NUM_ROWS;
+    descriptor: I
+  private static final int NUM_COLS;
+    descriptor: I
+  private static final int TAB_WIDTH;
+    descriptor: I
+  private static final int TAB_HEIGHT;
+    descriptor: I
+  private static final int SCROLLER_WIDTH;
+    descriptor: I
+  private static final int SCROLLER_HEIGHT;
+    descriptor: I
+  static final net.minecraft.world.SimpleContainer CONTAINER;
+    descriptor: Lnet/minecraft/world/SimpleContainer;
+  private static final net.minecraft.network.chat.Component TRASH_SLOT_TOOLTIP;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static net.minecraft.world.item.CreativeModeTab selectedTab;
+    descriptor: Lnet/minecraft/world/item/CreativeModeTab;
+  private float scrollOffs;
+    descriptor: F
+  private boolean scrolling;
+    descriptor: Z
+  private net.minecraft.client.gui.components.EditBox searchBox;
+    descriptor: Lnet/minecraft/client/gui/components/EditBox;
+  private java.util.List<net.minecraft.world.inventory.Slot> originalSlots;
+    descriptor: Ljava/util/List;
+  private net.minecraft.world.inventory.Slot destroyItemSlot;
+    descriptor: Lnet/minecraft/world/inventory/Slot;
+  private net.minecraft.client.gui.screens.inventory.CreativeInventoryListener listener;
+    descriptor: Lnet/minecraft/client/gui/screens/inventory/CreativeInventoryListener;
+  private boolean ignoreTextInput;
+    descriptor: Z
+  private boolean hasClickedOutside;
+    descriptor: Z
+  private final java.util.Set<net.minecraft.tags.TagKey<net.minecraft.world.item.Item>> visibleTags;
+    descriptor: Ljava/util/Set;
+  private final boolean displayOperatorCreativeTab;
+    descriptor: Z
+  private final net.minecraft.client.gui.screens.inventory.EffectsInInventory effects;
+    descriptor: Lnet/minecraft/client/gui/screens/inventory/EffectsInInventory;
+  private final java.util.List<net.neoforged.neoforge.client.gui.CreativeTabsScreenPage> pages;
+    descriptor: Ljava/util/List;
+  private net.neoforged.neoforge.client.gui.CreativeTabsScreenPage currentPage;
+    descriptor: Lnet/neoforged/neoforge/client/gui/CreativeTabsScreenPage;
+  public net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen(net.minecraft.client.player.LocalPlayer, net.minecraft.world.flag.FeatureFlagSet, boolean);
+    descriptor: (Lnet/minecraft/client/player/LocalPlayer;Lnet/minecraft/world/flag/FeatureFlagSet;Z)V
+
+  private boolean hasPermissions(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Z
+
+  private void tryRefreshInvalidatedTabs(net.minecraft.world.flag.FeatureFlagSet, boolean, net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/world/flag/FeatureFlagSet;ZLnet/minecraft/core/HolderLookup$Provider;)V
+
+  private boolean tryRebuildTabContents(net.minecraft.client.multiplayer.SessionSearchTrees, net.minecraft.world.flag.FeatureFlagSet, boolean, net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/client/multiplayer/SessionSearchTrees;Lnet/minecraft/world/flag/FeatureFlagSet;ZLnet/minecraft/core/HolderLookup$Provider;)Z
+
+  private void refreshCurrentTabContents(java.util.Collection<net.minecraft.world.item.ItemStack>);
+    descriptor: (Ljava/util/Collection;)V
+
+  public void containerTick();
+    descriptor: ()V
+
+  protected void slotClicked(net.minecraft.world.inventory.Slot, int, int, net.minecraft.world.inventory.ClickType);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;IILnet/minecraft/world/inventory/ClickType;)V
+
+  private boolean isCreativeSlot(net.minecraft.world.inventory.Slot);
+    descriptor: (Lnet/minecraft/world/inventory/Slot;)Z
+
+  protected void init();
+    descriptor: ()V
+
+  public void resize(int, int);
+    descriptor: (II)V
+
+  public void removed();
+    descriptor: ()V
+
+  public boolean charTyped(net.minecraft.client.input.CharacterEvent);
+    descriptor: (Lnet/minecraft/client/input/CharacterEvent;)Z
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public boolean keyReleased(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  private void refreshSearchResults();
+    descriptor: ()V
+
+  private void updateVisibleTags(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  protected void renderLabels(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+
+  private boolean canScroll();
+    descriptor: ()Z
+
+  private void selectTab(net.minecraft.world.item.CreativeModeTab);
+    descriptor: (Lnet/minecraft/world/item/CreativeModeTab;)V
+
+  public boolean mouseScrolled(double, double, double, double);
+    descriptor: (DDDD)Z
+
+  protected boolean hasClickedOutside(double, double, int, int);
+    descriptor: (DDII)Z
+
+  protected boolean insideScrollbar(double, double);
+    descriptor: (DD)Z
+
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)Z
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public boolean showsActiveEffects();
+    descriptor: ()Z
+
+  public java.util.List<net.minecraft.network.chat.Component> getTooltipFromContainerItem(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;
+
+  protected void renderBg(net.minecraft.client.gui.GuiGraphics, float, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;FII)V
+
+  private int getTabX(net.minecraft.world.item.CreativeModeTab);
+    descriptor: (Lnet/minecraft/world/item/CreativeModeTab;)I
+
+  private int getTabY(net.minecraft.world.item.CreativeModeTab);
+    descriptor: (Lnet/minecraft/world/item/CreativeModeTab;)I
+
+  protected boolean checkTabClicked(net.minecraft.world.item.CreativeModeTab, double, double);
+    descriptor: (Lnet/minecraft/world/item/CreativeModeTab;DD)Z
+
+  protected boolean checkTabHovering(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.item.CreativeModeTab, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/CreativeModeTab;II)Z
+
+  protected void renderTabButton(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.world.item.CreativeModeTab);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/item/CreativeModeTab;)V
+
+  public boolean isInventoryOpen();
+    descriptor: ()Z
+
+  public static void handleHotbarLoadOrSave(net.minecraft.client.Minecraft, int, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/Minecraft;IZZ)V
+
+  public net.neoforged.neoforge.client.gui.CreativeTabsScreenPage getCurrentPage();
+    descriptor: ()Lnet/neoforged/neoforge/client/gui/CreativeTabsScreenPage;
+
+  public void setCurrentPage(net.neoforged.neoforge.client.gui.CreativeTabsScreenPage);
+    descriptor: (Lnet/neoforged/neoforge/client/gui/CreativeTabsScreenPage;)V
+
+  private static void lambda$getTooltipFromContainerItem$7(net.minecraft.world.item.ItemStack, java.util.List, net.minecraft.tags.TagKey);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Ljava/util/List;Lnet/minecraft/tags/TagKey;)V
+
+  private static boolean lambda$updateVisibleTags$6(java.util.function.Predicate, net.minecraft.tags.TagKey);
+    descriptor: (Ljava/util/function/Predicate;Lnet/minecraft/tags/TagKey;)Z
+
+  private static boolean lambda$updateVisibleTags$5(java.lang.String, java.lang.String, net.minecraft.resources.Identifier);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/resources/Identifier;)Z
+
+  private static boolean lambda$updateVisibleTags$4(java.lang.String, net.minecraft.resources.Identifier);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/resources/Identifier;)Z
+
+  private static boolean lambda$init$3(net.neoforged.neoforge.client.gui.CreativeTabsScreenPage);
+    descriptor: (Lnet/neoforged/neoforge/client/gui/CreativeTabsScreenPage;)Z
+
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private static void lambda$tryRebuildTabContents$0(net.minecraft.client.multiplayer.SessionSearchTrees, net.minecraft.core.HolderLookup$Provider, net.minecraft.world.item.CreativeModeTab);
+    descriptor: (Lnet/minecraft/client/multiplayer/SessionSearchTrees;Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/world/item/CreativeModeTab;)V
+
+  static {};
+    descriptor: ()V
+}

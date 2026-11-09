@@ -1,0 +1,70 @@
+Compiled from "TransferableSelectionList.java"
+public class net.minecraft.client.gui.screens.packs.TransferableSelectionList extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraft.client.gui.screens.packs.TransferableSelectionList$Entry> {
+  static final net.minecraft.resources.Identifier SELECT_HIGHLIGHTED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier SELECT_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier UNSELECT_HIGHLIGHTED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier UNSELECT_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier MOVE_UP_HIGHLIGHTED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier MOVE_UP_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier MOVE_DOWN_HIGHLIGHTED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.resources.Identifier MOVE_DOWN_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  static final net.minecraft.network.chat.Component INCOMPATIBLE_TITLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  static final net.minecraft.network.chat.Component INCOMPATIBLE_CONFIRM_TITLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final int ENTRY_PADDING;
+    descriptor: I
+  private final net.minecraft.network.chat.Component title;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  final net.minecraft.client.gui.screens.packs.PackSelectionScreen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;
+  public net.minecraft.client.gui.screens.packs.TransferableSelectionList(net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.packs.PackSelectionScreen, int, int, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;IILnet/minecraft/network/chat/Component;)V
+
+  public int getRowWidth();
+    descriptor: ()I
+
+  protected int scrollBarX();
+    descriptor: ()I
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public void updateList(java.util.stream.Stream<net.minecraft.client.gui.screens.packs.PackSelectionModel$Entry>, net.minecraft.client.gui.screens.packs.PackSelectionModel$EntryBase);
+    descriptor: (Ljava/util/stream/Stream;Lnet/minecraft/client/gui/screens/packs/PackSelectionModel$EntryBase;)V
+
+  private void lambda$updateList$0(net.minecraft.client.gui.screens.packs.PackSelectionModel$EntryBase, net.minecraft.client.gui.screens.packs.PackSelectionModel$Entry);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/PackSelectionModel$EntryBase;Lnet/minecraft/client/gui/screens/packs/PackSelectionModel$Entry;)V
+
+  static boolean access$000(net.minecraft.client.gui.screens.packs.TransferableSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;)Z
+
+  static void access$100(net.minecraft.client.gui.screens.packs.TransferableSelectionList, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  static void access$200(net.minecraft.client.gui.screens.packs.TransferableSelectionList, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  static void access$300(net.minecraft.client.gui.screens.packs.TransferableSelectionList, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  static void access$400(net.minecraft.client.gui.screens.packs.TransferableSelectionList, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  static boolean access$500(net.minecraft.client.gui.screens.packs.TransferableSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;)Z
+
+  static boolean access$600(net.minecraft.client.gui.screens.packs.TransferableSelectionList);
+    descriptor: (Lnet/minecraft/client/gui/screens/packs/TransferableSelectionList;)Z
+
+  static {};
+    descriptor: ()V
+}

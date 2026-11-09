@@ -1,0 +1,21 @@
+Compiled from "ReportReasonSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry> {
+  final net.minecraft.client.multiplayer.chat.report.ReportReason reason;
+    descriptor: Lnet/minecraft/client/multiplayer/chat/report/ReportReason;
+  final net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList this$1;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen$ReasonSelectionList;
+  public net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList$Entry(net.minecraft.client.gui.screens.reporting.ReportReasonSelectionScreen$ReasonSelectionList, net.minecraft.client.multiplayer.chat.report.ReportReason);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ReportReasonSelectionScreen$ReasonSelectionList;Lnet/minecraft/client/multiplayer/chat/report/ReportReason;)V
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public net.minecraft.client.multiplayer.chat.report.ReportReason getReason();
+    descriptor: ()Lnet/minecraft/client/multiplayer/chat/report/ReportReason;
+}

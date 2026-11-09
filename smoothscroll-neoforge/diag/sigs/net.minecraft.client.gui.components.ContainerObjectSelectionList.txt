@@ -1,0 +1,23 @@
+Compiled from "ContainerObjectSelectionList.java"
+public abstract class net.minecraft.client.gui.components.ContainerObjectSelectionList<E extends net.minecraft.client.gui.components.ContainerObjectSelectionList$Entry<E>> extends net.minecraft.client.gui.components.AbstractSelectionList<E> {
+  public net.minecraft.client.gui.components.ContainerObjectSelectionList(net.minecraft.client.Minecraft, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;IIII)V
+
+  public net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  public void setFocused(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority narrationPriority();
+    descriptor: ()Lnet/minecraft/client/gui/narration/NarratableEntry$NarrationPriority;
+
+  protected boolean entriesCanBeSelected();
+    descriptor: ()Z
+
+  public void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  private static boolean lambda$nextFocusPath$0(net.minecraft.client.gui.components.ContainerObjectSelectionList$Entry);
+    descriptor: (Lnet/minecraft/client/gui/components/ContainerObjectSelectionList$Entry;)Z
+}
