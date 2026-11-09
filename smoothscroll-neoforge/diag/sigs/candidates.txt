@@ -36,10 +36,14 @@ net.minecraft.client.gui.navigation.ScreenRectangle$1
 net.minecraft.client.gui.navigation.ScreenRectangle
 net.minecraft.client.gui.components.AbstractWidget$WithInactiveMessage
 net.minecraft.client.gui.components.AbstractWidget
+net.minecraft.client.input.MouseButtonEvent
+net.minecraft.client.input.KeyEvent$Action
+net.minecraft.client.input.KeyEvent
 net.minecraft.client.gui.components.EditBox$TextFormatter
 net.minecraft.client.gui.components.EditBox
 net.minecraft.client.gui.components.CommandSuggestions$SuggestionsList
 net.minecraft.client.gui.components.CommandSuggestions
+net.minecraft.client.input.CharacterEvent
 net.minecraft.client.ScrollWheelHandler
 net.minecraft.client.gui.components.ContainerObjectSelectionList$Entry
 net.minecraft.client.gui.components.ContainerObjectSelectionList$1
