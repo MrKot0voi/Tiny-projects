@@ -1,0 +1,16 @@
+{
+    "text.autoconfig.armorchroma.title": "Configurazione Armor Chroma",
+    "text.autoconfig.armorchroma.option.enabled": "Abilita la Mod",
+    "text.autoconfig.armorchroma.option.renderGlint": "Mostra Luccichio",
+    "text.autoconfig.armorchroma.option.renderGlint.@Tooltip": "Visualizza Il Luccichio Incantato",
+    "text.autoconfig.armorchroma.option.glintIntensity": "Intensità del Luccichio",
+    "text.autoconfig.armorchroma.option.renderBackground": "Mostra Sfondo",
+    "text.autoconfig.armorchroma.option.renderBackground.@Tooltip": "Visualizza icone dell'armatura vuote quando la tua armatura è inferiore a 20",
+    "text.autoconfig.armorchroma.option.compressBar": "Comprimi Barra",
+    "text.autoconfig.armorchroma.option.compressBar.@Tooltip": "Comprimi la barra in bordi colorati diversi quando la tua armatura supera 20",
+    "text.autoconfig.armorchroma.option.displayedArmorCap": "Limite di Armatura Visualizzato",
+    "text.autoconfig.armorchroma.option.displayedArmorCap.@Tooltip": "Punti di armatura massimi da visualizzare",
+    "text.autoconfig.armorchroma.option.reverse": "Inverti l'Ordine dell'Armatura",
+
+    "armorchroma.tooltip.material": "Materiale dell'Armatura: %s"
+}
