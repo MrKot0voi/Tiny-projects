@@ -4,14 +4,14 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import java.util.Objects;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import nukeduck.armorchroma.ArmorChromaRenderLayers;
 
 public class ArmorIcon {
    public static final int ICON_SIZE = 9;
    private static final int SPAN = 28;
    private static final String TEXTURE_PATH = "textures/gui/armor_chroma.png";
-   public final ResourceLocation texture;
+   public final Identifier texture;
    public final int u;
    public final int v;
    public final int color;
@@ -29,7 +29,7 @@ public class ArmorIcon {
    }
 
    public ArmorIcon(String modid, int i, int color) {
-      this.texture = ResourceLocation.fromNamespaceAndPath(modid, TEXTURE_PATH);
+      this.texture = Identifier.fromNamespaceAndPath(modid, TEXTURE_PATH);
       if (i >= 0) {
          this.u = i % SPAN * ICON_SIZE;
          this.v = i / SPAN * ICON_SIZE;

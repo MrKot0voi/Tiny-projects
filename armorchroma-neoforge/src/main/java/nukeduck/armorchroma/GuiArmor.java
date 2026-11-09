@@ -6,9 +6,8 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,7 +21,7 @@ import nukeduck.armorchroma.config.SpecialIconKey;
 import nukeduck.armorchroma.config.Util;
 
 public class GuiArmor {
-   private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath("armorchroma", "textures/gui/background.png");
+   private static final Identifier BACKGROUND = Identifier.fromNamespaceAndPath("armorchroma", "textures/gui/background.png");
    private static final int LEFT_HALF_U_OFFSET = 0;
    private static final int RIGHT_HALF_U_OFFSET = 4;
    private static final int HALF_ICON_WIDTH = 5;
@@ -127,7 +126,7 @@ public class GuiArmor {
             totalPoints = nextTotalPoints;
             if (pointDelta > 0) {
                ArmorIcon icon = ArmorChroma.ICON_DATA.getIcon(stack);
-               boolean hasGlint = ArmorChroma.config.renderGlint() && stack.isFoil();
+               boolean hasGlint = ArmorChroma.config.renderGlint() && stack.hasFoil();
                String modId = Util.getModId(stack);
                ArmorIcon leadingMask = ArmorChroma.ICON_DATA.getSpecial(modId, SpecialIconKey.LEADING_MASK);
                ArmorIcon trailingMask = ArmorChroma.ICON_DATA.getSpecial(modId, SpecialIconKey.TRAILING_MASK);
@@ -175,8 +174,9 @@ public class GuiArmor {
 
    private void drawTexturedGlintRect(GuiGraphics context, int x, int y, float u, float v, int width, int height) {
       float intensity = this.client.options.glintStrength().get().floatValue() * ArmorChroma.config.glintIntensity();
-      int color = ARGB.gray(Mth.clamp(intensity, 0.0F, 1.0F));
-      context.blit(RenderPipelines.GUI_TEXTURED, ItemRenderer.ENCHANTED_GLINT_ITEM, x, y, u, v, width, height, 256, 256, color);
+      float clamped = Mth.clamp(intensity, 0.0F, 1.0F);
+      int color = ARGB.colorFromFloat(1.0F, clamped, clamped, clamped);
+      context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_item_glint.png"), x, y, u, v, width, height, 256, 256, color);
    }
 
    private void addZOffset(GuiGraphics context, int z) {

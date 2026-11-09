@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.DyedItemColor;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.ItemStack;
 
 public final class Util {

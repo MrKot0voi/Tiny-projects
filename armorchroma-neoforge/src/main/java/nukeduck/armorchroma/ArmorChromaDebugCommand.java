@@ -14,7 +14,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -58,7 +58,7 @@ public class ArmorChromaDebugCommand {
       }
 
       AttributeModifier attributeModifier = new AttributeModifier(
-         ResourceLocation.fromNamespaceAndPath("armorchroma", UUID.randomUUID().toString()),
+         Identifier.fromNamespaceAndPath("armorchroma", UUID.randomUUID().toString()),
          points,
          AttributeModifier.Operation.ADD_VALUE
       );

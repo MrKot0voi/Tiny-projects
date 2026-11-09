@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemStack;
@@ -68,7 +68,7 @@ public class IconData implements ResourceManagerReloadListener {
 
       for (IModInfo modInfo : ModList.get().getMods()) {
          String modid = modInfo.getModId();
-         List<Resource> resources = manager.getResourceStack(ResourceLocation.fromNamespaceAndPath(modid, ICONS_PATH));
+         List<Resource> resources = manager.getResourceStack(Identifier.fromNamespaceAndPath(modid, ICONS_PATH));
          if (!resources.isEmpty()) {
             for (Resource resource : resources) {
                try (Reader reader = new BufferedReader(new InputStreamReader(resource.open()))) {

@@ -1,12 +1,13 @@
 package nukeduck.armorchroma;
 
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
@@ -29,15 +30,15 @@ public class ArmorChroma {
       container.registerConfig(ModConfig.Type.CLIENT, ArmorChromaConfig.SPEC);
       container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
-      modBus.addListener(this::onRegisterReloadListeners);
+      modBus.addListener(this::onAddClientReloadListeners);
 
-      if (!FMLEnvironment.production) {
+      if (!FMLEnvironment.isProduction()) {
          NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
       }
    }
 
-   private void onRegisterReloadListeners(RegisterClientReloadListenersEvent event) {
-      event.registerReloadListener(ICON_DATA);
+   private void onAddClientReloadListeners(AddClientReloadListenersEvent event) {
+      event.addListener(Identifier.fromNamespaceAndPath(MODID, "icon_data"), ICON_DATA);
    }
 
    private void onRegisterCommands(RegisterCommandsEvent event) {
