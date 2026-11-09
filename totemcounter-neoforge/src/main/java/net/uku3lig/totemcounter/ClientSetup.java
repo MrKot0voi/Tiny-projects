@@ -17,6 +17,6 @@ public final class ClientSetup {
         NeoForge.EVENT_BUS.addListener(ClientEvents::onClientTick);
         NeoForge.EVENT_BUS.addListener(ClientEvents::registerClientCommands);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class,
-                () -> (container, parent) -> new TotemConfigScreen(parent));
+                (IConfigScreenFactory) (container, parent) -> new TotemConfigScreen(parent));
     }
 }

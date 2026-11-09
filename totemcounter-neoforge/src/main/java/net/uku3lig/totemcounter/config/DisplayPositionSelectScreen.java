@@ -2,6 +2,7 @@ package net.uku3lig.totemcounter.config;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -59,14 +60,14 @@ public class DisplayPositionSelectScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0 && mouseY > 48 && mouseY < height - 80) {
-            config.setX((int) mouseX - 8);
-            config.setY((int) mouseY - 8);
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        if (event.button() == 0 && event.y() > 48 && event.y() < height - 80) {
+            config.setX((int) event.x() - 8);
+            config.setY((int) event.y() - 8);
             config.save();
             return true;
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
