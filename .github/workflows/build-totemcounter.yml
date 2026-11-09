@@ -23,24 +23,6 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Dump Minecraft signatures (diagnostics)
-        run: |
-          ./gradlew createMinecraftArtifacts --no-daemon -q || true
-          MC=""
-          for j in $(find build "$HOME/.gradle" -name "*.jar" 2>/dev/null); do
-            if unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/client/gui/Gui.class"; then MC="$j"; break; fi
-          done
-          echo "=== MC jar: $MC"
-          P() { echo "--- $1"; javap -p -cp "$MC" "$1" 2>/dev/null | grep -E "$2" || echo "(no match)"; }
-          P net.minecraft.client.gui.Gui "render|minecraft"
-          P net.minecraft.client.multiplayer.ClientPacketListener "handleEntityEvent|level;"
-          P net.minecraft.client.renderer.GameRenderer "displayItemActivation|minecraft;"
-          P net.minecraft.client.gui.components.ChatComponent "addMessage"
-          P net.minecraft.client.renderer.entity.DisplayRenderer 'TextDisplay|extract'
-          P 'net.minecraft.client.renderer.entity.DisplayRenderer$TextDisplayRenderer' "extract|splitLines"
-          P net.minecraft.client.renderer.entity.state.TextDisplayEntityRenderState "cachedInfo"
-          P net.minecraft.client.particle.ParticleEngine "createTrackingEmitter"
-
       - name: Build
         run: chmod +x gradlew && ./gradlew build --stacktrace --no-daemon
 

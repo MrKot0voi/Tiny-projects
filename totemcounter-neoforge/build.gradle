@@ -9,14 +9,6 @@ base {
     archivesName = 'totemcounter-neoforge'
 }
 
-repositories {
-    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-}
-
-dependencies {
-    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
-}
-
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
