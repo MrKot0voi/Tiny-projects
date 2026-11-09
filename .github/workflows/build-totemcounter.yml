@@ -1,0 +1,34 @@
+name: build totemcounter (neoforge 1.21.11)
+
+on:
+  push:
+    paths:
+      - 'totemcounter-neoforge/**'
+      - '.github/workflows/build-totemcounter.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: totemcounter-neoforge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build
+        run: chmod +x gradlew && ./gradlew build --stacktrace --no-daemon
+
+      - name: Upload jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: totemcounter-neoforge-1.21.11
+          path: totemcounter-neoforge/build/libs/*.jar
+          if-no-files-found: error
