@@ -1,0 +1,70 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = "${project.property('mod_version')}+mc${project.property('minecraft_version')}-neoforge"
+group = project.property('mod_group_id')
+
+base {
+    archivesName = 'totemcounter-neoforge'
+}
+
+repositories {
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+
+dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+neoForge {
+    version = project.property('neo_version')
+
+    runs {
+        client {
+            client()
+            systemProperty 'forge.logging.console.level', 'info'
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        totemcounter {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+processResources {
+    inputs.properties([
+            version: project.version,
+            minecraft_version_range: project.minecraft_version_range,
+            neo_version_range: project.neo_version_range
+    ])
+
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand([
+                version: project.version,
+                minecraft_version_range: project.minecraft_version_range,
+                neo_version_range: project.neo_version_range
+        ])
+    }
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_totemcounter" }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}

@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.uku3lig.totemcounter.mixin",
+  "refmap": "mixin.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MixinChatComponent",
+    "MixinClientPacketListener",
+    "MixinExperienceBarRenderer",
+    "MixinGameRenderer",
+    "MixinGui",
+    "MixinPlayer",
+    "MixinPlayerTabOverlay",
+    "MixinTextDisplayRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
