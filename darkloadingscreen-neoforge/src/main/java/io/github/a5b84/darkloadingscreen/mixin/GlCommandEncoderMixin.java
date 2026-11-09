@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GlCommandEncoder.class)
 public abstract class GlCommandEncoderMixin {
 
+    /** GL_BLEND_EQUATION (0x8009), missing from LWJGL's GL14 class */
+    private static final int GL_BLEND_EQUATION = 0x8009;
+
     @Shadow @Nullable private RenderPipeline lastPipeline;
 
     @Unique private int oldBlendEquation;
@@ -27,7 +30,7 @@ public abstract class GlCommandEncoderMixin {
     public void onApplyPipelineState(RenderPipeline newPipeline, CallbackInfo ci) {
         if (lastPipeline != newPipeline) {
             if (newPipeline == DarkLoadingScreen.MOJANG_LOGO_SHADOWS) {
-                oldBlendEquation = GL11.glGetInteger(GL14.GL_BLEND_EQUATION);
+                oldBlendEquation = GL11.glGetInteger(GL_BLEND_EQUATION);
                 GL14.glBlendEquation(GL14.GL_FUNC_REVERSE_SUBTRACT);
             } else if (lastPipeline == DarkLoadingScreen.MOJANG_LOGO_SHADOWS) {
                 restoreOldBlendEquationIfAny();
