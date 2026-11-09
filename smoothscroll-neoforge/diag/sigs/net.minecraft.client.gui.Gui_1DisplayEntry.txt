@@ -1,0 +1,29 @@
+Compiled from "Gui.java"
+final class net.minecraft.client.gui.Gui$1DisplayEntry extends java.lang.Record {
+  private final net.minecraft.network.chat.Component name;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.network.chat.Component score;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final int scoreWidth;
+    descriptor: I
+  net.minecraft.client.gui.Gui$1DisplayEntry(net.minecraft.network.chat.Component, net.minecraft.network.chat.Component, int);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;I)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public net.minecraft.network.chat.Component name();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public net.minecraft.network.chat.Component score();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public int scoreWidth();
+    descriptor: ()I
+}

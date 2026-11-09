@@ -1,0 +1,102 @@
+Compiled from "WorldSelectionList.java"
+public final class net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry extends net.minecraft.client.gui.screens.worldselection.WorldSelectionList$Entry implements net.minecraft.client.gui.components.SelectableEntry {
+  private static final int ICON_SIZE;
+    descriptor: I
+  private final net.minecraft.client.gui.screens.worldselection.WorldSelectionList list;
+    descriptor: Lnet/minecraft/client/gui/screens/worldselection/WorldSelectionList;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.gui.screens.Screen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+  final net.minecraft.world.level.storage.LevelSummary summary;
+    descriptor: Lnet/minecraft/world/level/storage/LevelSummary;
+  private final net.minecraft.client.gui.screens.FaviconTexture icon;
+    descriptor: Lnet/minecraft/client/gui/screens/FaviconTexture;
+  private final net.minecraft.client.gui.components.StringWidget worldNameText;
+    descriptor: Lnet/minecraft/client/gui/components/StringWidget;
+  private final net.minecraft.client.gui.components.StringWidget idAndLastPlayedText;
+    descriptor: Lnet/minecraft/client/gui/components/StringWidget;
+  private final net.minecraft.client.gui.components.StringWidget infoText;
+    descriptor: Lnet/minecraft/client/gui/components/StringWidget;
+  private java.nio.file.Path iconFile;
+    descriptor: Ljava/nio/file/Path;
+  final net.minecraft.client.gui.screens.worldselection.WorldSelectionList this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/worldselection/WorldSelectionList;
+  public net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry(net.minecraft.client.gui.screens.worldselection.WorldSelectionList, net.minecraft.client.gui.screens.worldselection.WorldSelectionList, net.minecraft.world.level.storage.LevelSummary);
+    descriptor: (Lnet/minecraft/client/gui/screens/worldselection/WorldSelectionList;Lnet/minecraft/client/gui/screens/worldselection/WorldSelectionList;Lnet/minecraft/world/level/storage/LevelSummary;)V
+
+  private void validateIconFile();
+    descriptor: ()V
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  private int getTextX();
+    descriptor: ()I
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public boolean canInteract();
+    descriptor: ()Z
+
+  public void joinWorld();
+    descriptor: ()V
+
+  public void deleteWorld();
+    descriptor: ()V
+
+  public void doDeleteWorld();
+    descriptor: ()V
+
+  public void editWorld();
+    descriptor: ()V
+
+  public void recreateWorld();
+    descriptor: ()V
+
+  private void queueLoadScreen();
+    descriptor: ()V
+
+  private void loadIcon();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  public java.lang.String getLevelName();
+    descriptor: ()Ljava/lang/String;
+
+  public net.minecraft.world.level.storage.LevelSummary getLevelSummary();
+    descriptor: ()Lnet/minecraft/world/level/storage/LevelSummary;
+
+  private void renderExperimentalWarning(net.minecraft.client.gui.GuiGraphics, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZ)V
+
+  private void lambda$recreateWorld$6();
+    descriptor: ()V
+
+  private void lambda$recreateWorld$5();
+    descriptor: ()V
+
+  private void lambda$recreateWorld$4(net.minecraft.world.level.LevelSettings, net.minecraft.client.gui.screens.worldselection.WorldCreationContext, java.nio.file.Path, boolean);
+    descriptor: (Lnet/minecraft/world/level/LevelSettings;Lnet/minecraft/client/gui/screens/worldselection/WorldCreationContext;Ljava/nio/file/Path;Z)V
+
+  private void lambda$editWorld$3(net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess, boolean);
+    descriptor: (Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Z)V
+
+  private void lambda$editWorld$2();
+    descriptor: ()V
+
+  private void lambda$deleteWorld$1(boolean);
+    descriptor: (Z)V
+
+  private void lambda$joinWorld$0();
+    descriptor: ()V
+}

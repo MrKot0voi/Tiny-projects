@@ -1,0 +1,44 @@
+Compiled from "ScrollableLayout.java"
+class net.minecraft.client.gui.components.ScrollableLayout$Container extends net.minecraft.client.gui.components.AbstractContainerWidget {
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final java.util.List<net.minecraft.client.gui.components.AbstractWidget> children;
+    descriptor: Ljava/util/List;
+  final net.minecraft.client.gui.components.ScrollableLayout this$0;
+    descriptor: Lnet/minecraft/client/gui/components/ScrollableLayout;
+  public net.minecraft.client.gui.components.ScrollableLayout$Container(net.minecraft.client.gui.components.ScrollableLayout, net.minecraft.client.Minecraft, int, int);
+    descriptor: (Lnet/minecraft/client/gui/components/ScrollableLayout;Lnet/minecraft/client/Minecraft;II)V
+
+  protected int contentHeight();
+    descriptor: ()I
+
+  protected double scrollRate();
+    descriptor: ()D
+
+  protected void renderWidget(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  protected void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getBorderForArrowNavigation(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public void setFocused(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  public void setX(int);
+    descriptor: (I)V
+
+  public void setY(int);
+    descriptor: (I)V
+
+  public void setScrollAmount(double);
+    descriptor: (D)V
+
+  public java.util.List<? extends net.minecraft.client.gui.components.events.GuiEventListener> children();
+    descriptor: ()Ljava/util/List;
+
+  public java.util.Collection<? extends net.minecraft.client.gui.narration.NarratableEntry> getNarratables();
+    descriptor: ()Ljava/util/Collection;
+}

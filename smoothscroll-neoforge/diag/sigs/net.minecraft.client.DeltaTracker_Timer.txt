@@ -1,0 +1,55 @@
+Compiled from "DeltaTracker.java"
+public class net.minecraft.client.DeltaTracker$Timer implements net.minecraft.client.DeltaTracker {
+  private float deltaTicks;
+    descriptor: F
+  private float deltaTickResidual;
+    descriptor: F
+  private float realtimeDeltaTicks;
+    descriptor: F
+  private float pausedDeltaTickResidual;
+    descriptor: F
+  private long lastMs;
+    descriptor: J
+  private long lastUiMs;
+    descriptor: J
+  private final float msPerTick;
+    descriptor: F
+  private final it.unimi.dsi.fastutil.floats.FloatUnaryOperator targetMsptProvider;
+    descriptor: Lit/unimi/dsi/fastutil/floats/FloatUnaryOperator;
+  private boolean paused;
+    descriptor: Z
+  private boolean frozen;
+    descriptor: Z
+  public net.minecraft.client.DeltaTracker$Timer(float, long, it.unimi.dsi.fastutil.floats.FloatUnaryOperator);
+    descriptor: (FJLit/unimi/dsi/fastutil/floats/FloatUnaryOperator;)V
+
+  public int advanceTime(long, boolean);
+    descriptor: (JZ)I
+
+  private int advanceGameTime(long);
+    descriptor: (J)I
+
+  private void advanceRealTime(long);
+    descriptor: (J)V
+
+  public void updatePauseState(boolean);
+    descriptor: (Z)V
+
+  private void pause();
+    descriptor: ()V
+
+  private void unPause();
+    descriptor: ()V
+
+  public void updateFrozenState(boolean);
+    descriptor: (Z)V
+
+  public float getGameTimeDeltaTicks();
+    descriptor: ()F
+
+  public float getGameTimeDeltaPartialTick(boolean);
+    descriptor: (Z)F
+
+  public float getRealtimeDeltaTicks();
+    descriptor: ()F
+}

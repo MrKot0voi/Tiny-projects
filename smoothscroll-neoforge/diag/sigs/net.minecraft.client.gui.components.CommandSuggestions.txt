@@ -1,0 +1,123 @@
+Compiled from "CommandSuggestions.java"
+public class net.minecraft.client.gui.components.CommandSuggestions {
+  private static final java.util.regex.Pattern WHITESPACE_PATTERN;
+    descriptor: Ljava/util/regex/Pattern;
+  private static final net.minecraft.network.chat.Style UNPARSED_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+  private static final net.minecraft.network.chat.Style LITERAL_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
+  private static final java.util.List<net.minecraft.network.chat.Style> ARGUMENT_STYLES;
+    descriptor: Ljava/util/List;
+  final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.gui.screens.Screen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+  final net.minecraft.client.gui.components.EditBox input;
+    descriptor: Lnet/minecraft/client/gui/components/EditBox;
+  final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+  private final boolean commandsOnly;
+    descriptor: Z
+  private final boolean onlyShowIfCursorPastError;
+    descriptor: Z
+  final int lineStartOffset;
+    descriptor: I
+  final int suggestionLineLimit;
+    descriptor: I
+  final boolean anchorToBottom;
+    descriptor: Z
+  final int fillColor;
+    descriptor: I
+  private final java.util.List<net.minecraft.util.FormattedCharSequence> commandUsage;
+    descriptor: Ljava/util/List;
+  private int commandUsagePosition;
+    descriptor: I
+  private int commandUsageWidth;
+    descriptor: I
+  private com.mojang.brigadier.ParseResults<net.minecraft.client.multiplayer.ClientSuggestionProvider> currentParse;
+    descriptor: Lcom/mojang/brigadier/ParseResults;
+  private java.util.concurrent.CompletableFuture<com.mojang.brigadier.suggestion.Suggestions> pendingSuggestions;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
+  private net.minecraft.client.gui.components.CommandSuggestions$SuggestionsList suggestions;
+    descriptor: Lnet/minecraft/client/gui/components/CommandSuggestions$SuggestionsList;
+  private boolean allowSuggestions;
+    descriptor: Z
+  boolean keepSuggestions;
+    descriptor: Z
+  private boolean allowHiding;
+    descriptor: Z
+  public net.minecraft.client.gui.components.CommandSuggestions(net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.components.EditBox, net.minecraft.client.gui.Font, boolean, boolean, int, int, boolean, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/gui/components/EditBox;Lnet/minecraft/client/gui/Font;ZZIIZI)V
+
+  public void setAllowSuggestions(boolean);
+    descriptor: (Z)V
+
+  public void setAllowHiding(boolean);
+    descriptor: (Z)V
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public boolean mouseScrolled(double);
+    descriptor: (D)Z
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+
+  public void showSuggestions(boolean);
+    descriptor: (Z)V
+
+  public boolean isVisible();
+    descriptor: ()Z
+
+  public net.minecraft.network.chat.Component getUsageNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public void hide();
+    descriptor: ()V
+
+  private java.util.List<com.mojang.brigadier.suggestion.Suggestion> sortSuggestions(com.mojang.brigadier.suggestion.Suggestions);
+    descriptor: (Lcom/mojang/brigadier/suggestion/Suggestions;)Ljava/util/List;
+
+  public void updateCommandInfo();
+    descriptor: ()V
+
+  private static int getLastWordIndex(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  private static net.minecraft.util.FormattedCharSequence getExceptionMessage(com.mojang.brigadier.exceptions.CommandSyntaxException);
+    descriptor: (Lcom/mojang/brigadier/exceptions/CommandSyntaxException;)Lnet/minecraft/util/FormattedCharSequence;
+
+  private void updateUsageInfo();
+    descriptor: ()V
+
+  private boolean fillNodeUsage(net.minecraft.ChatFormatting);
+    descriptor: (Lnet/minecraft/ChatFormatting;)Z
+
+  private net.minecraft.util.FormattedCharSequence formatChat(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+
+  static java.lang.String calculateSuggestionSuffix(java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+  private static net.minecraft.util.FormattedCharSequence formatText(com.mojang.brigadier.ParseResults<net.minecraft.client.multiplayer.ClientSuggestionProvider>, java.lang.String, int);
+    descriptor: (Lcom/mojang/brigadier/ParseResults;Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)V
+
+  public boolean renderSuggestions(net.minecraft.client.gui.GuiGraphics, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;II)Z
+
+  public void renderUsage(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  public net.minecraft.network.chat.Component getNarrationMessage();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  private void lambda$updateCommandInfo$0();
+    descriptor: ()V
+
+  static {};
+    descriptor: ()V
+}

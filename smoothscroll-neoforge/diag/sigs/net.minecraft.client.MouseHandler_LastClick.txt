@@ -1,0 +1,24 @@
+Compiled from "MouseHandler.java"
+final class net.minecraft.client.MouseHandler$LastClick extends java.lang.Record {
+  private final long time;
+    descriptor: J
+  private final net.minecraft.client.gui.screens.Screen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+  net.minecraft.client.MouseHandler$LastClick(long, net.minecraft.client.gui.screens.Screen);
+    descriptor: (JLnet/minecraft/client/gui/screens/Screen;)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public long time();
+    descriptor: ()J
+
+  public net.minecraft.client.gui.screens.Screen screen();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+}

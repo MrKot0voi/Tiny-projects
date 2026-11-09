@@ -1,0 +1,15 @@
+Compiled from "ChatSelectionScreen.java"
+public class net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$DividerEntry extends net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$Entry {
+  private final net.minecraft.network.chat.Component text;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  final net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList this$1;
+    descriptor: Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;
+  public net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList$DividerEntry(net.minecraft.client.gui.screens.reporting.ChatSelectionScreen$ChatSelectionList, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/screens/reporting/ChatSelectionScreen$ChatSelectionList;Lnet/minecraft/network/chat/Component;)V
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+}
