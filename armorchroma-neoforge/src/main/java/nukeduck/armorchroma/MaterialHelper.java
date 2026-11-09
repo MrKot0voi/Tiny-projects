@@ -23,7 +23,7 @@ public class MaterialHelper {
                return TURTLE_MATERIAL;
             }
 
-            return asset.location().getPath();
+            return asset.identifier().getPath();
          }
       }
 

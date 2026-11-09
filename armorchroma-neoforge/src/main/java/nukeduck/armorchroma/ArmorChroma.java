@@ -8,6 +8,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
@@ -31,6 +32,7 @@ public class ArmorChroma {
       container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
       modBus.addListener(this::onAddClientReloadListeners);
+      modBus.addListener(this::onRegisterRenderPipelines);
 
       if (!FMLEnvironment.isProduction()) {
          NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
@@ -39,6 +41,10 @@ public class ArmorChroma {
 
    private void onAddClientReloadListeners(AddClientReloadListenersEvent event) {
       event.addListener(Identifier.fromNamespaceAndPath(MODID, "icon_data"), ICON_DATA);
+   }
+
+   private void onRegisterRenderPipelines(RegisterRenderPipelinesEvent event) {
+      ArmorChromaRenderLayers.registerPipelines(event);
    }
 
    private void onRegisterCommands(RegisterCommandsEvent event) {
