@@ -1,0 +1,54 @@
+name: diag shieldfixes signatures
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle 9.8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+
+      - name: Dump signatures
+        working-directory: shieldfixes-neoforge
+        run: |
+          gradle createMinecraftArtifacts --no-daemon -q || true
+          MC=""
+          for j in $(find build "$HOME/.gradle" -name "*.jar" 2>/dev/null); do
+            if unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/client/Minecraft.class"; then MC="$j"; break; fi
+          done
+          mkdir -p "$GITHUB_WORKSPACE/diag"
+          OUT="$GITHUB_WORKSPACE/diag/shield-signatures.txt"
+          {
+            echo "MC jar: $MC"
+            for c in net.minecraft.client.renderer.entity.player.AvatarRenderer net.minecraft.client.renderer.item.properties.conditional.IsUsingItem net.minecraft.world.entity.LivingEntity net.minecraft.client.player.LocalPlayer net.minecraft.client.Minecraft net.minecraft.client.multiplayer.MultiPlayerGameMode net.minecraft.world.level.ServerExplosion net.minecraft.world.item.ItemStack net.minecraft.world.entity.Avatar net.minecraft.client.model.HumanoidModel\$ArmPose net.minecraft.world.item.component.SwingAnimation net.minecraft.world.item.SwingAnimationType net.minecraft.world.item.ItemUseAnimation; do
+              echo "=== $c"
+              javap -p -cp "$MC" "$c" 2>&1 || echo "(not found)"
+            done
+          } > "$OUT"
+          wc -l "$OUT"
+
+      - name: Push to diag-output branch
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout -B diag-output
+          git add -f diag/shield-signatures.txt
+          git commit -m "diag: shieldfixes signatures"
+          git push -f origin diag-output
