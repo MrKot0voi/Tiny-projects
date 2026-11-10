@@ -49,7 +49,7 @@ jobs:
         continue-on-error: true
         run: |
           set +e
-          xvfb-run -a -s "-screen 0 1280x720x24" timeout 420 gradle runClient --no-daemon --stacktrace > runclient.log 2>&1
+          xvfb-run -a -s "-screen 0 1280x720x24" timeout 480 gradle runClient --no-daemon --stacktrace > runclient.log 2>&1
           echo "exit: $?" >> runclient.log
           pkill -f net.neoforged || true
 
@@ -61,6 +61,7 @@ jobs:
           { echo "== exit line"; grep -E "^exit:" $L || echo "no exit line";
             echo "== gradle result"; grep -E "BUILD (SUCCESSFUL|FAILED)|What went wrong" -A3 $L | head -40;
             echo "== reached game (sound engine / main menu)"; grep -E "Sound engine started|Created: |Loaded .* mod|Forge Mod Loader|NeoForge" $L | head -20;
+            echo "== selftest"; grep -E "SELFTEST" $L | head -40;
             echo "== mixin problems"; grep -E "Mixin apply failed|InvalidInjectionException|InvalidMixinException|Critical injection|MixinApplyError|Injection validation failed|Failed to apply mixin|smoothscroll.mixins" $L | head -60;
             echo "== errors and crashes"; grep -E "Exception|Crash|Caused by|ERROR" $L | grep -v "DEBUG" | head -80;
           } > diag/runclient-summary.txt
