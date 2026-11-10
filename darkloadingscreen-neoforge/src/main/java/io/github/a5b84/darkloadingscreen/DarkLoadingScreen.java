@@ -40,7 +40,11 @@ public class DarkLoadingScreen {
             .withBlend(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE))
             .build();
 
-    public static Config config = Config.read();
+    /**
+     * Значения по умолчанию до загрузки конфига. ModConfigSpec.get() до загрузки бросает исключение,
+     * поэтому реальные значения читаются в {@link #onConfigChanged} (ModConfigEvent).
+     */
+    public static Config config = Config.DEFAULT;
 
     public DarkLoadingScreen(IEventBus modBus, ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
