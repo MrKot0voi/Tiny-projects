@@ -1,0 +1,347 @@
+Compiled from "ServerData.java"
+public class net.minecraft.client.multiplayer.ServerData {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  private static final int MAX_ICON_SIZE;
+    descriptor: I
+
+  public java.lang.String name;
+    descriptor: Ljava/lang/String;
+
+  public java.lang.String ip;
+    descriptor: Ljava/lang/String;
+
+  public net.minecraft.network.chat.Component status;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  public net.minecraft.network.chat.Component motd;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  public net.minecraft.network.protocol.status.ServerStatus$Players players;
+    descriptor: Lnet/minecraft/network/protocol/status/ServerStatus$Players;
+
+  public long ping;
+    descriptor: J
+
+  public int protocol;
+    descriptor: I
+
+  public net.minecraft.network.chat.Component version;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  public java.util.List<net.minecraft.network.chat.Component> playerList;
+    descriptor: Ljava/util/List;
+
+  private net.minecraft.client.multiplayer.ServerData$ServerPackStatus packStatus;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+
+  private byte[] iconBytes;
+    descriptor: [B
+
+  private net.minecraft.client.multiplayer.ServerData$Type type;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData$Type;
+
+  private int acceptedCodeOfConduct;
+    descriptor: I
+
+  private net.minecraft.client.multiplayer.ServerData$State state;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData$State;
+
+  public net.neoforged.neoforge.client.ExtendedServerListData neoForgeData;
+    descriptor: Lnet/neoforged/neoforge/client/ExtendedServerListData;
+
+  public net.minecraft.client.multiplayer.ServerData(java.lang.String, java.lang.String, net.minecraft.client.multiplayer.ServerData$Type);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/client/multiplayer/ServerData$Type;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #7                  // Method net/minecraft/SharedConstants.getCurrentVersion:()Lnet/minecraft/WorldVersion;
+         8: invokeinterface #13,  1           // InterfaceMethod net/minecraft/WorldVersion.protocolVersion:()I
+        13: putfield      #19                 // Field protocol:I
+        16: aload_0
+        17: invokestatic  #7                  // Method net/minecraft/SharedConstants.getCurrentVersion:()Lnet/minecraft/WorldVersion;
+        20: invokeinterface #25,  1           // InterfaceMethod net/minecraft/WorldVersion.name:()Ljava/lang/String;
+        25: invokestatic  #29                 // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+        28: putfield      #35                 // Field version:Lnet/minecraft/network/chat/Component;
+        31: aload_0
+        32: invokestatic  #39                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        35: putfield      #45                 // Field playerList:Ljava/util/List;
+        38: aload_0
+        39: getstatic     #49                 // Field net/minecraft/client/multiplayer/ServerData$ServerPackStatus.PROMPT:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+        42: putfield      #55                 // Field packStatus:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+        45: aload_0
+        46: getstatic     #58                 // Field net/minecraft/client/multiplayer/ServerData$State.INITIAL:Lnet/minecraft/client/multiplayer/ServerData$State;
+        49: putfield      #64                 // Field state:Lnet/minecraft/client/multiplayer/ServerData$State;
+        52: aload_0
+        53: aconst_null
+        54: putfield      #67                 // Field neoForgeData:Lnet/neoforged/neoforge/client/ExtendedServerListData;
+        57: aload_0
+        58: aload_1
+        59: putfield      #71                 // Field name:Ljava/lang/String;
+        62: aload_0
+        63: aload_2
+        64: putfield      #74                 // Field ip:Ljava/lang/String;
+        67: aload_0
+        68: aload_3
+        69: putfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+        72: return
+
+  public net.minecraft.nbt.CompoundTag write();
+    descriptor: ()Lnet/minecraft/nbt/CompoundTag;
+    Code:
+         0: new           #81                 // class net/minecraft/nbt/CompoundTag
+         3: dup
+         4: invokespecial #83                 // Method net/minecraft/nbt/CompoundTag."<init>":()V
+         7: astore_1
+         8: aload_1
+         9: ldc           #84                 // String name
+        11: aload_0
+        12: getfield      #71                 // Field name:Ljava/lang/String;
+        15: invokevirtual #85                 // Method net/minecraft/nbt/CompoundTag.putString:(Ljava/lang/String;Ljava/lang/String;)V
+        18: aload_1
+        19: ldc           #89                 // String ip
+        21: aload_0
+        22: getfield      #74                 // Field ip:Ljava/lang/String;
+        25: invokevirtual #85                 // Method net/minecraft/nbt/CompoundTag.putString:(Ljava/lang/String;Ljava/lang/String;)V
+        28: aload_1
+        29: ldc           #90                 // String icon
+        31: getstatic     #92                 // Field net/minecraft/util/ExtraCodecs.BASE64_STRING:Lcom/mojang/serialization/Codec;
+        34: aload_0
+        35: getfield      #98                 // Field iconBytes:[B
+        38: invokevirtual #102                // Method net/minecraft/nbt/CompoundTag.storeNullable:(Ljava/lang/String;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V
+        41: aload_1
+        42: getstatic     #106                // Field net/minecraft/client/multiplayer/ServerData$ServerPackStatus.FIELD_CODEC:Lcom/mojang/serialization/MapCodec;
+        45: aload_0
+        46: getfield      #55                 // Field packStatus:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+        49: invokevirtual #110                // Method net/minecraft/nbt/CompoundTag.store:(Lcom/mojang/serialization/MapCodec;Ljava/lang/Object;)V
+        52: aload_0
+        53: getfield      #114                // Field acceptedCodeOfConduct:I
+        56: ifeq          69
+        59: aload_1
+        60: ldc           #117                // String acceptedCodeOfConduct
+        62: aload_0
+        63: getfield      #114                // Field acceptedCodeOfConduct:I
+        66: invokevirtual #118                // Method net/minecraft/nbt/CompoundTag.putInt:(Ljava/lang/String;I)V
+        69: aload_1
+        70: areturn
+
+  public net.minecraft.client.multiplayer.ServerData$ServerPackStatus getResourcePackStatus();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+    Code:
+         0: aload_0
+         1: getfield      #55                 // Field packStatus:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+         4: areturn
+
+  public void setResourcePackStatus(net.minecraft.client.multiplayer.ServerData$ServerPackStatus);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #55                 // Field packStatus:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+         5: return
+
+  public static net.minecraft.client.multiplayer.ServerData read(net.minecraft.nbt.CompoundTag);
+    descriptor: (Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/client/multiplayer/ServerData;
+    Code:
+         0: new           #20                 // class net/minecraft/client/multiplayer/ServerData
+         3: dup
+         4: aload_0
+         5: ldc           #84                 // String name
+         7: ldc           #122                // String
+         9: invokevirtual #124                // Method net/minecraft/nbt/CompoundTag.getStringOr:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        12: aload_0
+        13: ldc           #89                 // String ip
+        15: ldc           #122                // String
+        17: invokevirtual #124                // Method net/minecraft/nbt/CompoundTag.getStringOr:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        20: getstatic     #128                // Field net/minecraft/client/multiplayer/ServerData$Type.OTHER:Lnet/minecraft/client/multiplayer/ServerData$Type;
+        23: invokespecial #133                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/client/multiplayer/ServerData$Type;)V
+        26: astore_1
+        27: aload_1
+        28: aload_0
+        29: ldc           #90                 // String icon
+        31: getstatic     #92                 // Field net/minecraft/util/ExtraCodecs.BASE64_STRING:Lcom/mojang/serialization/Codec;
+        34: invokevirtual #136                // Method net/minecraft/nbt/CompoundTag.read:(Ljava/lang/String;Lcom/mojang/serialization/Codec;)Ljava/util/Optional;
+        37: aconst_null
+        38: invokevirtual #140                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        41: checkcast     #146                // class "[B"
+        44: invokevirtual #147                // Method setIconBytes:([B)V
+        47: aload_1
+        48: aload_0
+        49: getstatic     #106                // Field net/minecraft/client/multiplayer/ServerData$ServerPackStatus.FIELD_CODEC:Lcom/mojang/serialization/MapCodec;
+        52: invokevirtual #151                // Method net/minecraft/nbt/CompoundTag.read:(Lcom/mojang/serialization/MapCodec;)Ljava/util/Optional;
+        55: getstatic     #49                 // Field net/minecraft/client/multiplayer/ServerData$ServerPackStatus.PROMPT:Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+        58: invokevirtual #140                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        61: checkcast     #50                 // class net/minecraft/client/multiplayer/ServerData$ServerPackStatus
+        64: invokevirtual #154                // Method setResourcePackStatus:(Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;)V
+        67: aload_1
+        68: aload_0
+        69: ldc           #117                // String acceptedCodeOfConduct
+        71: iconst_0
+        72: invokevirtual #158                // Method net/minecraft/nbt/CompoundTag.getIntOr:(Ljava/lang/String;I)I
+        75: putfield      #114                // Field acceptedCodeOfConduct:I
+        78: aload_1
+        79: areturn
+
+  public byte[] getIconBytes();
+    descriptor: ()[B
+    Code:
+         0: aload_0
+         1: getfield      #98                 // Field iconBytes:[B
+         4: areturn
+
+  public void setIconBytes(byte[]);
+    descriptor: ([B)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #98                 // Field iconBytes:[B
+         5: return
+
+  public boolean isLan();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+         4: getstatic     #162                // Field net/minecraft/client/multiplayer/ServerData$Type.LAN:Lnet/minecraft/client/multiplayer/ServerData$Type;
+         7: if_acmpne     14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: ireturn
+
+  public boolean isRealm();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+         4: getstatic     #165                // Field net/minecraft/client/multiplayer/ServerData$Type.REALM:Lnet/minecraft/client/multiplayer/ServerData$Type;
+         7: if_acmpne     14
+        10: iconst_1
+        11: goto          15
+        14: iconst_0
+        15: ireturn
+
+  public net.minecraft.client.multiplayer.ServerData$Type type();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData$Type;
+    Code:
+         0: aload_0
+         1: getfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+         4: areturn
+
+  public boolean hasAcceptedCodeOfConduct(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+    Code:
+         0: aload_0
+         1: getfield      #114                // Field acceptedCodeOfConduct:I
+         4: aload_1
+         5: invokevirtual #168                // Method java/lang/String.hashCode:()I
+         8: if_icmpne     15
+        11: iconst_1
+        12: goto          16
+        15: iconst_0
+        16: ireturn
+
+  public void acceptCodeOfConduct(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #168                // Method java/lang/String.hashCode:()I
+         5: putfield      #114                // Field acceptedCodeOfConduct:I
+         8: return
+
+  public void clearCodeOfConduct();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: putfield      #114                // Field acceptedCodeOfConduct:I
+         5: return
+
+  public void copyNameIconFrom(net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getfield      #74                 // Field ip:Ljava/lang/String;
+         5: putfield      #74                 // Field ip:Ljava/lang/String;
+         8: aload_0
+         9: aload_1
+        10: getfield      #71                 // Field name:Ljava/lang/String;
+        13: putfield      #71                 // Field name:Ljava/lang/String;
+        16: aload_0
+        17: aload_1
+        18: getfield      #98                 // Field iconBytes:[B
+        21: putfield      #98                 // Field iconBytes:[B
+        24: return
+
+  public void copyFrom(net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #173                // Method copyNameIconFrom:(Lnet/minecraft/client/multiplayer/ServerData;)V
+         5: aload_0
+         6: aload_1
+         7: invokevirtual #177                // Method getResourcePackStatus:()Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+        10: invokevirtual #154                // Method setResourcePackStatus:(Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;)V
+        13: aload_0
+        14: aload_1
+        15: getfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+        18: putfield      #77                 // Field type:Lnet/minecraft/client/multiplayer/ServerData$Type;
+        21: return
+
+  public net.minecraft.client.multiplayer.ServerData$State state();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData$State;
+    Code:
+         0: aload_0
+         1: getfield      #64                 // Field state:Lnet/minecraft/client/multiplayer/ServerData$State;
+         4: areturn
+
+  public void setState(net.minecraft.client.multiplayer.ServerData$State);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData$State;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #64                 // Field state:Lnet/minecraft/client/multiplayer/ServerData$State;
+         5: return
+
+  public static byte[] validateIcon(byte[]);
+    descriptor: ([B)[B
+    Code:
+         0: aload_0
+         1: ifnull        46
+         4: aload_0
+         5: invokestatic  #181                // Method net/minecraft/util/PngInfo.fromBytes:([B)Lnet/minecraft/util/PngInfo;
+         8: astore_1
+         9: aload_1
+        10: invokevirtual #187                // Method net/minecraft/util/PngInfo.width:()I
+        13: sipush        1024
+        16: if_icmpgt     31
+        19: aload_1
+        20: invokevirtual #190                // Method net/minecraft/util/PngInfo.height:()I
+        23: sipush        1024
+        26: if_icmpgt     31
+        29: aload_0
+        30: areturn
+        31: goto          46
+        34: astore_1
+        35: getstatic     #195                // Field LOGGER:Lorg/slf4j/Logger;
+        38: ldc           #199                // String Failed to decode server icon
+        40: aload_1
+        41: invokeinterface #201,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Throwable;)V
+        46: aconst_null
+        47: areturn
+      Exception table:
+         from    to  target type
+             4    30    34   Class java/io/IOException
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #207                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+         3: putstatic     #195                // Field LOGGER:Lorg/slf4j/Logger;
+         6: return
+}

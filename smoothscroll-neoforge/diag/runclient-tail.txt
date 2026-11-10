@@ -8,50 +8,50 @@ Daemon will be stopped at the end of the build
 > Task :prepareClientRun
 
 > Task :runClient
-2026-11-10T07:59:33.157997533Z main WARN Advanced terminal features are not available in this environment
-[07:59:33] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 98ms
-[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
-[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/run
-[07:59:33] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 90) in 18ms
-[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
-[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
-[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
-[07:59:33] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
-[07:59:34] [fml-loadingscreen/INFO] [ne.ne.fm.ea.re.LoadingScreenRenderer/]: GL info: llvmpipe (LLVM 21.1.8, 256 bits) GL version 4.5 (Core Profile) Mesa 26.0.8-1ubuntu0.3, Mesa
-[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/classes/java/main:smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/resources/main from env
-[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
-[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+2026-11-10T09:35:21.700878993Z main WARN Advanced terminal features are not available in this environment
+[09:35:21] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 86ms
+[09:35:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
+[09:35:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/run
+[09:35:21] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 90) in 15ms
+[09:35:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[09:35:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[09:35:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[09:35:21] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[09:35:25] [ForkJoinPool.commonPool-worker-3/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[09:35:25] [fml-loadingscreen/INFO] [ne.ne.fm.ea.re.LoadingScreenRenderer/]: GL info: llvmpipe (LLVM 21.1.8, 256 bits) GL version 4.5 (Core Profile) Mesa 26.0.8-1ubuntu0.3, Mesa
+[09:35:25] [ForkJoinPool.commonPool-worker-3/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/classes/java/main:smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/resources/main from env
+[09:35:25] [ForkJoinPool.commonPool-worker-3/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[09:35:25] [ForkJoinPool.commonPool-worker-3/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
      Mod List:
 		Name Version (Mod Id)
 
 		Minecraft 1.21.11 (minecraft)
 		NeoForge 21.11.42 (neoforge)
 		Smooth Scroll 2.6.7+1.21.11 (smoothscroll)
-[07:59:34] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
-[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
-[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar > net.neoforged.neoforge-coremods-21.11.42.jar
-[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+[09:35:26] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
+[09:35:26] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[09:35:26] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar > net.neoforged.neoforge-coremods-21.11.42.jar
+[09:35:26] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
  - minecraft (composite(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42-client-extra-aka-minecraft-resources.jar), filtered(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar))))
  - mixinextras.neoforge (jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar > mixinextras-neoforge-0.5.3.jar))
  - neoforge (composite(filtered(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar))))
  - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
  - smoothscroll (composite(folder(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/classes/java/main), folder(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/resources/main)))
-[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 28ms
-[07:59:36] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 480 milliseconds
-[07:59:36] [pool-6-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
-[07:59:41] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.42, for MC 1.21.11
-[07:59:42] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
-[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
-[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
-[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
-[07:59:43] [Render thread/ERROR] [mojang/Narrator]: Error while loading the narrator
+[09:35:26] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 24ms
+[09:35:27] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 352 milliseconds
+[09:35:27] [pool-6-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[09:35:31] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[09:35:31] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.42, for MC 1.21.11
+[09:35:31] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[09:35:31] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[09:35:31] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
+[09:35:32] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[09:35:32] [Render thread/ERROR] [mojang/Narrator]: Error while loading the narrator
 com.mojang.text2speech.Narrator$InitializeException: Failed to load library flite
 	at com.mojang.text2speech.NarratorLinux$FliteLibrary.loadNative(NarratorLinux.java:81) ~[text2speech-1.18.11.jar:?] {}
 	at com.mojang.text2speech.NarratorLinux.<init>(NarratorLinux.java:18) ~[text2speech-1.18.11.jar:?] {}
@@ -117,10 +117,10 @@ Native library (linux-x86-64/libflite.so) not found in resource path (/home/runn
 		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
 		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
 		at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
-[07:59:43] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/smoothscroll, mod/neoforge
-[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
-[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
-[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[09:35:32] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/smoothscroll, mod/neoforge
+[09:35:33] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[09:35:33] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[09:35:33] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
 ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
 ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
 ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
@@ -137,7 +137,7 @@ ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
 ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
-[07:59:46] [Render thread/ERROR] [minecraft/SoundEngine]: Error starting SoundSystem. Turning off sounds & music
+[09:35:34] [Render thread/ERROR] [minecraft/SoundEngine]: Error starting SoundSystem. Turning off sounds & music
 java.lang.IllegalStateException: Failed to open OpenAL device
 	at TRANSFORMER/minecraft@1.21.11/com.mojang.blaze3d.audio.Library.openDeviceOrFallback(Library.java:202) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
 	at TRANSFORMER/minecraft@1.21.11/com.mojang.blaze3d.audio.Library.init(Library.java:71) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
@@ -160,20 +160,121 @@ java.lang.IllegalStateException: Failed to open OpenAL device
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
 	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
-[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
-[07:59:46] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[09:35:34] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[09:35:35] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[09:35:35] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[09:35:36] [Render thread/INFO] [minecraft/ConnectScreen]: Connecting to localhost, 25565
+[09:35:36] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST connecting to localhost:25565
+[09:35:39] [Render thread/WARN] [minecraft/ClientPacketListener]: Ignoring chat session from Dev due to missing Services public key
+[09:35:39] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 2 advancements
+[09:35:39] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST player joined
+[09:35:39] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[09:35:40] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[09:35:40] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 0
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 1
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 2
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 3
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 4
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 5
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 6
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 7
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 8
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 9
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 10
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 11
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 12
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 13
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 14
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 15
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 16
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 17
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 18
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 19
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 20
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 21
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 22
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 23
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 24
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 25
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 26
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 27
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 28
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 29
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 30
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 31
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 32
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 33
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 34
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 35
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 36
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 37
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 38
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 39
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 40
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 41
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 42
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 43
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 44
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 45
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 46
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 47
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 48
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 49
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 50
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 51
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 52
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 53
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 54
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 55
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 56
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 57
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 58
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 59
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 60
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 61
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 62
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 63
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 64
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 65
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 66
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 67
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 68
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 69
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 70
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 71
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 72
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 73
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 74
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 75
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 76
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 77
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 78
+[09:35:40] [Render thread/INFO] [minecraft/ChatComponent]: [System] [CHAT] selftest line 79
+[09:35:40] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 1 chat messages ok
+[09:35:40] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[09:35:40] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[09:35:40] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[09:35:41] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[09:35:41] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 2 chat screen ok
+[09:35:42] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 3 chat and screen scroll ok
+[09:35:43] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 4 suggestions screen ok
+[09:35:44] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 5 suggestions scroll ok
+[09:35:45] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 6 creative screen ok
+[09:35:46] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 7 creative scroll down ok
+[09:35:48] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST step 8 creative scroll up ok
+[09:35:49] [Render thread/INFO] [Smooth Scrolling/]: SELFTEST DONE
 exit: 124

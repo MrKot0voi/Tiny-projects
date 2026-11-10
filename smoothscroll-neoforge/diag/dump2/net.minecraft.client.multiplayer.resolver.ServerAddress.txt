@@ -1,0 +1,41 @@
+Compiled from "ServerAddress.java"
+public final class net.minecraft.client.multiplayer.resolver.ServerAddress {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private final com.google.common.net.HostAndPort hostAndPort;
+    descriptor: Lcom/google/common/net/HostAndPort;
+  private static final net.minecraft.client.multiplayer.resolver.ServerAddress INVALID;
+    descriptor: Lnet/minecraft/client/multiplayer/resolver/ServerAddress;
+  public net.minecraft.client.multiplayer.resolver.ServerAddress(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  private net.minecraft.client.multiplayer.resolver.ServerAddress(com.google.common.net.HostAndPort);
+    descriptor: (Lcom/google/common/net/HostAndPort;)V
+
+  public java.lang.String getHost();
+    descriptor: ()Ljava/lang/String;
+
+  public int getPort();
+    descriptor: ()I
+
+  public static net.minecraft.client.multiplayer.resolver.ServerAddress parseString(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/client/multiplayer/resolver/ServerAddress;
+
+  public static boolean isValidAddress(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  static int parsePort(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int hashCode();
+    descriptor: ()I
+
+  static {};
+    descriptor: ()V
+}
