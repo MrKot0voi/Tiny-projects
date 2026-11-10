@@ -1,0 +1,77 @@
+name: runclient smoke test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [darkloadingscreen-neoforge, shieldfixes-neoforge]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle 9.8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+
+      - name: Build WalksyLib (shieldfixes only)
+        if: matrix.project == 'shieldfixes-neoforge'
+        run: |
+          git clone --depth 1 https://github.com/Walksy/WalksyLib.git walksylib
+          cd walksylib
+          chmod +x gradlew
+          ./gradlew :neoforge-1.21.11:jar -Pwalksylib.loaders=neoforge -Pwalksylib.versions=1.21.11 --no-daemon
+          mkdir -p "$GITHUB_WORKSPACE/${{ matrix.project }}/libs"
+          JAR=$(find build/loader/neoforge/1.21.11/build/libs -name "*.jar" ! -name "*sources*" | head -1)
+          cp "$JAR" "$GITHUB_WORKSPACE/${{ matrix.project }}/libs/"
+
+      - name: Install Xvfb and Mesa
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglu1-mesa
+
+      - name: Run client under Xvfb
+        working-directory: ${{ matrix.project }}
+        run: |
+          mkdir -p run/mods
+          cp libs/*.jar run/mods/ 2>/dev/null || true
+          set +e
+          timeout 480 xvfb-run -a gradle runClient --no-daemon --stacktrace
+          echo "runClient exit code: $?"
+          pkill -f "net.neoforged" || true
+          set -e
+
+      - name: Save logs
+        working-directory: ${{ matrix.project }}
+        run: |
+          D="$GITHUB_WORKSPACE/diag/${{ matrix.project }}"
+          mkdir -p "$D"
+          cp run/logs/latest.log "$D/latest.log" 2>/dev/null || echo "no latest.log"
+          cp -r run/crash-reports "$D/" 2>/dev/null || true
+          ls -la "$D"
+
+      - name: Push logs to branch
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan runclient-${{ matrix.project }}
+          git rm -rf -q --cached . || true
+          git add -f diag/${{ matrix.project }}
+          git commit -q -m "runclient logs ${{ matrix.project }}"
+          git push -f origin runclient-${{ matrix.project }}
