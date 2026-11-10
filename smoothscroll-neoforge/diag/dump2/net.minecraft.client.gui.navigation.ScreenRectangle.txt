@@ -1,0 +1,94 @@
+Compiled from "ScreenRectangle.java"
+public final class net.minecraft.client.gui.navigation.ScreenRectangle extends java.lang.Record {
+  private final net.minecraft.client.gui.navigation.ScreenPosition position;
+    descriptor: Lnet/minecraft/client/gui/navigation/ScreenPosition;
+  private final int width;
+    descriptor: I
+  private final int height;
+    descriptor: I
+  private static final net.minecraft.client.gui.navigation.ScreenRectangle EMPTY;
+    descriptor: Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+  public net.minecraft.client.gui.navigation.ScreenRectangle(int, int, int, int);
+    descriptor: (IIII)V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle(net.minecraft.client.gui.navigation.ScreenPosition, int, int);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenPosition;II)V
+
+  public static net.minecraft.client.gui.navigation.ScreenRectangle empty();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public static net.minecraft.client.gui.navigation.ScreenRectangle of(net.minecraft.client.gui.navigation.ScreenAxis, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;IIII)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle step(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public int getLength(net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+
+  public int getBoundInDirection(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getBorder(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public boolean overlaps(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+
+  public boolean overlapsInAxis(net.minecraft.client.gui.navigation.ScreenRectangle, net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenAxis;)Z
+
+  public int getCenterInAxis(net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle intersection(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public boolean intersects(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+
+  public boolean encompasses(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+
+  public int top();
+    descriptor: ()I
+
+  public int bottom();
+    descriptor: ()I
+
+  public int left();
+    descriptor: ()I
+
+  public int right();
+    descriptor: ()I
+
+  public boolean containsPoint(int, int);
+    descriptor: (II)Z
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle transformAxisAligned(org.joml.Matrix3x2fc);
+    descriptor: (Lorg/joml/Matrix3x2fc;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle transformMaxBounds(org.joml.Matrix3x2fc);
+    descriptor: (Lorg/joml/Matrix3x2fc;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public net.minecraft.client.gui.navigation.ScreenPosition position();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenPosition;
+
+  public int width();
+    descriptor: ()I
+
+  public int height();
+    descriptor: ()I
+
+  static {};
+    descriptor: ()V
+}

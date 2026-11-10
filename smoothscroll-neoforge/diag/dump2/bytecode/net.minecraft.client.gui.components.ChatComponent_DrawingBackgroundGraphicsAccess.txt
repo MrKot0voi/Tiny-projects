@@ -1,0 +1,106 @@
+Compiled from "ChatComponent.java"
+class net.minecraft.client.gui.components.ChatComponent$DrawingBackgroundGraphicsAccess implements net.minecraft.client.gui.components.ChatComponent$ChatGraphicsAccess {
+  private final net.minecraft.client.gui.GuiGraphics graphics;
+    descriptor: Lnet/minecraft/client/gui/GuiGraphics;
+
+  private final net.minecraft.client.gui.ActiveTextCollector textRenderer;
+    descriptor: Lnet/minecraft/client/gui/ActiveTextCollector;
+
+  private net.minecraft.client.gui.ActiveTextCollector$Parameters parameters;
+    descriptor: Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+
+  public net.minecraft.client.gui.components.ChatComponent$DrawingBackgroundGraphicsAccess(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field graphics:Lnet/minecraft/client/gui/GuiGraphics;
+         9: aload_0
+        10: aload_1
+        11: getstatic     #13                 // Field net/minecraft/client/gui/GuiGraphics$HoveredTextEffects.NONE:Lnet/minecraft/client/gui/GuiGraphics$HoveredTextEffects;
+        14: aconst_null
+        15: invokevirtual #19                 // Method net/minecraft/client/gui/GuiGraphics.textRenderer:(Lnet/minecraft/client/gui/GuiGraphics$HoveredTextEffects;Ljava/util/function/Consumer;)Lnet/minecraft/client/gui/ActiveTextCollector;
+        18: putfield      #25                 // Field textRenderer:Lnet/minecraft/client/gui/ActiveTextCollector;
+        21: aload_0
+        22: aload_0
+        23: getfield      #25                 // Field textRenderer:Lnet/minecraft/client/gui/ActiveTextCollector;
+        26: invokeinterface #28,  1           // InterfaceMethod net/minecraft/client/gui/ActiveTextCollector.defaultParameters:()Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        31: putfield      #34                 // Field parameters:Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        34: return
+
+  public void updatePose(java.util.function.Consumer<org.joml.Matrix3x2f>);
+    descriptor: (Ljava/util/function/Consumer;)V
+    Code:
+         0: aload_1
+         1: aload_0
+         2: getfield      #7                  // Field graphics:Lnet/minecraft/client/gui/GuiGraphics;
+         5: invokevirtual #38                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+         8: invokeinterface #42,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        13: aload_0
+        14: aload_0
+        15: getfield      #34                 // Field parameters:Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        18: new           #48                 // class org/joml/Matrix3x2f
+        21: dup
+        22: aload_0
+        23: getfield      #7                  // Field graphics:Lnet/minecraft/client/gui/GuiGraphics;
+        26: invokevirtual #38                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+        29: invokespecial #50                 // Method org/joml/Matrix3x2f."<init>":(Lorg/joml/Matrix3x2fc;)V
+        32: invokevirtual #53                 // Method net/minecraft/client/gui/ActiveTextCollector$Parameters.withPose:(Lorg/joml/Matrix3x2fc;)Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        35: putfield      #34                 // Field parameters:Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        38: return
+
+  public void fill(int, int, int, int, int);
+    descriptor: (IIIII)V
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field graphics:Lnet/minecraft/client/gui/GuiGraphics;
+         4: iload_1
+         5: iload_2
+         6: iload_3
+         7: iload         4
+         9: iload         5
+        11: invokevirtual #59                 // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+        14: return
+
+  public boolean handleMessage(int, float, net.minecraft.util.FormattedCharSequence);
+    descriptor: (IFLnet/minecraft/util/FormattedCharSequence;)Z
+    Code:
+         0: aload_0
+         1: getfield      #25                 // Field textRenderer:Lnet/minecraft/client/gui/ActiveTextCollector;
+         4: getstatic     #63                 // Field net/minecraft/client/gui/TextAlignment.LEFT:Lnet/minecraft/client/gui/TextAlignment;
+         7: iconst_0
+         8: iload_1
+         9: aload_0
+        10: getfield      #34                 // Field parameters:Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        13: fload_2
+        14: invokevirtual #69                 // Method net/minecraft/client/gui/ActiveTextCollector$Parameters.withOpacity:(F)Lnet/minecraft/client/gui/ActiveTextCollector$Parameters;
+        17: aload_3
+        18: invokeinterface #73,  6           // InterfaceMethod net/minecraft/client/gui/ActiveTextCollector.accept:(Lnet/minecraft/client/gui/TextAlignment;IILnet/minecraft/client/gui/ActiveTextCollector$Parameters;Lnet/minecraft/util/FormattedCharSequence;)V
+        23: iconst_0
+        24: ireturn
+
+  public void handleTag(int, int, int, int, float, net.minecraft.client.GuiMessageTag);
+    descriptor: (IIIIFLnet/minecraft/client/GuiMessageTag;)V
+    Code:
+         0: fload         5
+         2: aload         6
+         4: invokevirtual #76                 // Method net/minecraft/client/GuiMessageTag.indicatorColor:()I
+         7: invokestatic  #82                 // Method net/minecraft/util/ARGB.color:(FI)I
+        10: istore        7
+        12: aload_0
+        13: getfield      #7                  // Field graphics:Lnet/minecraft/client/gui/GuiGraphics;
+        16: iload_1
+        17: iload_2
+        18: iload_3
+        19: iload         4
+        21: iload         7
+        23: invokevirtual #59                 // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+        26: return
+
+  public void handleTagIcon(int, int, boolean, net.minecraft.client.GuiMessageTag, net.minecraft.client.GuiMessageTag$Icon);
+    descriptor: (IIZLnet/minecraft/client/GuiMessageTag;Lnet/minecraft/client/GuiMessageTag$Icon;)V
+    Code:
+         0: return
+}

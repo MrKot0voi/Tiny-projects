@@ -1,0 +1,640 @@
+Compiled from "ScreenRectangle.java"
+public final class net.minecraft.client.gui.navigation.ScreenRectangle extends java.lang.Record {
+  private final net.minecraft.client.gui.navigation.ScreenPosition position;
+    descriptor: Lnet/minecraft/client/gui/navigation/ScreenPosition;
+
+  private final int width;
+    descriptor: I
+
+  private final int height;
+    descriptor: I
+
+  private static final net.minecraft.client.gui.navigation.ScreenRectangle EMPTY;
+    descriptor: Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle(int, int, int, int);
+    descriptor: (IIII)V
+    Code:
+         0: aload_0
+         1: new           #20                 // class net/minecraft/client/gui/navigation/ScreenPosition
+         4: dup
+         5: iload_1
+         6: iload_2
+         7: invokespecial #22                 // Method net/minecraft/client/gui/navigation/ScreenPosition."<init>":(II)V
+        10: iload_3
+        11: iload         4
+        13: invokespecial #25                 // Method "<init>":(Lnet/minecraft/client/gui/navigation/ScreenPosition;II)V
+        16: return
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle(net.minecraft.client.gui.navigation.ScreenPosition, int, int);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenPosition;II)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         9: aload_0
+        10: iload_2
+        11: putfield      #13                 // Field width:I
+        14: aload_0
+        15: iload_3
+        16: putfield      #17                 // Field height:I
+        19: return
+
+  public static net.minecraft.client.gui.navigation.ScreenRectangle empty();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: getstatic     #28                 // Field EMPTY:Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+         3: areturn
+
+  public static net.minecraft.client.gui.navigation.ScreenRectangle of(net.minecraft.client.gui.navigation.ScreenAxis, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;IIII)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: getstatic     #32                 // Field net/minecraft/client/gui/navigation/ScreenRectangle$1.$SwitchMap$net$minecraft$client$gui$navigation$ScreenAxis:[I
+         3: aload_0
+         4: invokevirtual #38                 // Method net/minecraft/client/gui/navigation/ScreenAxis.ordinal:()I
+         7: iaload
+         8: lookupswitch  { // 2
+                       1: 46
+                       2: 61
+                 default: 36
+            }
+        36: new           #44                 // class java/lang/MatchException
+        39: dup
+        40: aconst_null
+        41: aconst_null
+        42: invokespecial #46                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        45: athrow
+        46: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+        49: dup
+        50: iload_1
+        51: iload_2
+        52: iload_3
+        53: iload         4
+        55: invokespecial #49                 // Method "<init>":(IIII)V
+        58: goto          73
+        61: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+        64: dup
+        65: iload_2
+        66: iload_1
+        67: iload         4
+        69: iload_3
+        70: invokespecial #49                 // Method "<init>":(IIII)V
+        73: areturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle step(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+         3: dup
+         4: aload_0
+         5: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         8: aload_1
+         9: invokevirtual #52                 // Method net/minecraft/client/gui/navigation/ScreenPosition.step:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenPosition;
+        12: aload_0
+        13: getfield      #13                 // Field width:I
+        16: aload_0
+        17: getfield      #17                 // Field height:I
+        20: invokespecial #25                 // Method "<init>":(Lnet/minecraft/client/gui/navigation/ScreenPosition;II)V
+        23: areturn
+
+  public int getLength(net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+    Code:
+         0: getstatic     #32                 // Field net/minecraft/client/gui/navigation/ScreenRectangle$1.$SwitchMap$net$minecraft$client$gui$navigation$ScreenAxis:[I
+         3: aload_1
+         4: invokevirtual #38                 // Method net/minecraft/client/gui/navigation/ScreenAxis.ordinal:()I
+         7: iaload
+         8: lookupswitch  { // 2
+                       1: 46
+                       2: 53
+                 default: 36
+            }
+        36: new           #44                 // class java/lang/MatchException
+        39: dup
+        40: aconst_null
+        41: aconst_null
+        42: invokespecial #46                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        45: athrow
+        46: aload_0
+        47: getfield      #13                 // Field width:I
+        50: goto          57
+        53: aload_0
+        54: getfield      #17                 // Field height:I
+        57: ireturn
+
+  public int getBoundInDirection(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+    Code:
+         0: aload_1
+         1: invokevirtual #56                 // Method net/minecraft/client/gui/navigation/ScreenDirection.getAxis:()Lnet/minecraft/client/gui/navigation/ScreenAxis;
+         4: astore_2
+         5: aload_1
+         6: invokevirtual #62                 // Method net/minecraft/client/gui/navigation/ScreenDirection.isPositive:()Z
+         9: ifeq          31
+        12: aload_0
+        13: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+        16: aload_2
+        17: invokevirtual #66                 // Method net/minecraft/client/gui/navigation/ScreenPosition.getCoordinate:(Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+        20: aload_0
+        21: aload_2
+        22: invokevirtual #70                 // Method getLength:(Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+        25: iadd
+        26: iconst_1
+        27: isub
+        28: goto          39
+        31: aload_0
+        32: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+        35: aload_2
+        36: invokevirtual #66                 // Method net/minecraft/client/gui/navigation/ScreenPosition.getCoordinate:(Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+        39: ireturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getBorder(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+         5: istore_2
+         6: aload_1
+         7: invokevirtual #56                 // Method net/minecraft/client/gui/navigation/ScreenDirection.getAxis:()Lnet/minecraft/client/gui/navigation/ScreenAxis;
+        10: invokevirtual #77                 // Method net/minecraft/client/gui/navigation/ScreenAxis.orthogonal:()Lnet/minecraft/client/gui/navigation/ScreenAxis;
+        13: astore_3
+        14: aload_0
+        15: aload_3
+        16: invokevirtual #80                 // Method net/minecraft/client/gui/navigation/ScreenAxis.getNegative:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+        19: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+        22: istore        4
+        24: aload_0
+        25: aload_3
+        26: invokevirtual #70                 // Method getLength:(Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+        29: istore        5
+        31: aload_1
+        32: invokevirtual #56                 // Method net/minecraft/client/gui/navigation/ScreenDirection.getAxis:()Lnet/minecraft/client/gui/navigation/ScreenAxis;
+        35: iload_2
+        36: iload         4
+        38: iconst_1
+        39: iload         5
+        41: invokestatic  #84                 // Method of:(Lnet/minecraft/client/gui/navigation/ScreenAxis;IIII)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+        44: aload_1
+        45: invokevirtual #88                 // Method step:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+        48: areturn
+
+  public boolean overlaps(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getstatic     #91                 // Field net/minecraft/client/gui/navigation/ScreenAxis.HORIZONTAL:Lnet/minecraft/client/gui/navigation/ScreenAxis;
+         5: invokevirtual #95                 // Method overlapsInAxis:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenAxis;)Z
+         8: ifeq          26
+        11: aload_0
+        12: aload_1
+        13: getstatic     #99                 // Field net/minecraft/client/gui/navigation/ScreenAxis.VERTICAL:Lnet/minecraft/client/gui/navigation/ScreenAxis;
+        16: invokevirtual #95                 // Method overlapsInAxis:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenAxis;)Z
+        19: ifeq          26
+        22: iconst_1
+        23: goto          27
+        26: iconst_0
+        27: ireturn
+
+  public boolean overlapsInAxis(net.minecraft.client.gui.navigation.ScreenRectangle, net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenAxis;)Z
+    Code:
+         0: aload_0
+         1: aload_2
+         2: invokevirtual #80                 // Method net/minecraft/client/gui/navigation/ScreenAxis.getNegative:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+         5: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+         8: istore_3
+         9: aload_1
+        10: aload_2
+        11: invokevirtual #80                 // Method net/minecraft/client/gui/navigation/ScreenAxis.getNegative:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+        14: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+        17: istore        4
+        19: aload_0
+        20: aload_2
+        21: invokevirtual #102                // Method net/minecraft/client/gui/navigation/ScreenAxis.getPositive:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+        24: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+        27: istore        5
+        29: aload_1
+        30: aload_2
+        31: invokevirtual #102                // Method net/minecraft/client/gui/navigation/ScreenAxis.getPositive:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+        34: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+        37: istore        6
+        39: iload_3
+        40: iload         4
+        42: invokestatic  #105                // Method java/lang/Math.max:(II)I
+        45: iload         5
+        47: iload         6
+        49: invokestatic  #111                // Method java/lang/Math.min:(II)I
+        52: if_icmpgt     59
+        55: iconst_1
+        56: goto          60
+        59: iconst_0
+        60: ireturn
+
+  public int getCenterInAxis(net.minecraft.client.gui.navigation.ScreenAxis);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenAxis;)I
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #102                // Method net/minecraft/client/gui/navigation/ScreenAxis.getPositive:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+         5: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+         8: aload_0
+         9: aload_1
+        10: invokevirtual #80                 // Method net/minecraft/client/gui/navigation/ScreenAxis.getNegative:()Lnet/minecraft/client/gui/navigation/ScreenDirection;
+        13: invokevirtual #73                 // Method getBoundInDirection:(Lnet/minecraft/client/gui/navigation/ScreenDirection;)I
+        16: iadd
+        17: iconst_2
+        18: idiv
+        19: ireturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle intersection(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_0
+         1: invokevirtual #114                // Method left:()I
+         4: aload_1
+         5: invokevirtual #114                // Method left:()I
+         8: invokestatic  #105                // Method java/lang/Math.max:(II)I
+        11: istore_2
+        12: aload_0
+        13: invokevirtual #117                // Method top:()I
+        16: aload_1
+        17: invokevirtual #117                // Method top:()I
+        20: invokestatic  #105                // Method java/lang/Math.max:(II)I
+        23: istore_3
+        24: aload_0
+        25: invokevirtual #120                // Method right:()I
+        28: aload_1
+        29: invokevirtual #120                // Method right:()I
+        32: invokestatic  #111                // Method java/lang/Math.min:(II)I
+        35: istore        4
+        37: aload_0
+        38: invokevirtual #123                // Method bottom:()I
+        41: aload_1
+        42: invokevirtual #123                // Method bottom:()I
+        45: invokestatic  #111                // Method java/lang/Math.min:(II)I
+        48: istore        5
+        50: iload_2
+        51: iload         4
+        53: if_icmpge     82
+        56: iload_3
+        57: iload         5
+        59: if_icmpge     82
+        62: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+        65: dup
+        66: iload_2
+        67: iload_3
+        68: iload         4
+        70: iload_2
+        71: isub
+        72: iload         5
+        74: iload_3
+        75: isub
+        76: invokespecial #49                 // Method "<init>":(IIII)V
+        79: goto          83
+        82: aconst_null
+        83: areturn
+
+  public boolean intersects(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+    Code:
+         0: aload_0
+         1: invokevirtual #114                // Method left:()I
+         4: aload_1
+         5: invokevirtual #120                // Method right:()I
+         8: if_icmpge     48
+        11: aload_0
+        12: invokevirtual #120                // Method right:()I
+        15: aload_1
+        16: invokevirtual #114                // Method left:()I
+        19: if_icmple     48
+        22: aload_0
+        23: invokevirtual #117                // Method top:()I
+        26: aload_1
+        27: invokevirtual #123                // Method bottom:()I
+        30: if_icmpge     48
+        33: aload_0
+        34: invokevirtual #123                // Method bottom:()I
+        37: aload_1
+        38: invokevirtual #117                // Method top:()I
+        41: if_icmple     48
+        44: iconst_1
+        45: goto          49
+        48: iconst_0
+        49: ireturn
+
+  public boolean encompasses(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Z
+    Code:
+         0: aload_1
+         1: invokevirtual #114                // Method left:()I
+         4: aload_0
+         5: invokevirtual #114                // Method left:()I
+         8: if_icmplt     48
+        11: aload_1
+        12: invokevirtual #117                // Method top:()I
+        15: aload_0
+        16: invokevirtual #117                // Method top:()I
+        19: if_icmplt     48
+        22: aload_1
+        23: invokevirtual #120                // Method right:()I
+        26: aload_0
+        27: invokevirtual #120                // Method right:()I
+        30: if_icmpgt     48
+        33: aload_1
+        34: invokevirtual #123                // Method bottom:()I
+        37: aload_0
+        38: invokevirtual #123                // Method bottom:()I
+        41: if_icmpgt     48
+        44: iconst_1
+        45: goto          49
+        48: iconst_0
+        49: ireturn
+
+  public int top();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         4: invokevirtual #126                // Method net/minecraft/client/gui/navigation/ScreenPosition.y:()I
+         7: ireturn
+
+  public int bottom();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         4: invokevirtual #126                // Method net/minecraft/client/gui/navigation/ScreenPosition.y:()I
+         7: aload_0
+         8: getfield      #17                 // Field height:I
+        11: iadd
+        12: ireturn
+
+  public int left();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         4: invokevirtual #129                // Method net/minecraft/client/gui/navigation/ScreenPosition.x:()I
+         7: ireturn
+
+  public int right();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         4: invokevirtual #129                // Method net/minecraft/client/gui/navigation/ScreenPosition.x:()I
+         7: aload_0
+         8: getfield      #13                 // Field width:I
+        11: iadd
+        12: ireturn
+
+  public boolean containsPoint(int, int);
+    descriptor: (II)Z
+    Code:
+         0: iload_1
+         1: aload_0
+         2: invokevirtual #114                // Method left:()I
+         5: if_icmplt     36
+         8: iload_1
+         9: aload_0
+        10: invokevirtual #120                // Method right:()I
+        13: if_icmpge     36
+        16: iload_2
+        17: aload_0
+        18: invokevirtual #117                // Method top:()I
+        21: if_icmplt     36
+        24: iload_2
+        25: aload_0
+        26: invokevirtual #123                // Method bottom:()I
+        29: if_icmpge     36
+        32: iconst_1
+        33: goto          37
+        36: iconst_0
+        37: ireturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle transformAxisAligned(org.joml.Matrix3x2fc);
+    descriptor: (Lorg/joml/Matrix3x2fc;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokevirtual #114                // Method left:()I
+         5: i2f
+         6: aload_0
+         7: invokevirtual #117                // Method top:()I
+        10: i2f
+        11: new           #132                // class org/joml/Vector2f
+        14: dup
+        15: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        18: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        23: astore_2
+        24: aload_1
+        25: aload_0
+        26: invokevirtual #120                // Method right:()I
+        29: i2f
+        30: aload_0
+        31: invokevirtual #123                // Method bottom:()I
+        34: i2f
+        35: new           #132                // class org/joml/Vector2f
+        38: dup
+        39: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        42: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        47: astore_3
+        48: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+        51: dup
+        52: aload_2
+        53: getfield      #141                // Field org/joml/Vector2f.x:F
+        56: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+        59: aload_2
+        60: getfield      #150                // Field org/joml/Vector2f.y:F
+        63: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+        66: aload_3
+        67: getfield      #141                // Field org/joml/Vector2f.x:F
+        70: aload_2
+        71: getfield      #141                // Field org/joml/Vector2f.x:F
+        74: fsub
+        75: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+        78: aload_3
+        79: getfield      #150                // Field org/joml/Vector2f.y:F
+        82: aload_2
+        83: getfield      #150                // Field org/joml/Vector2f.y:F
+        86: fsub
+        87: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+        90: invokespecial #49                 // Method "<init>":(IIII)V
+        93: areturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle transformMaxBounds(org.joml.Matrix3x2fc);
+    descriptor: (Lorg/joml/Matrix3x2fc;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: invokevirtual #114                // Method left:()I
+         5: i2f
+         6: aload_0
+         7: invokevirtual #117                // Method top:()I
+        10: i2f
+        11: new           #132                // class org/joml/Vector2f
+        14: dup
+        15: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        18: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        23: astore_2
+        24: aload_1
+        25: aload_0
+        26: invokevirtual #120                // Method right:()I
+        29: i2f
+        30: aload_0
+        31: invokevirtual #117                // Method top:()I
+        34: i2f
+        35: new           #132                // class org/joml/Vector2f
+        38: dup
+        39: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        42: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        47: astore_3
+        48: aload_1
+        49: aload_0
+        50: invokevirtual #114                // Method left:()I
+        53: i2f
+        54: aload_0
+        55: invokevirtual #123                // Method bottom:()I
+        58: i2f
+        59: new           #132                // class org/joml/Vector2f
+        62: dup
+        63: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        66: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        71: astore        4
+        73: aload_1
+        74: aload_0
+        75: invokevirtual #120                // Method right:()I
+        78: i2f
+        79: aload_0
+        80: invokevirtual #123                // Method bottom:()I
+        83: i2f
+        84: new           #132                // class org/joml/Vector2f
+        87: dup
+        88: invokespecial #134                // Method org/joml/Vector2f."<init>":()V
+        91: invokeinterface #135,  4          // InterfaceMethod org/joml/Matrix3x2fc.transformPosition:(FFLorg/joml/Vector2f;)Lorg/joml/Vector2f;
+        96: astore        5
+        98: aload_2
+        99: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       102: aload         4
+       104: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       107: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       110: aload_3
+       111: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       114: aload         5
+       116: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       119: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       122: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       125: fstore        6
+       127: aload_2
+       128: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       131: aload         4
+       133: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       136: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       139: aload_3
+       140: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       143: aload         5
+       145: invokevirtual #152                // Method org/joml/Vector2f.x:()F
+       148: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       151: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       154: fstore        7
+       156: aload_2
+       157: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       160: aload         4
+       162: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       165: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       168: aload_3
+       169: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       172: aload         5
+       174: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       177: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       180: invokestatic  #155                // Method java/lang/Math.min:(FF)F
+       183: fstore        8
+       185: aload_2
+       186: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       189: aload         4
+       191: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       194: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       197: aload_3
+       198: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       201: aload         5
+       203: invokevirtual #160                // Method org/joml/Vector2f.y:()F
+       206: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       209: invokestatic  #158                // Method java/lang/Math.max:(FF)F
+       212: fstore        9
+       214: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+       217: dup
+       218: fload         6
+       220: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+       223: fload         8
+       225: invokestatic  #144                // Method net/minecraft/util/Mth.floor:(F)I
+       228: fload         7
+       230: fload         6
+       232: fsub
+       233: invokestatic  #162                // Method net/minecraft/util/Mth.ceil:(F)I
+       236: fload         9
+       238: fload         8
+       240: fsub
+       241: invokestatic  #162                // Method net/minecraft/util/Mth.ceil:(F)I
+       244: invokespecial #49                 // Method "<init>":(IIII)V
+       247: areturn
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #165,  0            // InvokeDynamic #0:toString:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #169,  0            // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #173,  0            // InvokeDynamic #0:equals:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public net.minecraft.client.gui.navigation.ScreenPosition position();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenPosition;
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field position:Lnet/minecraft/client/gui/navigation/ScreenPosition;
+         4: areturn
+
+  public int width();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field width:I
+         4: ireturn
+
+  public int height();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field height:I
+         4: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: new           #8                  // class net/minecraft/client/gui/navigation/ScreenRectangle
+         3: dup
+         4: iconst_0
+         5: iconst_0
+         6: iconst_0
+         7: iconst_0
+         8: invokespecial #49                 // Method "<init>":(IIII)V
+        11: putstatic     #28                 // Field EMPTY:Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+        14: return
+}

@@ -1,0 +1,96 @@
+Compiled from "GuiGraphics.java"
+class net.minecraft.client.gui.GuiGraphics$ScissorStack {
+  private final java.util.Deque<net.minecraft.client.gui.navigation.ScreenRectangle> stack;
+    descriptor: Ljava/util/Deque;
+
+  net.minecraft.client.gui.GuiGraphics$ScissorStack();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/ArrayDeque
+         8: dup
+         9: invokespecial #9                  // Method java/util/ArrayDeque."<init>":()V
+        12: putfield      #10                 // Field stack:Ljava/util/Deque;
+        15: return
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle push(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stack:Ljava/util/Deque;
+         4: invokeinterface #16,  1           // InterfaceMethod java/util/Deque.peekLast:()Ljava/lang/Object;
+         9: checkcast     #22                 // class net/minecraft/client/gui/navigation/ScreenRectangle
+        12: astore_2
+        13: aload_2
+        14: ifnull        44
+        17: aload_1
+        18: aload_2
+        19: invokevirtual #24                 // Method net/minecraft/client/gui/navigation/ScreenRectangle.intersection:(Lnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+        22: invokestatic  #28                 // Method net/minecraft/client/gui/navigation/ScreenRectangle.empty:()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+        25: invokestatic  #32                 // Method java/util/Objects.requireNonNullElse:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        28: checkcast     #22                 // class net/minecraft/client/gui/navigation/ScreenRectangle
+        31: astore_3
+        32: aload_0
+        33: getfield      #10                 // Field stack:Ljava/util/Deque;
+        36: aload_3
+        37: invokeinterface #38,  2           // InterfaceMethod java/util/Deque.addLast:(Ljava/lang/Object;)V
+        42: aload_3
+        43: areturn
+        44: aload_0
+        45: getfield      #10                 // Field stack:Ljava/util/Deque;
+        48: aload_1
+        49: invokeinterface #38,  2           // InterfaceMethod java/util/Deque.addLast:(Ljava/lang/Object;)V
+        54: aload_1
+        55: areturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle pop();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stack:Ljava/util/Deque;
+         4: invokeinterface #42,  1           // InterfaceMethod java/util/Deque.isEmpty:()Z
+         9: ifeq          22
+        12: new           #46                 // class java/lang/IllegalStateException
+        15: dup
+        16: ldc           #48                 // String Scissor stack underflow
+        18: invokespecial #50                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        21: athrow
+        22: aload_0
+        23: getfield      #10                 // Field stack:Ljava/util/Deque;
+        26: invokeinterface #53,  1           // InterfaceMethod java/util/Deque.removeLast:()Ljava/lang/Object;
+        31: pop
+        32: aload_0
+        33: getfield      #10                 // Field stack:Ljava/util/Deque;
+        36: invokeinterface #16,  1           // InterfaceMethod java/util/Deque.peekLast:()Ljava/lang/Object;
+        41: checkcast     #22                 // class net/minecraft/client/gui/navigation/ScreenRectangle
+        44: areturn
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle peek();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stack:Ljava/util/Deque;
+         4: invokeinterface #16,  1           // InterfaceMethod java/util/Deque.peekLast:()Ljava/lang/Object;
+         9: checkcast     #22                 // class net/minecraft/client/gui/navigation/ScreenRectangle
+        12: areturn
+
+  public boolean containsPoint(int, int);
+    descriptor: (II)Z
+    Code:
+         0: aload_0
+         1: getfield      #10                 // Field stack:Ljava/util/Deque;
+         4: invokeinterface #42,  1           // InterfaceMethod java/util/Deque.isEmpty:()Z
+         9: ifeq          16
+        12: iconst_1
+        13: goto          33
+        16: aload_0
+        17: getfield      #10                 // Field stack:Ljava/util/Deque;
+        20: invokeinterface #56,  1           // InterfaceMethod java/util/Deque.peek:()Ljava/lang/Object;
+        25: checkcast     #22                 // class net/minecraft/client/gui/navigation/ScreenRectangle
+        28: iload_1
+        29: iload_2
+        30: invokevirtual #59                 // Method net/minecraft/client/gui/navigation/ScreenRectangle.containsPoint:(II)Z
+        33: ireturn
+}
