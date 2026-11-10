@@ -1,29 +1,57 @@
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterDebugRenderersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterMenuScreensEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterJsonAnimationTypesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterBlockStateModels to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.InitializeClientRegistriesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.AddClientReloadListenersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.EntityRenderersEvent$CreateSkullModels to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.EntityRenderersEvent$RegisterRenderers to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterEntitySpectatorShadersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterRecipeBookSearchCategoriesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterGuiLayersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterCustomEnvironmentEffectRendererEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterNamedRenderTypesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterColorHandlersEvent$ColorResolvers to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterPresetEditorsEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.gui.map.RegisterMapDecorationRenderersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.pipeline.RegisterPipelineModifiersEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [ne.ne.fm.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.gamerules.RegisterGameRuleEntryFactoryEvent to a broken mod state
-[07:57:36] [Render thread/ERROR] [mojang/Narrator]: Error while loading the narrator
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :downloadAssets UP-TO-DATE
+> Task :prepareClientRun
+
+> Task :runClient
+2026-11-10T07:59:33.157997533Z main WARN Advanced terminal features are not available in this environment
+[07:59:33] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 98ms
+[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
+[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/run
+[07:59:33] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 90) in 18ms
+[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[07:59:33] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[07:59:33] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[07:59:34] [fml-loadingscreen/INFO] [ne.ne.fm.ea.re.LoadingScreenRenderer/]: GL info: llvmpipe (LLVM 21.1.8, 256 bits) GL version 4.5 (Core Profile) Mesa 26.0.8-1ubuntu0.3, Mesa
+[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/classes/java/main:smoothscroll%%/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/resources/main from env
+[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[07:59:34] [ForkJoinPool.commonPool-worker-2/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Minecraft 1.21.11 (minecraft)
+		NeoForge 21.11.42 (neoforge)
+		Smooth Scroll 2.6.7+1.21.11 (smoothscroll)
+[07:59:34] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
+[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar > net.neoforged.neoforge-coremods-21.11.42.jar
+[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - minecraft (composite(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42-client-extra-aka-minecraft-resources.jar), filtered(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar))))
+ - mixinextras.neoforge (jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/moddev/artifacts/neoforge-21.11.42.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+ - smoothscroll (composite(folder(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/classes/java/main), folder(/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/build/resources/main)))
+[07:59:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 28ms
+[07:59:36] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 480 milliseconds
+[07:59:36] [pool-6-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07:59:41] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[07:59:41] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.42, for MC 1.21.11
+[07:59:42] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
+[07:59:42] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[07:59:43] [Render thread/ERROR] [mojang/Narrator]: Error while loading the narrator
 com.mojang.text2speech.Narrator$InitializeException: Failed to load library flite
 	at com.mojang.text2speech.NarratorLinux$FliteLibrary.loadNative(NarratorLinux.java:81) ~[text2speech-1.18.11.jar:?] {}
 	at com.mojang.text2speech.NarratorLinux.<init>(NarratorLinux.java:18) ~[text2speech-1.18.11.jar:?] {}
@@ -89,312 +117,63 @@ Native library (linux-x86-64/libflite.so) not found in resource path (/home/runn
 		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
 		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
 		at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
-[07:57:36] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla
-[07:57:37] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
-[07:57:37] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
-[07:57:37] [Render thread/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID 632f09ff-bc0e-4a34-a688-2043ee70a1bc
----- Minecraft Crash Report ----
-// There are four lights!
-
-Time: 2026-11-10 07:57:37
-Description: Initializing game
-
-java.lang.NullPointerException: Initializing game
-	at java.base/java.util.Objects.requireNonNull(Objects.java:233) ~[?:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.PreparableReloadListener$SharedState.get(PreparableReloadListener.java:44) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.resources.model.ModelManager.reload(ModelManager.java:110) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance$StateFactory.lambda$static$0(SimpleReloadInstance.java:145) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.prepareTasks(SimpleReloadInstance.java:86) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.startTasks(SimpleReloadInstance.java:50) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.of(SimpleReloadInstance.java:33) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.create(SimpleReloadInstance.java:140) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.ReloadableResourceManager.createReload(ReloadableResourceManager.java:50) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.<init>(Minecraft.java:678) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.main.Main.main(Main.java:214) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+[07:59:43] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/smoothscroll, mod/neoforge
+[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[07:59:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+[07:59:46] [Render thread/ERROR] [minecraft/SoundEngine]: Error starting SoundSystem. Turning off sounds & music
+java.lang.IllegalStateException: Failed to open OpenAL device
+	at TRANSFORMER/minecraft@1.21.11/com.mojang.blaze3d.audio.Library.openDeviceOrFallback(Library.java:202) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/com.mojang.blaze3d.audio.Library.init(Library.java:71) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.sounds.SoundEngine.loadLibrary(SoundEngine.java:110) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.sounds.SoundEngine.reload(SoundEngine.java:102) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.sounds.SoundManager.apply(SoundManager.java:120) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.sounds.SoundManager.apply(SoundManager.java:43) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:16) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$prepareTasks$2(SimpleReloadInstance.java:71) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:157) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:131) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.BlockableEventLoop.runAllTasks(BlockableEventLoop.java:116) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.runTick(Minecraft.java:1284) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.run(Minecraft.java:918) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.main.Main.main(Main.java:229) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
 	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-10.0.36.jar:10.0] {}
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
 	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
-
-
-A detailed walkthrough of the error, its code path and all known details is as follows:
----------------------------------------------------------------------------------------
-
--- Head --
-Thread: Render thread
-Stacktrace:
-	at java.base/java.util.Objects.requireNonNull(Objects.java:233) ~[?:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.PreparableReloadListener$SharedState.get(PreparableReloadListener.java:44) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.resources.model.ModelManager.reload(ModelManager.java:110) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance$StateFactory.lambda$static$0(SimpleReloadInstance.java:145) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.prepareTasks(SimpleReloadInstance.java:86) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.startTasks(SimpleReloadInstance.java:50) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.of(SimpleReloadInstance.java:33) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.SimpleReloadInstance.create(SimpleReloadInstance.java:140) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.packs.resources.ReloadableResourceManager.createReload(ReloadableResourceManager.java:50) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.<init>(Minecraft.java:678) ~[neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
--- Initialization --
-Details:
-	Modules: 
-Stacktrace:
-	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.main.Main.main(Main.java:214) [neoforge-21.11.42-client-extra-aka-minecraft-resources.jar:?] {}
-	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-10.0.36.jar:10.0] {}
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
-	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
-
-
--- System Details --
-Details:
-	Minecraft Version: 1.21.11
-	Minecraft Version ID: 1.21.11
-	Operating System: Linux (amd64) version 7.0.0-1019-azure
-	Java Version: 21.0.13, Eclipse Adoptium
-	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
-	Memory: 81912096 bytes (78 MiB) / 406847488 bytes (388 MiB) up to 4190109696 bytes (3996 MiB)
-	CPUs: 4
-	Processor Vendor: AuthenticAMD
-	Processor Name: AMD EPYC 9V74 80-Core Processor
-	Identifier: AuthenticAMD Family 25 Model 17 Stepping 1
-	Microarchitecture: Zen 3
-	Frequency (GHz): -0.00
-	Number of physical packages: 1
-	Number of physical CPUs: 2
-	Number of logical CPUs: 4
-	Graphics card #0 name: hyperv_drmdrmfb
-	Graphics card #0 vendor: unknown
-	Graphics card #0 VRAM (MiB): 0.00
-	Graphics card #0 deviceId: unknown
-	Graphics card #0 versionInfo: unknown
-	Virtual memory max (MiB): 11063.52
-	Virtual memory used (MiB): 4115.75
-	Swap memory total (MiB): 3072.00
-	Swap memory used (MiB): 0.00
-	Space in storage for jna.tmpdir (MiB): <path not set>
-	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
-	Space in storage for io.netty.native.workdir (MiB): <path not set>
-	Space in storage for java.io.tmpdir (MiB): available: 88451.00, total: 147813.48
-	Space in storage for workdir (MiB): available: 88451.00, total: 147813.48
-	JVM Flags: 0 total; 
-	Debug Flags: 0 total; 
-	Launched Version: 21.11.42
-	Backend library: LWJGL version 3.3.3+5
-	Backend API: llvmpipe (LLVM 21.1.8, 256 bits) GL version 4.5 (Core Profile) Mesa 26.0.8-1ubuntu0.3, Mesa
-	Window size: <not initialized>
-	GFLW Platform: x11
-	Render Extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
-	GL debug messages: 
-	Is Modded: Definitely; Client brand changed to 'neoforge'
-	Universe: 404
-	Type: Client (map_client.txt)
-	Locale: en
-	System encoding: UTF-8
-	File encoding: UTF-8
-	CPU: 4x AMD EPYC 9V74 80-Core Processor
-	Class Processors: 
-		00.00%: neoforge:neoforge_dev_dist_cleaner
-		00.00%: neoforge:computing_frames (marker)
-		00.00%: neoforge:runtime_enum_extender
-		05.56%: neoforge:access_transformer
-		00.14%: neoforge:mixin
-		00.00%: neoforge:simple_processors_default (marker)
-		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.biome.biome
-		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.block.flowerpotblock
-		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.levelgen.structure.structure
-		00.30%: neoforge.coremods:method_redirector
-	Mod List: 
-		neoforge-21.11.42-client-extra-aka-minecraft-resou|Minecraft                     |minecraft                     |1.21.11             |Manifest: NOSIGNATURE
-		neoforge-21.11.42.jar                             |NeoForge                      |neoforge                      |21.11.42            |Manifest: NOSIGNATURE
-		main                                              |Smooth Scroll                 |smoothscroll                  |2.6.7+1.21.11       |Manifest: NOSIGNATURE
-	Crash Report UUID: 632f09ff-bc0e-4a34-a688-2043ee70a1bc
-	FML: 10.0.36
-	NeoForge: 21.11.42
-[07:57:37] [Render thread/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID d5390909-7197-4308-8c51-73239273833f
-#@!@# Game crashed! Crash report saved to: #@!@# /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/run/./crash-reports/crash-2026-11-10_07.57.37-client.txt
-[07:57:37] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
-
-> Task :runClient FAILED
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1794297441593.json
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':runClient' (registered in build file 'build.gradle').
-> Process 'command '/usr/lib/jvm/temurin-21-jdk-amd64/bin/java'' finished with non-zero exit value 255
-
-* Try:
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights from a Build Scan (powered by Develocity).
-> Get more help at https://help.gradle.org.
-
-* Exception is:
-org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':runClient' (registered in build file 'build.gradle').
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.lambda$doExecute$1(DefaultTaskNodeExecutor.java:367)
-	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:365)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeTrackingTaskIdentity(DefaultTaskNodeExecutor.java:332)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeFinalizingProperties(DefaultTaskNodeExecutor.java:318)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingWithNoActions(DefaultTaskNodeExecutor.java:289)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingOnlyIf(DefaultTaskNodeExecutor.java:272)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeCatchingFailures(DefaultTaskNodeExecutor.java:228)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithFallbackOperationId(DefaultTaskNodeExecutor.java:197)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithLifecycle(DefaultTaskNodeExecutor.java:171)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.access$000(DefaultTaskNodeExecutor.java:67)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor$1.run(DefaultTaskNodeExecutor.java:136)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.execute(DefaultTaskNodeExecutor.java:133)
-	at org.gradle.execution.plan.LocalTaskNode.execute(LocalTaskNode.java:229)
-	at org.gradle.execution.DefaultBuildWorkExecutor.lambda$executePlan$0(DefaultBuildWorkExecutor.java:153)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.lambda$execute$0(DefaultPlanExecutor.java:476)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:118)
-	at org.gradle.execution.DefaultBuildWorkExecutor.executePlan(DefaultBuildWorkExecutor.java:143)
-	at org.gradle.execution.DefaultBuildWorkExecutor.displayOrExecutePlan(DefaultBuildWorkExecutor.java:128)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:79)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
-	at org.gradle.execution.DefaultBuildWorkExecutor.execute(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$0(DefaultBuildLifecycleController.java:323)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:324)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$0(StateTransitionController.java:235)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:235)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:207)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:296)
-	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:294)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:290)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:282)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
-	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
-Caused by: org.gradle.process.ProcessExecutionException: Process 'command '/usr/lib/jvm/temurin-21-jdk-amd64/bin/java'' finished with non-zero exit value 255
-	at org.gradle.process.internal.DefaultExecHandle$ExecResultImpl.assertNormalExitValue(DefaultExecHandle.java:461)
-	at org.gradle.process.internal.DefaultJavaExecAction.execute(DefaultJavaExecAction.java:59)
-	at org.gradle.api.tasks.JavaExec.exec(JavaExec.java:182)
-	at net.neoforged.moddevgradle.internal.RunGameTask.exec(RunGameTask.java:51)
-	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
-	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
-	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
-	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:268)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:253)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:236)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:219)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:185)
-	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
-	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
-	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
-	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
-	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
-	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
-	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
-	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
-	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
-	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
-	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
-	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
-	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
-	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
-	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
-	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
-	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
-	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
-	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:76)
-	at org.gradle.internal.Either$Right.fold(Either.java:176)
-	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
-	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
-	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
-	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
-	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
-	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
-	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
-	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
-	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
-	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
-	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
-	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
-	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
-	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
-	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
-	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
-	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
-	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
-	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:85)
-	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
-	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
-	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
-	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:314)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
-	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
-	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
-	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
-	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
-	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
-	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
-	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
-	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
-	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
-	... 55 more
-
-
-BUILD FAILED in 18s
-6 actionable tasks: 2 executed, 4 up-to-date
-exit: 1
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[07:59:46] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[07:59:46] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+exit: 124
