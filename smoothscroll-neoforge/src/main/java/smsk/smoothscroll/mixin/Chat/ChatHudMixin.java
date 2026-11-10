@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.Unique;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
@@ -84,7 +85,7 @@ public abstract class ChatHudMixin {
 
     // Запоминаем, сколько строк реально видно (для анимации открытия).
     @WrapMethod(method = "forEachLine")
-    private int forEachLineWrap(ChatComponent.AlphaCalculator calculator, ChatComponent.LineConsumer consumer, Operation<Integer> operation) {
+    private int forEachLineWrap(@Coerce Object calculator, @Coerce Object consumer, Operation<Integer> operation) {
         int visible = operation.call(calculator, consumer);
         this.lastVisibleLines = visible;
         return visible;
