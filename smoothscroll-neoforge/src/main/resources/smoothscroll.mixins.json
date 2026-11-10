@@ -9,6 +9,7 @@
     "Hotbar.HotbarMixin",
     "Hotbar.MouseMixin",
     "Widgets.ScrollableWidgetMixin",
-    "Widgets.TextFieldWidgetMixin"
+    "Widgets.TextFieldWidgetMixin",
+    "Chat.SuggestionWindowMixin"
   ]
 }
