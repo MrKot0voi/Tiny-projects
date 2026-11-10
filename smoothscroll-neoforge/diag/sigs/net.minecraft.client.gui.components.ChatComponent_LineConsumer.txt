@@ -1,5 +1,0 @@
-Compiled from "ChatComponent.java"
-interface net.minecraft.client.gui.components.ChatComponent$LineConsumer {
-  public abstract void accept(net.minecraft.client.GuiMessage$Line, int, float);
-    descriptor: (Lnet/minecraft/client/GuiMessage$Line;IF)V
-}

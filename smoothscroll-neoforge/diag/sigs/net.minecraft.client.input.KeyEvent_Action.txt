@@ -1,3 +1,0 @@
-Compiled from "KeyEvent.java"
-public interface net.minecraft.client.input.KeyEvent$Action extends java.lang.annotation.Annotation {
-}

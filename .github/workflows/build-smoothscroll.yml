@@ -1,8 +1,5 @@
 name: build smoothscroll (neoforge 1.21.11)
 
-permissions:
-  contents: write
-
 on:
   push:
     paths:
@@ -31,47 +28,8 @@ jobs:
         with:
           gradle-version: '9.8.2'
 
-      - name: Dump Minecraft signatures (diagnostics)
-        if: always()
-        continue-on-error: true
-        run: |
-          gradle createMinecraftArtifacts --no-daemon -q || true
-          bash tools/dump-signatures.sh build/signatures || true
-
-      - name: Commit signatures (diagnostics)
-        if: always()
-        continue-on-error: true
-        run: |
-          rm -rf diag/sigs
-          mkdir -p diag/sigs
-          cp -r build/signatures/. diag/sigs/ 2>/dev/null || true
-          cd "$GITHUB_WORKSPACE"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f smoothscroll-neoforge/diag
-          git commit -m "[skip ci] диагностика сигнатур Mojang" || echo "nothing to commit"
-          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"
-
       - name: Build
-        id: build
-        run: |
-          set -o pipefail
-          gradle build --stacktrace --no-daemon 2>&1 | tee build.log
-
-      - name: Report build status (diagnostics)
-        if: always()
-        continue-on-error: true
-        run: |
-          mkdir -p diag
-          echo "job: ${{ job.status }}" > diag/build-status.txt
-          grep -nE "error:|warning: \\[|FAILURE|What went wrong|BUILD (SUCCESSFUL|FAILED)" build.log | head -300 >> diag/build-status.txt || true
-          tail -n 120 build.log > diag/build-tail.txt || true
-          cd "$GITHUB_WORKSPACE"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f smoothscroll-neoforge/diag/build-status.txt smoothscroll-neoforge/diag/build-tail.txt
-          git commit -m "[skip ci] статус сборки smoothscroll" || echo "nothing to commit"
-          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"
+        run: gradle build --stacktrace --no-daemon
 
       - name: Upload jar
         uses: actions/upload-artifact@v4

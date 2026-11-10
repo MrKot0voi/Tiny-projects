@@ -1,7 +1,0 @@
-Compiled from "ServerSelectionList.java"
-class net.minecraft.client.gui.screens.multiplayer.ServerSelectionList$1 {
-  static final int[] $SwitchMap$net$minecraft$client$multiplayer$ServerData$State;
-    descriptor: [I
-  static {};
-    descriptor: ()V
-}
