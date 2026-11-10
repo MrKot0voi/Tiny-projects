@@ -38,6 +38,13 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y xvfb libgl1 libgl1-mesa-dri libglu1-mesa xauth
 
+      - name: Dump extra signatures (diagnostics)
+        if: always()
+        continue-on-error: true
+        run: |
+          gradle createMinecraftArtifacts --no-daemon -q || true
+          bash tools/dump2.sh diag/dump2 || true
+
       - name: Run client (headless, 7 min)
         continue-on-error: true
         run: |
@@ -67,7 +74,7 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f smoothscroll-neoforge/diag/runclient-summary.txt smoothscroll-neoforge/diag/runclient-tail.txt
+          git add -f smoothscroll-neoforge/diag/runclient-summary.txt smoothscroll-neoforge/diag/runclient-tail.txt smoothscroll-neoforge/diag/dump2
           git commit -m "[skip ci] результат runClient smoothscroll" || echo "nothing to commit"
           git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"
 
