@@ -1,7 +1,0 @@
-Compiled from "ScreenRectangle.java"
-class net.minecraft.client.gui.navigation.ScreenRectangle$1 {
-  static final int[] $SwitchMap$net$minecraft$client$gui$navigation$ScreenAxis;
-    descriptor: [I
-  static {};
-    descriptor: ()V
-}

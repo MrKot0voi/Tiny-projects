@@ -1,8 +1,0 @@
-Compiled from "ChatComponent.java"
-final class net.minecraft.client.gui.components.ChatComponent$ChatMethod$2 extends net.minecraft.client.gui.components.ChatComponent$ChatMethod {
-  private net.minecraft.client.gui.components.ChatComponent$ChatMethod$2(java.lang.String, int, java.lang.String);
-    descriptor: (Ljava/lang/String;ILjava/lang/String;)V
-
-  public boolean isDraftRestorable(net.minecraft.client.gui.components.ChatComponent$Draft);
-    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$Draft;)Z
-}
