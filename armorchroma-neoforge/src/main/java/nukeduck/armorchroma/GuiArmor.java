@@ -29,11 +29,10 @@ public class GuiArmor {
    private static final int ROW_SPACING = 5;
    private static final int ARMOR_PER_ROW = 20;
    private static final AttributeSupplier FALLBACK_ATTRIBUTES = AttributeSupplier.builder().add(Attributes.ARMOR).build();
-   private final Minecraft client = Minecraft.getInstance();
 
    public void draw(GuiGraphics context, int x, int y) {
       List<ArmorBarSegment> segments = new ArrayList<>(EquipmentSlot.VALUES.size());
-      int totalPoints = this.buildArmorSegments(this.client.player, segments);
+      int totalPoints = this.buildArmorSegments(Minecraft.getInstance().player, segments);
       if (totalPoints > 0) {
          int barPoints = 0;
          int compressedRows = ArmorChroma.config.compressBar() ? this.compressRows(segments, totalPoints) : 0;
@@ -173,7 +172,7 @@ public class GuiArmor {
    }
 
    private void drawTexturedGlintRect(GuiGraphics context, int x, int y, float u, float v, int width, int height) {
-      float intensity = this.client.options.glintStrength().get().floatValue() * ArmorChroma.config.glintIntensity();
+      float intensity = Minecraft.getInstance().options.glintStrength().get().floatValue() * ArmorChroma.config.glintIntensity();
       float clamped = Mth.clamp(intensity, 0.0F, 1.0F);
       int color = ARGB.colorFromFloat(1.0F, clamped, clamped, clamped);
       context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_item_glint.png"), x, y, u, v, width, height, 256, 256, color);
