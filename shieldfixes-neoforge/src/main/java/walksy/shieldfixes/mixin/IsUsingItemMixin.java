@@ -18,7 +18,7 @@ import walksy.shieldfixes.manager.ShieldStateManager;
 public class IsUsingItemMixin {
 
     @Inject(method = "get", at = @At("HEAD"), cancellable = true)
-    private static void registerShieldItem(ItemStack itemStack, ClientLevel level, LivingEntity owner, int seed, ItemDisplayContext displayContext, CallbackInfoReturnable<Boolean> cir) {
+    private void registerShieldItem(ItemStack itemStack, ClientLevel level, LivingEntity owner, int seed, ItemDisplayContext displayContext, CallbackInfoReturnable<Boolean> cir) {
         if (!ShieldFixesConfig.modEnabled()) return;
         if (owner == Minecraft.getInstance().player) return;
         if (owner instanceof Player player) {

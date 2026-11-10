@@ -26,7 +26,7 @@ public abstract class ServerExplosionMixin {
     @Shadow
     public abstract Vec3 center();
 
-    @Inject(method = "hurtEntities", at = @At("HEAD"))
+    @Inject(method = "hurtEntities()V", at = @At("HEAD"))
     public void onExplosion(final CallbackInfo ci) {
         if (!ShieldFixesConfig.modEnabled()) {
             return;
