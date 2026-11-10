@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "ru.berdinskiybear.armorhud.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "InventoryMenuAccessor",
+    "MixinBossHealthOverlay",
+    "MixinGui",
+    "MixinMinecraft",
+    "MixinSubtitleOverlay"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
