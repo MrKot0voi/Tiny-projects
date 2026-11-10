@@ -9,7 +9,7 @@ for j in $(find build "$HOME/.gradle" -name "*.jar" 2>/dev/null); do
 done
 echo "MC jar: $MC"
 [ -z "$MC" ] && exit 0
-CLASSES='net.minecraft.client.gui.screens.ChatScreen net.minecraft.client.gui.screens.OptionsScreen net.minecraft.client.gui.GuiGraphics$ScissorStack net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen$ItemPickerMenu net.minecraft.client.gui.components.ChatComponent$DrawingBackgroundGraphicsAccess net.minecraft.client.gui.navigation.ScreenRectangle net.minecraft.client.gui.GuiGraphics net.minecraft.client.gui.screens.inventory.AbstractContainerScreen net.minecraft.client.gui.components.ChatComponent$ChatGraphicsAccess net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen'
+CLASSES='net.minecraft.client.gui.screens.ConnectScreen net.minecraft.client.multiplayer.ServerData net.minecraft.client.multiplayer.resolver.ServerAddress net.minecraft.client.gui.render.GuiRenderer net.minecraft.client.gui.screens.ChatScreen net.minecraft.client.gui.screens.OptionsScreen net.minecraft.client.gui.GuiGraphics$ScissorStack net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen$ItemPickerMenu net.minecraft.client.gui.components.ChatComponent$DrawingBackgroundGraphicsAccess net.minecraft.client.gui.navigation.ScreenRectangle net.minecraft.client.gui.GuiGraphics net.minecraft.client.gui.screens.inventory.AbstractContainerScreen net.minecraft.client.gui.components.ChatComponent$ChatGraphicsAccess net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen'
 for c in $CLASSES; do
   n=$(echo "$c" | tr '$' '_')
   javap -p -s -cp "$MC" "$c" > "$OUT/$n.txt" 2>/dev/null

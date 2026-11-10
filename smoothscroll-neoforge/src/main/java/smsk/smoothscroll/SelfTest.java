@@ -11,6 +11,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 // Включается системным свойством smoothscroll.selftest=true (см. build.gradle, блок runs).
 final class SelfTest {
     private static int tick = -1;
+    private static int waiting = 0;
 
     private SelfTest() {
     }
@@ -20,6 +21,17 @@ final class SelfTest {
         if (tick < 0) {
             // Ждём, пока игрок подключится к локальному серверу (нужен для чата с подсказками и креатива).
             if (mc.player == null || mc.level == null) {
+                waiting++;
+                if (waiting == 40) {
+                    try {
+                        net.minecraft.client.multiplayer.resolver.ServerAddress address = new net.minecraft.client.multiplayer.resolver.ServerAddress("localhost", 25565);
+                        net.minecraft.client.multiplayer.ServerData data = new net.minecraft.client.multiplayer.ServerData("Local", "localhost:25565", net.minecraft.client.multiplayer.ServerData.Type.OTHER);
+                        net.minecraft.client.gui.screens.ConnectScreen.startConnecting(mc.screen, mc, address, data, false, null);
+                        SmoothSc.LOGGER.info("SELFTEST connecting to localhost:25565");
+                    } catch (Throwable t) {
+                        SmoothSc.LOGGER.error("SELFTEST connect failed", t);
+                    }
+                }
                 return;
             }
             tick = 0;
