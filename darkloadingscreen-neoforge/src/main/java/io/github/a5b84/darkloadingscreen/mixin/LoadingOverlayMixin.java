@@ -23,6 +23,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Цели проверены по сигнатурам и байткоду LoadingOverlay из 1.21.11:
+ * render(GuiGraphics, int, int, float), drawProgressBar(GuiGraphics, int, int, int, int, float),
+ * private static final IntSupplier BRAND_BACKGROUND, константы fade в render — float (500f / 1000f).
+ */
 @Mixin(LoadingOverlay.class)
 public abstract class LoadingOverlayMixin {
 
@@ -36,22 +41,26 @@ public abstract class LoadingOverlayMixin {
 
     // Progress bar
 
-    /** Renders the bar background and changes the main bar color */
-    @ModifyVariable(method = "renderProgressBar",
-            at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/ARGB;color(IIII)I"),
-            ordinal = 6)
-    private int modifyBarColor(int barColor, GuiGraphics context, int x1, int y1, int x2, int y2, float opacity) {
-        int alpha = barColor & 0xff000000;
+    /** Draws the bar background, under the progress bar */
+    @Inject(method = "drawProgressBar", at = @At("HEAD"))
+    private void drawBarBackground(GuiGraphics context, int x1, int y1, int x2, int y2, float opacity, CallbackInfo ci) {
+        int alpha = ARGB.color(Math.round(opacity * 255), 255, 255, 255) & 0xff000000;
         context.fill(x1 + 1, y1 + 1, x2 - 1, y2 - 1, config.barBg | alpha);
-        return config.bar | alpha;
     }
 
-    /** Changes the bar border color */
-    @ModifyVariable(method = "renderProgressBar",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0, shift = At.Shift.AFTER),
-            ordinal = 6)
-    private int modifyBarBorderColor(int color) {
-        return config.border | color & 0xff000000;
+    /** The shared color local (used by the border fills) becomes the border color */
+    @ModifyVariable(method = "drawProgressBar",
+            at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/ARGB;color(IIII)I"),
+            ordinal = 0)
+    private int modifyBorderColor(int color, GuiGraphics context, int x1, int y1, int x2, int y2, float opacity) {
+        return config.border | (color & 0xff000000);
+    }
+
+    /** The first fill is the progress itself, it gets the bar color */
+    @WrapOperation(method = "drawProgressBar",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0))
+    private void drawBarFill(GuiGraphics context, int x1, int y1, int x2, int y2, int color, Operation<Void> original) {
+        original.call(context, x1, y1, x2, y2, config.bar | (color & 0xff000000));
     }
 
     // Logo
