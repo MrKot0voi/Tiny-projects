@@ -44,7 +44,7 @@ public abstract class HitBoxRenderMixin {
             return;
         }
 
-        float lineWidth = Main.mc.player != null && Main.mc.player.distanceTo(entity) > config.distFor2() ? config.line2() : config.line1();
+        float lineWidth = Main.mc().player != null && Main.mc().player.distanceTo(entity) > config.distFor2() ? config.line2() : config.line1();
 
         render_1_21_1_boxes(lineWidth, entity, tickProgress,
                 new Color(config.eyeColor(), true),
@@ -80,7 +80,7 @@ public abstract class HitBoxRenderMixin {
         Vec3 vec3d = entity.position();
         Vec3 vec3d2 = entity.getPosition(tickProgress);
         Vec3 vec3d3 = vec3d2.subtract(vec3d);
-        Color outer = entity instanceof LivingEntity le && le.hurtTime != 0 && hurtCol ? ifHurt : (targetCol && Main.mc.hitResult instanceof EntityHitResult ehr && ehr.getEntity() == entity ? ifTarget : main);
+        Color outer = entity instanceof LivingEntity le && le.hurtTime != 0 && hurtCol ? ifHurt : (targetCol && Main.mc().hitResult instanceof EntityHitResult ehr && ehr.getEntity() == entity ? ifTarget : main);
         int i = outer.getRGB();
         if (outlineEnabled) {
             Gizmos.cuboid(entity.getBoundingBox().move(vec3d3), GizmoStyle.stroke(outlineColor.getRGB(), lineWidth * outlineMultiplier));
