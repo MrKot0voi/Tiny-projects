@@ -24,8 +24,13 @@ neoForge {
     runs {
         client {
             client()
-            // ТЕСТОВО (ветка runclient-test): включает харнесс автотеста.
+            // ТЕСТОВО (ветка runclient-test): харнесс и подключение к локальному серверу.
             systemProperty 'smoothscroll.selftest', 'true'
+            programArguments.addAll('--quickPlayMultiplayer', 'localhost:25565')
+        }
+        server {
+            server()
+            programArguments.add('--nogui')
         }
     }
 

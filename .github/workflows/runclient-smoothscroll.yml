@@ -45,13 +45,27 @@ jobs:
           gradle createMinecraftArtifacts --no-daemon -q || true
           bash tools/dump2.sh diag/dump2 || true
 
-      - name: Run client (headless, 7 min)
+      - name: Prepare local server (offline, creative)
+        run: |
+          mkdir -p run
+          echo "eula=true" > run/eula.txt
+          printf 'online-mode=false\ngamemode=creative\ndifficulty=peaceful\nview-distance=4\nspawn-protection=0\nmax-players=2\nlevel-type=minecraft\\:flat\n' > run/server.properties
+          cat run/server.properties
+
+      - name: Start server and run client (headless)
         continue-on-error: true
         run: |
           set +e
+          gradle runServer --no-daemon > server.log 2>&1 &
+          SP=$!
+          for i in $(seq 1 60); do grep -q 'Done (' server.log && break; sleep 5; done
+          echo "server ready after ${i} polls" > server-status.txt
           xvfb-run -a -s "-screen 0 1280x720x24" timeout 480 gradle runClient --no-daemon --stacktrace > runclient.log 2>&1
           echo "exit: $?" >> runclient.log
           pkill -f net.neoforged || true
+          kill $SP 2>/dev/null || true
+          sleep 3; pkill -f "net.neoforged" || true
+          cp server.log diag-server.log 2>/dev/null || true
 
       - name: Summarize log
         if: always()
@@ -67,6 +81,9 @@ jobs:
           } > diag/runclient-summary.txt
           tail -n 400 $L > diag/runclient-tail.txt
           cp $L diag/runclient-full.log || true
+          cp server.log diag/server-log.txt 2>/dev/null || true
+          cp server-status.txt diag/ 2>/dev/null || true
+          tail -n 150 server.log > diag/server-tail.txt 2>/dev/null || true
           ls -la diag
 
       - name: Commit results to branch
@@ -75,7 +92,7 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f smoothscroll-neoforge/diag/runclient-summary.txt smoothscroll-neoforge/diag/runclient-tail.txt smoothscroll-neoforge/diag/dump2
+          git add -f smoothscroll-neoforge/diag/runclient-summary.txt smoothscroll-neoforge/diag/runclient-tail.txt smoothscroll-neoforge/diag/server-tail.txt smoothscroll-neoforge/diag/server-status.txt smoothscroll-neoforge/diag/dump2
           git commit -m "[skip ci] результат runClient smoothscroll" || echo "nothing to commit"
           git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"
 
