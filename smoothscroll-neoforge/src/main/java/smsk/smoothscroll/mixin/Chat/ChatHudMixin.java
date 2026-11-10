@@ -32,6 +32,11 @@ public abstract class ChatHudMixin {
         return 0;
     }
 
+    @Shadow
+    public double getScale() {
+        return 1.0;
+    }
+
     @WrapMethod(method = "render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;IIIZZ)V")
     private void renderH(GuiGraphics graphics, Font font, int mouseX, int mouseY, int ticks, boolean focused, boolean hidden, Operation<Void> operation) {
         if (SmScCfg.chatSmoothness() == 0.0F) {
