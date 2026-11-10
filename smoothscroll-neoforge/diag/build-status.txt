@@ -1,2 +1,7 @@
-job: success
-19:BUILD SUCCESSFUL in 6s
+job: failure
+6:/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/src/main/java/smsk/smoothscroll/mixin/Chat/ChatHudMixin.java:50: error: cannot find symbol
+17:FAILURE: Build failed with an exception.
+19:* What went wrong:
+22:  /home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/src/main/java/smsk/smoothscroll/mixin/Chat/ChatHudMixin.java:50: error: cannot find symbol
+93:/home/runner/work/Tiny-projects/Tiny-projects/smoothscroll-neoforge/src/main/java/smsk/smoothscroll/mixin/Chat/ChatHudMixin.java:50: error: cannot find symbol
+232:BUILD FAILED in 10s
