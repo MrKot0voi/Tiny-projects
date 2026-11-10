@@ -33,12 +33,12 @@ jobs:
             if unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/client/gui/screens/LoadingOverlay.class"; then MC="$j"; break; fi
           done
           mkdir -p "$GITHUB_WORKSPACE/diag"
-          OUT="$GITHUB_WORKSPACE/diag/dls-signatures.txt"
+          OUT="$GITHUB_WORKSPACE/diag/dls-bytecode.txt"
           {
             echo "MC jar: $MC"
-            for c in net.minecraft.client.gui.screens.LoadingOverlay com.mojang.blaze3d.opengl.GlCommandEncoder net.minecraft.client.gui.GuiGraphics net.minecraft.util.ARGB net.minecraft.client.renderer.RenderPipelines com.mojang.blaze3d.pipeline.RenderPipeline 'com.mojang.blaze3d.pipeline.RenderPipeline$Builder' com.mojang.blaze3d.pipeline.BlendFunction net.minecraft.resources.Identifier; do
+            for c in net.minecraft.client.gui.screens.LoadingOverlay; do
               echo "=== $c"
-              javap -p -cp "$MC" "$c" 2>&1 || echo "(not found)"
+              javap -p -c -cp "$MC" "$c" 2>&1 || echo "(not found)"
             done
           } > "$OUT"
           wc -l "$OUT"
@@ -50,6 +50,6 @@ jobs:
           git config user.email "actions@github.com"
           git fetch origin diag-output 2>/dev/null || true
           git checkout -B diag-output
-          git add -f diag/dls-signatures.txt
-          git commit -m "diag: dls signatures"
+          git add -f diag/dls-bytecode.txt
+          git commit -m "diag: dls bytecode"
           git push -f origin diag-output
