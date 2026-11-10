@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.Unique;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
@@ -21,6 +22,12 @@ public abstract class ChatHudMixin {
     private float smoothScrollPos;
     @Unique
     private float targetScrollPos;
+    @Unique
+    private int lastVisibleLines;
+    @Unique
+    private float smoothMaskHeight;
+    @Unique
+    private boolean maskInitialized = false;
 
     @Shadow
     private int getLineHeight() {
@@ -39,25 +46,49 @@ public abstract class ChatHudMixin {
 
     @WrapMethod(method = "render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;IIIZZ)V")
     private void renderH(GuiGraphics graphics, Font font, int mouseX, int mouseY, int ticks, boolean focused, boolean hidden, Operation<Void> operation) {
-        if (SmScCfg.chatSmoothness() == 0.0F) {
+        if (SmScCfg.chatSmoothness() == 0.0F && SmScCfg.chatOpeningSmoothness() == 0.0F) {
             operation.call(graphics, font, mouseX, mouseY, ticks, focused, hidden);
             return;
         }
 
-        this.smoothScrollPos = (this.smoothScrollPos - this.targetScrollPos) * (float) Math.pow(SmScCfg.chatSmoothness(), SmoothSc.getLastFrameDuration()) + this.targetScrollPos;
-        if (Math.abs(this.smoothScrollPos - this.targetScrollPos) < 1.0F / this.getLineHeight() / 2.0F) {
-            this.smoothScrollPos = this.targetScrollPos;
+        if (SmScCfg.chatSmoothness() != 0.0F) {
+            this.smoothScrollPos = (this.smoothScrollPos - this.targetScrollPos) * (float) Math.pow(SmScCfg.chatSmoothness(), SmoothSc.getLastFrameDuration()) + this.targetScrollPos;
+            if (Math.abs(this.smoothScrollPos - this.targetScrollPos) < 1.0F / this.getLineHeight() / 2.0F) {
+                this.smoothScrollPos = this.targetScrollPos;
+            }
+
+            this.chatScrollbarPos = (int) Math.floor(this.smoothScrollPos);
         }
 
-        this.chatScrollbarPos = (int) Math.floor(this.smoothScrollPos);
-
-        // Обрезаем верхнюю часть: строки, уехавшие вверх при анимации, не должны вылезать за область чата.
+        // Маска: строки за пределами области чата не должны вылезать (и при анимации открытия — растут снизу вверх).
         float scale = (float) this.getScale();
         int lineHeight = this.getLineHeight();
-        int top = graphics.guiHeight() - 40 - (int) Math.ceil((this.getLinesPerPage() + 1) * lineHeight * scale);
+        int bottom = graphics.guiHeight() - 40;
+        int top;
+        if (SmScCfg.chatOpeningSmoothness() == 0.0F) {
+            top = bottom - (int) Math.ceil((this.getLinesPerPage() + 1) * lineHeight * scale);
+        } else {
+            float target = (this.lastVisibleLines + 1) * lineHeight * scale;
+            if (!this.maskInitialized) {
+                this.smoothMaskHeight = target;
+                this.maskInitialized = true;
+            }
+
+            this.smoothMaskHeight = (this.smoothMaskHeight - target) * (float) Math.pow(SmScCfg.chatOpeningSmoothness(), SmoothSc.getLastFrameDuration()) + target;
+            top = bottom - (int) Math.ceil(this.smoothMaskHeight);
+        }
+
         graphics.enableScissor(0, top, graphics.guiWidth(), graphics.guiHeight());
         operation.call(graphics, font, mouseX, mouseY, ticks, focused, hidden);
         graphics.disableScissor();
+    }
+
+    // Запоминаем, сколько строк реально видно (для анимации открытия).
+    @WrapMethod(method = "forEachLine")
+    private int forEachLineWrap(@Coerce Object calculator, @Coerce Object consumer, Operation<Integer> operation) {
+        int visible = operation.call(calculator, consumer);
+        this.lastVisibleLines = visible;
+        return visible;
     }
 
     // Сдвиг всего содержимого чата на дробную часть прокрутки (после масштаба, как в оригинале).

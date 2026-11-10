@@ -19,6 +19,9 @@ public class SmoothSc {
     // Сколько раз хотбар "прокрутился" через край (для плавного переполнения).
     public static int hotbarRollover = 0;
 
+    // Смещение (в пикселях) слотов креативного меню при плавной прокрутке.
+    public static float creativeSlideOffset = 0.0F;
+
     public SmoothSc(ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, SmScCfg.SPEC);
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
