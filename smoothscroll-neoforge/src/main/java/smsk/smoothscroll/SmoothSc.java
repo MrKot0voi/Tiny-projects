@@ -19,9 +19,16 @@ public class SmoothSc {
     // Сколько раз хотбар "прокрутился" через край (для плавного переполнения).
     public static int hotbarRollover = 0;
 
+    // Смещение (в пикселях) слотов креативного меню при плавной прокрутке.
+    public static float creativeSlideOffset = 0.0F;
+
     public SmoothSc(ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, SmScCfg.SPEC);
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        // ТЕСТОВО: харнесс автотеста включается только системным свойством (в main его не будет).
+        if (Boolean.getBoolean("smoothscroll.selftest")) {
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(SelfTest::onTick);
+        }
     }
 
     /** Длительность последнего кадра в тиках (1 тик = 50 мс). */

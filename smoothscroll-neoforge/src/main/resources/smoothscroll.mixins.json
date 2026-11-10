@@ -12,6 +12,8 @@
     "Widgets.TextFieldWidgetMixin",
     "Chat.SuggestionWindowMixin",
     "Chat.ChatHudMixin",
-    "CreativeScreen.CreativeScreenMixin"
+    "CreativeScreen.CreativeScreenMixin",
+    "CreativeScreen.ItemPickerMenuAccessor",
+    "CreativeScreen.CreativeSlotsMixin"
   ]
 }

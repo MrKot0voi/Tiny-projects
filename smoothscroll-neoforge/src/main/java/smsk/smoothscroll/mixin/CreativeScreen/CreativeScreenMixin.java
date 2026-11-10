@@ -66,6 +66,14 @@ public abstract class CreativeScreenMixin {
                     this.applyScroll(this.smoothScroll);
                 }
             }
+
+            // Дробная часть позиции ряда -> смещение слотов вверх на 18 px на ряд.
+            float rows = ((ItemPickerMenuAccessor) this.menu).invokeCalculateRowCount();
+            float rowPos = this.smoothScroll * rows;
+            int base = (int) (rowPos + 0.5F);
+            SmoothSc.creativeSlideOffset = rows > 0 ? -(rowPos - base) * 18.0F : 0.0F;
+        } else {
+            SmoothSc.creativeSlideOffset = 0.0F;
         }
 
         operation.call(graphics, mouseX, mouseY, partialTick);
