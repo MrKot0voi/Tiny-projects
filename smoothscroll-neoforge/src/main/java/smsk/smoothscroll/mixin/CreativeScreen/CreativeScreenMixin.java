@@ -4,8 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,9 +17,6 @@ import smsk.smoothscroll.cfg.SmScCfg;
 public abstract class CreativeScreenMixin {
     @Shadow
     private float scrollOffs;
-    @Shadow
-    @Final
-    protected AbstractContainerMenu menu;
 
     @Unique
     private float smoothScroll;
@@ -68,7 +64,7 @@ public abstract class CreativeScreenMixin {
             }
 
             // Дробная часть позиции ряда -> смещение слотов вверх на 18 px на ряд.
-            float rows = ((ItemPickerMenuAccessor) this.menu).invokeCalculateRowCount();
+            float rows = ((ItemPickerMenuAccessor) this.menu()).invokeCalculateRowCount();
             float rowPos = this.smoothScroll * rows;
             int base = (int) (rowPos + 0.5F);
             SmoothSc.creativeSlideOffset = rows > 0 ? -(rowPos - base) * 18.0F : 0.0F;
@@ -79,10 +75,21 @@ public abstract class CreativeScreenMixin {
         operation.call(graphics, mouseX, mouseY, partialTick);
     }
 
+    // Меню лежит в AbstractContainerScreen (суперкласс), поэтому обращаемся через this с приведением к нему.
+    @Unique
+    private AbstractContainerScreen<?> screen() {
+        return (AbstractContainerScreen<?>) (Object) this;
+    }
+
+    @Unique
+    private net.minecraft.world.inventory.AbstractContainerMenu menu() {
+        return this.screen().getMenu();
+    }
+
     @Unique
     private void applyScroll(float value) {
         this.scrollOffs = value;
-        ((CreativeModeInventoryScreen.ItemPickerMenu) this.menu).scrollTo(value);
+        ((CreativeModeInventoryScreen.ItemPickerMenu) this.menu()).scrollTo(value);
         this.lastApplied = value;
     }
 }
