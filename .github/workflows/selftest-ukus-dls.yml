@@ -1,0 +1,63 @@
+name: selftest ukus armorhud + darkloadingscreen
+
+on:
+  push:
+    branches: [selftest-ukus-dls]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        project: [darkloadingscreen-neoforge, armorhud-neoforge]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle 9.8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+
+      - name: Install Xvfb and Mesa
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglu1-mesa
+
+      - name: Build and run client under Xvfb
+        working-directory: ${{ matrix.project }}
+        run: |
+          set +e
+          timeout 420 xvfb-run -a gradle runClient --no-daemon --stacktrace > "$RUNNER_TEMP/runclient.out" 2>&1
+          echo "runClient exit: $?"
+          pkill -f "net.neoforged" || true
+          set -e
+
+      - name: Collect SELFTEST lines
+        run: |
+          D="$GITHUB_WORKSPACE/diag/selftest"
+          mkdir -p "$D"
+          cd "$GITHUB_WORKSPACE/${{ matrix.project }}"
+          { echo "== ${{ matrix.project }} =="; grep -E "SELFTEST|FAIL|Exception" run/logs/latest.log 2>/dev/null | head -80 || true; echo "-- runclient tail --"; tail -n 40 "$RUNNER_TEMP/runclient.out"; } > "$D/${{ matrix.project }}.txt" || true
+
+      - name: Commit results
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f diag/selftest
+          git commit -m "[skip ci] selftest results ${{ matrix.project }}" || echo "nothing"
+          for i in 1 2 3; do git pull -q --rebase origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done

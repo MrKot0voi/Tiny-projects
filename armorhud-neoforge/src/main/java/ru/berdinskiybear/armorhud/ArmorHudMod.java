@@ -58,6 +58,7 @@ public final class ArmorHudMod {
         manager.load();
 
         modBus.addListener(ArmorHudMod::onRegisterKeyMappings);
+        NeoForge.EVENT_BUS.addListener(SelfTest::onTick);
         NeoForge.EVENT_BUS.addListener(ArmorHudMod::onClientTickPre);
     }
 
