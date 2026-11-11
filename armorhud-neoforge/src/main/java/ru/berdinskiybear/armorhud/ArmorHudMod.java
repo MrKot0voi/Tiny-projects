@@ -81,6 +81,27 @@ public final class ArmorHudMod {
     }
 
     @Nullable
+    private static boolean debugLogged = false;
+
+    /** Одноразовый лог состояния HUD для диагностики (ARMORHUD_DEBUG в latest.log). */
+    public static void debugOnce(GuiGraphics graphics) {
+        if (debugLogged) return;
+        debugLogged = true;
+        try {
+            ArmorHudConfig config = manager.getConfig();
+            Player player = getCameraPlayer();
+            Optional<Rect2i> rect = player == null ? Optional.empty() : getWidgetRect(graphics, player);
+            int armorCount = player == null ? -1 : getArmorItems(player).size();
+            org.apache.logging.log4j.LogManager.getLogger("ARMORHUD_DEBUG").info(
+                    "enabled={} player={} armorItems={} rect={} guiW={} guiH={} anchor={} side={} style={} orientation={} widgetShown={} offsetX={} offsetY={}",
+                    config.isEnabled(), player != null, armorCount, rect.map(r -> r.getX() + "," + r.getY() + "," + r.getWidth() + "x" + r.getHeight()).orElse("EMPTY"),
+                    graphics.guiWidth(), graphics.guiHeight(), config.getAnchor(), config.getSide(), config.getStyle(),
+                    config.getOrientation(), config.getWidgetShown(), config.getOffsetX(), config.getOffsetY());
+        } catch (Throwable t) {
+            org.apache.logging.log4j.LogManager.getLogger("ARMORHUD_DEBUG").error("debug failed", t);
+        }
+    }
+
     public static Player getCameraPlayer() {
         return Minecraft.getInstance().getCameraEntity() instanceof Player player ? player : null;
     }

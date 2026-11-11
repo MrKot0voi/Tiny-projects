@@ -56,6 +56,7 @@ public abstract class MixinGui {
 
     @Inject(method = "renderItemHotbar", at = @At("TAIL"))
     public void renderArmorHud(GuiGraphics graphics, DeltaTracker tickCounter, CallbackInfo ci) {
+        ArmorHudMod.debugOnce(graphics);
         Profiler.get().push(MOD_ID);
 
         // this was extracted to a different method to be able to return whenever I want
