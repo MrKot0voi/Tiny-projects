@@ -71,6 +71,19 @@ jobs:
           cp -r run/crash-reports "$D/" 2>/dev/null || true
           cp "$GITHUB_WORKSPACE/build.log" "$D/build.log" 2>/dev/null || true
 
+      - name: Build jar
+        working-directory: armorhud-neoforge
+        run: |
+          chmod +x gradlew 2>/dev/null || true
+          gradle build --no-daemon > "$GITHUB_WORKSPACE/build-jar.log" 2>&1 || echo "build failed"
+
+      - name: Upload jar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: armorhud-neoforge-1.21.11-debug
+          path: armorhud-neoforge/build/libs/*.jar
+          if-no-files-found: warn
+
       - name: Push results to branch
         run: |
           cd "$GITHUB_WORKSPACE"
