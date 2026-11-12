@@ -167,8 +167,9 @@ public class GuiArmor {
    }
 
    private void drawMaskedIcon(GuiGraphics context, int x, int y, ArmorIcon icon, ArmorIcon mask, int uOffset) {
-      mask.draw(context, x, y, uOffset, 5);
-      icon.drawMasked(context, x, y, uOffset, 5);
+      Identifier composite = MaskedIconCache.get(icon, mask);
+      int size = ArmorIcon.ICON_SIZE;
+      context.blit(RenderPipelines.GUI_TEXTURED, composite, x + uOffset, y, uOffset, 0, 5, size, size, size, -1);
    }
 
    private void drawTexturedGlintRect(GuiGraphics context, int x, int y, float u, float v, int width, int height) {
