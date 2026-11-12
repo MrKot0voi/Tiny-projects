@@ -1,0 +1,42 @@
+name: dump armorchroma texture signatures
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [armorchroma-composite]
+    paths:
+      - '.github/workflows/dump-armorchroma-sigs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: armorchroma-neoforge
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+      - name: Create MC artifacts and dump signatures
+        run: |
+          gradle createMinecraftArtifacts --no-daemon -q || true
+          bash tools/dump-texture-sigs.sh build/sigs || true
+      - name: Commit signatures
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          mkdir -p diag/texture-sigs
+          cp -r armorchroma-neoforge/build/sigs/. diag/texture-sigs/ 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f diag/texture-sigs
+          git commit -m "[skip ci] texture signatures" || echo "nothing"
+          for i in 1 2 3; do git pull -q --rebase origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
