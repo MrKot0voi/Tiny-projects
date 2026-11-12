@@ -1,0 +1,17 @@
+Compiled from "ResourceManager.java"
+public interface net.minecraft.server.packs.resources.ResourceManager extends net.minecraft.server.packs.resources.ResourceProvider {
+  public abstract java.util.Set<java.lang.String> getNamespaces();
+    descriptor: ()Ljava/util/Set;
+
+  public abstract java.util.List<net.minecraft.server.packs.resources.Resource> getResourceStack(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)Ljava/util/List;
+
+  public abstract java.util.Map<net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource> listResources(java.lang.String, java.util.function.Predicate<net.minecraft.resources.Identifier>);
+    descriptor: (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Map;
+
+  public abstract java.util.Map<net.minecraft.resources.Identifier, java.util.List<net.minecraft.server.packs.resources.Resource>> listResourceStacks(java.lang.String, java.util.function.Predicate<net.minecraft.resources.Identifier>);
+    descriptor: (Ljava/lang/String;Ljava/util/function/Predicate;)Ljava/util/Map;
+
+  public abstract java.util.stream.Stream<net.minecraft.server.packs.PackResources> listPacks();
+    descriptor: ()Ljava/util/stream/Stream;
+}

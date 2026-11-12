@@ -1,0 +1,23 @@
+Compiled from "AbstractTexture.java"
+public abstract class net.minecraft.client.renderer.texture.AbstractTexture implements java.lang.AutoCloseable {
+  protected com.mojang.blaze3d.textures.GpuTexture texture;
+    descriptor: Lcom/mojang/blaze3d/textures/GpuTexture;
+  protected com.mojang.blaze3d.textures.GpuTextureView textureView;
+    descriptor: Lcom/mojang/blaze3d/textures/GpuTextureView;
+  protected com.mojang.blaze3d.textures.GpuSampler sampler;
+    descriptor: Lcom/mojang/blaze3d/textures/GpuSampler;
+  public net.minecraft.client.renderer.texture.AbstractTexture();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  public com.mojang.blaze3d.textures.GpuTexture getTexture();
+    descriptor: ()Lcom/mojang/blaze3d/textures/GpuTexture;
+
+  public com.mojang.blaze3d.textures.GpuTextureView getTextureView();
+    descriptor: ()Lcom/mojang/blaze3d/textures/GpuTextureView;
+
+  public com.mojang.blaze3d.textures.GpuSampler getSampler();
+    descriptor: ()Lcom/mojang/blaze3d/textures/GpuSampler;
+}

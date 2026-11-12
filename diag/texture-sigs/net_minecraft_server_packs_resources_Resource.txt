@@ -1,0 +1,34 @@
+Compiled from "Resource.java"
+public class net.minecraft.server.packs.resources.Resource {
+  private final net.minecraft.server.packs.PackResources source;
+    descriptor: Lnet/minecraft/server/packs/PackResources;
+  private final net.minecraft.server.packs.resources.IoSupplier<java.io.InputStream> streamSupplier;
+    descriptor: Lnet/minecraft/server/packs/resources/IoSupplier;
+  private final net.minecraft.server.packs.resources.IoSupplier<net.minecraft.server.packs.resources.ResourceMetadata> metadataSupplier;
+    descriptor: Lnet/minecraft/server/packs/resources/IoSupplier;
+  private net.minecraft.server.packs.resources.ResourceMetadata cachedMetadata;
+    descriptor: Lnet/minecraft/server/packs/resources/ResourceMetadata;
+  public net.minecraft.server.packs.resources.Resource(net.minecraft.server.packs.PackResources, net.minecraft.server.packs.resources.IoSupplier<java.io.InputStream>, net.minecraft.server.packs.resources.IoSupplier<net.minecraft.server.packs.resources.ResourceMetadata>);
+    descriptor: (Lnet/minecraft/server/packs/PackResources;Lnet/minecraft/server/packs/resources/IoSupplier;Lnet/minecraft/server/packs/resources/IoSupplier;)V
+
+  public net.minecraft.server.packs.resources.Resource(net.minecraft.server.packs.PackResources, net.minecraft.server.packs.resources.IoSupplier<java.io.InputStream>);
+    descriptor: (Lnet/minecraft/server/packs/PackResources;Lnet/minecraft/server/packs/resources/IoSupplier;)V
+
+  public net.minecraft.server.packs.PackResources source();
+    descriptor: ()Lnet/minecraft/server/packs/PackResources;
+
+  public java.lang.String sourcePackId();
+    descriptor: ()Ljava/lang/String;
+
+  public java.util.Optional<net.minecraft.server.packs.repository.KnownPack> knownPackInfo();
+    descriptor: ()Ljava/util/Optional;
+
+  public java.io.InputStream open() throws java.io.IOException;
+    descriptor: ()Ljava/io/InputStream;
+
+  public java.io.BufferedReader openAsReader() throws java.io.IOException;
+    descriptor: ()Ljava/io/BufferedReader;
+
+  public net.minecraft.server.packs.resources.ResourceMetadata metadata() throws java.io.IOException;
+    descriptor: ()Lnet/minecraft/server/packs/resources/ResourceMetadata;
+}
