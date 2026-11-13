@@ -1,0 +1,67 @@
+name: fetch modrinth
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Modrinth project slug
+        required: true
+        default: smooth-scroll
+      mc_version:
+        description: Minecraft version
+        required: true
+        default: '1.21.11'
+      loader:
+        description: loader (neoforge or fabric)
+        required: true
+        default: neoforge
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download from Modrinth API
+        env:
+          SLUG: ${{ inputs.slug }}
+          MCV: ${{ inputs.mc_version }}
+          LOADER: ${{ inputs.loader }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request, hashlib, pathlib
+          slug = os.environ['SLUG']; mcv = os.environ['MCV']; loader = os.environ['LOADER']
+          base = 'https://api.modrinth.com/v2'
+          ua = {'User-Agent': 'MrKot0voi/Tiny-projects (ci fetch)'}
+          q = urllib.parse.urlencode({'game_versions': json.dumps([mcv]), 'loaders': json.dumps([loader])})
+          versions = json.load(urllib.request.urlopen(urllib.request.Request(f'{base}/project/{slug}/version?{q}', headers=ua)))
+          out = pathlib.Path('modrinth-out'); out.mkdir(exist_ok=True)
+          index = {'slug': slug, 'mc': mcv, 'loader': loader, 'versions_found': len(versions), 'downloads': []}
+          if versions:
+              v = versions[0]
+              f = next((x for x in v['files'] if x.get('primary')), v['files'][0])
+              data = urllib.request.urlopen(urllib.request.Request(f['url'], headers=ua)).read()
+              sha_ok = hashlib.sha1(data).hexdigest() == f['hashes']['sha1']
+              (out / f['filename']).write_bytes(data)
+              index['downloads'].append({
+                  'version': v['version_number'], 'version_id': v['id'], 'file': f['filename'],
+                  'size': len(data), 'sha1_ok': sha_ok,
+                  'required_deps': [d.get('project_id') for d in v.get('dependencies', []) if d.get('dependency_type') == 'required']})
+          (out / 'index.json').write_text(json.dumps(index, indent=2))
+          print(json.dumps(index, indent=2))
+          PY
+
+      - name: Push to branch
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan modrinth-${{ inputs.slug }}
+          git rm -rf -q --cached . || true
+          git add -f modrinth-out
+          git commit -q -m "modrinth ${{ inputs.slug }} ${{ inputs.mc_version }} ${{ inputs.loader }}"
+          git push -f origin modrinth-${{ inputs.slug }}
