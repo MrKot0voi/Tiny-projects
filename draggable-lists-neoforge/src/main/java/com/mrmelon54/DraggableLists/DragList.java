@@ -3,7 +3,7 @@ package com.mrmelon54.DraggableLists;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 
-public interface DragList<T, E extends ObjectSelectionList.Entry<E>> {
+public interface DragList<T, E extends ObjectSelectionList.Entry<?>> {
     DragItem<T, E> draggable_lists$getEntryAtPosition(double mouseX, double mouseY);
 
     int draggable_lists$getIndexOfEntry(DragItem<T, E> item);

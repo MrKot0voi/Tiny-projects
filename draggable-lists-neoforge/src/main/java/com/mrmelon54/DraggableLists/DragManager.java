@@ -6,7 +6,7 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 
-public class DragManager<T, E extends ObjectSelectionList.Entry<E>> {
+public class DragManager<T, E extends ObjectSelectionList.Entry<?>> {
     private final DragList<T, E> dragList;
     private DragItem<T, E> selectedItem;
     private double draggingStartX = 0.0;
