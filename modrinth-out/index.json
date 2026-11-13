@@ -1,0 +1,16 @@
+{
+  "slug": "smooth-scroll",
+  "mc": "1.21.11",
+  "loader": "fabric",
+  "versions_found": 8,
+  "downloads": [
+    {
+      "version": "2.6.7",
+      "version_id": "OVornAB5",
+      "file": "smoothscroll-2.6.7.jar",
+      "size": 98910,
+      "sha1_ok": true,
+      "required_deps": []
+    }
+  ]
+}
