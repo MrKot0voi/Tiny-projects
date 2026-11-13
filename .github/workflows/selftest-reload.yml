@@ -1,0 +1,48 @@
+name: selftest reload screen
+
+on:
+  push:
+    branches: [selftest-reload]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+      - name: Install Xvfb and Mesa
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglu1-mesa
+      - name: Run client under Xvfb
+        working-directory: darkloadingscreen-neoforge
+        run: |
+          set +e
+          timeout 420 xvfb-run -a gradle runClient --no-daemon --stacktrace > "$RUNNER_TEMP/runclient.out" 2>&1
+          echo "runClient exit: $?"
+          pkill -f "net.neoforged" || true
+          set -e
+      - name: Collect SELFTEST lines
+        run: |
+          D="$GITHUB_WORKSPACE/diag/selftest-reload"
+          mkdir -p "$D"
+          { grep -E "SELFTEST|FAIL|Exception" darkloadingscreen-neoforge/run/logs/latest.log | head -150; echo "-- runclient tail --"; tail -n 30 "$RUNNER_TEMP/runclient.out"; } > "$D/result.txt" || true
+      - name: Commit results
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f diag/selftest-reload
+          git commit -m "[skip ci] selftest reload results" || echo "nothing"
+          for i in 1 2 3; do git pull -q --rebase origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done

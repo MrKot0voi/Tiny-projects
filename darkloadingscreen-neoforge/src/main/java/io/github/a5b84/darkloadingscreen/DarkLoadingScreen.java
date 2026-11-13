@@ -47,6 +47,7 @@ public class DarkLoadingScreen {
     public static Config config = Config.DEFAULT;
 
     public DarkLoadingScreen(IEventBus modBus, ModContainer container) {
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(SelfTest::onTick);
         container.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
 
         modBus.addListener(DarkLoadingScreen::onRegisterRenderPipelines);
