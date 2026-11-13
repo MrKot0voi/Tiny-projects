@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [darkloadingscreen-neoforge, shieldfixes-neoforge]
+        project: [darkloadingscreen-neoforge, shieldfixes-neoforge, smoothscroll-neoforge]
     steps:
       - name: Checkout
         uses: actions/checkout@v4

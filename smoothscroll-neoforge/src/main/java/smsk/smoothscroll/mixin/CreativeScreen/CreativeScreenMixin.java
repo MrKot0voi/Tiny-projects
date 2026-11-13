@@ -11,6 +11,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import smsk.smoothscroll.CreativeGrid;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
 
@@ -101,17 +102,17 @@ public abstract class CreativeScreenMixin {
         }
 
         AbstractContainerScreenAccessor acc = (AbstractContainerScreenAccessor) (Object) this;
-        int x0 = acc.smoothscroll$getLeftPos() + CreativeSlotsMixin.GRID_X0;
-        int y0 = acc.smoothscroll$getTopPos() + CreativeSlotsMixin.GRID_Y0;
-        int w = CreativeSlotsMixin.GRID_X1 - CreativeSlotsMixin.GRID_X0;
-        int h = CreativeSlotsMixin.GRID_Y1 - CreativeSlotsMixin.GRID_Y0;
+        int x0 = acc.smoothscroll$getLeftPos() + CreativeGrid.X0;
+        int y0 = acc.smoothscroll$getTopPos() + CreativeGrid.Y0;
+        int w = CreativeGrid.X1 - CreativeGrid.X0;
+        int h = CreativeGrid.Y1 - CreativeGrid.Y0;
 
         Identifier tab = selectedTab.getBackgroundTexture();
         graphics.enableScissor(x0, y0, x0 + w, y0 + h);
         for (int k = -1; k <= 1; k++) {
             graphics.pose().pushMatrix();
             graphics.pose().translate(0.0F, dy + k * 18.0F);
-            graphics.blit(RenderPipelines.GUI_TEXTURED, tab, x0, y0, (float) CreativeSlotsMixin.GRID_X0, (float) CreativeSlotsMixin.GRID_Y0, w, h, TAB_TEXTURE_SIZE, TAB_TEXTURE_SIZE);
+            graphics.blit(RenderPipelines.GUI_TEXTURED, tab, x0, y0, (float) CreativeGrid.X0, (float) CreativeGrid.Y0, w, h, TAB_TEXTURE_SIZE, TAB_TEXTURE_SIZE);
             graphics.pose().popMatrix();
         }
         graphics.disableScissor();
