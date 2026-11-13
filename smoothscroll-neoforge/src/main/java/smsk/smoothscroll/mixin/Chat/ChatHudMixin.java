@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
 
-// Плавная прокрутка чата. Опционально: анимация открытия чата (opening smoothness) пока не портирована.
+// Плавная прокрутка чата и анимация открытия (маска растёт снизу вверх, opening smoothness).
 @Mixin(ChatComponent.class)
 public abstract class ChatHudMixin {
     @Shadow

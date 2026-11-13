@@ -10,7 +10,7 @@
   "smoothscroll.configuration.chat.smoothness": "Плавность",
   "smoothscroll.configuration.chat.smoothness.tooltip": "Smoothness of chat scrolling (0 % = off).",
   "smoothscroll.configuration.chat.openingSmoothness": "Плавность открытия",
-  "smoothscroll.configuration.chat.openingSmoothness.tooltip": "Opening animation smoothness (not ported yet).",
+  "smoothscroll.configuration.chat.openingSmoothness.tooltip": "Плавность анимации открытия: маска чата растёт снизу вверх при открытии чата.",
   "smoothscroll.configuration.chat.scrollingSpeed": "Скорость прокрутки",
   "smoothscroll.configuration.chat.scrollingSpeed.tooltip": "Pixels per scroll step, 0 = automatic.",
   "smoothscroll.configuration.chat.suggestionSmoothness": "Плавность подсказок",
