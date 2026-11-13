@@ -28,8 +28,7 @@ public class TextFieldWidgetMixin {
                     firstWordIndex = -1;
                 }
                 if (firstWordIndex != -1 && splitText[firstWordIndex].charAt(0) == '/'
-                        && (NoPeekingConfig.commandsToObfuscate().contains(splitText[firstWordIndex])
-                        || NoPeekingConfig.commandsToObfuscate().contains(splitText[firstWordIndex].substring(1)))) {
+                        && NoPeekingConfig.isObfuscatedCommand(splitText[firstWordIndex])) {
                     StringBuilder obfuscatedText = new StringBuilder();
                     for (int i = 0; i < firstWordIndex; i++) {
                         obfuscatedText.append(' ');
