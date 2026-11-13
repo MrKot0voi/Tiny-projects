@@ -37,6 +37,7 @@ jobs:
         run: |
           D="$GITHUB_WORKSPACE/diag/selftest-reload"
           mkdir -p "$D"
+          cp darkloadingscreen-neoforge/run/selftest-reload.png "$D/" 2>/dev/null || true
           { grep -E "SELFTEST|FAIL|Exception" darkloadingscreen-neoforge/run/logs/latest.log | head -150; echo "-- runclient tail --"; tail -n 30 "$RUNNER_TEMP/runclient.out"; } > "$D/result.txt" || true
       - name: Commit results
         run: |

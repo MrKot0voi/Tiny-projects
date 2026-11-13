@@ -2,6 +2,9 @@ package io.github.a5b84.darkloadingscreen;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.util.function.Consumer;
+import net.neoforged.fml.loading.FMLPaths;
 import java.util.function.IntSupplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Overlay;
@@ -47,6 +50,9 @@ final class SelfTest {
                 LOG.info("SELFTEST tick={} overlay={}", ticks, name);
                 lastOverlay = name;
             }
+            if (ticks - reloadAt == 30 && name.contains("LoadingOverlay")) {
+                takeShot(mc);
+            }
             if (ticks - reloadAt > 400) {
                 finish(mc);
             }
@@ -79,6 +85,36 @@ final class SelfTest {
             return "no-overlay-field";
         } catch (Throwable t) {
             return "error " + t;
+        }
+    }
+
+    private static void takeShot(Minecraft mc) {
+        try {
+            Path out = FMLPaths.GAMEDIR.get().resolve("selftest-reload.png");
+            Object target = Minecraft.class.getMethod("getMainRenderTarget").invoke(mc);
+            Class<?> shotCls = Class.forName("net.minecraft.client.Screenshot");
+            Method take = null;
+            for (Method m : shotCls.getMethods()) {
+                if (m.getName().equals("takeScreenshot") && m.getParameterCount() == 2) {
+                    take = m;
+                }
+            }
+            if (take == null) {
+                LOG.error("SELFTEST no takeScreenshot method");
+                return;
+            }
+            Consumer<Object> save = img -> {
+                try {
+                    img.getClass().getMethod("writeToFile", Path.class).invoke(img, out);
+                    LOG.info("SELFTEST screenshot saved {}", out);
+                } catch (Throwable t) {
+                    LOG.error("SELFTEST FAIL writeToFile", t);
+                }
+            };
+            take.invoke(null, target, save);
+            LOG.info("SELFTEST screenshot requested");
+        } catch (Throwable t) {
+            LOG.error("SELFTEST FAIL screenshot", t);
         }
     }
 
