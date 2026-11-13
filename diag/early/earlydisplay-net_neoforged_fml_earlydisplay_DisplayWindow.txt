@@ -1,0 +1,1253 @@
+Compiled from "DisplayWindow.java"
+public class net.neoforged.fml.earlydisplay.DisplayWindow implements net.neoforged.neoforgespi.earlywindow.ImmediateWindowProvider {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final java.lang.ThreadGroup BACKGROUND_THREAD_GROUP;
+
+  private final net.neoforged.fml.loading.progress.ProgressMeter mainProgress;
+
+  private boolean darkMode;
+
+  private net.neoforged.fml.earlydisplay.theme.Theme theme;
+
+  private java.util.concurrent.ScheduledFuture<net.neoforged.fml.earlydisplay.render.LoadingScreenRenderer> rendererFuture;
+
+  private long window;
+
+  private java.util.concurrent.ScheduledExecutorService renderScheduler;
+
+  private int winWidth;
+
+  private int winHeight;
+
+  private java.lang.String assetsDir;
+
+  private java.lang.String assetIndex;
+
+  private boolean maximized;
+
+  private java.lang.Runnable repaintTick;
+
+  private volatile boolean closed;
+
+  private java.lang.String neoForgeVersion;
+
+  private java.lang.String minecraftVersion;
+
+  private static final java.lang.String ERROR_URL = "https://links.neoforged.net/early-display-errors";
+
+  private final java.util.concurrent.locks.ReentrantLock crashLock;
+
+  public net.neoforged.fml.earlydisplay.DisplayWindow();
+    Code:
+       0: aload_0
+       1: invokespecial #5                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokedynamic #11,  0             // InvokeDynamic #0:run:()Ljava/lang/Runnable;
+      10: putfield      #15                 // Field repaintTick:Ljava/lang/Runnable;
+      13: aload_0
+      14: new           #21                 // class java/util/concurrent/locks/ReentrantLock
+      17: dup
+      18: invokespecial #23                 // Method java/util/concurrent/locks/ReentrantLock."<init>":()V
+      21: putfield      #24                 // Field crashLock:Ljava/util/concurrent/locks/ReentrantLock;
+      24: aload_0
+      25: ldc           #28                 // String
+      27: iconst_0
+      28: invokestatic  #30                 // Method net/neoforged/fml/loading/progress/StartupNotificationManager.addProgressBar:(Ljava/lang/String;I)Lnet/neoforged/fml/loading/progress/ProgressMeter;
+      31: putfield      #36                 // Field mainProgress:Lnet/neoforged/fml/loading/progress/ProgressMeter;
+      34: return
+
+  public java.lang.String name();
+    Code:
+       0: ldc           #40                 // String fmlearlywindow
+       2: areturn
+
+  public void initialize(net.neoforged.fml.loading.ProgramArgs);
+    Code:
+       0: new           #42                 // class joptsimple/OptionParser
+       3: dup
+       4: invokespecial #44                 // Method joptsimple/OptionParser."<init>":()V
+       7: astore_2
+       8: aload_2
+       9: ldc           #45                 // String width
+      11: invokevirtual #47                 // Method joptsimple/OptionParser.accepts:(Ljava/lang/String;)Ljoptsimple/OptionSpecBuilder;
+      14: invokevirtual #51                 // Method joptsimple/OptionSpecBuilder.withRequiredArg:()Ljoptsimple/ArgumentAcceptingOptionSpec;
+      17: ldc           #57                 // class java/lang/Integer
+      19: invokevirtual #59                 // Method joptsimple/ArgumentAcceptingOptionSpec.ofType:(Ljava/lang/Class;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+      22: getstatic     #65                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_WIDTH:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+      25: invokestatic  #71                 // Method net/neoforged/fml/loading/FMLConfig.getIntConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)I
+      28: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      31: iconst_0
+      32: anewarray     #57                 // class java/lang/Integer
+      35: invokevirtual #81                 // Method joptsimple/ArgumentAcceptingOptionSpec.defaultsTo:(Ljava/lang/Object;[Ljava/lang/Object;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+      38: astore_3
+      39: aload_2
+      40: ldc           #85                 // String height
+      42: invokevirtual #47                 // Method joptsimple/OptionParser.accepts:(Ljava/lang/String;)Ljoptsimple/OptionSpecBuilder;
+      45: invokevirtual #51                 // Method joptsimple/OptionSpecBuilder.withRequiredArg:()Ljoptsimple/ArgumentAcceptingOptionSpec;
+      48: ldc           #57                 // class java/lang/Integer
+      50: invokevirtual #59                 // Method joptsimple/ArgumentAcceptingOptionSpec.ofType:(Ljava/lang/Class;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+      53: getstatic     #87                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_HEIGHT:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+      56: invokestatic  #71                 // Method net/neoforged/fml/loading/FMLConfig.getIntConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)I
+      59: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      62: iconst_0
+      63: anewarray     #57                 // class java/lang/Integer
+      66: invokevirtual #81                 // Method joptsimple/ArgumentAcceptingOptionSpec.defaultsTo:(Ljava/lang/Object;[Ljava/lang/Object;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+      69: astore        4
+      71: aload_2
+      72: ldc           #90                 // String earlywindow.maximized
+      74: invokevirtual #47                 // Method joptsimple/OptionParser.accepts:(Ljava/lang/String;)Ljoptsimple/OptionSpecBuilder;
+      77: astore        5
+      79: aload_2
+      80: ldc           #92                 // String assetsDir
+      82: invokevirtual #47                 // Method joptsimple/OptionParser.accepts:(Ljava/lang/String;)Ljoptsimple/OptionSpecBuilder;
+      85: invokevirtual #51                 // Method joptsimple/OptionSpecBuilder.withRequiredArg:()Ljoptsimple/ArgumentAcceptingOptionSpec;
+      88: ldc           #94                 // class java/lang/String
+      90: invokevirtual #59                 // Method joptsimple/ArgumentAcceptingOptionSpec.ofType:(Ljava/lang/Class;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+      93: astore        6
+      95: aload_2
+      96: ldc           #96                 // String assetIndex
+      98: invokevirtual #47                 // Method joptsimple/OptionParser.accepts:(Ljava/lang/String;)Ljoptsimple/OptionSpecBuilder;
+     101: invokevirtual #51                 // Method joptsimple/OptionSpecBuilder.withRequiredArg:()Ljoptsimple/ArgumentAcceptingOptionSpec;
+     104: ldc           #94                 // class java/lang/String
+     106: invokevirtual #59                 // Method joptsimple/ArgumentAcceptingOptionSpec.ofType:(Ljava/lang/Class;)Ljoptsimple/ArgumentAcceptingOptionSpec;
+     109: astore        7
+     111: aload_2
+     112: invokevirtual #98                 // Method joptsimple/OptionParser.allowsUnrecognizedOptions:()V
+     115: aload_2
+     116: aload_1
+     117: invokevirtual #101                // Method net/neoforged/fml/loading/ProgramArgs.getArguments:()[Ljava/lang/String;
+     120: invokevirtual #107                // Method joptsimple/OptionParser.parse:([Ljava/lang/String;)Ljoptsimple/OptionSet;
+     123: astore        8
+     125: aload_0
+     126: aload         8
+     128: aload_3
+     129: invokevirtual #111                // Method joptsimple/OptionSet.valueOf:(Ljoptsimple/OptionSpec;)Ljava/lang/Object;
+     132: checkcast     #57                 // class java/lang/Integer
+     135: invokevirtual #116                // Method java/lang/Integer.intValue:()I
+     138: putfield      #120                // Field winWidth:I
+     141: aload_0
+     142: aload         8
+     144: aload         4
+     146: invokevirtual #111                // Method joptsimple/OptionSet.valueOf:(Ljoptsimple/OptionSpec;)Ljava/lang/Object;
+     149: checkcast     #57                 // class java/lang/Integer
+     152: invokevirtual #116                // Method java/lang/Integer.intValue:()I
+     155: putfield      #124                // Field winHeight:I
+     158: getstatic     #65                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_WIDTH:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     161: aload_0
+     162: getfield      #120                // Field winWidth:I
+     165: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     168: invokestatic  #127                // Method net/neoforged/fml/loading/FMLConfig.updateConfig:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;Ljava/lang/Object;)V
+     171: getstatic     #87                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_HEIGHT:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     174: aload_0
+     175: getfield      #124                // Field winHeight:I
+     178: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     181: invokestatic  #127                // Method net/neoforged/fml/loading/FMLConfig.updateConfig:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;Ljava/lang/Object;)V
+     184: aload         8
+     186: aload         6
+     188: invokevirtual #131                // Method joptsimple/OptionSet.has:(Ljoptsimple/OptionSpec;)Z
+     191: ifeq          232
+     194: aload         8
+     196: aload         7
+     198: invokevirtual #131                // Method joptsimple/OptionSet.has:(Ljoptsimple/OptionSpec;)Z
+     201: ifeq          232
+     204: aload_0
+     205: aload         8
+     207: aload         6
+     209: invokevirtual #111                // Method joptsimple/OptionSet.valueOf:(Ljoptsimple/OptionSpec;)Ljava/lang/Object;
+     212: checkcast     #94                 // class java/lang/String
+     215: putfield      #135                // Field assetsDir:Ljava/lang/String;
+     218: aload_0
+     219: aload         8
+     221: aload         7
+     223: invokevirtual #111                // Method joptsimple/OptionSet.valueOf:(Ljoptsimple/OptionSpec;)Ljava/lang/Object;
+     226: checkcast     #94                 // class java/lang/String
+     229: putfield      #138                // Field assetIndex:Ljava/lang/String;
+     232: ldc           #140                // String fml.earlyWindowDarkMode
+     234: invokestatic  #142                // Method java/lang/Boolean.getBoolean:(Ljava/lang/String;)Z
+     237: ifeq          248
+     240: aload_0
+     241: iconst_1
+     242: putfield      #148                // Field darkMode:Z
+     245: goto          366
+     248: getstatic     #152                // Field net/neoforged/fml/loading/FMLPaths.GAMEDIR:Lnet/neoforged/fml/loading/FMLPaths;
+     251: invokevirtual #158                // Method net/neoforged/fml/loading/FMLPaths.get:()Ljava/nio/file/Path;
+     254: ldc           #162                // String options.txt
+     256: iconst_0
+     257: anewarray     #94                 // class java/lang/String
+     260: invokestatic  #164                // Method java/nio/file/Paths.get:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+     263: invokeinterface #169,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/nio/file/Path;)Ljava/nio/file/Path;
+     268: invokestatic  #175                // Method java/nio/file/Files.readAllLines:(Ljava/nio/file/Path;)Ljava/util/List;
+     271: astore        9
+     273: aload         9
+     275: invokeinterface #181,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     280: invokedynamic #187,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     285: invokeinterface #191,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     290: invokedynamic #197,  0            // InvokeDynamic #2:test:()Ljava/util/function/Predicate;
+     295: invokeinterface #201,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     300: invokedynamic #205,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+     305: invokedynamic #206,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+     310: invokestatic  #207                // Method java/util/stream/Collectors.toMap:(Ljava/util/function/Function;Ljava/util/function/Function;)Ljava/util/stream/Collector;
+     313: invokeinterface #213,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     318: checkcast     #217                // class java/util/Map
+     321: astore        10
+     323: aload_0
+     324: aload         10
+     326: ldc           #219                // String darkMojangStudiosBackground
+     328: ldc           #221                // String false
+     330: invokeinterface #223,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     335: checkcast     #94                 // class java/lang/String
+     338: invokestatic  #227                // Method java/lang/Boolean.parseBoolean:(Ljava/lang/String;)Z
+     341: putfield      #148                // Field darkMode:Z
+     344: goto          366
+     347: astore        9
+     349: goto          366
+     352: astore        9
+     354: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     357: ldc           #238                // String Failed to read dark-mode settings from options.txt
+     359: aload         9
+     361: invokeinterface #240,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     366: getstatic     #246                // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_LOADING_SCREEN_THEME:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     369: invokestatic  #249                // Method net/neoforged/fml/loading/FMLConfig.getConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)Ljava/lang/String;
+     372: astore        9
+     374: aload         9
+     376: invokevirtual #253                // Method java/lang/String.isEmpty:()Z
+     379: ifne          407
+     382: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     385: ldc_w         #257                // String Trying to load configured early loading screen theme \'{}\'
+     388: aload         9
+     390: invokeinterface #259,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     395: aload_0
+     396: aload         9
+     398: invokestatic  #263                // Method loadTheme:(Ljava/lang/String;)Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     401: putfield      #267                // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     404: goto          418
+     407: aload_0
+     408: aload_0
+     409: getfield      #148                // Field darkMode:Z
+     412: invokestatic  #271                // Method loadTheme:(Z)Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     415: putfield      #267                // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     418: aload_0
+     419: aload         8
+     421: aload         5
+     423: invokevirtual #131                // Method joptsimple/OptionSet.has:(Ljoptsimple/OptionSpec;)Z
+     426: ifne          438
+     429: getstatic     #274                // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_MAXIMIZED:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     432: invokestatic  #277                // Method net/neoforged/fml/loading/FMLConfig.getBoolConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)Z
+     435: ifeq          442
+     438: iconst_1
+     439: goto          443
+     442: iconst_0
+     443: putfield      #281                // Field maximized:Z
+     446: aload_0
+     447: invokestatic  #284                // Method java/lang/Thread.ofPlatform:()Ljava/lang/Thread$Builder$OfPlatform;
+     450: getstatic     #290                // Field BACKGROUND_THREAD_GROUP:Ljava/lang/ThreadGroup;
+     453: invokeinterface #294,  2          // InterfaceMethod java/lang/Thread$Builder$OfPlatform.group:(Ljava/lang/ThreadGroup;)Ljava/lang/Thread$Builder$OfPlatform;
+     458: ldc_w         #300                // String fml-loadingscreen
+     461: invokeinterface #302,  2          // InterfaceMethod java/lang/Thread$Builder$OfPlatform.name:(Ljava/lang/String;)Ljava/lang/Thread$Builder$OfPlatform;
+     466: invokeinterface #306,  1          // InterfaceMethod java/lang/Thread$Builder$OfPlatform.daemon:()Ljava/lang/Thread$Builder$OfPlatform;
+     471: invokedynamic #309,  0            // InvokeDynamic #5:uncaughtException:()Ljava/lang/Thread$UncaughtExceptionHandler;
+     476: invokeinterface #313,  2          // InterfaceMethod java/lang/Thread$Builder$OfPlatform.uncaughtExceptionHandler:(Ljava/lang/Thread$UncaughtExceptionHandler;)Ljava/lang/Thread$Builder$OfPlatform;
+     481: invokeinterface #317,  1          // InterfaceMethod java/lang/Thread$Builder$OfPlatform.factory:()Ljava/util/concurrent/ThreadFactory;
+     486: invokestatic  #321                // Method java/util/concurrent/Executors.newSingleThreadScheduledExecutor:(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ScheduledExecutorService;
+     489: putfield      #327                // Field renderScheduler:Ljava/util/concurrent/ScheduledExecutorService;
+     492: aload_0
+     493: invokevirtual #331                // Method initWindow:()V
+     496: aload_0
+     497: aload_0
+     498: getfield      #327                // Field renderScheduler:Ljava/util/concurrent/ScheduledExecutorService;
+     501: aload_0
+     502: invokedynamic #334,  0            // InvokeDynamic #6:call:(Lnet/neoforged/fml/earlydisplay/DisplayWindow;)Ljava/util/concurrent/Callable;
+     507: lconst_1
+     508: getstatic     #338                // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+     511: invokeinterface #344,  5          // InterfaceMethod java/util/concurrent/ScheduledExecutorService.schedule:(Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+     516: putfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+     519: aload_0
+     520: ldc_w         #354                // String Initializing Game Graphics
+     523: invokevirtual #356                // Method updateProgress:(Ljava/lang/String;)V
+     526: return
+    Exception table:
+       from    to  target type
+         248   344   347   Class java/nio/file/NoSuchFileException
+         248   344   352   Class java/io/IOException
+
+  public void setMinecraftVersion(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #360                // Field minecraftVersion:Ljava/lang/String;
+       5: return
+
+  public void setNeoForgeVersion(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #363                // Field neoForgeVersion:Ljava/lang/String;
+       4: aload_1
+       5: invokestatic  #366                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifne          28
+      11: aload_0
+      12: aload_1
+      13: putfield      #363                // Field neoForgeVersion:Ljava/lang/String;
+      16: invokestatic  #372                // Method net/neoforged/fml/loading/progress/StartupNotificationManager.modLoaderConsumer:()Ljava/util/Optional;
+      19: aload_1
+      20: invokedynamic #376,  0            // InvokeDynamic #7:accept:(Ljava/lang/String;)Ljava/util/function/Consumer;
+      25: invokevirtual #380                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      28: return
+
+  private static net.neoforged.fml.earlydisplay.theme.Theme loadTheme(boolean);
+    Code:
+       0: iload_0
+       1: invokestatic  #386                // Method getThemeId:(Z)Ljava/lang/String;
+       4: invokestatic  #263                // Method loadTheme:(Ljava/lang/String;)Lnet/neoforged/fml/earlydisplay/theme/Theme;
+       7: areturn
+
+  private static net.neoforged.fml.earlydisplay.theme.Theme loadTheme(java.lang.String);
+    Code:
+       0: invokestatic  #390                // Method getThemePath:()Ljava/nio/file/Path;
+       3: astore_1
+       4: aload_1
+       5: aload_0
+       6: invokestatic  #393                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader.load:(Ljava/nio/file/Path;Ljava/lang/String;)Lnet/neoforged/fml/earlydisplay/theme/Theme;
+       9: astore_2
+      10: goto          45
+      13: astore_3
+      14: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+      17: ldc_w         #401                // String Failed to load theme {} from {}
+      20: iconst_3
+      21: anewarray     #6                  // class java/lang/Object
+      24: dup
+      25: iconst_0
+      26: aload_0
+      27: aastore
+      28: dup
+      29: iconst_1
+      30: aload_1
+      31: aastore
+      32: dup
+      33: iconst_2
+      34: aload_3
+      35: aastore
+      36: invokeinterface #403,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+      41: invokestatic  #407                // Method net/neoforged/fml/earlydisplay/theme/Theme.createDefaultTheme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+      44: astore_2
+      45: aload_2
+      46: areturn
+    Exception table:
+       from    to  target type
+           4    10    13   Class java/lang/Exception
+
+  private static java.lang.String getThemeId(boolean);
+    Code:
+       0: iload_0
+       1: ifeq          10
+       4: ldc_w         #415                // String darkmode
+       7: goto          13
+      10: ldc_w         #417                // String default
+      13: astore_1
+      14: invokestatic  #419                // Method java/time/LocalDate.now:()Ljava/time/LocalDate;
+      17: astore_2
+      18: aload_2
+      19: invokevirtual #425                // Method java/time/LocalDate.getMonth:()Ljava/time/Month;
+      22: getstatic     #429                // Field java/time/Month.APRIL:Ljava/time/Month;
+      25: if_acmpne     50
+      28: aload_2
+      29: invokevirtual #435                // Method java/time/LocalDate.getDayOfMonth:()I
+      32: iconst_1
+      33: if_icmpne     50
+      36: iload_0
+      37: ifeq          46
+      40: ldc_w         #438                // String april-fools-darkmode
+      43: goto          49
+      46: ldc_w         #440                // String april-fools
+      49: astore_1
+      50: aload_1
+      51: areturn
+
+  private static java.nio.file.Path getThemePath();
+    Code:
+       0: getstatic     #442                // Field net/neoforged/fml/loading/FMLPaths.CONFIGDIR:Lnet/neoforged/fml/loading/FMLPaths;
+       3: invokevirtual #158                // Method net/neoforged/fml/loading/FMLPaths.get:()Ljava/nio/file/Path;
+       6: ldc_w         #445                // String fml
+       9: invokeinterface #447,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      14: areturn
+
+  public void renderToFramebuffer();
+    Code:
+       0: aload_0
+       1: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+       4: invokeinterface #450,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.isDone:()Z
+       9: ifeq          27
+      12: aload_0
+      13: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+      16: invokeinterface #455,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.resultNow:()Ljava/lang/Object;
+      21: checkcast     #459                // class net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer
+      24: invokevirtual #461                // Method net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer.renderToFramebuffer:()V
+      27: return
+
+  private void crashElegantly(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field crashLock:Ljava/util/concurrent/locks/ReentrantLock;
+       4: invokevirtual #464                // Method java/util/concurrent/locks/ReentrantLock.lock:()V
+       7: new           #467                // class java/lang/StringBuilder
+      10: dup
+      11: sipush        2000
+      14: invokespecial #469                // Method java/lang/StringBuilder."<init>":(I)V
+      17: astore_2
+      18: aload_2
+      19: ldc_w         #472                // String Failed to initialize the mod loading system and display.\n
+      22: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      25: pop
+      26: aload_2
+      27: ldc_w         #478                // String \n\n
+      30: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      33: pop
+      34: aload_2
+      35: ldc_w         #480                // String Failure details:\n
+      38: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      41: pop
+      42: aload_2
+      43: aload_1
+      44: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      47: pop
+      48: aload_2
+      49: ldc_w         #478                // String \n\n
+      52: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      55: pop
+      56: aload_2
+      57: ldc_w         #482                // String If you click yes, we will try and open https://links.neoforged.net/early-display-errors in your default browser
+      60: invokevirtual #474                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      63: pop
+      64: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+      67: ldc_w         #484                // String ERROR DISPLAY\n{}
+      70: aload_2
+      71: invokeinterface #486,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      76: new           #285                // class java/lang/Thread
+      79: dup
+      80: aload_2
+      81: invokedynamic #488,  0            // InvokeDynamic #8:run:(Ljava/lang/StringBuilder;)Ljava/lang/Runnable;
+      86: ldc_w         #491                // String crash-report
+      89: invokespecial #493                // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;Ljava/lang/String;)V
+      92: astore_3
+      93: aload_3
+      94: iconst_1
+      95: invokevirtual #496                // Method java/lang/Thread.setDaemon:(Z)V
+      98: aload_3
+      99: invokevirtual #500                // Method java/lang/Thread.start:()V
+     102: aload_3
+     103: invokevirtual #503                // Method java/lang/Thread.join:()V
+     106: goto          111
+     109: astore        4
+     111: iconst_1
+     112: invokestatic  #508                // Method java/lang/System.exit:(I)V
+     115: return
+    Exception table:
+       from    to  target type
+         102   106   109   Class java/lang/InterruptedException
+
+  public void initWindow();
+    Code:
+       0: invokestatic  #513                // Method java/lang/System.nanoTime:()J
+       3: lstore_1
+       4: invokestatic  #517                // Method org/lwjgl/glfw/GLFW.glfwInit:()Z
+       7: ifne          28
+      10: aload_0
+      11: ldc_w         #520                // String We are unable to initialize the graphics system.\nglfwInit failed.\n
+      14: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+      17: new           #525                // class java/lang/IllegalStateException
+      20: dup
+      21: ldc_w         #527                // String Unable to initialize GLFW
+      24: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      27: athrow
+      28: invokestatic  #513                // Method java/lang/System.nanoTime:()J
+      31: lstore_3
+      32: lload_3
+      33: lload_1
+      34: lsub
+      35: l2d
+      36: ldc2_w        #531                // double 1.0E9d
+      39: dcmpl
+      40: ifle          65
+      43: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+      46: ldc_w         #533                // String WARNING : glfwInit took {} seconds to start.
+      49: lload_3
+      50: lload_1
+      51: lsub
+      52: l2d
+      53: ldc2_w        #531                // double 1.0E9d
+      56: ddiv
+      57: invokestatic  #535                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      60: invokeinterface #486,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      65: invokestatic  #540                // Method getLastGlfwError:()Ljava/util/Optional;
+      68: invokedynamic #543,  0            // InvokeDynamic #9:accept:()Ljava/util/function/Consumer;
+      73: invokevirtual #380                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      76: invokestatic  #546                // Method org/lwjgl/glfw/GLFW.glfwDefaultWindowHints:()V
+      79: ldc_w         #549                // int 139265
+      82: ldc_w         #550                // int 196609
+      85: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+      88: ldc_w         #555                // int 139275
+      91: ldc_w         #556                // int 221185
+      94: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+      97: ldc_w         #557                // int 139266
+     100: iconst_3
+     101: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     104: ldc_w         #558                // int 139267
+     107: iconst_3
+     108: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     111: ldc_w         #559                // int 139272
+     114: ldc_w         #560                // int 204801
+     117: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     120: ldc_w         #561                // int 139270
+     123: iconst_1
+     124: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     127: ldc_w         #562                // int 131076
+     130: iconst_0
+     131: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     134: ldc_w         #563                // int 131075
+     137: iconst_1
+     138: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     141: ldc_w         #564                // String Minecraft*
+     144: astore        5
+     146: ldc_w         #566                // int 147457
+     149: aload         5
+     151: invokestatic  #567                // Method org/lwjgl/glfw/GLFW.glfwWindowHintString:(ILjava/lang/CharSequence;)V
+     154: ldc_w         #571                // int 147458
+     157: aload         5
+     159: invokestatic  #567                // Method org/lwjgl/glfw/GLFW.glfwWindowHintString:(ILjava/lang/CharSequence;)V
+     162: getstatic     #572                // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.DEBUG_OPENGL:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     165: invokestatic  #277                // Method net/neoforged/fml/loading/FMLConfig.getBoolConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)Z
+     168: ifeq          189
+     171: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     174: ldc_w         #575                // String Requesting the creation of an OpenGL debug context
+     177: invokeinterface #577,  2          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+     182: ldc_w         #579                // int 139271
+     185: iconst_1
+     186: invokestatic  #551                // Method org/lwjgl/glfw/GLFW.glfwWindowHint:(II)V
+     189: invokestatic  #580                // Method org/lwjgl/glfw/GLFW.glfwGetPrimaryMonitor:()J
+     192: lstore        6
+     194: lload         6
+     196: lconst_0
+     197: lcmp
+     198: ifne          230
+     201: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     204: ldc_w         #583                // String Failed to find a primary monitor - this means LWJGL isn\'t working properly
+     207: invokeinterface #585,  2          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;)V
+     212: aload_0
+     213: ldc_w         #587                // String Failed to locate a primary monitor.\nglfwGetPrimaryMonitor failed.\n
+     216: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+     219: new           #525                // class java/lang/IllegalStateException
+     222: dup
+     223: ldc_w         #589                // String Can\'t find a primary monitor
+     226: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     229: athrow
+     230: lload         6
+     232: invokestatic  #591                // Method org/lwjgl/glfw/GLFW.glfwGetVideoMode:(J)Lorg/lwjgl/glfw/GLFWVidMode;
+     235: astore        8
+     237: aload         8
+     239: ifnonnull     271
+     242: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     245: ldc_w         #595                // String Failed to get the current display video mode.
+     248: invokeinterface #585,  2          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;)V
+     253: aload_0
+     254: ldc_w         #597                // String Failed to get current display resolution.\nglfwGetVideoMode failed.\n
+     257: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+     260: new           #525                // class java/lang/IllegalStateException
+     263: dup
+     264: ldc_w         #599                // String Can\'t get a resolution
+     267: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     270: athrow
+     271: new           #601                // class java/util/concurrent/atomic/AtomicBoolean
+     274: dup
+     275: iconst_0
+     276: invokespecial #603                // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+     279: astore        9
+     281: aload_0
+     282: getfield      #327                // Field renderScheduler:Ljava/util/concurrent/ScheduledExecutorService;
+     285: aload_0
+     286: aload         9
+     288: invokedynamic #605,  0            // InvokeDynamic #10:run:(Lnet/neoforged/fml/earlydisplay/DisplayWindow;Ljava/util/concurrent/atomic/AtomicBoolean;)Ljava/lang/Runnable;
+     293: ldc2_w        #608                // long 30l
+     296: getstatic     #610                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+     299: invokeinterface #613,  5          // InterfaceMethod java/util/concurrent/ScheduledExecutorService.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
+     304: astore        10
+     306: aload_0
+     307: aload_0
+     308: getfield      #120                // Field winWidth:I
+     311: aload_0
+     312: getfield      #124                // Field winHeight:I
+     315: ldc_w         #616                // String Minecraft: NeoForge Loading...
+     318: lconst_0
+     319: lconst_0
+     320: invokestatic  #618                // Method org/lwjgl/glfw/GLFW.glfwCreateWindow:(IILjava/lang/CharSequence;JJ)J
+     323: putfield      #622                // Field window:J
+     326: invokestatic  #540                // Method getLastGlfwError:()Ljava/util/Optional;
+     329: ldc_w         #626                // String unknown error
+     332: invokevirtual #628                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     335: checkcast     #94                 // class java/lang/String
+     338: astore        11
+     340: aload_0
+     341: getfield      #622                // Field window:J
+     344: lconst_0
+     345: lcmp
+     346: ifne          384
+     349: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     352: ldc_w         #632                // String Failed to create window: {}
+     355: aload         11
+     357: invokeinterface #486,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+     362: aload_0
+     363: aload         11
+     365: invokedynamic #634,  0            // InvokeDynamic #11:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     370: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+     373: new           #525                // class java/lang/IllegalStateException
+     376: dup
+     377: ldc_w         #638                // String Failed to create a window
+     380: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     383: athrow
+     384: aload         9
+     386: iconst_1
+     387: invokevirtual #640                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+     390: aload         10
+     392: iconst_1
+     393: invokeinterface #643,  2          // InterfaceMethod java/util/concurrent/ScheduledFuture.cancel:(Z)Z
+     398: ifne          412
+     401: new           #525                // class java/lang/IllegalStateException
+     404: dup
+     405: ldc_w         #647                // String We died but didn\'t somehow?
+     408: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     411: athrow
+     412: iconst_1
+     413: newarray       int
+     415: astore        12
+     417: iconst_1
+     418: newarray       int
+     420: astore        13
+     422: lload         6
+     424: aload         12
+     426: aload         13
+     428: invokestatic  #649                // Method org/lwjgl/glfw/GLFW.glfwGetMonitorPos:(J[I[I)V
+     431: aload         12
+     433: iconst_0
+     434: iaload
+     435: istore        14
+     437: aload         13
+     439: iconst_0
+     440: iaload
+     441: istore        15
+     443: aload_0
+     444: getfield      #281                // Field maximized:Z
+     447: ifeq          457
+     450: aload_0
+     451: getfield      #622                // Field window:J
+     454: invokestatic  #653                // Method org/lwjgl/glfw/GLFW.glfwMaximizeWindow:(J)V
+     457: aload_0
+     458: getfield      #622                // Field window:J
+     461: aload         12
+     463: aload         13
+     465: invokestatic  #657                // Method org/lwjgl/glfw/GLFW.glfwGetWindowSize:(J[I[I)V
+     468: aload_0
+     469: aload         12
+     471: iconst_0
+     472: iaload
+     473: putfield      #120                // Field winWidth:I
+     476: aload_0
+     477: aload         13
+     479: iconst_0
+     480: iaload
+     481: putfield      #124                // Field winHeight:I
+     484: aload_0
+     485: getfield      #622                // Field window:J
+     488: aload         8
+     490: invokevirtual #660                // Method org/lwjgl/glfw/GLFWVidMode.width:()I
+     493: aload_0
+     494: getfield      #120                // Field winWidth:I
+     497: isub
+     498: iconst_2
+     499: idiv
+     500: iload         14
+     502: iadd
+     503: aload         8
+     505: invokevirtual #664                // Method org/lwjgl/glfw/GLFWVidMode.height:()I
+     508: aload_0
+     509: getfield      #124                // Field winHeight:I
+     512: isub
+     513: iconst_2
+     514: idiv
+     515: iload         15
+     517: iadd
+     518: invokestatic  #666                // Method org/lwjgl/glfw/GLFW.glfwSetWindowPos:(JII)V
+     521: iconst_1
+     522: invokestatic  #670                // Method org/lwjgl/glfw/GLFWImage.malloc:(I)Lorg/lwjgl/glfw/GLFWImage$Buffer;
+     525: astore        16
+     527: invokestatic  #676                // Method org/lwjgl/glfw/GLFWImage.malloc:()Lorg/lwjgl/glfw/GLFWImage;
+     530: astore        17
+     532: aload_0
+     533: getfield      #267                // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     536: invokevirtual #679                // Method net/neoforged/fml/earlydisplay/theme/Theme.windowIcon:()Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+     539: invokestatic  #390                // Method getThemePath:()Ljava/nio/file/Path;
+     542: invokevirtual #683                // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.loadAsImage:(Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+     545: astore        18
+     547: aload         16
+     549: aload         17
+     551: aload         18
+     553: invokevirtual #689                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.width:()I
+     556: aload         18
+     558: invokevirtual #692                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.height:()I
+     561: aload         18
+     563: invokevirtual #693                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.imageData:()Ljava/nio/ByteBuffer;
+     566: invokevirtual #697                // Method org/lwjgl/glfw/GLFWImage.set:(IILjava/nio/ByteBuffer;)Lorg/lwjgl/glfw/GLFWImage;
+     569: invokevirtual #700                // Method org/lwjgl/glfw/GLFWImage$Buffer.put:(Lorg/lwjgl/system/Struct;)Lorg/lwjgl/system/StructBuffer;
+     572: pop
+     573: aload         16
+     575: invokevirtual #706                // Method org/lwjgl/glfw/GLFWImage$Buffer.flip:()Lorg/lwjgl/system/CustomBuffer;
+     578: pop
+     579: aload_0
+     580: getfield      #622                // Field window:J
+     583: aload         16
+     585: invokestatic  #710                // Method org/lwjgl/glfw/GLFW.glfwSetWindowIcon:(JLorg/lwjgl/glfw/GLFWImage$Buffer;)V
+     588: aload         18
+     590: ifnull        628
+     593: aload         18
+     595: invokevirtual #714                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.close:()V
+     598: goto          628
+     601: astore        19
+     603: aload         18
+     605: ifnull        625
+     608: aload         18
+     610: invokevirtual #714                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.close:()V
+     613: goto          625
+     616: astore        20
+     618: aload         19
+     620: aload         20
+     622: invokevirtual #719                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     625: aload         19
+     627: athrow
+     628: aload         17
+     630: ifnull        668
+     633: aload         17
+     635: invokevirtual #723                // Method org/lwjgl/glfw/GLFWImage.close:()V
+     638: goto          668
+     641: astore        18
+     643: aload         17
+     645: ifnull        665
+     648: aload         17
+     650: invokevirtual #723                // Method org/lwjgl/glfw/GLFWImage.close:()V
+     653: goto          665
+     656: astore        19
+     658: aload         18
+     660: aload         19
+     662: invokevirtual #719                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     665: aload         18
+     667: athrow
+     668: aload         16
+     670: ifnull        708
+     673: aload         16
+     675: invokevirtual #724                // Method org/lwjgl/glfw/GLFWImage$Buffer.close:()V
+     678: goto          708
+     681: astore        17
+     683: aload         16
+     685: ifnull        705
+     688: aload         16
+     690: invokevirtual #724                // Method org/lwjgl/glfw/GLFWImage$Buffer.close:()V
+     693: goto          705
+     696: astore        18
+     698: aload         17
+     700: aload         18
+     702: invokevirtual #719                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     705: aload         17
+     707: athrow
+     708: goto          726
+     711: astore        16
+     713: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+     716: ldc_w         #725                // String Failed to load NeoForged icon
+     719: aload         16
+     721: invokeinterface #727,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     726: invokestatic  #540                // Method getLastGlfwError:()Ljava/util/Optional;
+     729: invokedynamic #729,  0            // InvokeDynamic #12:accept:()Ljava/util/function/Consumer;
+     734: invokevirtual #380                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+     737: aload_0
+     738: getfield      #622                // Field window:J
+     741: aload_0
+     742: invokedynamic #730,  0            // InvokeDynamic #13:invoke:(Lnet/neoforged/fml/earlydisplay/DisplayWindow;)Lorg/lwjgl/glfw/GLFWWindowSizeCallbackI;
+     747: invokestatic  #734                // Method org/lwjgl/glfw/GLFW.glfwSetWindowSizeCallback:(JLorg/lwjgl/glfw/GLFWWindowSizeCallbackI;)Lorg/lwjgl/glfw/GLFWWindowSizeCallback;
+     750: pop
+     751: aload_0
+     752: getfield      #622                // Field window:J
+     755: invokestatic  #738                // Method org/lwjgl/glfw/GLFW.glfwShowWindow:(J)V
+     758: invokestatic  #540                // Method getLastGlfwError:()Ljava/util/Optional;
+     761: invokedynamic #741,  0            // InvokeDynamic #14:accept:()Ljava/util/function/Consumer;
+     766: invokevirtual #380                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+     769: invokestatic  #742                // Method org/lwjgl/glfw/GLFW.glfwPollEvents:()V
+     772: return
+    Exception table:
+       from    to  target type
+         547   588   601   Class java/lang/Throwable
+         608   613   616   Class java/lang/Throwable
+         532   628   641   Class java/lang/Throwable
+         648   653   656   Class java/lang/Throwable
+         527   668   681   Class java/lang/Throwable
+         688   693   696   Class java/lang/Throwable
+         521   708   711   Class java/lang/Exception
+
+  private void winResize(long, int, int);
+    Code:
+       0: lload_1
+       1: aload_0
+       2: getfield      #622                // Field window:J
+       5: lcmp
+       6: ifne          29
+       9: iload_3
+      10: ifeq          29
+      13: iload         4
+      15: ifeq          29
+      18: aload_0
+      19: iload_3
+      20: putfield      #120                // Field winWidth:I
+      23: aload_0
+      24: iload         4
+      26: putfield      #124                // Field winHeight:I
+      29: return
+
+  private static java.util.Optional<java.lang.String> getLastGlfwError();
+    Code:
+       0: invokestatic  #745                // Method org/lwjgl/system/MemoryStack.stackPush:()Lorg/lwjgl/system/MemoryStack;
+       3: astore_0
+       4: aload_0
+       5: iconst_1
+       6: invokevirtual #751                // Method org/lwjgl/system/MemoryStack.mallocPointer:(I)Lorg/lwjgl/PointerBuffer;
+       9: astore_1
+      10: aload_1
+      11: invokestatic  #755                // Method org/lwjgl/glfw/GLFW.glfwGetError:(Lorg/lwjgl/PointerBuffer;)I
+      14: istore_2
+      15: iload_2
+      16: ifeq          122
+      19: aload_1
+      20: invokevirtual #759                // Method org/lwjgl/PointerBuffer.get:()J
+      23: lstore_3
+      24: lload_3
+      25: lconst_0
+      26: lcmp
+      27: ifne          34
+      30: aconst_null
+      31: goto          38
+      34: lload_3
+      35: invokestatic  #763                // Method org/lwjgl/system/MemoryUtil.memUTF8:(J)Ljava/lang/String;
+      38: astore        5
+      40: aload         5
+      42: ifnull        86
+      45: getstatic     #769                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      48: ldc_w         #775                // String [0x%X] %s
+      51: iconst_2
+      52: anewarray     #6                  // class java/lang/Object
+      55: dup
+      56: iconst_0
+      57: iload_2
+      58: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      61: aastore
+      62: dup
+      63: iconst_1
+      64: aload         5
+      66: aastore
+      67: invokestatic  #777                // Method java/lang/String.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      70: invokestatic  #781                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+      73: astore        6
+      75: aload_0
+      76: ifnull        83
+      79: aload_0
+      80: invokevirtual #785                // Method org/lwjgl/system/MemoryStack.close:()V
+      83: aload         6
+      85: areturn
+      86: getstatic     #769                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      89: ldc_w         #786                // String [0x%X]
+      92: iconst_1
+      93: anewarray     #6                  // class java/lang/Object
+      96: dup
+      97: iconst_0
+      98: iload_2
+      99: invokestatic  #77                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     102: aastore
+     103: invokestatic  #777                // Method java/lang/String.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     106: invokestatic  #781                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+     109: astore        6
+     111: aload_0
+     112: ifnull        119
+     115: aload_0
+     116: invokevirtual #785                // Method org/lwjgl/system/MemoryStack.close:()V
+     119: aload         6
+     121: areturn
+     122: aload_0
+     123: ifnull        153
+     126: aload_0
+     127: invokevirtual #785                // Method org/lwjgl/system/MemoryStack.close:()V
+     130: goto          153
+     133: astore_1
+     134: aload_0
+     135: ifnull        151
+     138: aload_0
+     139: invokevirtual #785                // Method org/lwjgl/system/MemoryStack.close:()V
+     142: goto          151
+     145: astore_2
+     146: aload_1
+     147: aload_2
+     148: invokevirtual #719                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     151: aload_1
+     152: athrow
+     153: invokestatic  #788                // Method java/util/Optional.empty:()Ljava/util/Optional;
+     156: areturn
+    Exception table:
+       from    to  target type
+           4    75   133   Class java/lang/Throwable
+          86   111   133   Class java/lang/Throwable
+         138   142   145   Class java/lang/Throwable
+
+  public long takeOverGlfwWindow();
+    Code:
+       0: aload_0
+       1: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+       4: ldc2_w        #608                // long 30l
+       7: getstatic     #610                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      10: invokeinterface #791,  4          // InterfaceMethod java/util/concurrent/ScheduledFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+      15: checkcast     #459                // class net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer
+      18: astore_1
+      19: goto          47
+      22: astore_2
+      23: new           #796                // class java/lang/RuntimeException
+      26: dup
+      27: aload_2
+      28: invokespecial #798                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+      31: athrow
+      32: astore_2
+      33: invokestatic  #802                // Method dumpBackgroundThreadStack:()V
+      36: aload_0
+      37: ldc_w         #805                // String We seem to be having trouble initializing the window, waited for 30 seconds
+      40: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+      43: ldc2_w        #807                // long -1l
+      46: lreturn
+      47: aload_0
+      48: ldc_w         #354                // String Initializing Game Graphics
+      51: invokevirtual #356                // Method updateProgress:(Ljava/lang/String;)V
+      54: aload_1
+      55: invokevirtual #809                // Method net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer.stopAutomaticRendering:()V
+      58: goto          82
+      61: astore_2
+      62: invokestatic  #802                // Method dumpBackgroundThreadStack:()V
+      65: aload_0
+      66: ldc_w         #812                // String Cannot hand over rendering to Minecraft! The background loading screen renderer seems stuck.
+      69: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+      72: goto          82
+      75: astore_2
+      76: invokestatic  #814                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+      79: invokevirtual #818                // Method java/lang/Thread.interrupt:()V
+      82: aload_0
+      83: invokevirtual #821                // Method completeProgress:()V
+      86: aload_0
+      87: getfield      #622                // Field window:J
+      90: invokestatic  #824                // Method org/lwjgl/glfw/GLFW.glfwMakeContextCurrent:(J)V
+      93: iconst_0
+      94: invokestatic  #827                // Method org/lwjgl/glfw/GLFW.glfwSwapInterval:(I)V
+      97: aload_0
+      98: getfield      #622                // Field window:J
+     101: aconst_null
+     102: invokestatic  #734                // Method org/lwjgl/glfw/GLFW.glfwSetWindowSizeCallback:(JLorg/lwjgl/glfw/GLFWWindowSizeCallbackI;)Lorg/lwjgl/glfw/GLFWWindowSizeCallback;
+     105: invokevirtual #830                // Method org/lwjgl/glfw/GLFWWindowSizeCallback.close:()V
+     108: aload_0
+     109: aload_1
+     110: dup
+     111: invokestatic  #833                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     114: pop
+     115: invokedynamic #836,  0            // InvokeDynamic #15:run:(Lnet/neoforged/fml/earlydisplay/render/LoadingScreenRenderer;)Ljava/lang/Runnable;
+     120: putfield      #15                 // Field repaintTick:Ljava/lang/Runnable;
+     123: aload_0
+     124: getfield      #622                // Field window:J
+     127: lreturn
+    Exception table:
+       from    to  target type
+           0    19    22   Class java/lang/InterruptedException
+           0    19    22   Class java/util/concurrent/ExecutionException
+           0    19    32   Class java/util/concurrent/TimeoutException
+          54    58    61   Class java/util/concurrent/TimeoutException
+          54    58    75   Class java/lang/InterruptedException
+
+  public int getFramebufferTextureId();
+    Code:
+       0: aload_0
+       1: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+       4: invokeinterface #450,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.isDone:()Z
+       9: ifne          23
+      12: new           #525                // class java/lang/IllegalStateException
+      15: dup
+      16: ldc_w         #839                // String Initialization of the renderer has not completed yet.
+      19: invokespecial #529                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      22: athrow
+      23: aload_0
+      24: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+      27: invokeinterface #455,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.resultNow:()Ljava/lang/Object;
+      32: checkcast     #459                // class net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer
+      35: invokevirtual #841                // Method net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer.getFramebufferTextureId:()I
+      38: ireturn
+
+  public void periodicTick();
+    Code:
+       0: aload_0
+       1: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+       4: invokeinterface #844,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.state:()Ljava/util/concurrent/Future$State;
+       9: getstatic     #848                // Field java/util/concurrent/Future$State.FAILED:Ljava/util/concurrent/Future$State;
+      12: if_acmpne     35
+      15: new           #796                // class java/lang/RuntimeException
+      18: dup
+      19: ldc_w         #854                // String Initialization of the loading screen failed.
+      22: aload_0
+      23: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+      26: invokeinterface #856,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.exceptionNow:()Ljava/lang/Throwable;
+      31: invokespecial #860                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      34: athrow
+      35: invokestatic  #742                // Method org/lwjgl/glfw/GLFW.glfwPollEvents:()V
+      38: aload_0
+      39: getfield      #862                // Field closed:Z
+      42: ifne          54
+      45: aload_0
+      46: getfield      #15                 // Field repaintTick:Ljava/lang/Runnable;
+      49: invokeinterface #865,  1          // InterfaceMethod java/lang/Runnable.run:()V
+      54: return
+
+  public void updateProgress(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field mainProgress:Lnet/neoforged/fml/loading/progress/ProgressMeter;
+       4: aload_1
+       5: invokevirtual #869                // Method net/neoforged/fml/loading/progress/ProgressMeter.label:(Ljava/lang/String;)V
+       8: return
+
+  public void completeProgress();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field mainProgress:Lnet/neoforged/fml/loading/progress/ProgressMeter;
+       4: invokevirtual #874                // Method net/neoforged/fml/loading/progress/ProgressMeter.complete:()V
+       7: return
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #862                // Field closed:Z
+       4: ifne          62
+       7: aload_0
+       8: iconst_1
+       9: putfield      #862                // Field closed:Z
+      12: aload_0
+      13: getfield      #327                // Field renderScheduler:Ljava/util/concurrent/ScheduledExecutorService;
+      16: invokeinterface #877,  1          // InterfaceMethod java/util/concurrent/ScheduledExecutorService.shutdown:()V
+      21: aload_0
+      22: getfield      #350                // Field rendererFuture:Ljava/util/concurrent/ScheduledFuture;
+      25: invokeinterface #880,  1          // InterfaceMethod java/util/concurrent/ScheduledFuture.get:()Ljava/lang/Object;
+      30: checkcast     #459                // class net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer
+      33: invokevirtual #882                // Method net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer.close:()V
+      36: goto          62
+      39: astore_1
+      40: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+      43: ldc_w         #883                // String Cannot close renderer since it failed to initialize
+      46: aload_1
+      47: invokeinterface #727,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      52: goto          62
+      55: astore_1
+      56: invokestatic  #814                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+      59: invokevirtual #818                // Method java/lang/Thread.interrupt:()V
+      62: return
+    Exception table:
+       from    to  target type
+          21    36    39   Class java/util/concurrent/ExecutionException
+          21    36    55   Class java/lang/InterruptedException
+
+  public void crash(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+       5: return
+
+  public void displayFatalErrorAndExit(java.util.List<net.neoforged.fml.ModLoadingIssue>, java.nio.file.Path, java.nio.file.Path, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: invokevirtual #885                // Method takeOverGlfwWindow:()J
+       4: lstore        5
+       6: invokestatic  #888                // Method org/lwjgl/opengl/GL.createCapabilities:()Lorg/lwjgl/opengl/GLCapabilities;
+       9: pop
+      10: aload_0
+      11: invokevirtual #894                // Method close:()V
+      14: lload         5
+      16: aload_0
+      17: getfield      #135                // Field assetsDir:Ljava/lang/String;
+      20: aload_0
+      21: getfield      #138                // Field assetIndex:Ljava/lang/String;
+      24: aload_1
+      25: aload_2
+      26: aload_3
+      27: aload         4
+      29: invokestatic  #895                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplay.fatal:(JLjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+      32: return
+
+  private static void dumpBackgroundThreadStack();
+    Code:
+       0: getstatic     #290                // Field BACKGROUND_THREAD_GROUP:Ljava/lang/ThreadGroup;
+       3: invokevirtual #901                // Method java/lang/ThreadGroup.list:()V
+       6: return
+
+  private static void lambda$initWindow$14(java.lang.String);
+    Code:
+       0: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc_w         #906                // String Failed to show and position window: {}
+       6: aload_0
+       7: invokeinterface #908,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+
+  private static void lambda$initWindow$13(java.lang.String);
+    Code:
+       0: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc_w         #910                // String Failed to set window icon: {}
+       6: aload_0
+       7: invokeinterface #908,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+
+  private void lambda$initWindow$12(java.util.concurrent.atomic.AtomicBoolean);
+    Code:
+       0: aload_1
+       1: invokevirtual #912                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+       4: ifne          14
+       7: aload_0
+       8: ldc_w         #914                // String Timed out trying to setup the Game Window.
+      11: invokevirtual #522                // Method crashElegantly:(Ljava/lang/String;)V
+      14: return
+
+  private static void lambda$initWindow$11(java.lang.String);
+    Code:
+       0: getstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc_w         #916                // String Suppressing Last GLFW error: {}
+       6: aload_0
+       7: invokeinterface #486,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+
+  private static void lambda$crashElegantly$10(java.lang.StringBuilder);
+    Code:
+       0: ldc_w         #918                // String Minecraft: NeoForge
+       3: aload_0
+       4: invokevirtual #920                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       7: ldc_w         #924                // String yesno
+      10: ldc_w         #926                // String error
+      13: iconst_0
+      14: invokestatic  #927                // Method org/lwjgl/util/tinyfd/TinyFileDialogs.tinyfd_messageBox:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+      17: istore_1
+      18: iload_1
+      19: ifeq          55
+      22: invokestatic  #933                // Method java/awt/Desktop.getDesktop:()Ljava/awt/Desktop;
+      25: ldc_w         #939                // String https://links.neoforged.net/early-display-errors
+      28: invokestatic  #941                // Method java/net/URI.create:(Ljava/lang/String;)Ljava/net/URI;
+      31: invokevirtual #947                // Method java/awt/Desktop.browse:(Ljava/net/URI;)V
+      34: goto          55
+      37: astore_2
+      38: ldc_w         #918                // String Minecraft: NeoForge
+      41: ldc_w         #951                // String Sadly, we couldn\'t open your browser.\nVisit https://links.neoforged.net/early-display-errors
+      44: ldc_w         #953                // String ok
+      47: ldc_w         #926                // String error
+      50: iconst_0
+      51: invokestatic  #927                // Method org/lwjgl/util/tinyfd/TinyFileDialogs.tinyfd_messageBox:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+      54: pop
+      55: return
+    Exception table:
+       from    to  target type
+          22    34    37   Class java/io/IOException
+
+  private static void lambda$setNeoForgeVersion$9(java.lang.String, java.util.function.Consumer);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokedynamic #955,  0            // InvokeDynamic #16:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       7: invokeinterface #956,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      12: return
+
+  private net.neoforged.fml.earlydisplay.render.LoadingScreenRenderer lambda$initialize$8() throws java.lang.Exception;
+    Code:
+       0: new           #459                // class net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer
+       3: dup
+       4: aload_0
+       5: getfield      #327                // Field renderScheduler:Ljava/util/concurrent/ScheduledExecutorService;
+       8: aload_0
+       9: getfield      #622                // Field window:J
+      12: aload_0
+      13: getfield      #267                // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+      16: invokestatic  #390                // Method getThemePath:()Ljava/nio/file/Path;
+      19: aload_0
+      20: invokedynamic #961,  0            // InvokeDynamic #17:get:(Lnet/neoforged/fml/earlydisplay/DisplayWindow;)Ljava/util/function/Supplier;
+      25: aload_0
+      26: invokedynamic #964,  0            // InvokeDynamic #18:get:(Lnet/neoforged/fml/earlydisplay/DisplayWindow;)Ljava/util/function/Supplier;
+      31: invokespecial #965                // Method net/neoforged/fml/earlydisplay/render/LoadingScreenRenderer."<init>":(Ljava/util/concurrent/ScheduledExecutorService;JLnet/neoforged/fml/earlydisplay/theme/Theme;Ljava/nio/file/Path;Ljava/util/function/Supplier;Ljava/util/function/Supplier;)V
+      34: areturn
+
+  private java.lang.String lambda$initialize$7();
+    Code:
+       0: aload_0
+       1: getfield      #363                // Field neoForgeVersion:Ljava/lang/String;
+       4: areturn
+
+  private java.lang.String lambda$initialize$6();
+    Code:
+       0: aload_0
+       1: getfield      #360                // Field minecraftVersion:Ljava/lang/String;
+       4: areturn
+
+  private static void lambda$initialize$5(java.lang.Thread, java.lang.Throwable);
+    Code:
+       0: getstatic     #968                // Field java/lang/System.err:Ljava/io/PrintStream;
+       3: aload_1
+       4: invokestatic  #972                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       7: invokedynamic #975,  0            // InvokeDynamic #19:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      12: invokevirtual #976                // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      15: aload_1
+      16: invokevirtual #981                // Method java/lang/Throwable.printStackTrace:()V
+      19: return
+
+  private static java.lang.String lambda$initialize$4(java.lang.String[]);
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: aaload
+       3: areturn
+
+  private static java.lang.String lambda$initialize$3(java.lang.String[]);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: aaload
+       3: areturn
+
+  private static boolean lambda$initialize$2(java.lang.String[]);
+    Code:
+       0: aload_0
+       1: arraylength
+       2: iconst_2
+       3: if_icmpne     10
+       6: iconst_1
+       7: goto          11
+      10: iconst_0
+      11: ireturn
+
+  private static java.lang.String[] lambda$initialize$1(java.lang.String);
+    Code:
+       0: aload_0
+       1: ldc_w         #984                // String :
+       4: invokevirtual #986                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+       7: areturn
+
+  private static void lambda$new$0();
+    Code:
+       0: return
+
+  static {};
+    Code:
+       0: ldc_w         #990                // String EARLYDISPLAY
+       3: invokestatic  #992                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/String;)Lorg/slf4j/Logger;
+       6: putstatic     #234                // Field LOGGER:Lorg/slf4j/Logger;
+       9: new           #902                // class java/lang/ThreadGroup
+      12: dup
+      13: ldc_w         #300                // String fml-loadingscreen
+      16: invokespecial #998                // Method java/lang/ThreadGroup."<init>":(Ljava/lang/String;)V
+      19: putstatic     #290                // Field BACKGROUND_THREAD_GROUP:Ljava/lang/ThreadGroup;
+      22: return
+}

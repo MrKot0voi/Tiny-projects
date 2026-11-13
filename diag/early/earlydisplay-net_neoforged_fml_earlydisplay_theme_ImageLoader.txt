@@ -1,0 +1,294 @@
+Compiled from "ImageLoader.java"
+public final class net.neoforged.fml.earlydisplay.theme.ImageLoader {
+  private static final java.lang.String BROKEN_TEXTURE_NAME = "broken texture";
+
+  private static final int BROKEN_TEXTURE_DIMENSIONS = 16;
+
+  static final org.slf4j.Logger LOGGER;
+
+  public static net.neoforged.fml.earlydisplay.theme.UncompressedImage loadImage(net.neoforged.fml.earlydisplay.theme.ThemeResource, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #1                  // Method tryLoadImage:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result;
+       5: dup
+       6: invokestatic  #7                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: pop
+      10: astore_2
+      11: iconst_0
+      12: istore_3
+      13: aload_2
+      14: iload_3
+      15: invokedynamic #13,  0             // InvokeDynamic #0:typeSwitch:(Ljava/lang/Object;I)I
+      20: lookupswitch  { // 2
+                     0: 58
+                     1: 80
+               default: 48
+          }
+      48: new           #17                 // class java/lang/MatchException
+      51: dup
+      52: aconst_null
+      53: aconst_null
+      54: invokespecial #19                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      57: athrow
+      58: aload_2
+      59: checkcast     #23                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success
+      62: astore        4
+      64: aload         4
+      66: invokevirtual #25                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success.image:()Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+      69: astore        6
+      71: aload         6
+      73: astore        5
+      75: aload         5
+      77: goto          113
+      80: aload_2
+      81: checkcast     #29                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error
+      84: astore        6
+      86: aload         6
+      88: invokevirtual #31                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error.exception:()Ljava/lang/Exception;
+      91: astore        8
+      93: aload         8
+      95: astore        7
+      97: getstatic     #35                 // Field LOGGER:Lorg/slf4j/Logger;
+     100: ldc           #39                 // String Failed to load theme image {}
+     102: aload_0
+     103: aload         7
+     105: invokeinterface #41,  4           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     110: invokestatic  #47                 // Method createBrokenImage:()Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+     113: areturn
+     114: astore_2
+     115: new           #17                 // class java/lang/MatchException
+     118: dup
+     119: aload_2
+     120: invokevirtual #52                 // Method java/lang/Throwable.toString:()Ljava/lang/String;
+     123: aload_2
+     124: invokespecial #19                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     127: athrow
+    Exception table:
+       from    to  target type
+          66    69   114   Class java/lang/Throwable
+          88    91   114   Class java/lang/Throwable
+
+  public static net.neoforged.fml.earlydisplay.theme.ImageLoader$Result tryLoadImage(net.neoforged.fml.earlydisplay.theme.ThemeResource, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #56                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.toNativeBuffer:(Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+       5: astore_2
+       6: aload_0
+       7: invokevirtual #62                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.toString:()Ljava/lang/String;
+      10: aload_0
+      11: aload_2
+      12: invokestatic  #63                 // Method tryLoadImage:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;)Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result;
+      15: astore_3
+      16: aload_2
+      17: ifnull        24
+      20: aload_2
+      21: invokevirtual #66                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.close:()V
+      24: aload_3
+      25: areturn
+      26: astore_3
+      27: aload_2
+      28: ifnull        46
+      31: aload_2
+      32: invokevirtual #66                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.close:()V
+      35: goto          46
+      38: astore        4
+      40: aload_3
+      41: aload         4
+      43: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+      46: aload_3
+      47: athrow
+      48: astore_2
+      49: new           #29                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error
+      52: dup
+      53: aload_2
+      54: invokespecial #78                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error."<init>":(Ljava/lang/Exception;)V
+      57: areturn
+    Exception table:
+       from    to  target type
+           6    16    26   Class java/lang/Throwable
+          31    35    38   Class java/lang/Throwable
+           0    24    48   Class java/lang/Exception
+          26    48    48   Class java/lang/Exception
+
+  public static net.neoforged.fml.earlydisplay.theme.ImageLoader$Result tryLoadImage(java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource, net.neoforged.fml.earlydisplay.theme.NativeBuffer);
+    Code:
+       0: aload_2
+       1: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.buffer:()Ljava/nio/ByteBuffer;
+       4: invokevirtual #85                 // Method java/nio/ByteBuffer.slice:()Ljava/nio/ByteBuffer;
+       7: invokestatic  #90                 // Method validateHeader:(Ljava/nio/ByteBuffer;)V
+      10: iconst_1
+      11: newarray       int
+      13: astore_3
+      14: iconst_1
+      15: newarray       int
+      17: astore        4
+      19: iconst_1
+      20: newarray       int
+      22: astore        5
+      24: aload_2
+      25: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.buffer:()Ljava/nio/ByteBuffer;
+      28: aload_3
+      29: aload         4
+      31: aload         5
+      33: iconst_4
+      34: invokestatic  #94                 // Method org/lwjgl/stb/STBImage.stbi_load_from_memory:(Ljava/nio/ByteBuffer;[I[I[II)Ljava/nio/ByteBuffer;
+      37: astore        6
+      39: aload         6
+      41: ifnonnull     54
+      44: new           #100                // class java/io/IOException
+      47: dup
+      48: ldc           #102                // String PNG decoding error
+      50: invokespecial #104                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+      53: athrow
+      54: new           #23                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success
+      57: dup
+      58: new           #107                // class net/neoforged/fml/earlydisplay/theme/UncompressedImage
+      61: dup
+      62: aload_0
+      63: aload_1
+      64: new           #67                 // class net/neoforged/fml/earlydisplay/theme/NativeBuffer
+      67: dup
+      68: aload         6
+      70: invokedynamic #109,  0            // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+      75: invokespecial #113                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer."<init>":(Ljava/nio/ByteBuffer;Ljava/util/function/Consumer;)V
+      78: aload_3
+      79: iconst_0
+      80: iaload
+      81: aload         4
+      83: iconst_0
+      84: iaload
+      85: invokespecial #116                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage."<init>":(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;II)V
+      88: invokespecial #119                // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success."<init>":(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;)V
+      91: areturn
+      92: astore_3
+      93: new           #29                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error
+      96: dup
+      97: aload_3
+      98: invokespecial #78                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error."<init>":(Ljava/lang/Exception;)V
+     101: areturn
+    Exception table:
+       from    to  target type
+           0    91    92   Class java/lang/Exception
+
+  private static void validateHeader(java.nio.ByteBuffer) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: invokevirtual #122                // Method java/nio/ByteBuffer.order:()Ljava/nio/ByteOrder;
+       4: astore_1
+       5: aload_0
+       6: getstatic     #126                // Field java/nio/ByteOrder.BIG_ENDIAN:Ljava/nio/ByteOrder;
+       9: invokevirtual #132                // Method java/nio/ByteBuffer.order:(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer;
+      12: pop
+      13: aload_0
+      14: iconst_0
+      15: invokevirtual #135                // Method java/nio/ByteBuffer.getLong:(I)J
+      18: ldc2_w        #139                // long -8552249625308161526l
+      21: lcmp
+      22: ifeq          35
+      25: new           #100                // class java/io/IOException
+      28: dup
+      29: ldc           #141                // String Bad PNG Signature
+      31: invokespecial #104                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+      34: athrow
+      35: aload_0
+      36: bipush        8
+      38: invokevirtual #143                // Method java/nio/ByteBuffer.getInt:(I)I
+      41: bipush        13
+      43: if_icmpeq     56
+      46: new           #100                // class java/io/IOException
+      49: dup
+      50: ldc           #147                // String Bad length for IHDR chunk!
+      52: invokespecial #104                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+      55: athrow
+      56: aload_0
+      57: bipush        12
+      59: invokevirtual #143                // Method java/nio/ByteBuffer.getInt:(I)I
+      62: ldc           #149                // int 1229472850
+      64: if_icmpeq     77
+      67: new           #100                // class java/io/IOException
+      70: dup
+      71: ldc           #150                // String Bad type for IHDR chunk!
+      73: invokespecial #104                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+      76: athrow
+      77: aload_0
+      78: aload_1
+      79: invokevirtual #132                // Method java/nio/ByteBuffer.order:(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer;
+      82: pop
+      83: return
+
+  private static net.neoforged.fml.earlydisplay.theme.UncompressedImage createBrokenImage();
+    Code:
+       0: sipush        1024
+       3: invokestatic  #152                // Method org/lwjgl/system/MemoryUtil.memAlloc:(I)Ljava/nio/ByteBuffer;
+       6: astore_0
+       7: aload_0
+       8: invokevirtual #158                // Method java/nio/ByteBuffer.asIntBuffer:()Ljava/nio/IntBuffer;
+      11: astore_1
+      12: iconst_0
+      13: istore_2
+      14: iload_2
+      15: bipush        16
+      17: if_icmpge     83
+      20: iconst_0
+      21: istore_3
+      22: iload_3
+      23: bipush        16
+      25: if_icmpge     77
+      28: iload_3
+      29: bipush        8
+      31: if_icmpge     38
+      34: iconst_1
+      35: goto          39
+      38: iconst_0
+      39: iload_2
+      40: bipush        8
+      42: if_icmpge     49
+      45: iconst_1
+      46: goto          50
+      49: iconst_0
+      50: ixor
+      51: ifeq          64
+      54: aload_1
+      55: ldc           #162                // int -524040
+      57: invokevirtual #163                // Method java/nio/IntBuffer.put:(I)Ljava/nio/IntBuffer;
+      60: pop
+      61: goto          71
+      64: aload_1
+      65: ldc           #169                // int -16777216
+      67: invokevirtual #163                // Method java/nio/IntBuffer.put:(I)Ljava/nio/IntBuffer;
+      70: pop
+      71: iinc          3, 1
+      74: goto          22
+      77: iinc          2, 1
+      80: goto          14
+      83: new           #67                 // class net/neoforged/fml/earlydisplay/theme/NativeBuffer
+      86: dup
+      87: aload_0
+      88: invokedynamic #170,  0            // InvokeDynamic #2:accept:()Ljava/util/function/Consumer;
+      93: invokespecial #113                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer."<init>":(Ljava/nio/ByteBuffer;Ljava/util/function/Consumer;)V
+      96: astore_2
+      97: new           #107                // class net/neoforged/fml/earlydisplay/theme/UncompressedImage
+     100: dup
+     101: ldc           #171                // String broken texture
+     103: aconst_null
+     104: aload_2
+     105: bipush        16
+     107: bipush        16
+     109: invokespecial #116                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage."<init>":(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;II)V
+     112: areturn
+
+  private net.neoforged.fml.earlydisplay.theme.ImageLoader();
+    Code:
+       0: aload_0
+       1: invokespecial #173                // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: ldc           #2                  // class net/neoforged/fml/earlydisplay/theme/ImageLoader
+       2: invokestatic  #177                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #35                 // Field LOGGER:Lorg/slf4j/Logger;
+       8: return
+}

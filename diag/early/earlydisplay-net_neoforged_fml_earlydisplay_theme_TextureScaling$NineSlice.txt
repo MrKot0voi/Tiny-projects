@@ -1,0 +1,126 @@
+Compiled from "TextureScaling.java"
+public final class net.neoforged.fml.earlydisplay.theme.TextureScaling$NineSlice extends java.lang.Record implements net.neoforged.fml.earlydisplay.theme.TextureScaling {
+  private final int width;
+
+  private final int height;
+
+  private final int left;
+
+  private final int top;
+
+  private final int right;
+
+  private final int bottom;
+
+  private final boolean stretchHorizontalFill;
+
+  private final boolean stretchVerticalFill;
+
+  private final boolean linearScaling;
+
+  public net.neoforged.fml.earlydisplay.theme.TextureScaling$NineSlice(int, int, int, int, int, int, boolean, boolean, boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #7                  // Field width:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #13                 // Field height:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #16                 // Field left:I
+      19: aload_0
+      20: iload         4
+      22: putfield      #19                 // Field top:I
+      25: aload_0
+      26: iload         5
+      28: putfield      #22                 // Field right:I
+      31: aload_0
+      32: iload         6
+      34: putfield      #25                 // Field bottom:I
+      37: aload_0
+      38: iload         7
+      40: putfield      #28                 // Field stretchHorizontalFill:Z
+      43: aload_0
+      44: iload         8
+      46: putfield      #32                 // Field stretchVerticalFill:Z
+      49: aload_0
+      50: iload         9
+      52: putfield      #35                 // Field linearScaling:Z
+      55: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #38,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #42,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #46,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int width();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field width:I
+       4: ireturn
+
+  public int height();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field height:I
+       4: ireturn
+
+  public int left();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field left:I
+       4: ireturn
+
+  public int top();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field top:I
+       4: ireturn
+
+  public int right();
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field right:I
+       4: ireturn
+
+  public int bottom();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field bottom:I
+       4: ireturn
+
+  public boolean stretchHorizontalFill();
+    Code:
+       0: aload_0
+       1: getfield      #28                 // Field stretchHorizontalFill:Z
+       4: ireturn
+
+  public boolean stretchVerticalFill();
+    Code:
+       0: aload_0
+       1: getfield      #32                 // Field stretchVerticalFill:Z
+       4: ireturn
+
+  public boolean linearScaling();
+    Code:
+       0: aload_0
+       1: getfield      #35                 // Field linearScaling:Z
+       4: ireturn
+}

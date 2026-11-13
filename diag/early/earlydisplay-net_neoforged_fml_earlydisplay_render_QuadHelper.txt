@@ -1,0 +1,856 @@
+Compiled from "QuadHelper.java"
+class net.neoforged.fml.earlydisplay.render.QuadHelper {
+  net.neoforged.fml.earlydisplay.render.QuadHelper();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void fillSprite(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, net.neoforged.fml.earlydisplay.render.Texture, float, float, float, float, float, int, net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection, int, float, float, float, float);
+    Code:
+       0: ldc           #7                  // float 65535.0f
+       2: fload         5
+       4: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+       7: fstore        5
+       9: ldc           #7                  // float 65535.0f
+      11: fload         6
+      13: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      16: fstore        6
+      18: fconst_0
+      19: fstore        14
+      21: fconst_1
+      22: fstore        15
+      24: fconst_0
+      25: fstore        16
+      27: fconst_1
+      28: fstore        17
+      30: aload_1
+      31: invokevirtual #14                 // Method net/neoforged/fml/earlydisplay/render/Texture.animationMetadata:()Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+      34: ifnull        90
+      37: aload_1
+      38: invokevirtual #14                 // Method net/neoforged/fml/earlydisplay/render/Texture.animationMetadata:()Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+      41: invokevirtual #20                 // Method net/neoforged/fml/earlydisplay/theme/AnimationMetadata.frameCount:()I
+      44: istore        18
+      46: aload_1
+      47: invokevirtual #26                 // Method net/neoforged/fml/earlydisplay/render/Texture.physicalHeight:()I
+      50: iload         18
+      52: idiv
+      53: istore        19
+      55: iload         19
+      57: i2f
+      58: aload_1
+      59: invokevirtual #26                 // Method net/neoforged/fml/earlydisplay/render/Texture.physicalHeight:()I
+      62: i2f
+      63: fdiv
+      64: fstore        20
+      66: iload         9
+      68: iload         18
+      70: irem
+      71: i2f
+      72: fload         20
+      74: fmul
+      75: fstore        16
+      77: iload         9
+      79: iload         18
+      81: irem
+      82: iconst_1
+      83: iadd
+      84: i2f
+      85: fload         20
+      87: fmul
+      88: fstore        17
+      90: fload         15
+      92: fload         14
+      94: fsub
+      95: fstore        18
+      97: fload         14
+      99: fload         18
+     101: fload         11
+     103: fmul
+     104: fadd
+     105: fstore        15
+     107: fload         14
+     109: fload         18
+     111: fload         10
+     113: fmul
+     114: fadd
+     115: fstore        14
+     117: fload         17
+     119: fload         16
+     121: fsub
+     122: fstore        19
+     124: fload         16
+     126: fload         19
+     128: fload         13
+     130: fmul
+     131: fadd
+     132: fstore        17
+     134: fload         16
+     136: fload         19
+     138: fload         12
+     140: fmul
+     141: fadd
+     142: fstore        16
+     144: aload_1
+     145: invokevirtual #29                 // Method net/neoforged/fml/earlydisplay/render/Texture.scaling:()Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+     148: dup
+     149: invokestatic  #33                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     152: pop
+     153: astore        20
+     155: iconst_0
+     156: istore        21
+     158: aload         20
+     160: iload         21
+     162: invokedynamic #39,  0             // InvokeDynamic #0:typeSwitch:(Ljava/lang/Object;I)I
+     167: tableswitch   { // 0 to 2
+                     0: 192
+                     1: 238
+                     2: 270
+               default: 304
+          }
+     192: aload         20
+     194: checkcast     #43                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Tile
+     197: astore        22
+     199: aload_0
+     200: fload_2
+     201: fload_3
+     202: fload         4
+     204: fload         5
+     206: fload         6
+     208: iload         7
+     210: aload         22
+     212: invokevirtual #45                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$Tile.width:()I
+     215: i2f
+     216: aload         22
+     218: invokevirtual #48                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$Tile.height:()I
+     221: i2f
+     222: fload         14
+     224: fload         15
+     226: fload         16
+     228: fload         17
+     230: aload         8
+     232: invokestatic  #51                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFFLnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;)V
+     235: goto          304
+     238: aload         20
+     240: checkcast     #57                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Stretch
+     243: astore        23
+     245: aload_0
+     246: fload_2
+     247: fload_3
+     248: fload         4
+     250: fload         5
+     252: fload         6
+     254: iload         7
+     256: fload         14
+     258: fload         15
+     260: fload         16
+     262: fload         17
+     264: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     267: goto          304
+     270: aload         20
+     272: checkcast     #63                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+     275: astore        24
+     277: aload_0
+     278: fload_2
+     279: fload_3
+     280: fload         4
+     282: fload         5
+     284: fload         6
+     286: iload         7
+     288: aload         24
+     290: fload         14
+     292: fload         15
+     294: fload         16
+     296: fload         17
+     298: invokestatic  #65                 // Method addTiledNineSlice:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFILnet/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice;FFFF)V
+     301: goto          304
+     304: return
+
+  private static void addTiledNineSlice(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, int, net.neoforged.fml.earlydisplay.theme.TextureScaling$NineSlice, float, float, float, float);
+    Code:
+       0: aload         7
+       2: invokevirtual #69                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.left:()I
+       5: i2f
+       6: fload         4
+       8: fconst_2
+       9: fdiv
+      10: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      13: fstore        12
+      15: aload         7
+      17: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.right:()I
+      20: i2f
+      21: fload         4
+      23: fconst_2
+      24: fdiv
+      25: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      28: fstore        13
+      30: aload         7
+      32: invokevirtual #75                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.top:()I
+      35: i2f
+      36: fload         5
+      38: fconst_2
+      39: fdiv
+      40: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      43: fstore        14
+      45: aload         7
+      47: invokevirtual #78                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.bottom:()I
+      50: i2f
+      51: fload         5
+      53: fconst_2
+      54: fdiv
+      55: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      58: fstore        15
+      60: aload         7
+      62: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.width:()I
+      65: aload         7
+      67: invokevirtual #69                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.left:()I
+      70: isub
+      71: aload         7
+      73: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.right:()I
+      76: isub
+      77: istore        16
+      79: aload         7
+      81: invokevirtual #82                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.height:()I
+      84: aload         7
+      86: invokevirtual #75                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.top:()I
+      89: isub
+      90: aload         7
+      92: invokevirtual #78                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.bottom:()I
+      95: isub
+      96: istore        17
+      98: fload         8
+     100: fload         12
+     102: aload         7
+     104: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.width:()I
+     107: i2f
+     108: fdiv
+     109: fload         9
+     111: fload         8
+     113: fsub
+     114: fmul
+     115: fadd
+     116: fstore        18
+     118: fload         9
+     120: fload         13
+     122: aload         7
+     124: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.width:()I
+     127: i2f
+     128: fdiv
+     129: fload         9
+     131: fload         8
+     133: fsub
+     134: fmul
+     135: fsub
+     136: fstore        19
+     138: fload         10
+     140: fload         14
+     142: aload         7
+     144: invokevirtual #82                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.height:()I
+     147: i2f
+     148: fdiv
+     149: fload         11
+     151: fload         10
+     153: fsub
+     154: fmul
+     155: fadd
+     156: fstore        20
+     158: fload         11
+     160: fload         15
+     162: aload         7
+     164: invokevirtual #82                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.height:()I
+     167: i2f
+     168: fdiv
+     169: fload         11
+     171: fload         10
+     173: fsub
+     174: fmul
+     175: fsub
+     176: fstore        21
+     178: fload_1
+     179: fload         12
+     181: fadd
+     182: fstore        22
+     184: fload_2
+     185: fload         14
+     187: fadd
+     188: fstore        23
+     190: fload_1
+     191: fload         4
+     193: fadd
+     194: fload         13
+     196: fsub
+     197: fstore        24
+     199: fload_2
+     200: fload         5
+     202: fadd
+     203: fload         15
+     205: fsub
+     206: fstore        25
+     208: fload         24
+     210: fload         22
+     212: fsub
+     213: fstore        26
+     215: fload         25
+     217: fload         23
+     219: fsub
+     220: fstore        27
+     222: aload_0
+     223: fload_1
+     224: fload_2
+     225: fload_3
+     226: fload         12
+     228: fload         14
+     230: iload         6
+     232: fload         8
+     234: fload         18
+     236: fload         10
+     238: fload         20
+     240: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     243: aload_0
+     244: fload         24
+     246: fload_2
+     247: fload_3
+     248: fload         13
+     250: fload         14
+     252: iload         6
+     254: fload         19
+     256: fload         9
+     258: fload         10
+     260: fload         20
+     262: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     265: aload_0
+     266: fload         24
+     268: fload         25
+     270: fload_3
+     271: fload         13
+     273: fload         15
+     275: iload         6
+     277: fload         19
+     279: fload         9
+     281: fload         21
+     283: fload         11
+     285: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     288: aload_0
+     289: fload_1
+     290: fload         25
+     292: fload_3
+     293: fload         12
+     295: fload         15
+     297: iload         6
+     299: fload         8
+     301: fload         18
+     303: fload         21
+     305: fload         11
+     307: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     310: aload         7
+     312: invokevirtual #83                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchHorizontalFill:()Z
+     315: ifeq          366
+     318: aload_0
+     319: fload         22
+     321: fload_2
+     322: fload_3
+     323: fload         26
+     325: fload         14
+     327: iload         6
+     329: fload         18
+     331: fload         19
+     333: fload         10
+     335: fload         20
+     337: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     340: aload_0
+     341: fload         22
+     343: fload         25
+     345: fload_3
+     346: fload         26
+     348: fload         15
+     350: iload         6
+     352: fload         18
+     354: fload         19
+     356: fload         21
+     358: fload         11
+     360: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     363: goto          429
+     366: aload_0
+     367: fload         22
+     369: fload_2
+     370: fload_3
+     371: fload         26
+     373: fload         14
+     375: iload         6
+     377: iload         16
+     379: i2f
+     380: aload         7
+     382: invokevirtual #75                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.top:()I
+     385: i2f
+     386: fload         18
+     388: fload         19
+     390: fload         10
+     392: fload         20
+     394: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     397: aload_0
+     398: fload         22
+     400: fload         25
+     402: fload_3
+     403: fload         26
+     405: fload         15
+     407: iload         6
+     409: iload         16
+     411: i2f
+     412: aload         7
+     414: invokevirtual #78                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.bottom:()I
+     417: i2f
+     418: fload         18
+     420: fload         19
+     422: fload         21
+     424: fload         11
+     426: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     429: aload         7
+     431: invokevirtual #90                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchVerticalFill:()Z
+     434: ifeq          485
+     437: aload_0
+     438: fload_1
+     439: fload         23
+     441: fload_3
+     442: fload         12
+     444: fload         27
+     446: iload         6
+     448: fload         8
+     450: fload         18
+     452: fload         20
+     454: fload         21
+     456: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     459: aload_0
+     460: fload         24
+     462: fload         23
+     464: fload_3
+     465: fload         13
+     467: fload         27
+     469: iload         6
+     471: fload         19
+     473: fload         9
+     475: fload         20
+     477: fload         21
+     479: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     482: goto          548
+     485: aload_0
+     486: fload_1
+     487: fload         23
+     489: fload_3
+     490: fload         12
+     492: fload         27
+     494: iload         6
+     496: aload         7
+     498: invokevirtual #69                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.left:()I
+     501: i2f
+     502: iload         17
+     504: i2f
+     505: fload         8
+     507: fload         18
+     509: fload         20
+     511: fload         21
+     513: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     516: aload_0
+     517: fload         24
+     519: fload         23
+     521: fload_3
+     522: fload         13
+     524: fload         27
+     526: iload         6
+     528: aload         7
+     530: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.right:()I
+     533: i2f
+     534: iload         17
+     536: i2f
+     537: fload         19
+     539: fload         9
+     541: fload         20
+     543: fload         21
+     545: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     548: aload         7
+     550: invokevirtual #83                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchHorizontalFill:()Z
+     553: ifeq          590
+     556: aload         7
+     558: invokevirtual #90                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchVerticalFill:()Z
+     561: ifeq          590
+     564: aload_0
+     565: fload         22
+     567: fload         23
+     569: fload_3
+     570: fload         26
+     572: fload         27
+     574: iload         6
+     576: fload         18
+     578: fload         19
+     580: fload         20
+     582: fload         21
+     584: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     587: goto          697
+     590: aload         7
+     592: invokevirtual #83                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchHorizontalFill:()Z
+     595: ifeq          629
+     598: aload_0
+     599: fload         22
+     601: fload         23
+     603: fload_3
+     604: fload         26
+     606: fload         27
+     608: iload         6
+     610: fload         26
+     612: iload         17
+     614: i2f
+     615: fload         18
+     617: fload         19
+     619: fload         20
+     621: fload         21
+     623: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     626: goto          697
+     629: aload         7
+     631: invokevirtual #90                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice.stretchVerticalFill:()Z
+     634: ifeq          668
+     637: aload_0
+     638: fload         22
+     640: fload         23
+     642: fload_3
+     643: fload         26
+     645: fload         27
+     647: iload         6
+     649: iload         16
+     651: i2f
+     652: fload         27
+     654: fload         18
+     656: fload         19
+     658: fload         20
+     660: fload         21
+     662: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     665: goto          697
+     668: aload_0
+     669: fload         22
+     671: fload         23
+     673: fload_3
+     674: fload         26
+     676: fload         27
+     678: iload         6
+     680: iload         16
+     682: i2f
+     683: iload         17
+     685: i2f
+     686: fload         18
+     688: fload         19
+     690: fload         20
+     692: fload         21
+     694: invokestatic  #87                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFF)V
+     697: return
+
+  private static void fillTiled(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, int, float, float, float, float, float, float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: fload_2
+       3: fload_3
+       4: fload         4
+       6: fload         5
+       8: iload         6
+      10: fload         7
+      12: fload         8
+      14: fload         9
+      16: fload         10
+      18: fload         11
+      20: fload         12
+      22: getstatic     #93                 // Field net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection.TOP_TO_BOTTOM:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      25: invokestatic  #51                 // Method fillTiled:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFFFFLnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;)V
+      28: return
+
+  private static void fillTiled(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, int, float, float, float, float, float, float, net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection);
+    Code:
+       0: fload         7
+       2: fconst_0
+       3: fcmpg
+       4: ifle          14
+       7: fload         8
+       9: fconst_0
+      10: fcmpg
+      11: ifgt          15
+      14: return
+      15: fload_1
+      16: fload         4
+      18: fadd
+      19: fstore        14
+      21: fload_2
+      22: fload         5
+      24: fadd
+      25: fstore        15
+      27: aload         13
+      29: getstatic     #99                 // Field net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection.BOTTOM_TO_TOP:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      32: if_acmpne     161
+      35: fload         15
+      37: fstore        16
+      39: fload         16
+      41: fload_2
+      42: fcmpl
+      43: iflt          158
+      46: fload         16
+      48: fload_2
+      49: fsub
+      50: fload         8
+      52: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      55: fstore        17
+      57: fload         12
+      59: fload         12
+      61: fload         11
+      63: fsub
+      64: fload         17
+      66: fmul
+      67: fload         8
+      69: fdiv
+      70: fsub
+      71: fstore        18
+      73: fload_1
+      74: fstore        19
+      76: fload         19
+      78: fload         14
+      80: fcmpg
+      81: ifge          148
+      84: fload         14
+      86: fload         19
+      88: fsub
+      89: fload         7
+      91: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+      94: fstore        20
+      96: fload         9
+      98: fload         10
+     100: fload         9
+     102: fsub
+     103: fload         20
+     105: fmul
+     106: fload         7
+     108: fdiv
+     109: fadd
+     110: fstore        21
+     112: aload_0
+     113: fload         19
+     115: fload         16
+     117: fload         17
+     119: fsub
+     120: fload_3
+     121: fload         20
+     123: fload         17
+     125: iload         6
+     127: fload         9
+     129: fload         21
+     131: fload         18
+     133: fload         12
+     135: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     138: fload         19
+     140: fload         7
+     142: fadd
+     143: fstore        19
+     145: goto          76
+     148: fload         16
+     150: fload         8
+     152: fsub
+     153: fstore        16
+     155: goto          39
+     158: goto          282
+     161: fload_2
+     162: fstore        16
+     164: fload         16
+     166: fload         15
+     168: fcmpg
+     169: ifge          282
+     172: fload         15
+     174: fload         16
+     176: fsub
+     177: fload         8
+     179: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+     182: fstore        17
+     184: fload         11
+     186: fload         12
+     188: fload         11
+     190: fsub
+     191: fload         17
+     193: fmul
+     194: fload         8
+     196: fdiv
+     197: fadd
+     198: fstore        18
+     200: fload_1
+     201: fstore        19
+     203: fload         19
+     205: fload         14
+     207: fcmpg
+     208: ifge          272
+     211: fload         14
+     213: fload         19
+     215: fsub
+     216: fload         7
+     218: invokestatic  #8                  // Method java/lang/Math.min:(FF)F
+     221: fstore        20
+     223: fload         9
+     225: fload         10
+     227: fload         9
+     229: fsub
+     230: fload         20
+     232: fmul
+     233: fload         7
+     235: fdiv
+     236: fadd
+     237: fstore        21
+     239: aload_0
+     240: fload         19
+     242: fload         16
+     244: fload_3
+     245: fload         20
+     247: fload         17
+     249: iload         6
+     251: fload         9
+     253: fload         21
+     255: fload         11
+     257: fload         18
+     259: invokestatic  #59                 // Method addQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFIFFFF)V
+     262: fload         19
+     264: fload         7
+     266: fadd
+     267: fstore        19
+     269: goto          203
+     272: fload         16
+     274: fload         8
+     276: fadd
+     277: fstore        16
+     279: goto          164
+     282: return
+
+  public static void addQuad(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, int, float, float, float, float);
+    Code:
+       0: fload         4
+       2: fconst_0
+       3: fcmpg
+       4: iflt          14
+       7: fload         5
+       9: fconst_0
+      10: fcmpg
+      11: ifge          15
+      14: return
+      15: aload_0
+      16: fload_1
+      17: fload_1
+      18: fload         4
+      20: fadd
+      21: fload_2
+      22: fload_2
+      23: fload         5
+      25: fadd
+      26: fload         7
+      28: fload         8
+      30: fload         9
+      32: fload         10
+      34: iload         6
+      36: invokestatic  #102                // Method loadQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFFFFI)V
+      39: return
+
+  public static void loadQuad(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, net.neoforged.fml.earlydisplay.util.Bounds, float, float, float, float, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #106                // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+       5: aload_1
+       6: invokevirtual #111                // Method net/neoforged/fml/earlydisplay/util/Bounds.right:()F
+       9: aload_1
+      10: invokevirtual #113                // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+      13: aload_1
+      14: invokevirtual #115                // Method net/neoforged/fml/earlydisplay/util/Bounds.bottom:()F
+      17: fload_2
+      18: fload_3
+      19: fload         4
+      21: fload         5
+      23: iload         6
+      25: invokestatic  #102                // Method loadQuad:(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;FFFFFFFFI)V
+      28: return
+
+  public static void loadQuad(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, float, float, float, int);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: fload_3
+       3: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+       6: fload         5
+       8: fload         7
+      10: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      13: iload         9
+      15: invokevirtual #126                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      18: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      21: pop
+      22: aload_0
+      23: fload_2
+      24: fload_3
+      25: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      28: fload         6
+      30: fload         7
+      32: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      35: iload         9
+      37: invokevirtual #126                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      40: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      43: pop
+      44: aload_0
+      45: fload_1
+      46: fload         4
+      48: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      51: fload         5
+      53: fload         8
+      55: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      58: iload         9
+      60: invokevirtual #126                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      63: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      66: pop
+      67: aload_0
+      68: fload_2
+      69: fload         4
+      71: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      74: fload         6
+      76: fload         8
+      78: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      81: iload         9
+      83: invokevirtual #126                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      86: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      89: pop
+      90: return
+
+  public static void loadQuad(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, float, float, float, float, float, float, float, float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: fload_3
+       3: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+       6: fload         5
+       8: fload         7
+      10: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      13: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      16: pop
+      17: aload_0
+      18: fload_2
+      19: fload_3
+      20: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      23: fload         6
+      25: fload         7
+      27: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      30: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      33: pop
+      34: aload_0
+      35: fload_1
+      36: fload         4
+      38: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      41: fload         5
+      43: fload         8
+      45: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      48: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      51: pop
+      52: aload_0
+      53: fload_2
+      54: fload         4
+      56: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      59: fload         6
+      61: fload         8
+      63: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      66: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      69: pop
+      70: return
+}

@@ -1,0 +1,136 @@
+Compiled from "ProgressBarsElement.java"
+public class net.neoforged.fml.earlydisplay.render.elements.ProgressBarsElement extends net.neoforged.fml.earlydisplay.render.elements.RenderElement {
+  private static final int BAR_AREA_WIDTH = 400;
+
+  private static final int BAR_AREA_HEIGHT = 200;
+
+  private final net.neoforged.fml.earlydisplay.theme.elements.ThemeProgressBarsElement settings;
+
+  public net.neoforged.fml.earlydisplay.render.elements.ProgressBarsElement(net.neoforged.fml.earlydisplay.theme.elements.ThemeProgressBarsElement, net.neoforged.fml.earlydisplay.render.MaterializedTheme);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeElement;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)V
+       6: aload_0
+       7: aload_1
+       8: putfield      #7                  // Field settings:Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement;
+      11: return
+
+  public void render(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #13                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableWidth:()F
+       5: aload_1
+       6: invokevirtual #19                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableHeight:()F
+       9: ldc           #22                 // float 400.0f
+      11: ldc           #23                 // float 200.0f
+      13: invokevirtual #24                 // Method resolveBounds:(FFFF)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      16: astore_2
+      17: fconst_0
+      18: fstore_3
+      19: iconst_0
+      20: istore        4
+      22: invokestatic  #28                 // Method net/neoforged/fml/loading/progress/StartupNotificationManager.getCurrentProgress:()Ljava/util/List;
+      25: invokeinterface #34,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      30: astore        5
+      32: aload         5
+      34: invokeinterface #40,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      39: ifeq          241
+      42: aload         5
+      44: invokeinterface #46,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      49: checkcast     #50                 // class net/neoforged/fml/loading/progress/ProgressMeter
+      52: astore        6
+      54: iinc          4, 1
+      57: iload         4
+      59: iconst_2
+      60: if_icmple     66
+      63: goto          241
+      66: aload         6
+      68: invokevirtual #52                 // Method net/neoforged/fml/loading/progress/ProgressMeter.label:()Lnet/neoforged/fml/loading/progress/Message;
+      71: invokevirtual #56                 // Method net/neoforged/fml/loading/progress/Message.getText:()Ljava/lang/String;
+      74: astore        7
+      76: aload         7
+      78: invokevirtual #62                 // Method java/lang/String.isEmpty:()Z
+      81: ifne          149
+      84: aload_1
+      85: aload_2
+      86: invokevirtual #67                 // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+      89: aload_2
+      90: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+      93: fload_3
+      94: fadd
+      95: aload_0
+      96: getfield      #75                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      99: new           #79                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+     102: dup
+     103: aload         7
+     105: aload_0
+     106: getfield      #81                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     109: invokevirtual #85                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     112: invokevirtual #90                 // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+     115: invokevirtual #96                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.text:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+     118: invokevirtual #102                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.toArgb:()I
+     121: invokespecial #108                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText."<init>":(Ljava/lang/String;I)V
+     124: invokestatic  #111                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+     127: invokevirtual #115                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderText:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     130: fload_3
+     131: aload_0
+     132: getfield      #75                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     135: invokevirtual #119                // Method net/neoforged/fml/earlydisplay/render/SimpleFont.lineSpacing:()I
+     138: aload_0
+     139: getfield      #7                  // Field settings:Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement;
+     142: invokevirtual #124                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.labelGap:()I
+     145: iadd
+     146: i2f
+     147: fadd
+     148: fstore_3
+     149: new           #68                 // class net/neoforged/fml/earlydisplay/util/Bounds
+     152: dup
+     153: aload_2
+     154: invokevirtual #67                 // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+     157: aload_2
+     158: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+     161: fload_3
+     162: fadd
+     163: aload_2
+     164: invokevirtual #129                // Method net/neoforged/fml/earlydisplay/util/Bounds.right:()F
+     167: aload_2
+     168: invokevirtual #72                 // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+     171: fload_3
+     172: fadd
+     173: aload_0
+     174: getfield      #81                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     177: invokevirtual #132                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.sprites:()Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;
+     180: invokevirtual #136                // Method net/neoforged/fml/earlydisplay/render/MaterializedThemeSprites.progressBarBackground:()Lnet/neoforged/fml/earlydisplay/render/Texture;
+     183: invokevirtual #142                // Method net/neoforged/fml/earlydisplay/render/Texture.height:()I
+     186: i2f
+     187: fadd
+     188: invokespecial #147                // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFFF)V
+     191: astore        8
+     193: aload         6
+     195: invokevirtual #150                // Method net/neoforged/fml/loading/progress/ProgressMeter.steps:()I
+     198: ifne          210
+     201: aload_1
+     202: aload         8
+     204: invokevirtual #153                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderIndeterminateProgressBar:(Lnet/neoforged/fml/earlydisplay/util/Bounds;)V
+     207: goto          221
+     210: aload_1
+     211: aload         8
+     213: aload         6
+     215: invokevirtual #157                // Method net/neoforged/fml/loading/progress/ProgressMeter.progress:()F
+     218: invokevirtual #160                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderProgressBar:(Lnet/neoforged/fml/earlydisplay/util/Bounds;F)V
+     221: fload_3
+     222: aload         8
+     224: invokevirtual #164                // Method net/neoforged/fml/earlydisplay/util/Bounds.height:()F
+     227: aload_0
+     228: getfield      #7                  // Field settings:Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement;
+     231: invokevirtual #166                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.barGap:()I
+     234: i2f
+     235: fadd
+     236: fadd
+     237: fstore_3
+     238: goto          32
+     241: return
+}

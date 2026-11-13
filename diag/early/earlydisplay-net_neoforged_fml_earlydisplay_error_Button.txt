@@ -1,0 +1,416 @@
+Compiled from "Button.java"
+final class net.neoforged.fml.earlydisplay.error.Button {
+  private final net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow window;
+
+  private final int x;
+
+  private final int y;
+
+  private final int width;
+
+  private final int height;
+
+  private final java.lang.String text;
+
+  private final boolean active;
+
+  private final java.lang.Runnable onPress;
+
+  private boolean focused;
+
+  net.neoforged.fml.earlydisplay.error.Button(net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow, int, int, int, int, java.lang.String, boolean, java.lang.Runnable);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field window:Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;
+       9: aload_0
+      10: iload_2
+      11: putfield      #13                 // Field x:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #17                 // Field y:I
+      19: aload_0
+      20: iload         4
+      22: putfield      #20                 // Field width:I
+      25: aload_0
+      26: iload         5
+      28: putfield      #23                 // Field height:I
+      31: aload_0
+      32: aload         6
+      34: putfield      #26                 // Field text:Ljava/lang/String;
+      37: aload_0
+      38: iload         7
+      40: putfield      #30                 // Field active:Z
+      43: aload_0
+      44: aload         8
+      46: putfield      #34                 // Field onPress:Ljava/lang/Runnable;
+      49: return
+
+  void render(net.neoforged.fml.earlydisplay.render.RenderContext, net.neoforged.fml.earlydisplay.render.SimpleFont, double, double);
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field active:Z
+       4: ifeq          28
+       7: aload_0
+       8: getfield      #38                 // Field focused:Z
+      11: ifne          24
+      14: aload_0
+      15: dload_3
+      16: dload         5
+      18: invokevirtual #41                 // Method isMouseOver:(DD)Z
+      21: ifeq          28
+      24: iconst_1
+      25: goto          29
+      28: iconst_0
+      29: istore        7
+      31: aload_0
+      32: getfield      #30                 // Field active:Z
+      35: ifeq          63
+      38: iload         7
+      40: ifeq          53
+      43: aload_0
+      44: getfield      #7                  // Field window:Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;
+      47: getfield      #45                 // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow.buttonTextureHover:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      50: goto          70
+      53: aload_0
+      54: getfield      #7                  // Field window:Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;
+      57: getfield      #51                 // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow.buttonTexture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      60: goto          70
+      63: aload_0
+      64: getfield      #7                  // Field window:Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;
+      67: getfield      #54                 // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow.buttonTextureInactive:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      70: astore        8
+      72: aload_1
+      73: aload         8
+      75: aload_0
+      76: getfield      #13                 // Field x:I
+      79: i2f
+      80: aload_0
+      81: getfield      #17                 // Field y:I
+      84: i2f
+      85: aload_0
+      86: getfield      #20                 // Field width:I
+      89: i2f
+      90: aload_0
+      91: getfield      #23                 // Field height:I
+      94: i2f
+      95: invokevirtual #57                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.blitTexture:(Lnet/neoforged/fml/earlydisplay/render/Texture;FFFF)V
+      98: aload_2
+      99: aload_0
+     100: getfield      #26                 // Field text:Ljava/lang/String;
+     103: invokevirtual #63                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont.stringWidth:(Ljava/lang/String;)I
+     106: istore        9
+     108: aload_0
+     109: getfield      #13                 // Field x:I
+     112: i2f
+     113: aload_0
+     114: getfield      #20                 // Field width:I
+     117: i2f
+     118: fconst_2
+     119: fdiv
+     120: fadd
+     121: iload         9
+     123: i2f
+     124: fconst_2
+     125: fdiv
+     126: fsub
+     127: fstore        10
+     129: aload_0
+     130: getfield      #30                 // Field active:Z
+     133: ifeq          140
+     136: iconst_m1
+     137: goto          142
+     140: ldc           #69                 // int -6250336
+     142: istore        11
+     144: aload_1
+     145: fload         10
+     147: aload_0
+     148: getfield      #17                 // Field y:I
+     151: iconst_2
+     152: iadd
+     153: i2f
+     154: aload_2
+     155: new           #70                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+     158: dup
+     159: aload_0
+     160: getfield      #26                 // Field text:Ljava/lang/String;
+     163: iload         11
+     165: invokespecial #72                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText."<init>":(Ljava/lang/String;I)V
+     168: invokestatic  #75                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+     171: invokevirtual #81                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderTextWithShadow:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     174: return
+
+  boolean isMouseOver(double, double);
+    Code:
+       0: dload_1
+       1: aload_0
+       2: getfield      #13                 // Field x:I
+       5: i2d
+       6: dcmpl
+       7: iflt          54
+      10: dload_1
+      11: aload_0
+      12: getfield      #13                 // Field x:I
+      15: aload_0
+      16: getfield      #20                 // Field width:I
+      19: iadd
+      20: i2d
+      21: dcmpg
+      22: ifge          54
+      25: dload_3
+      26: aload_0
+      27: getfield      #17                 // Field y:I
+      30: i2d
+      31: dcmpl
+      32: iflt          54
+      35: dload_3
+      36: aload_0
+      37: getfield      #17                 // Field y:I
+      40: aload_0
+      41: getfield      #23                 // Field height:I
+      44: iadd
+      45: i2d
+      46: dcmpg
+      47: ifge          54
+      50: iconst_1
+      51: goto          55
+      54: iconst_0
+      55: ireturn
+
+  boolean isActive();
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field active:Z
+       4: ireturn
+
+  boolean isFocused();
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field focused:Z
+       4: ireturn
+
+  void focus();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: putfield      #38                 // Field focused:Z
+       5: return
+
+  void unfocus();
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: putfield      #38                 // Field focused:Z
+       5: return
+
+  void press();
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field active:Z
+       4: ifeq          16
+       7: aload_0
+       8: getfield      #34                 // Field onPress:Ljava/lang/Runnable;
+      11: invokeinterface #85,  1           // InterfaceMethod java/lang/Runnable.run:()V
+      16: return
+
+  static net.neoforged.fml.earlydisplay.render.Texture loadTexture(boolean, boolean);
+    Code:
+       0: iload_0
+       1: ifeq          18
+       4: iload_1
+       5: ifeq          13
+       8: ldc           #90                 // String _highlighted
+      10: goto          20
+      13: ldc           #92                 // String
+      15: goto          20
+      18: ldc           #94                 // String _disabled
+      20: astore_2
+      21: aload_2
+      22: invokedynamic #96,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      27: astore_3
+      28: aload_2
+      29: invokedynamic #100,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      34: astore        4
+      36: aload_3
+      37: aconst_null
+      38: invokestatic  #101                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.loadFromClasspath:(Ljava/lang/String;Ljava/lang/ClassLoader;)Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+      41: astore        6
+      43: aload         4
+      45: aconst_null
+      46: aload         6
+      48: invokestatic  #107                // Method net/neoforged/fml/earlydisplay/theme/ImageLoader.tryLoadImage:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;)Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result;
+      51: astore        7
+      53: aload         7
+      55: dup
+      56: invokestatic  #113                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      59: pop
+      60: astore        8
+      62: iconst_0
+      63: istore        9
+      65: aload         8
+      67: iload         9
+      69: invokedynamic #119,  0            // InvokeDynamic #2:typeSwitch:(Ljava/lang/Object;I)I
+      74: lookupswitch  { // 2
+                     0: 110
+                     1: 158
+               default: 100
+          }
+     100: new           #123                // class java/lang/MatchException
+     103: dup
+     104: aconst_null
+     105: aconst_null
+     106: invokespecial #125                // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     109: athrow
+     110: aload         8
+     112: checkcast     #128                // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success
+     115: astore        10
+     117: new           #130                // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+     120: dup
+     121: sipush        400
+     124: bipush        40
+     126: bipush        6
+     128: bipush        6
+     130: bipush        6
+     132: bipush        6
+     134: iconst_0
+     135: iconst_0
+     136: iconst_0
+     137: invokespecial #132                // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice."<init>":(IIIIIIZZZ)V
+     140: astore        11
+     142: aload         10
+     144: invokevirtual #135                // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success.image:()Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+     147: aload         4
+     149: aload         11
+     151: aconst_null
+     152: invokestatic  #139                // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     155: goto          171
+     158: aload         8
+     160: checkcast     #145                // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error
+     163: astore        11
+     165: iload_0
+     166: iload_1
+     167: aload_2
+     168: invokestatic  #147                // Method createFallbackTexture:(ZZLjava/lang/String;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     171: astore        5
+     173: goto          186
+     176: astore        6
+     178: iload_0
+     179: iload_1
+     180: aload_2
+     181: invokestatic  #147                // Method createFallbackTexture:(ZZLjava/lang/String;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     184: astore        5
+     186: aload         5
+     188: areturn
+    Exception table:
+       from    to  target type
+          36   173   176   Class java/io/IOException
+
+  private static net.neoforged.fml.earlydisplay.render.Texture createFallbackTexture(boolean, boolean, java.lang.String);
+    Code:
+       0: aload_2
+       1: invokedynamic #153,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       6: astore_3
+       7: bipush        60
+       9: istore        4
+      11: bipush        20
+      13: istore        5
+      15: iload         4
+      17: iload         5
+      19: imul
+      20: iconst_4
+      21: imul
+      22: invokestatic  #154                // Method org/lwjgl/system/MemoryUtil.memAlloc:(I)Ljava/nio/ByteBuffer;
+      25: astore        6
+      27: aload         6
+      29: invokevirtual #160                // Method java/nio/ByteBuffer.asIntBuffer:()Ljava/nio/IntBuffer;
+      32: astore        7
+      34: iload_1
+      35: ifeq          42
+      38: iconst_m1
+      39: goto          44
+      42: ldc           #166                // int -16777216
+      44: istore        8
+      46: iload_0
+      47: ifeq          55
+      50: ldc           #167                // int -7829368
+      52: goto          57
+      55: ldc           #168                // int -13882324
+      57: istore        9
+      59: iconst_0
+      60: istore        10
+      62: iload         10
+      64: iload         5
+      66: if_icmpge     138
+      69: iconst_0
+      70: istore        11
+      72: iload         11
+      74: iload         4
+      76: if_icmpge     132
+      79: iload         10
+      81: ifeq          107
+      84: iload         10
+      86: iload         5
+      88: iconst_1
+      89: isub
+      90: if_icmpeq     107
+      93: iload         11
+      95: ifeq          107
+      98: iload         11
+     100: iload         4
+     102: iconst_1
+     103: isub
+     104: if_icmpne     118
+     107: aload         7
+     109: iload         8
+     111: invokevirtual #169                // Method java/nio/IntBuffer.put:(I)Ljava/nio/IntBuffer;
+     114: pop
+     115: goto          126
+     118: aload         7
+     120: iload         9
+     122: invokevirtual #169                // Method java/nio/IntBuffer.put:(I)Ljava/nio/IntBuffer;
+     125: pop
+     126: iinc          11, 1
+     129: goto          72
+     132: iinc          10, 1
+     135: goto          62
+     138: new           #102                // class net/neoforged/fml/earlydisplay/theme/NativeBuffer
+     141: dup
+     142: aload         6
+     144: invokedynamic #175,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+     149: invokespecial #179                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer."<init>":(Ljava/nio/ByteBuffer;Ljava/util/function/Consumer;)V
+     152: astore        10
+     154: new           #182                // class net/neoforged/fml/earlydisplay/theme/UncompressedImage
+     157: dup
+     158: aload_3
+     159: aconst_null
+     160: aload         10
+     162: iload         4
+     164: iload         5
+     166: invokespecial #184                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage."<init>":(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;II)V
+     169: astore        11
+     171: new           #130                // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+     174: dup
+     175: iload         4
+     177: iconst_2
+     178: imul
+     179: iload         5
+     181: iconst_2
+     182: imul
+     183: iconst_2
+     184: iconst_2
+     185: iconst_2
+     186: iconst_2
+     187: iconst_1
+     188: iconst_1
+     189: iconst_0
+     190: invokespecial #132                // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice."<init>":(IIIIIIZZZ)V
+     193: astore        12
+     195: aload         11
+     197: aload_3
+     198: aload         12
+     200: aconst_null
+     201: invokestatic  #139                // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     204: areturn
+}

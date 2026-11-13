@@ -1,0 +1,204 @@
+Compiled from "Texture.java"
+public final class net.neoforged.fml.earlydisplay.render.Texture extends java.lang.Record implements java.lang.AutoCloseable {
+  private final int textureId;
+
+  private final int physicalWidth;
+
+  private final int physicalHeight;
+
+  private final net.neoforged.fml.earlydisplay.theme.TextureScaling scaling;
+
+  private final net.neoforged.fml.earlydisplay.theme.AnimationMetadata animationMetadata;
+
+  public net.neoforged.fml.earlydisplay.render.Texture(int, int, int, net.neoforged.fml.earlydisplay.theme.TextureScaling, net.neoforged.fml.earlydisplay.theme.AnimationMetadata);
+    Code:
+       0: aload_0
+       1: invokespecial #5                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #11                 // Field textureId:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #17                 // Field physicalWidth:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #20                 // Field physicalHeight:I
+      19: aload_0
+      20: aload         4
+      22: putfield      #23                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+      25: aload_0
+      26: aload         5
+      28: putfield      #27                 // Field animationMetadata:Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+      31: return
+
+  public int width();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+       4: invokeinterface #31,  1           // InterfaceMethod net/neoforged/fml/earlydisplay/theme/TextureScaling.width:()I
+       9: ireturn
+
+  public int height();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+       4: invokeinterface #37,  1           // InterfaceMethod net/neoforged/fml/earlydisplay/theme/TextureScaling.height:()I
+       9: ireturn
+
+  public static net.neoforged.fml.earlydisplay.render.Texture create(net.neoforged.fml.earlydisplay.theme.ThemeTexture, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: invokevirtual #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture.resource:()Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: aload_1
+       5: invokevirtual #46                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.loadAsImage:(Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+       8: astore_2
+       9: aload_2
+      10: aload_0
+      11: invokestatic  #52                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      14: invokedynamic #58,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      19: aload_0
+      20: invokevirtual #62                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture.scaling:()Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+      23: aload_0
+      24: invokevirtual #65                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture.animation:()Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+      27: invokestatic  #69                 // Method create:(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+      30: astore_3
+      31: aload_2
+      32: ifnull        39
+      35: aload_2
+      36: invokevirtual #73                 // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.close:()V
+      39: aload_3
+      40: areturn
+      41: astore_3
+      42: aload_2
+      43: ifnull        61
+      46: aload_2
+      47: invokevirtual #73                 // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.close:()V
+      50: goto          61
+      53: astore        4
+      55: aload_3
+      56: aload         4
+      58: invokevirtual #80                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+      61: aload_3
+      62: athrow
+    Exception table:
+       from    to  target type
+           9    31    41   Class java/lang/Throwable
+          46    50    53   Class java/lang/Throwable
+
+  public static net.neoforged.fml.earlydisplay.render.Texture create(net.neoforged.fml.earlydisplay.theme.UncompressedImage, java.lang.String, net.neoforged.fml.earlydisplay.theme.TextureScaling, net.neoforged.fml.earlydisplay.theme.AnimationMetadata);
+    Code:
+       0: invokestatic  #84                 // Method org/lwjgl/opengl/GL11C.glGenTextures:()I
+       3: istore        4
+       5: iload         4
+       7: invokestatic  #87                 // Method net/neoforged/fml/earlydisplay/render/GlState.bindTexture2D:(I)V
+      10: iload         4
+      12: aload_1
+      13: invokestatic  #93                 // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelTexture:(ILjava/lang/String;)V
+      16: aload_2
+      17: invokeinterface #99,  1           // InterfaceMethod net/neoforged/fml/earlydisplay/theme/TextureScaling.linearScaling:()Z
+      22: istore        5
+      24: sipush        3553
+      27: sipush        10242
+      30: ldc           #103                // int 33071
+      32: invokestatic  #104                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+      35: sipush        3553
+      38: sipush        10243
+      41: ldc           #103                // int 33071
+      43: invokestatic  #104                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+      46: sipush        3553
+      49: sipush        10240
+      52: iload         5
+      54: ifeq          63
+      57: sipush        9729
+      60: goto          66
+      63: sipush        9728
+      66: invokestatic  #104                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+      69: sipush        3553
+      72: sipush        10241
+      75: iload         5
+      77: ifeq          86
+      80: sipush        9729
+      83: goto          89
+      86: sipush        9728
+      89: invokestatic  #104                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+      92: sipush        3553
+      95: iconst_0
+      96: sipush        6408
+      99: aload_0
+     100: invokevirtual #108                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.width:()I
+     103: aload_0
+     104: invokevirtual #109                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.height:()I
+     107: iconst_0
+     108: sipush        6408
+     111: sipush        5121
+     114: aload_0
+     115: invokevirtual #110                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.imageData:()Ljava/nio/ByteBuffer;
+     118: invokestatic  #114                // Method org/lwjgl/opengl/GL11C.glTexImage2D:(IIIIIIIILjava/nio/ByteBuffer;)V
+     121: new           #12                 // class net/neoforged/fml/earlydisplay/render/Texture
+     124: dup
+     125: iload         4
+     127: aload_0
+     128: invokevirtual #108                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.width:()I
+     131: aload_0
+     132: invokevirtual #109                // Method net/neoforged/fml/earlydisplay/theme/UncompressedImage.height:()I
+     135: aload_2
+     136: aload_3
+     137: invokespecial #118                // Method "<init>":(IIILnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)V
+     140: areturn
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #11                 // Field textureId:I
+       4: invokestatic  #121                // Method org/lwjgl/opengl/GL32C.glDeleteTextures:(I)V
+       7: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #126,  0            // InvokeDynamic #1:toString:(Lnet/neoforged/fml/earlydisplay/render/Texture;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #130,  0            // InvokeDynamic #1:hashCode:(Lnet/neoforged/fml/earlydisplay/render/Texture;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #134,  0            // InvokeDynamic #1:equals:(Lnet/neoforged/fml/earlydisplay/render/Texture;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int textureId();
+    Code:
+       0: aload_0
+       1: getfield      #11                 // Field textureId:I
+       4: ireturn
+
+  public int physicalWidth();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field physicalWidth:I
+       4: ireturn
+
+  public int physicalHeight();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field physicalHeight:I
+       4: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.TextureScaling scaling();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.AnimationMetadata animationMetadata();
+    Code:
+       0: aload_0
+       1: getfield      #27                 // Field animationMetadata:Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+       4: areturn
+}

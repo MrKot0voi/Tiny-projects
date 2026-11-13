@@ -1,0 +1,3 @@
+Compiled from "ImageLoader.java"
+public interface net.neoforged.fml.earlydisplay.theme.ImageLoader$Result {
+}

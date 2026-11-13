@@ -1,0 +1,80 @@
+Compiled from "ImageElement.java"
+public class net.neoforged.fml.earlydisplay.render.elements.ImageElement extends net.neoforged.fml.earlydisplay.render.elements.RenderElement {
+  private final net.neoforged.fml.earlydisplay.render.Texture texture;
+
+  public net.neoforged.fml.earlydisplay.render.elements.ImageElement(net.neoforged.fml.earlydisplay.theme.elements.ThemeImageElement, net.neoforged.fml.earlydisplay.render.MaterializedTheme);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeElement;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)V
+       6: aload_0
+       7: aload_1
+       8: invokevirtual #7                  // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement.texture:()Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;
+      11: aload_2
+      12: invokevirtual #13                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.externalThemeDirectory:()Ljava/nio/file/Path;
+      15: invokestatic  #19                 // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+      18: putfield      #25                 // Field texture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      21: return
+
+  public void render(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: iconst_m1
+       1: istore_2
+       2: ldc           #30                 // String squir
+       4: aload_0
+       5: invokevirtual #32                 // Method id:()Ljava/lang/String;
+       8: invokevirtual #36                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      11: ifeq          51
+      14: aload_1
+      15: invokevirtual #42                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.animationFrame:()I
+      18: i2d
+      19: ldc2_w        #50                 // double 3.141592653589793d
+      22: dmul
+      23: ldc2_w        #52                 // double 16.0d
+      26: ddiv
+      27: invokestatic  #54                 // Method java/lang/Math.cos:(D)D
+      30: ldc2_w        #52                 // double 16.0d
+      33: dmul
+      34: d2i
+      35: bipush        16
+      37: iadd
+      38: istore_3
+      39: iload_3
+      40: sipush        255
+      43: iand
+      44: bipush        24
+      46: ishl
+      47: ldc           #58                 // int 16777215
+      49: ior
+      50: istore_2
+      51: aload_0
+      52: aload_1
+      53: invokevirtual #59                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableWidth:()F
+      56: aload_1
+      57: invokevirtual #63                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableHeight:()F
+      60: aload_0
+      61: getfield      #25                 // Field texture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      64: invokevirtual #66                 // Method net/neoforged/fml/earlydisplay/render/Texture.width:()I
+      67: i2f
+      68: aload_0
+      69: getfield      #25                 // Field texture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      72: invokevirtual #69                 // Method net/neoforged/fml/earlydisplay/render/Texture.height:()I
+      75: i2f
+      76: invokevirtual #72                 // Method resolveBounds:(FFFF)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      79: astore_3
+      80: aload_1
+      81: aload_0
+      82: getfield      #25                 // Field texture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      85: aload_3
+      86: iload_2
+      87: invokevirtual #76                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.blitTexture:(Lnet/neoforged/fml/earlydisplay/render/Texture;Lnet/neoforged/fml/earlydisplay/util/Bounds;I)V
+      90: return
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field texture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+       4: invokevirtual #80                 // Method net/neoforged/fml/earlydisplay/render/Texture.close:()V
+       7: return
+}

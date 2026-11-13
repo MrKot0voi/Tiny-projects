@@ -1,0 +1,96 @@
+Compiled from "UncompressedImage.java"
+public final class net.neoforged.fml.earlydisplay.theme.UncompressedImage extends java.lang.Record implements java.lang.AutoCloseable {
+  private final java.lang.String name;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeResource source;
+
+  private final net.neoforged.fml.earlydisplay.theme.NativeBuffer nativeImageData;
+
+  private final int width;
+
+  private final int height;
+
+  public net.neoforged.fml.earlydisplay.theme.UncompressedImage(java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource, net.neoforged.fml.earlydisplay.theme.NativeBuffer, int, int);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field name:Ljava/lang/String;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field source:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field nativeImageData:Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+      19: aload_0
+      20: iload         4
+      22: putfield      #21                 // Field width:I
+      25: aload_0
+      26: iload         5
+      28: putfield      #25                 // Field height:I
+      31: return
+
+  public java.nio.ByteBuffer imageData();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field nativeImageData:Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+       4: invokevirtual #28                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.buffer:()Ljava/nio/ByteBuffer;
+       7: areturn
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field nativeImageData:Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+       4: invokevirtual #34                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.close:()V
+       7: return
+
+  public java.lang.String toString();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field name:Ljava/lang/String;
+       4: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #37,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #41,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String name();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field name:Ljava/lang/String;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource source();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field source:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.NativeBuffer nativeImageData();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field nativeImageData:Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+       4: areturn
+
+  public int width();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field width:I
+       4: ireturn
+
+  public int height();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field height:I
+       4: ireturn
+}

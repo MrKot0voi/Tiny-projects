@@ -1,0 +1,116 @@
+Compiled from "ExtraDataTextRenderer.java"
+public class net.neoforged.fml.logging.ExtraDataTextRenderer implements org.apache.logging.log4j.core.pattern.TextRenderer {
+  private final org.apache.logging.log4j.core.pattern.TextRenderer wrapped;
+
+  private final net.neoforged.fml.classloading.transformation.ClassProcessorAuditSource auditLog;
+
+  private final java.lang.ThreadLocal<net.neoforged.fml.logging.ExtraDataTextRenderer$TransformerContext> currentClass;
+
+  net.neoforged.fml.logging.ExtraDataTextRenderer(org.apache.logging.log4j.core.pattern.TextRenderer);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #7                  // class java/lang/ThreadLocal
+       8: dup
+       9: invokespecial #9                  // Method java/lang/ThreadLocal."<init>":()V
+      12: putfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+      15: aload_0
+      16: aload_1
+      17: putfield      #16                 // Field wrapped:Lorg/apache/logging/log4j/core/pattern/TextRenderer;
+      20: invokestatic  #20                 // Method net/neoforged/fml/loading/FMLLoader.getCurrentOrNull:()Lnet/neoforged/fml/loading/FMLLoader;
+      23: astore_2
+      24: aload_0
+      25: aload_2
+      26: ifnull        36
+      29: aload_2
+      30: invokevirtual #26                 // Method net/neoforged/fml/loading/FMLLoader.getClassTransformerAuditLog:()Lnet/neoforged/fml/classloading/transformation/ClassProcessorAuditSource;
+      33: goto          37
+      36: aconst_null
+      37: putfield      #30                 // Field auditLog:Lnet/neoforged/fml/classloading/transformation/ClassProcessorAuditSource;
+      40: return
+
+  public void render(java.lang.String, java.lang.StringBuilder, java.lang.String);
+    Code:
+       0: ldc           #34                 // String StackTraceElement.ClassName
+       2: aload_3
+       3: invokevirtual #36                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       6: ifeq          40
+       9: aload_0
+      10: getfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+      13: new           #42                 // class net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext
+      16: dup
+      17: invokespecial #44                 // Method net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext."<init>":()V
+      20: invokevirtual #45                 // Method java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+      23: aload_0
+      24: getfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+      27: invokevirtual #49                 // Method java/lang/ThreadLocal.get:()Ljava/lang/Object;
+      30: checkcast     #42                 // class net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext
+      33: aload_1
+      34: invokevirtual #53                 // Method net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext.setClassName:(Ljava/lang/String;)V
+      37: goto          155
+      40: ldc           #57                 // String StackTraceElement.MethodName
+      42: aload_3
+      43: invokevirtual #36                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      46: ifeq          75
+      49: aload_0
+      50: getfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+      53: invokevirtual #49                 // Method java/lang/ThreadLocal.get:()Ljava/lang/Object;
+      56: checkcast     #42                 // class net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext
+      59: astore        4
+      61: aload         4
+      63: ifnull        72
+      66: aload         4
+      68: aload_1
+      69: invokevirtual #59                 // Method net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext.setMethodName:(Ljava/lang/String;)V
+      72: goto          155
+      75: ldc           #62                 // String Suffix
+      77: aload_3
+      78: invokevirtual #36                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      81: ifeq          155
+      84: aload_0
+      85: getfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+      88: invokevirtual #49                 // Method java/lang/ThreadLocal.get:()Ljava/lang/Object;
+      91: checkcast     #42                 // class net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext
+      94: astore        4
+      96: aload_0
+      97: getfield      #10                 // Field currentClass:Ljava/lang/ThreadLocal;
+     100: invokevirtual #64                 // Method java/lang/ThreadLocal.remove:()V
+     103: aload         4
+     105: ifnull        154
+     108: aload_0
+     109: getfield      #30                 // Field auditLog:Lnet/neoforged/fml/classloading/transformation/ClassProcessorAuditSource;
+     112: ifnull        132
+     115: aload_0
+     116: getfield      #30                 // Field auditLog:Lnet/neoforged/fml/classloading/transformation/ClassProcessorAuditSource;
+     119: aload         4
+     121: invokevirtual #67                 // Method net/neoforged/fml/logging/ExtraDataTextRenderer$TransformerContext.getClassName:()Ljava/lang/String;
+     124: invokeinterface #71,  2           // InterfaceMethod net/neoforged/fml/classloading/transformation/ClassProcessorAuditSource.getAuditString:(Ljava/lang/String;)Ljava/lang/String;
+     129: goto          133
+     132: aconst_null
+     133: astore        5
+     135: aload_0
+     136: getfield      #16                 // Field wrapped:Lorg/apache/logging/log4j/core/pattern/TextRenderer;
+     139: aload         5
+     141: invokedynamic #77,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     146: aload_2
+     147: ldc           #80                 // String StackTraceElement.Transformers
+     149: invokeinterface #82,  4           // InterfaceMethod org/apache/logging/log4j/core/pattern/TextRenderer.render:(Ljava/lang/String;Ljava/lang/StringBuilder;Ljava/lang/String;)V
+     154: return
+     155: aload_0
+     156: getfield      #16                 // Field wrapped:Lorg/apache/logging/log4j/core/pattern/TextRenderer;
+     159: aload_1
+     160: aload_2
+     161: aload_3
+     162: invokeinterface #82,  4           // InterfaceMethod org/apache/logging/log4j/core/pattern/TextRenderer.render:(Ljava/lang/String;Ljava/lang/StringBuilder;Ljava/lang/String;)V
+     167: return
+
+  public void render(java.lang.StringBuilder, java.lang.StringBuilder);
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field wrapped:Lorg/apache/logging/log4j/core/pattern/TextRenderer;
+       4: aload_1
+       5: aload_2
+       6: invokeinterface #88,  3           // InterfaceMethod org/apache/logging/log4j/core/pattern/TextRenderer.render:(Ljava/lang/StringBuilder;Ljava/lang/StringBuilder;)V
+      11: return
+}

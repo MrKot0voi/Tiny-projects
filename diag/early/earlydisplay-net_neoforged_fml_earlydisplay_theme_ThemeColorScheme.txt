@@ -1,0 +1,97 @@
+Compiled from "ThemeColorScheme.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeColorScheme extends java.lang.Record {
+  private final net.neoforged.fml.earlydisplay.theme.ThemeColor screenBackground;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeColor text;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeColor memoryLowColor;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeColor memoryHighColor;
+
+  public static final net.neoforged.fml.earlydisplay.theme.ThemeColorScheme DEFAULT;
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColorScheme(net.neoforged.fml.earlydisplay.theme.ThemeColor, net.neoforged.fml.earlydisplay.theme.ThemeColor, net.neoforged.fml.earlydisplay.theme.ThemeColor, net.neoforged.fml.earlydisplay.theme.ThemeColor);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field screenBackground:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field text:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      14: aload_0
+      15: aload_3
+      16: putfield      #16                 // Field memoryLowColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      19: aload_0
+      20: aload         4
+      22: putfield      #19                 // Field memoryHighColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      25: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #22,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #26,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #30,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor screenBackground();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field screenBackground:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor text();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field text:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor memoryLowColor();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field memoryLowColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor memoryHighColor();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field memoryHighColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       4: areturn
+
+  static {};
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeColorScheme
+       3: dup
+       4: sipush        239
+       7: bipush        50
+       9: bipush        61
+      11: invokestatic  #34                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.ofBytes:(III)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      14: sipush        255
+      17: sipush        255
+      20: sipush        255
+      23: invokestatic  #34                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.ofBytes:(III)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      26: iconst_0
+      27: bipush        127
+      29: iconst_0
+      30: invokestatic  #34                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.ofBytes:(III)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      33: sipush        255
+      36: bipush        127
+      38: iconst_0
+      39: invokestatic  #34                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.ofBytes:(III)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      42: invokespecial #40                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;)V
+      45: putstatic     #43                 // Field DEFAULT:Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+      48: return
+}

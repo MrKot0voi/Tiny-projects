@@ -1,0 +1,8 @@
+Compiled from "ErrorDisplay.java"
+public class net.neoforged.fml.earlydisplay.error.ErrorDisplay$FatalLoadingError extends java.lang.RuntimeException {
+  public net.neoforged.fml.earlydisplay.error.ErrorDisplay$FatalLoadingError();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/RuntimeException."<init>":()V
+       4: return
+}

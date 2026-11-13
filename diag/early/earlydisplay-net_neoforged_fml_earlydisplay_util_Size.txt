@@ -1,0 +1,49 @@
+Compiled from "Size.java"
+public final class net.neoforged.fml.earlydisplay.util.Size extends java.lang.Record {
+  private final float width;
+
+  private final float height;
+
+  public net.neoforged.fml.earlydisplay.util.Size(float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: fload_1
+       6: putfield      #7                  // Field width:F
+       9: aload_0
+      10: fload_2
+      11: putfield      #13                 // Field height:F
+      14: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #16,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/util/Size;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #20,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/util/Size;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #24,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/util/Size;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public float width();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field width:F
+       4: freturn
+
+  public float height();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field height:F
+       4: freturn
+}

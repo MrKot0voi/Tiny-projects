@@ -1,0 +1,95 @@
+Compiled from "ThemeShader.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeShader extends java.lang.Record {
+  private final net.neoforged.fml.earlydisplay.theme.ThemeResource vertexShader;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeResource fragmentShader;
+
+  public static final net.neoforged.fml.earlydisplay.theme.ThemeShader DEFAULT_GUI;
+
+  public static final net.neoforged.fml.earlydisplay.theme.ThemeShader DEFAULT_FONT;
+
+  public static final net.neoforged.fml.earlydisplay.theme.ThemeShader DEFAULT_COLOR;
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeShader(net.neoforged.fml.earlydisplay.theme.ThemeResource, net.neoforged.fml.earlydisplay.theme.ThemeResource);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field vertexShader:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field fragmentShader:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+      14: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #16,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #20,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #24,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource vertexShader();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field vertexShader:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource fragmentShader();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field fragmentShader:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: areturn
+
+  static {};
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeShader
+       3: dup
+       4: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+       7: dup
+       8: ldc           #30                 // String gui.vert
+      10: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      13: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      16: dup
+      17: ldc           #35                 // String gui.frag
+      19: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      22: invokespecial #37                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;)V
+      25: putstatic     #40                 // Field DEFAULT_GUI:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+      28: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeShader
+      31: dup
+      32: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      35: dup
+      36: ldc           #30                 // String gui.vert
+      38: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      41: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      44: dup
+      45: ldc           #44                 // String gui_font.frag
+      47: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      50: invokespecial #37                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;)V
+      53: putstatic     #46                 // Field DEFAULT_FONT:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+      56: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeShader
+      59: dup
+      60: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      63: dup
+      64: ldc           #30                 // String gui.vert
+      66: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      69: new           #28                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      72: dup
+      73: ldc           #49                 // String gui_color.frag
+      75: invokespecial #32                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      78: invokespecial #37                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;)V
+      81: putstatic     #51                 // Field DEFAULT_COLOR:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+      84: return
+}

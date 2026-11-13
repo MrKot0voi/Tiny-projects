@@ -1,0 +1,70 @@
+Compiled from "ThemeTexture.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeTexture extends java.lang.Record {
+  private final net.neoforged.fml.earlydisplay.theme.ThemeResource resource;
+
+  private final net.neoforged.fml.earlydisplay.theme.TextureScaling scaling;
+
+  private final net.neoforged.fml.earlydisplay.theme.AnimationMetadata animation;
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeTexture(net.neoforged.fml.earlydisplay.theme.ThemeResource, net.neoforged.fml.earlydisplay.theme.TextureScaling);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aconst_null
+       4: invokespecial #21                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)V
+       7: return
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeTexture(net.neoforged.fml.earlydisplay.theme.ThemeResource, net.neoforged.fml.earlydisplay.theme.TextureScaling, net.neoforged.fml.earlydisplay.theme.AnimationMetadata);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field resource:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field animation:Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+      19: return
+
+  public java.lang.String toString();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field resource:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: invokevirtual #24                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.toString:()Ljava/lang/String;
+       7: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #30,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #34,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource resource();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field resource:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.TextureScaling scaling();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field scaling:Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.AnimationMetadata animation();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field animation:Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;
+       4: areturn
+}

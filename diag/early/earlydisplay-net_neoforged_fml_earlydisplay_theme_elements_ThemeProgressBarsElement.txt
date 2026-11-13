@@ -1,0 +1,38 @@
+Compiled from "ThemeProgressBarsElement.java"
+public class net.neoforged.fml.earlydisplay.theme.elements.ThemeProgressBarsElement extends net.neoforged.fml.earlydisplay.theme.elements.ThemeElement {
+  private int labelGap;
+
+  private int barGap;
+
+  public net.neoforged.fml.earlydisplay.theme.elements.ThemeProgressBarsElement();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeElement."<init>":()V
+       4: return
+
+  public int labelGap();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field labelGap:I
+       4: ireturn
+
+  public void setLabelGap(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #7                  // Field labelGap:I
+       5: return
+
+  public int barGap();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field barGap:I
+       4: ireturn
+
+  public void setBarGap(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #13                 // Field barGap:I
+       5: return
+}

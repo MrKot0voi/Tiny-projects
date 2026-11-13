@@ -1,0 +1,173 @@
+Compiled from "ImmediateWindowHandler.java"
+public class net.neoforged.fml.loading.ImmediateWindowHandler {
+  private static final org.apache.logging.log4j.Logger LOGGER;
+
+  static net.neoforged.neoforgespi.earlywindow.ImmediateWindowProvider provider;
+
+  public net.neoforged.fml.loading.ImmediateWindowHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void load(net.neoforged.neoforgespi.ILaunchContext, boolean, net.neoforged.fml.loading.ProgramArgs);
+    Code:
+       0: aload_0
+       1: ldc           #7                  // class net/neoforged/neoforgespi/earlywindow/GraphicsBootstrapper
+       3: invokestatic  #9                  // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       6: invokestatic  #15                 // Method net/neoforged/fml/util/ServiceLoaderUtil.loadEarlyServices:(Lnet/neoforged/neoforgespi/ILaunchContext;Ljava/lang/Class;Ljava/util/Collection;)Ljava/util/List;
+       9: aload_2
+      10: invokedynamic #21,  0             // InvokeDynamic #0:accept:(Lnet/neoforged/fml/loading/ProgramArgs;)Ljava/util/function/Consumer;
+      15: invokeinterface #25,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      20: iload_1
+      21: ifeq          39
+      24: aconst_null
+      25: putstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+      28: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+      31: ldc           #39                 // String Not loading early display in headless mode.
+      33: invokeinterface #41,  2           // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;)V
+      38: return
+      39: getstatic     #47                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_CONTROL:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+      42: invokestatic  #53                 // Method net/neoforged/fml/loading/FMLConfig.getBoolConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)Z
+      45: ifne          65
+      48: aconst_null
+      49: putstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+      52: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+      55: ldc           #59                 // String ImmediateWindowProvider not loading because splash screen is disabled
+      57: invokeinterface #41,  2           // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;)V
+      62: goto          178
+      65: getstatic     #61                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_PROVIDER:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+      68: invokestatic  #64                 // Method net/neoforged/fml/loading/FMLConfig.getConfigValue:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;)Ljava/lang/String;
+      71: astore_3
+      72: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+      75: ldc           #68                 // String Loading ImmediateWindowProvider {}
+      77: aload_3
+      78: invokeinterface #70,  3           // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      83: aload_0
+      84: ldc           #73                 // class net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider
+      86: invokestatic  #9                  // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      89: invokestatic  #15                 // Method net/neoforged/fml/util/ServiceLoaderUtil.loadEarlyServices:(Lnet/neoforged/neoforgespi/ILaunchContext;Ljava/lang/Class;Ljava/util/Collection;)Ljava/util/List;
+      92: invokeinterface #75,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      97: aload_3
+      98: invokedynamic #79,  0             // InvokeDynamic #1:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+     103: invokeinterface #83,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     108: invokeinterface #89,  1           // InterfaceMethod java/util/stream/Stream.findFirst:()Ljava/util/Optional;
+     113: astore        4
+     115: aload         4
+     117: aconst_null
+     118: invokevirtual #93                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     121: checkcast     #73                 // class net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider
+     124: putstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     127: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     130: ifnonnull     147
+     133: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+     136: ldc           #99                 // String Failed to find ImmediateWindowProvider {}, disabling
+     138: aload_3
+     139: invokeinterface #70,  3           // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     144: goto          178
+     147: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     150: aload_2
+     151: invokeinterface #101,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.initialize:(Lnet/neoforged/fml/loading/ProgramArgs;)V
+     156: goto          178
+     159: astore        5
+     161: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+     164: ldc           #107                // String Failed to initialize ImmediateWindowProvider \'{}\'
+     166: aload_3
+     167: aload         5
+     169: invokeinterface #109,  4          // InterfaceMethod org/apache/logging/log4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     174: aconst_null
+     175: putstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     178: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     181: ifnull        198
+     184: getstatic     #61                 // Field net/neoforged/fml/loading/FMLConfig$ConfigValue.EARLY_WINDOW_PROVIDER:Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;
+     187: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+     190: invokeinterface #113,  1          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.name:()Ljava/lang/String;
+     195: invokestatic  #117                // Method net/neoforged/fml/loading/FMLConfig.updateConfig:(Lnet/neoforged/fml/loading/FMLConfig$ConfigValue;Ljava/lang/Object;)V
+     198: return
+    Exception table:
+       from    to  target type
+         147   156   159   Class java/lang/Exception
+
+  public static void setNeoForgeVersion(java.lang.String);
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        15
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: aload_0
+      10: invokeinterface #121,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.setNeoForgeVersion:(Ljava/lang/String;)V
+      15: return
+
+  public static void setMinecraftVersion(java.lang.String);
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        15
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: aload_0
+      10: invokeinterface #124,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.setMinecraftVersion:(Ljava/lang/String;)V
+      15: return
+
+  public static void renderTick();
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        14
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: invokeinterface #127,  1          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.periodicTick:()V
+      14: return
+
+  public static void updateProgress(java.lang.String);
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        15
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: aload_0
+      10: invokeinterface #130,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.updateProgress:(Ljava/lang/String;)V
+      15: return
+
+  public static void crash(java.lang.String);
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        15
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: aload_0
+      10: invokeinterface #133,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.crash:(Ljava/lang/String;)V
+      15: return
+
+  public static void displayFatalErrorAndExit(java.util.List<net.neoforged.fml.ModLoadingIssue>, java.nio.file.Path, java.nio.file.Path, java.nio.file.Path);
+    Code:
+       0: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: ifnull        18
+       6: getstatic     #29                 // Field provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       9: aload_0
+      10: aload_1
+      11: aload_2
+      12: aload_3
+      13: invokeinterface #136,  5          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.displayFatalErrorAndExit:(Ljava/util/List;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V
+      18: return
+
+  private static boolean lambda$load$1(java.lang.String, net.neoforged.neoforgespi.earlywindow.ImmediateWindowProvider);
+    Code:
+       0: aload_1
+       1: invokeinterface #113,  1          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider.name:()Ljava/lang/String;
+       6: aload_0
+       7: invokestatic  #140                // Method java/util/Objects.equals:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      10: ireturn
+
+  private static void lambda$load$0(net.neoforged.fml.loading.ProgramArgs, net.neoforged.neoforgespi.earlywindow.GraphicsBootstrapper);
+    Code:
+       0: getstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       3: ldc           #146                // String Running graphics bootstrap plugin {}
+       5: aload_1
+       6: invokeinterface #148,  1          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/GraphicsBootstrapper.name:()Ljava/lang/String;
+      11: invokeinterface #70,  3           // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      16: aload_1
+      17: aload_0
+      18: invokevirtual #149                // Method net/neoforged/fml/loading/ProgramArgs.getArguments:()[Ljava/lang/String;
+      21: invokeinterface #155,  2          // InterfaceMethod net/neoforged/neoforgespi/earlywindow/GraphicsBootstrapper.bootstrap:([Ljava/lang/String;)V
+      26: return
+
+  static {};
+    Code:
+       0: invokestatic  #159                // Method org/apache/logging/log4j/LogManager.getLogger:()Lorg/apache/logging/log4j/Logger;
+       3: putstatic     #35                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       6: return
+}

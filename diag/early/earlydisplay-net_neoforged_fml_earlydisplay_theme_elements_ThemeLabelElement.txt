@@ -1,0 +1,28 @@
+Compiled from "ThemeLabelElement.java"
+public class net.neoforged.fml.earlydisplay.theme.elements.ThemeLabelElement extends net.neoforged.fml.earlydisplay.theme.elements.ThemeDecorativeElement {
+  private java.lang.String text;
+
+  public net.neoforged.fml.earlydisplay.theme.elements.ThemeLabelElement();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeDecorativeElement."<init>":()V
+       4: aload_0
+       5: ldc           #7                  // String
+       7: putfield      #9                  // Field text:Ljava/lang/String;
+      10: return
+
+  public java.lang.String text();
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field text:Ljava/lang/String;
+       4: areturn
+
+  public void setText(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       5: checkcast     #21                 // class java/lang/String
+       8: putfield      #9                  // Field text:Ljava/lang/String;
+      11: return
+}

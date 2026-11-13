@@ -1,0 +1,15 @@
+Compiled from "EarlyLoadingScreenController.java"
+public interface net.neoforged.fml.loading.EarlyLoadingScreenController {
+  public static net.neoforged.fml.loading.EarlyLoadingScreenController current();
+    Code:
+       0: getstatic     #1                  // Field net/neoforged/fml/loading/ImmediateWindowHandler.provider:Lnet/neoforged/neoforgespi/earlywindow/ImmediateWindowProvider;
+       3: areturn
+
+  public abstract long takeOverGlfwWindow();
+
+  public abstract void periodicTick();
+
+  public abstract void updateProgress(java.lang.String);
+
+  public abstract void completeProgress();
+}

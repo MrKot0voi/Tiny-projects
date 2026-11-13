@@ -1,0 +1,741 @@
+Compiled from "FontLoader.java"
+final class net.neoforged.fml.earlydisplay.error.FontLoader {
+  private static final org.apache.logging.log4j.Logger LOGGER;
+
+  private static final java.lang.String[] FONT_PATHS;
+
+  private static final int GLYPH_HEIGHT = 16;
+
+  static net.neoforged.fml.earlydisplay.render.SimpleFont loadVanillaFont(java.lang.String, java.lang.String);
+    Code:
+       0: aload_0
+       1: ifnull        8
+       4: aload_1
+       5: ifnonnull     10
+       8: aconst_null
+       9: areturn
+      10: aload_0
+      11: iconst_0
+      12: anewarray     #1                  // class java/lang/String
+      15: invokestatic  #3                  // InterfaceMethod java/nio/file/Path.of:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+      18: astore_2
+      19: aload_2
+      20: ldc           #9                  // String indexes
+      22: invokeinterface #11,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      27: aload_1
+      28: invokedynamic #15,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      33: invokeinterface #11,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      38: astore_3
+      39: aload_3
+      40: iconst_0
+      41: anewarray     #19                 // class java/nio/file/LinkOption
+      44: invokestatic  #21                 // Method java/nio/file/Files.isRegularFile:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+      47: ifne          52
+      50: aconst_null
+      51: areturn
+      52: new           #27                 // class java/util/ArrayList
+      55: dup
+      56: getstatic     #29                 // Field FONT_PATHS:[Ljava/lang/String;
+      59: arraylength
+      60: invokespecial #35                 // Method java/util/ArrayList."<init>":(I)V
+      63: astore        4
+      65: new           #39                 // class java/io/BufferedReader
+      68: dup
+      69: aload_3
+      70: invokestatic  #41                 // Method java/nio/file/Files.newBufferedReader:(Ljava/nio/file/Path;)Ljava/io/BufferedReader;
+      73: invokespecial #45                 // Method java/io/BufferedReader."<init>":(Ljava/io/Reader;)V
+      76: astore        5
+      78: new           #48                 // class com/google/gson/Gson
+      81: dup
+      82: invokespecial #50                 // Method com/google/gson/Gson."<init>":()V
+      85: aload         5
+      87: ldc           #53                 // class com/google/gson/JsonObject
+      89: invokevirtual #55                 // Method com/google/gson/Gson.fromJson:(Ljava/io/Reader;Ljava/lang/Class;)Ljava/lang/Object;
+      92: checkcast     #53                 // class com/google/gson/JsonObject
+      95: ldc           #59                 // String objects
+      97: invokevirtual #61                 // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+     100: astore        6
+     102: getstatic     #29                 // Field FONT_PATHS:[Ljava/lang/String;
+     105: astore        7
+     107: aload         7
+     109: arraylength
+     110: istore        8
+     112: iconst_0
+     113: istore        9
+     115: iload         9
+     117: iload         8
+     119: if_icmpge     213
+     122: aload         7
+     124: iload         9
+     126: aaload
+     127: astore        10
+     129: aload         6
+     131: aload         10
+     133: invokevirtual #65                 // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+     136: ifeq          207
+     139: aload         6
+     141: aload         10
+     143: invokevirtual #61                 // Method com/google/gson/JsonObject.getAsJsonObject:(Ljava/lang/String;)Lcom/google/gson/JsonObject;
+     146: ldc           #69                 // String hash
+     148: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     151: invokevirtual #75                 // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+     154: astore        11
+     156: aload_2
+     157: ldc           #59                 // String objects
+     159: invokeinterface #11,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     164: aload         11
+     166: iconst_0
+     167: iconst_2
+     168: invokevirtual #81                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+     171: invokeinterface #11,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     176: aload         11
+     178: invokeinterface #11,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     183: astore        12
+     185: aload         12
+     187: iconst_0
+     188: anewarray     #19                 // class java/nio/file/LinkOption
+     191: invokestatic  #21                 // Method java/nio/file/Files.isRegularFile:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+     194: ifeq          207
+     197: aload         4
+     199: aload         12
+     201: invokeinterface #85,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     206: pop
+     207: iinc          9, 1
+     210: goto          115
+     213: aload         5
+     215: invokevirtual #91                 // Method java/io/BufferedReader.close:()V
+     218: goto          243
+     221: astore        6
+     223: aload         5
+     225: invokevirtual #91                 // Method java/io/BufferedReader.close:()V
+     228: goto          240
+     231: astore        7
+     233: aload         6
+     235: aload         7
+     237: invokevirtual #96                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     240: aload         6
+     242: athrow
+     243: goto          262
+     246: astore        5
+     248: getstatic     #100                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+     251: ldc           #104                // String Failed to load asset index file
+     253: aload         5
+     255: invokeinterface #106,  3          // InterfaceMethod org/apache/logging/log4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     260: aconst_null
+     261: areturn
+     262: aload         4
+     264: invokeinterface #112,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     269: ifeq          274
+     272: aconst_null
+     273: areturn
+     274: new           #27                 // class java/util/ArrayList
+     277: dup
+     278: invokespecial #116                // Method java/util/ArrayList."<init>":()V
+     281: astore        5
+     283: aload         4
+     285: invokeinterface #117,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     290: astore        6
+     292: aload         6
+     294: invokeinterface #121,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     299: ifeq          449
+     302: aload         6
+     304: invokeinterface #126,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     309: checkcast     #4                  // class java/nio/file/Path
+     312: astore        7
+     314: new           #130                // class java/util/zip/ZipInputStream
+     317: dup
+     318: aload         7
+     320: iconst_0
+     321: anewarray     #132                // class java/nio/file/OpenOption
+     324: invokestatic  #134                // Method java/nio/file/Files.newInputStream:(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/InputStream;
+     327: invokespecial #138                // Method java/util/zip/ZipInputStream."<init>":(Ljava/io/InputStream;)V
+     330: astore        8
+     332: new           #27                 // class java/util/ArrayList
+     335: dup
+     336: invokespecial #116                // Method java/util/ArrayList."<init>":()V
+     339: astore        9
+     341: aload         8
+     343: invokevirtual #141                // Method java/util/zip/ZipInputStream.getNextEntry:()Ljava/util/zip/ZipEntry;
+     346: dup
+     347: astore        10
+     349: ifnull        389
+     352: aload         10
+     354: invokevirtual #145                // Method java/util/zip/ZipEntry.getName:()Ljava/lang/String;
+     357: astore        11
+     359: aload         11
+     361: ldc           #150                // String .hex
+     363: invokevirtual #152                // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+     366: ifeq          386
+     369: aload         8
+     371: aload         9
+     373: dup
+     374: invokestatic  #155                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     377: pop
+     378: invokedynamic #161,  0            // InvokeDynamic #1:accept:(Ljava/util/List;)Ljava/util/function/Consumer;
+     383: invokestatic  #165                // Method parseHexFile:(Ljava/io/InputStream;Ljava/util/function/Consumer;)V
+     386: goto          341
+     389: aload         5
+     391: aload         9
+     393: invokeinterface #169,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+     398: pop
+     399: aload         8
+     401: invokevirtual #173                // Method java/util/zip/ZipInputStream.close:()V
+     404: goto          429
+     407: astore        9
+     409: aload         8
+     411: invokevirtual #173                // Method java/util/zip/ZipInputStream.close:()V
+     414: goto          426
+     417: astore        10
+     419: aload         9
+     421: aload         10
+     423: invokevirtual #96                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     426: aload         9
+     428: athrow
+     429: goto          446
+     432: astore        8
+     434: getstatic     #100                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+     437: ldc           #174                // String Failed to load font ZIP
+     439: aload         8
+     441: invokeinterface #106,  3          // InterfaceMethod org/apache/logging/log4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     446: goto          292
+     449: aload         5
+     451: invokeinterface #112,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     456: ifeq          463
+     459: aconst_null
+     460: goto          468
+     463: aload         5
+     465: invokestatic  #176                // Method buildFont:(Ljava/util/List;)Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     468: areturn
+    Exception table:
+       from    to  target type
+          78   213   221   Class java/lang/Throwable
+         223   228   231   Class java/lang/Throwable
+          65   243   246   Class java/lang/Throwable
+         332   399   407   Class java/lang/Throwable
+         409   414   417   Class java/lang/Throwable
+         314   429   432   Class java/lang/Throwable
+
+  private static void parseHexFile(java.io.InputStream, java.util.function.Consumer<net.neoforged.fml.earlydisplay.error.FontLoader$ProtoGlyph>) throws java.io.IOException;
+    Code:
+       0: new           #39                 // class java/io/BufferedReader
+       3: dup
+       4: new           #180                // class java/io/InputStreamReader
+       7: dup
+       8: aload_0
+       9: invokespecial #182                // Method java/io/InputStreamReader."<init>":(Ljava/io/InputStream;)V
+      12: invokespecial #45                 // Method java/io/BufferedReader."<init>":(Ljava/io/Reader;)V
+      15: astore_2
+      16: aload_2
+      17: invokevirtual #183                // Method java/io/BufferedReader.readLine:()Ljava/lang/String;
+      20: dup
+      21: astore_3
+      22: ifnull        225
+      25: aload_3
+      26: bipush        58
+      28: invokevirtual #186                // Method java/lang/String.indexOf:(I)I
+      31: istore        4
+      33: iload         4
+      35: iconst_4
+      36: if_icmplt     46
+      39: iload         4
+      41: bipush        6
+      43: if_icmple     54
+      46: new           #190                // class java/lang/IllegalStateException
+      49: dup
+      50: invokespecial #192                // Method java/lang/IllegalStateException."<init>":()V
+      53: athrow
+      54: aload_3
+      55: iconst_0
+      56: iload         4
+      58: invokevirtual #81                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+      61: bipush        16
+      63: invokestatic  #193                // Method java/lang/Integer.parseInt:(Ljava/lang/String;I)I
+      66: istore        5
+      68: aload_3
+      69: iload         4
+      71: iconst_1
+      72: iadd
+      73: invokevirtual #199                // Method java/lang/String.substring:(I)Ljava/lang/String;
+      76: astore        6
+      78: aload         6
+      80: invokevirtual #202                // Method java/lang/String.length:()I
+      83: istore        7
+      85: iload         7
+      87: bipush        32
+      89: if_icmpeq     122
+      92: iload         7
+      94: bipush        64
+      96: if_icmpeq     122
+      99: iload         7
+     101: bipush        96
+     103: if_icmpeq     122
+     106: iload         7
+     108: sipush        128
+     111: if_icmpeq     122
+     114: new           #190                // class java/lang/IllegalStateException
+     117: dup
+     118: invokespecial #192                // Method java/lang/IllegalStateException."<init>":()V
+     121: athrow
+     122: iload         7
+     124: bipush        16
+     126: idiv
+     127: istore        8
+     129: iload         8
+     131: iconst_4
+     132: imul
+     133: istore        9
+     135: bipush        16
+     137: newarray       int
+     139: astore        10
+     141: iconst_0
+     142: istore        11
+     144: iload         11
+     146: iload         7
+     148: if_icmpge     203
+     151: iload         11
+     153: iload         8
+     155: idiv
+     156: istore        12
+     158: iload         8
+     160: iconst_1
+     161: isub
+     162: iload         11
+     164: iload         8
+     166: irem
+     167: isub
+     168: iconst_4
+     169: imul
+     170: istore        13
+     172: aload         6
+     174: iload         11
+     176: invokevirtual #206                // Method java/lang/String.charAt:(I)C
+     179: invokestatic  #210                // Method parseHexDigit:(C)I
+     182: istore        14
+     184: aload         10
+     186: iload         12
+     188: dup2
+     189: iaload
+     190: iload         14
+     192: iload         13
+     194: ishl
+     195: ior
+     196: iastore
+     197: iinc          11, 1
+     200: goto          144
+     203: aload_1
+     204: new           #214                // class net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph
+     207: dup
+     208: iload         5
+     210: iload         9
+     212: aload         10
+     214: invokespecial #216                // Method net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph."<init>":(II[I)V
+     217: invokeinterface #219,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+     222: goto          16
+     225: return
+
+  private static int parseHexDigit(char);
+    Code:
+       0: iload_0
+       1: tableswitch   { // 48 to 102
+                    48: 236
+                    49: 240
+                    50: 244
+                    51: 248
+                    52: 252
+                    53: 256
+                    54: 260
+                    55: 265
+                    56: 270
+                    57: 275
+                    58: 310
+                    59: 310
+                    60: 310
+                    61: 310
+                    62: 310
+                    63: 310
+                    64: 310
+                    65: 280
+                    66: 285
+                    67: 290
+                    68: 295
+                    69: 300
+                    70: 305
+                    71: 310
+                    72: 310
+                    73: 310
+                    74: 310
+                    75: 310
+                    76: 310
+                    77: 310
+                    78: 310
+                    79: 310
+                    80: 310
+                    81: 310
+                    82: 310
+                    83: 310
+                    84: 310
+                    85: 310
+                    86: 310
+                    87: 310
+                    88: 310
+                    89: 310
+                    90: 310
+                    91: 310
+                    92: 310
+                    93: 310
+                    94: 310
+                    95: 310
+                    96: 310
+                    97: 280
+                    98: 285
+                    99: 290
+                   100: 295
+                   101: 300
+                   102: 305
+               default: 310
+          }
+     236: iconst_0
+     237: goto          324
+     240: iconst_1
+     241: goto          324
+     244: iconst_2
+     245: goto          324
+     248: iconst_3
+     249: goto          324
+     252: iconst_4
+     253: goto          324
+     256: iconst_5
+     257: goto          324
+     260: bipush        6
+     262: goto          324
+     265: bipush        7
+     267: goto          324
+     270: bipush        8
+     272: goto          324
+     275: bipush        9
+     277: goto          324
+     280: bipush        10
+     282: goto          324
+     285: bipush        11
+     287: goto          324
+     290: bipush        12
+     292: goto          324
+     295: bipush        13
+     297: goto          324
+     300: bipush        14
+     302: goto          324
+     305: bipush        15
+     307: goto          324
+     310: new           #224                // class java/lang/IllegalArgumentException
+     313: dup
+     314: iload_0
+     315: invokedynamic #226,  0            // InvokeDynamic #2:makeConcatWithConstants:(C)Ljava/lang/String;
+     320: invokespecial #229                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+     323: athrow
+     324: ireturn
+
+  private static net.neoforged.fml.earlydisplay.render.SimpleFont buildFont(java.util.List<net.neoforged.fml.earlydisplay.error.FontLoader$ProtoGlyph>);
+    Code:
+       0: invokestatic  #232                // Method org/lwjgl/opengl/GL11C.glGenTextures:()I
+       3: istore_1
+       4: iload_1
+       5: invokestatic  #237                // Method net/neoforged/fml/earlydisplay/render/GlState.bindTexture2D:(I)V
+       8: iload_1
+       9: ldc           #242                // String unifont texture
+      11: invokestatic  #244                // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelTexture:(ILjava/lang/String;)V
+      14: aload_0
+      15: invokeinterface #250,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      20: invokedynamic #254,  0            // InvokeDynamic #3:applyAsInt:()Ljava/util/function/ToIntFunction;
+      25: invokeinterface #258,  2          // InterfaceMethod java/util/stream/Stream.mapToInt:(Ljava/util/function/ToIntFunction;)Ljava/util/stream/IntStream;
+      30: invokeinterface #264,  1          // InterfaceMethod java/util/stream/IntStream.sum:()I
+      35: istore_2
+      36: iconst_1
+      37: istore_3
+      38: sipush        512
+      41: istore        4
+      43: sipush        512
+      46: istore        5
+      48: iload         4
+      50: iload         5
+      52: imul
+      53: iload_2
+      54: if_icmpge     89
+      57: iload_3
+      58: ifeq          70
+      61: iload         4
+      63: iconst_1
+      64: ishl
+      65: istore        4
+      67: goto          76
+      70: iload         5
+      72: iconst_1
+      73: ishl
+      74: istore        5
+      76: iload_3
+      77: ifne          84
+      80: iconst_1
+      81: goto          85
+      84: iconst_0
+      85: istore_3
+      86: goto          48
+      89: sipush        3379
+      92: invokestatic  #269                // Method org/lwjgl/opengl/GL11C.glGetInteger:(I)I
+      95: istore        6
+      97: iload         4
+      99: iload         6
+     101: if_icmpgt     111
+     104: iload         5
+     106: iload         6
+     108: if_icmple     113
+     111: aconst_null
+     112: areturn
+     113: iconst_0
+     114: istore        7
+     116: iconst_0
+     117: istore        8
+     119: new           #272                // class java/util/HashMap
+     122: dup
+     123: invokespecial #274                // Method java/util/HashMap."<init>":()V
+     126: astore        9
+     128: iload         4
+     130: iload         5
+     132: imul
+     133: invokestatic  #275                // Method org/lwjgl/BufferUtils.createByteBuffer:(I)Ljava/nio/ByteBuffer;
+     136: astore        10
+     138: aload_0
+     139: invokeinterface #117,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     144: astore        11
+     146: aload         11
+     148: invokeinterface #121,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     153: ifeq          422
+     156: aload         11
+     158: invokeinterface #126,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     163: checkcast     #214                // class net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph
+     166: astore        12
+     168: aload         12
+     170: getfield      #281                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.codepoint:I
+     173: invokestatic  #285                // Method java/lang/Character.toChars:(I)[C
+     176: iconst_0
+     177: caload
+     178: istore        13
+     180: iconst_4
+     181: newarray       int
+     183: dup
+     184: iconst_0
+     185: iconst_0
+     186: iastore
+     187: dup
+     188: iconst_1
+     189: iconst_4
+     190: iastore
+     191: dup
+     192: iconst_2
+     193: aload         12
+     195: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     198: iastore
+     199: dup
+     200: iconst_3
+     201: bipush        20
+     203: iastore
+     204: astore        14
+     206: iconst_4
+     207: newarray       float
+     209: dup
+     210: iconst_0
+     211: iload         7
+     213: i2f
+     214: iload         4
+     216: i2f
+     217: fdiv
+     218: fastore
+     219: dup
+     220: iconst_1
+     221: iload         8
+     223: i2f
+     224: iload         5
+     226: i2f
+     227: fdiv
+     228: fastore
+     229: dup
+     230: iconst_2
+     231: iload         7
+     233: aload         12
+     235: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     238: iadd
+     239: i2f
+     240: iload         4
+     242: i2f
+     243: fdiv
+     244: fastore
+     245: dup
+     246: iconst_3
+     247: iload         8
+     249: bipush        16
+     251: iadd
+     252: i2f
+     253: iload         5
+     255: i2f
+     256: fdiv
+     257: fastore
+     258: astore        15
+     260: aload         9
+     262: aload         12
+     264: getfield      #281                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.codepoint:I
+     267: invokestatic  #294                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     270: new           #298                // class net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph
+     273: dup
+     274: iload         13
+     276: aload         12
+     278: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     281: aload         14
+     283: aload         15
+     285: invokespecial #300                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph."<init>":(CI[I[F)V
+     288: invokeinterface #303,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     293: pop
+     294: aload         12
+     296: getfield      #309                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.lines:[I
+     299: astore        16
+     301: iconst_0
+     302: istore        17
+     304: iload         17
+     306: aload         16
+     308: arraylength
+     309: if_icmpge     396
+     312: aload         16
+     314: iload         17
+     316: iaload
+     317: istore        18
+     319: iload         8
+     321: iload         17
+     323: iadd
+     324: iload         4
+     326: imul
+     327: iload         7
+     329: iadd
+     330: istore        19
+     332: iconst_0
+     333: istore        20
+     335: iload         20
+     337: aload         12
+     339: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     342: if_icmpge     390
+     345: iload         19
+     347: iload         20
+     349: iadd
+     350: istore        21
+     352: iload         18
+     354: aload         12
+     356: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     359: iconst_1
+     360: isub
+     361: iload         20
+     363: isub
+     364: ishr
+     365: iconst_1
+     366: iand
+     367: sipush        255
+     370: imul
+     371: istore        22
+     373: aload         10
+     375: iload         21
+     377: iload         22
+     379: i2b
+     380: invokevirtual #313                // Method java/nio/ByteBuffer.put:(IB)Ljava/nio/ByteBuffer;
+     383: pop
+     384: iinc          20, 1
+     387: goto          335
+     390: iinc          17, 1
+     393: goto          304
+     396: iload         7
+     398: aload         12
+     400: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+     403: iadd
+     404: istore        7
+     406: iload         7
+     408: iload         4
+     410: if_icmplt     419
+     413: iconst_0
+     414: istore        7
+     416: iinc          8, 16
+     419: goto          146
+     422: sipush        3553
+     425: iconst_0
+     426: sipush        6403
+     429: iload         4
+     431: iload         5
+     433: iconst_0
+     434: sipush        6403
+     437: sipush        5121
+     440: aload         10
+     442: invokestatic  #318                // Method org/lwjgl/opengl/GL11C.glTexImage2D:(IIIIIIIILjava/nio/ByteBuffer;)V
+     445: sipush        3553
+     448: sipush        10242
+     451: ldc_w         #324                // int 33071
+     454: invokestatic  #325                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+     457: sipush        3553
+     460: sipush        10243
+     463: ldc_w         #324                // int 33071
+     466: invokestatic  #325                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+     469: sipush        3553
+     472: sipush        10240
+     475: sipush        9728
+     478: invokestatic  #325                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+     481: sipush        3553
+     484: sipush        10241
+     487: sipush        9728
+     490: invokestatic  #325                // Method org/lwjgl/opengl/GL11C.glTexParameteri:(III)V
+     493: aload         9
+     495: bipush        32
+     497: invokestatic  #294                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     500: invokeinterface #329,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+     505: ifne          510
+     508: aconst_null
+     509: areturn
+     510: new           #332                // class net/neoforged/fml/earlydisplay/render/SimpleFont
+     513: dup
+     514: bipush        24
+     516: bipush        16
+     518: iload_1
+     519: aload         9
+     521: dup
+     522: invokestatic  #155                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     525: pop
+     526: invokedynamic #334,  0            // InvokeDynamic #4:apply:(Ljava/util/Map;)Ljava/util/function/IntFunction;
+     531: invokespecial #338                // Method net/neoforged/fml/earlydisplay/render/SimpleFont."<init>":(IIILjava/util/function/IntFunction;)V
+     534: areturn
+
+  private net.neoforged.fml.earlydisplay.error.FontLoader();
+    Code:
+       0: aload_0
+       1: invokespecial #341                // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static int lambda$buildFont$0(net.neoforged.fml.earlydisplay.error.FontLoader$ProtoGlyph);
+    Code:
+       0: aload_0
+       1: getfield      #291                // Field net/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph.width:I
+       4: bipush        16
+       6: imul
+       7: ireturn
+
+  static {};
+    Code:
+       0: invokestatic  #344                // Method org/apache/logging/log4j/LogManager.getLogger:()Lorg/apache/logging/log4j/Logger;
+       3: putstatic     #100                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       6: iconst_3
+       7: anewarray     #1                  // class java/lang/String
+      10: dup
+      11: iconst_0
+      12: ldc_w         #350                // String minecraft/font/unifont.zip
+      15: aastore
+      16: dup
+      17: iconst_1
+      18: ldc_w         #352                // String minecraft/font/unifont_pua.zip
+      21: aastore
+      22: dup
+      23: iconst_2
+      24: ldc_w         #354                // String minecraft/font/unifont_jp.zip
+      27: aastore
+      28: putstatic     #29                 // Field FONT_PATHS:[Ljava/lang/String;
+      31: return
+}

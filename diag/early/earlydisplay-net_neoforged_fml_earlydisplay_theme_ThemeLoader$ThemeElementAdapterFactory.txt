@@ -1,0 +1,103 @@
+Compiled from "ThemeLoader.java"
+class net.neoforged.fml.earlydisplay.theme.ThemeLoader$ThemeElementAdapterFactory implements com.google.gson.TypeAdapterFactory {
+  private static final java.util.Map<java.lang.String, java.lang.Class<? extends net.neoforged.fml.earlydisplay.theme.elements.ThemeDecorativeElement>> TYPE_MAP;
+
+  private net.neoforged.fml.earlydisplay.theme.ThemeLoader$ThemeElementAdapterFactory();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public <T> com.google.gson.TypeAdapter<T> create(com.google.gson.Gson, com.google.gson.reflect.TypeToken<T>);
+    Code:
+       0: aload_2
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: ldc           #7                  // class net/neoforged/fml/earlydisplay/theme/elements/ThemeDecorativeElement
+       8: aload_2
+       9: invokevirtual #9                  // Method com/google/gson/reflect/TypeToken.getRawType:()Ljava/lang/Class;
+      12: invokevirtual #15                 // Method java/lang/Class.isAssignableFrom:(Ljava/lang/Class;)Z
+      15: ifne          20
+      18: aconst_null
+      19: areturn
+      20: aload_1
+      21: ldc           #21                 // class com/google/gson/JsonElement
+      23: invokevirtual #23                 // Method com/google/gson/Gson.getAdapter:(Ljava/lang/Class;)Lcom/google/gson/TypeAdapter;
+      26: astore_3
+      27: new           #29                 // class java/util/HashMap
+      30: dup
+      31: invokespecial #31                 // Method java/util/HashMap."<init>":()V
+      34: astore        4
+      36: new           #29                 // class java/util/HashMap
+      39: dup
+      40: invokespecial #31                 // Method java/util/HashMap."<init>":()V
+      43: astore        5
+      45: new           #29                 // class java/util/HashMap
+      48: dup
+      49: invokespecial #31                 // Method java/util/HashMap."<init>":()V
+      52: astore        6
+      54: getstatic     #32                 // Field TYPE_MAP:Ljava/util/Map;
+      57: invokeinterface #38,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      62: invokeinterface #44,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      67: astore        7
+      69: aload         7
+      71: invokeinterface #50,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      76: ifeq          182
+      79: aload         7
+      81: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      86: checkcast     #60                 // class java/util/Map$Entry
+      89: astore        8
+      91: aload_1
+      92: aload_0
+      93: aload         8
+      95: invokeinterface #62,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     100: checkcast     #16                 // class java/lang/Class
+     103: invokestatic  #65                 // Method com/google/gson/reflect/TypeToken.get:(Ljava/lang/Class;)Lcom/google/gson/reflect/TypeToken;
+     106: invokevirtual #69                 // Method com/google/gson/Gson.getDelegateAdapter:(Lcom/google/gson/TypeAdapterFactory;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+     109: astore        9
+     111: aload         4
+     113: aload         8
+     115: invokeinterface #73,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     120: checkcast     #76                 // class java/lang/String
+     123: aload         9
+     125: invokeinterface #78,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     130: pop
+     131: aload         5
+     133: aload         8
+     135: invokeinterface #62,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     140: checkcast     #16                 // class java/lang/Class
+     143: aload         9
+     145: invokeinterface #78,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     150: pop
+     151: aload         6
+     153: aload         8
+     155: invokeinterface #62,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     160: checkcast     #16                 // class java/lang/Class
+     163: aload         8
+     165: invokeinterface #73,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     170: checkcast     #76                 // class java/lang/String
+     173: invokeinterface #78,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     178: pop
+     179: goto          69
+     182: new           #82                 // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory$1
+     185: dup
+     186: aload_0
+     187: aload_3
+     188: aload         4
+     190: aload         6
+     192: aload         5
+     194: invokespecial #84                 // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory$1."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory;Lcom/google/gson/TypeAdapter;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)V
+     197: invokevirtual #87                 // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory$1.nullSafe:()Lcom/google/gson/TypeAdapter;
+     200: areturn
+
+  static {};
+    Code:
+       0: ldc           #91                 // String image
+       2: ldc           #93                 // class net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement
+       4: ldc           #95                 // String label
+       6: ldc           #97                 // class net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement
+       8: invokestatic  #99                 // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+      11: putstatic     #32                 // Field TYPE_MAP:Ljava/util/Map;
+      14: return
+}

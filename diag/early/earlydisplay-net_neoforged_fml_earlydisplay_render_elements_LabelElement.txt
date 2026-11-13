@@ -1,0 +1,108 @@
+Compiled from "LabelElement.java"
+public class net.neoforged.fml.earlydisplay.render.elements.LabelElement extends net.neoforged.fml.earlydisplay.render.elements.RenderElement {
+  private final java.lang.String originalText;
+
+  private final java.util.function.Supplier<java.util.Map<java.lang.String, java.lang.String>> placeholderSupplier;
+
+  public net.neoforged.fml.earlydisplay.render.elements.LabelElement(net.neoforged.fml.earlydisplay.theme.elements.ThemeLabelElement, net.neoforged.fml.earlydisplay.render.MaterializedTheme, java.util.function.Supplier<java.util.Map<java.lang.String, java.lang.String>>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeElement;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)V
+       6: aload_0
+       7: aload_1
+       8: invokevirtual #7                  // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement.text:()Ljava/lang/String;
+      11: putfield      #13                 // Field originalText:Ljava/lang/String;
+      14: aload_0
+      15: aload_3
+      16: putfield      #19                 // Field placeholderSupplier:Ljava/util/function/Supplier;
+      19: return
+
+  public void render(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field originalText:Ljava/lang/String;
+       4: aload_0
+       5: getfield      #19                 // Field placeholderSupplier:Ljava/util/function/Supplier;
+       8: invokeinterface #23,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+      13: checkcast     #29                 // class java/util/Map
+      16: invokestatic  #31                 // Method net/neoforged/fml/earlydisplay/util/Placeholders.resolve:(Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+      19: astore_2
+      20: new           #37                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+      23: dup
+      24: aload_2
+      25: iconst_m1
+      26: invokespecial #39                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText."<init>":(Ljava/lang/String;I)V
+      29: invokestatic  #42                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+      32: astore_3
+      33: aload_3
+      34: aload_0
+      35: getfield      #48                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      38: invokestatic  #52                 // Method getIntrinsicSize:(Ljava/util/List;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;)Lnet/neoforged/fml/earlydisplay/util/Size;
+      41: astore        4
+      43: aload_0
+      44: aload_1
+      45: invokevirtual #56                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableWidth:()F
+      48: aload_1
+      49: invokevirtual #62                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableHeight:()F
+      52: aload         4
+      54: invokevirtual #65                 // Method net/neoforged/fml/earlydisplay/util/Size.width:()F
+      57: aload         4
+      59: invokevirtual #70                 // Method net/neoforged/fml/earlydisplay/util/Size.height:()F
+      62: invokevirtual #73                 // Method resolveBounds:(FFFF)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      65: astore        5
+      67: aload_1
+      68: aload         5
+      70: invokevirtual #77                 // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+      73: aload         5
+      75: invokevirtual #82                 // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+      78: aload_0
+      79: getfield      #48                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      82: aload_3
+      83: invokevirtual #85                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderText:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+      86: return
+
+  private static net.neoforged.fml.earlydisplay.util.Size getIntrinsicSize(java.util.List<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>, net.neoforged.fml.earlydisplay.render.SimpleFont);
+    Code:
+       0: new           #78                 // class net/neoforged/fml/earlydisplay/util/Bounds
+       3: dup
+       4: fconst_0
+       5: fconst_0
+       6: fconst_0
+       7: fconst_0
+       8: invokespecial #89                 // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFFF)V
+      11: astore_2
+      12: aload_0
+      13: invokeinterface #92,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      18: astore_3
+      19: aload_3
+      20: invokeinterface #96,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      25: ifeq          68
+      28: aload_3
+      29: invokeinterface #102,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      34: checkcast     #37                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+      37: astore        4
+      39: aload_2
+      40: new           #78                 // class net/neoforged/fml/earlydisplay/util/Bounds
+      43: dup
+      44: fconst_0
+      45: aload_2
+      46: invokevirtual #105                // Method net/neoforged/fml/earlydisplay/util/Bounds.bottom:()F
+      49: aload_1
+      50: aload         4
+      52: invokevirtual #108                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText.string:()Ljava/lang/String;
+      55: invokevirtual #111                // Method net/neoforged/fml/earlydisplay/render/SimpleFont.measureText:(Ljava/lang/CharSequence;)Lnet/neoforged/fml/earlydisplay/util/Size;
+      58: invokespecial #117                // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFLnet/neoforged/fml/earlydisplay/util/Size;)V
+      61: invokevirtual #120                // Method net/neoforged/fml/earlydisplay/util/Bounds.union:(Lnet/neoforged/fml/earlydisplay/util/Bounds;)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      64: astore_2
+      65: goto          19
+      68: new           #66                 // class net/neoforged/fml/earlydisplay/util/Size
+      71: dup
+      72: aload_2
+      73: invokevirtual #124                // Method net/neoforged/fml/earlydisplay/util/Bounds.width:()F
+      76: aload_2
+      77: invokevirtual #125                // Method net/neoforged/fml/earlydisplay/util/Bounds.height:()F
+      80: invokespecial #126                // Method net/neoforged/fml/earlydisplay/util/Size."<init>":(FF)V
+      83: areturn
+}

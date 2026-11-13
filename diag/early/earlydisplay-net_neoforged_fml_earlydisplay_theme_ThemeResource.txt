@@ -1,0 +1,118 @@
+Compiled from "ThemeResource.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeResource extends java.lang.Record {
+  private final java.lang.String path;
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field path:Ljava/lang/String;
+       9: return
+
+  public net.neoforged.fml.earlydisplay.theme.NativeBuffer toNativeBuffer(java.nio.file.Path) throws java.io.IOException;
+    Code:
+       0: aload_1
+       1: ifnull        19
+       4: aload_1
+       5: aload_0
+       6: getfield      #7                  // Field path:Ljava/lang/String;
+       9: invokeinterface #13,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      14: invokestatic  #19                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.loadFromPath:(Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+      17: areturn
+      18: astore_2
+      19: aload_0
+      20: getfield      #7                  // Field path:Ljava/lang/String;
+      23: invokedynamic #27,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      28: aconst_null
+      29: invokestatic  #31                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.loadFromClasspath:(Ljava/lang/String;Ljava/lang/ClassLoader;)Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+      32: areturn
+    Exception table:
+       from    to  target type
+           4    17    18   Class java/nio/file/NoSuchFileException
+
+  public net.neoforged.fml.earlydisplay.theme.UncompressedImage loadAsImage(java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #35                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader.loadImage:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+       5: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.UncompressedImage tryLoadAsImage(java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #41                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader.tryLoadImage:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result;
+       5: dup
+       6: invokestatic  #45                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: pop
+      10: astore_2
+      11: iconst_0
+      12: istore_3
+      13: aload_2
+      14: iload_3
+      15: invokedynamic #51,  0             // InvokeDynamic #1:typeSwitch:(Ljava/lang/Object;I)I
+      20: lookupswitch  { // 2
+                     0: 58
+                     1: 68
+               default: 48
+          }
+      48: new           #55                 // class java/lang/MatchException
+      51: dup
+      52: aconst_null
+      53: aconst_null
+      54: invokespecial #57                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      57: athrow
+      58: aload_2
+      59: checkcast     #60                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Error
+      62: astore        4
+      64: aconst_null
+      65: goto          87
+      68: aload_2
+      69: checkcast     #62                 // class net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success
+      72: astore        5
+      74: aload         5
+      76: invokevirtual #64                 // Method net/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success.image:()Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+      79: astore        7
+      81: aload         7
+      83: astore        6
+      85: aload         6
+      87: areturn
+      88: astore_2
+      89: new           #55                 // class java/lang/MatchException
+      92: dup
+      93: aload_2
+      94: invokevirtual #70                 // Method java/lang/Throwable.toString:()Ljava/lang/String;
+      97: aload_2
+      98: invokespecial #57                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     101: athrow
+    Exception table:
+       from    to  target type
+          76    79    88   Class java/lang/Throwable
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #74,  0             // InvokeDynamic #2:toString:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #77,  0             // InvokeDynamic #2:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #81,  0             // InvokeDynamic #2:equals:(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String path();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field path:Ljava/lang/String;
+       4: areturn
+}

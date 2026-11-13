@@ -1,0 +1,162 @@
+Compiled from "StartupLogElement.java"
+public class net.neoforged.fml.earlydisplay.render.elements.StartupLogElement extends net.neoforged.fml.earlydisplay.render.elements.RenderElement {
+  private net.neoforged.fml.earlydisplay.theme.ThemeColor textColor;
+
+  public net.neoforged.fml.earlydisplay.render.elements.StartupLogElement(net.neoforged.fml.earlydisplay.theme.elements.ThemeStartupLogElement, net.neoforged.fml.earlydisplay.render.MaterializedTheme);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeElement;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)V
+       6: aload_0
+       7: aload_0
+       8: getfield      #7                  // Field textColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      11: aload_2
+      12: invokedynamic #13,  0             // InvokeDynamic #0:get:(Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)Ljava/util/function/Supplier;
+      17: invokestatic  #17                 // Method java/util/Objects.requireNonNullElseGet:(Ljava/lang/Object;Ljava/util/function/Supplier;)Ljava/lang/Object;
+      20: checkcast     #23                 // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+      23: putfield      #7                  // Field textColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      26: return
+
+  public void render(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: invokestatic  #25                 // Method net/neoforged/fml/loading/progress/StartupNotificationManager.getMessages:()Ljava/util/List;
+       3: astore_2
+       4: new           #31                 // class java/util/ArrayList
+       7: dup
+       8: invokespecial #33                 // Method java/util/ArrayList."<init>":()V
+      11: astore_3
+      12: aload_2
+      13: invokeinterface #36,  1           // InterfaceMethod java/util/List.size:()I
+      18: iconst_1
+      19: isub
+      20: istore        4
+      22: iload         4
+      24: iflt          132
+      27: aload_2
+      28: iload         4
+      30: invokeinterface #42,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      35: checkcast     #45                 // class net/neoforged/fml/loading/progress/StartupNotificationManager$AgeMessage
+      38: astore        5
+      40: ldc           #47                 // float 4000.0f
+      42: aload         5
+      44: invokevirtual #48                 // Method net/neoforged/fml/loading/progress/StartupNotificationManager$AgeMessage.age:()I
+      47: i2f
+      48: fsub
+      49: iload         4
+      51: iconst_4
+      52: isub
+      53: i2f
+      54: ldc           #51                 // float 1000.0f
+      56: fmul
+      57: fsub
+      58: ldc           #52                 // float 5000.0f
+      60: fdiv
+      61: fconst_0
+      62: fconst_1
+      63: invokestatic  #53                 // Method clamp:(FFF)F
+      66: fstore        6
+      68: fload         6
+      70: ldc           #57                 // float 0.01f
+      72: fcmpg
+      73: ifge          79
+      76: goto          126
+      79: aload         5
+      81: invokevirtual #58                 // Method net/neoforged/fml/loading/progress/StartupNotificationManager$AgeMessage.message:()Lnet/neoforged/fml/loading/progress/Message;
+      84: astore        7
+      86: aload_0
+      87: getfield      #7                  // Field textColor:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      90: fload         6
+      92: invokevirtual #62                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.withAlpha:(F)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      95: invokevirtual #66                 // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.toArgb:()I
+      98: istore        8
+     100: aload_3
+     101: new           #69                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+     104: dup
+     105: aload         7
+     107: invokevirtual #71                 // Method net/neoforged/fml/loading/progress/Message.getText:()Ljava/lang/String;
+     110: invokedynamic #77,  0             // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     115: iload         8
+     117: invokespecial #81                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText."<init>":(Ljava/lang/String;I)V
+     120: invokeinterface #84,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     125: pop
+     126: iinc          4, -1
+     129: goto          22
+     132: aload_3
+     133: aload_0
+     134: getfield      #88                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     137: invokestatic  #92                 // Method getIntrinsicSize:(Ljava/util/List;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;)Lnet/neoforged/fml/earlydisplay/util/Size;
+     140: astore        4
+     142: aload_0
+     143: aload_1
+     144: invokevirtual #96                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableWidth:()F
+     147: aload_1
+     148: invokevirtual #102                // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableHeight:()F
+     151: aload         4
+     153: invokevirtual #105                // Method net/neoforged/fml/earlydisplay/util/Size.width:()F
+     156: aload         4
+     158: invokevirtual #110                // Method net/neoforged/fml/earlydisplay/util/Size.height:()F
+     161: invokevirtual #113                // Method resolveBounds:(FFFF)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+     164: astore        5
+     166: aload_1
+     167: aload         5
+     169: invokevirtual #117                // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+     172: aload         5
+     174: invokevirtual #122                // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+     177: aload_0
+     178: getfield      #88                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     181: aload_3
+     182: invokevirtual #125                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderText:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     185: return
+
+  private static net.neoforged.fml.earlydisplay.util.Size getIntrinsicSize(java.util.List<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>, net.neoforged.fml.earlydisplay.render.SimpleFont);
+    Code:
+       0: new           #118                // class net/neoforged/fml/earlydisplay/util/Bounds
+       3: dup
+       4: fconst_0
+       5: fconst_0
+       6: fconst_0
+       7: fconst_0
+       8: invokespecial #129                // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFFF)V
+      11: astore_2
+      12: aload_0
+      13: invokeinterface #132,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      18: astore_3
+      19: aload_3
+      20: invokeinterface #136,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      25: ifeq          68
+      28: aload_3
+      29: invokeinterface #142,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      34: checkcast     #69                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+      37: astore        4
+      39: aload_2
+      40: new           #118                // class net/neoforged/fml/earlydisplay/util/Bounds
+      43: dup
+      44: fconst_0
+      45: aload_2
+      46: invokevirtual #146                // Method net/neoforged/fml/earlydisplay/util/Bounds.bottom:()F
+      49: aload_1
+      50: aload         4
+      52: invokevirtual #149                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText.string:()Ljava/lang/String;
+      55: invokevirtual #152                // Method net/neoforged/fml/earlydisplay/render/SimpleFont.measureText:(Ljava/lang/CharSequence;)Lnet/neoforged/fml/earlydisplay/util/Size;
+      58: invokespecial #158                // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFLnet/neoforged/fml/earlydisplay/util/Size;)V
+      61: invokevirtual #161                // Method net/neoforged/fml/earlydisplay/util/Bounds.union:(Lnet/neoforged/fml/earlydisplay/util/Bounds;)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      64: astore_2
+      65: goto          19
+      68: new           #106                // class net/neoforged/fml/earlydisplay/util/Size
+      71: dup
+      72: aload_2
+      73: invokevirtual #165                // Method net/neoforged/fml/earlydisplay/util/Bounds.width:()F
+      76: aload_2
+      77: invokevirtual #166                // Method net/neoforged/fml/earlydisplay/util/Bounds.height:()F
+      80: invokespecial #167                // Method net/neoforged/fml/earlydisplay/util/Size."<init>":(FF)V
+      83: areturn
+
+  private static net.neoforged.fml.earlydisplay.theme.ThemeColor lambda$new$0(net.neoforged.fml.earlydisplay.render.MaterializedTheme);
+    Code:
+       0: aload_0
+       1: invokevirtual #170                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+       4: invokevirtual #176                // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+       7: invokevirtual #182                // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.text:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      10: areturn
+}

@@ -1,0 +1,166 @@
+Compiled from "Bounds.java"
+public final class net.neoforged.fml.earlydisplay.util.Bounds extends java.lang.Record {
+  private final float left;
+
+  private final float top;
+
+  private final float right;
+
+  private final float bottom;
+
+  public net.neoforged.fml.earlydisplay.util.Bounds(float, float, net.neoforged.fml.earlydisplay.util.Size);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: fload_2
+       3: fload_1
+       4: aload_3
+       5: invokevirtual #22                 // Method net/neoforged/fml/earlydisplay/util/Size.width:()F
+       8: fadd
+       9: fload_2
+      10: aload_3
+      11: invokevirtual #28                 // Method net/neoforged/fml/earlydisplay/util/Size.height:()F
+      14: fadd
+      15: invokespecial #31                 // Method "<init>":(FFFF)V
+      18: return
+
+  public net.neoforged.fml.earlydisplay.util.Bounds(float, float, float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: fload_1
+       6: putfield      #7                  // Field left:F
+       9: aload_0
+      10: fload_2
+      11: putfield      #13                 // Field top:F
+      14: aload_0
+      15: fload_3
+      16: putfield      #16                 // Field right:F
+      19: aload_0
+      20: fload         4
+      22: putfield      #19                 // Field bottom:F
+      25: return
+
+  public float width();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field right:F
+       4: aload_0
+       5: getfield      #7                  // Field left:F
+       8: fsub
+       9: freturn
+
+  public float height();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field bottom:F
+       4: aload_0
+       5: getfield      #13                 // Field top:F
+       8: fsub
+       9: freturn
+
+  public float horizontalCenter();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field right:F
+       4: aload_0
+       5: getfield      #7                  // Field left:F
+       8: fadd
+       9: fconst_2
+      10: fdiv
+      11: freturn
+
+  public net.neoforged.fml.earlydisplay.util.Bounds union(net.neoforged.fml.earlydisplay.util.Bounds);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/util/Bounds
+       3: dup
+       4: aload_0
+       5: getfield      #7                  // Field left:F
+       8: aload_1
+       9: getfield      #7                  // Field left:F
+      12: invokestatic  #34                 // Method java/lang/Math.min:(FF)F
+      15: aload_0
+      16: getfield      #13                 // Field top:F
+      19: aload_1
+      20: getfield      #13                 // Field top:F
+      23: invokestatic  #34                 // Method java/lang/Math.min:(FF)F
+      26: aload_0
+      27: getfield      #16                 // Field right:F
+      30: aload_1
+      31: getfield      #16                 // Field right:F
+      34: invokestatic  #40                 // Method java/lang/Math.max:(FF)F
+      37: aload_0
+      38: getfield      #19                 // Field bottom:F
+      41: aload_1
+      42: getfield      #19                 // Field bottom:F
+      45: invokestatic  #40                 // Method java/lang/Math.max:(FF)F
+      48: invokespecial #31                 // Method "<init>":(FFFF)V
+      51: areturn
+
+  public net.neoforged.fml.earlydisplay.util.Bounds deflate(float);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/util/Bounds
+       3: dup
+       4: aload_0
+       5: getfield      #7                  // Field left:F
+       8: fload_1
+       9: fadd
+      10: aload_0
+      11: getfield      #13                 // Field top:F
+      14: fload_1
+      15: fadd
+      16: aload_0
+      17: getfield      #16                 // Field right:F
+      20: fload_1
+      21: fsub
+      22: aload_0
+      23: getfield      #19                 // Field bottom:F
+      26: fload_1
+      27: fsub
+      28: invokespecial #31                 // Method "<init>":(FFFF)V
+      31: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #43,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/util/Bounds;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #47,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/util/Bounds;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #51,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/util/Bounds;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public float left();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field left:F
+       4: freturn
+
+  public float top();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field top:F
+       4: freturn
+
+  public float right();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field right:F
+       4: freturn
+
+  public float bottom();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field bottom:F
+       4: freturn
+}

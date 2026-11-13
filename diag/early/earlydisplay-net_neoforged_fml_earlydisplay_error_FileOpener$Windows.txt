@@ -1,0 +1,27 @@
+Compiled from "FileOpener.java"
+final class net.neoforged.fml.earlydisplay.error.FileOpener$Windows extends net.neoforged.fml.earlydisplay.error.FileOpener {
+  private net.neoforged.fml.earlydisplay.error.FileOpener$Windows();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/error/FileOpener."<init>":()V
+       4: return
+
+  protected java.lang.String[] getOpenParameters(java.net.URI);
+    Code:
+       0: iconst_3
+       1: anewarray     #7                  // class java/lang/String
+       4: dup
+       5: iconst_0
+       6: ldc           #9                  // String rundll32
+       8: aastore
+       9: dup
+      10: iconst_1
+      11: ldc           #11                 // String url.dll,FileProtocolHandler
+      13: aastore
+      14: dup
+      15: iconst_2
+      16: aload_1
+      17: invokevirtual #13                 // Method java/net/URI.toString:()Ljava/lang/String;
+      20: aastore
+      21: areturn
+}

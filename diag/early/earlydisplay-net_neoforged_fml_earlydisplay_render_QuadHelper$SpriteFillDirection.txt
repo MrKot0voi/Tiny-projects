@@ -1,0 +1,63 @@
+Compiled from "QuadHelper.java"
+public final class net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection extends java.lang.Enum<net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection> {
+  public static final net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection TOP_TO_BOTTOM;
+
+  public static final net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection BOTTOM_TO_TOP;
+
+  private static final net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection[] $VALUES;
+
+  public static net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection[] values();
+    Code:
+       0: getstatic     #10                 // Field $VALUES:[Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+       3: invokevirtual #14                 // Method "[Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;".clone:()Ljava/lang/Object;
+       6: checkcast     #15                 // class "[Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;"
+       9: areturn
+
+  public static net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection valueOf(java.lang.String);
+    Code:
+       0: ldc           #1                  // class net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection
+       2: aload_0
+       3: invokestatic  #19                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #1                  // class net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection
+       9: areturn
+
+  private net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #25                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  private static net.neoforged.fml.earlydisplay.render.QuadHelper$SpriteFillDirection[] $values();
+    Code:
+       0: iconst_2
+       1: anewarray     #1                  // class net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection
+       4: dup
+       5: iconst_0
+       6: getstatic     #3                  // Field TOP_TO_BOTTOM:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #7                  // Field BOTTOM_TO_TOP:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      15: aastore
+      16: areturn
+
+  static {};
+    Code:
+       0: new           #1                  // class net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection
+       3: dup
+       4: ldc           #29                 // String TOP_TO_BOTTOM
+       6: iconst_0
+       7: invokespecial #30                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #3                  // Field TOP_TO_BOTTOM:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      13: new           #1                  // class net/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection
+      16: dup
+      17: ldc           #31                 // String BOTTOM_TO_TOP
+      19: iconst_1
+      20: invokespecial #30                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #7                  // Field BOTTOM_TO_TOP:Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      26: invokestatic  #32                 // Method $values:()[Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      29: putstatic     #10                 // Field $VALUES:[Lnet/neoforged/fml/earlydisplay/render/QuadHelper$SpriteFillDirection;
+      32: return
+}

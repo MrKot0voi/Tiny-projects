@@ -1,0 +1,14 @@
+Compiled from "ImmediateWindowProvider.java"
+public interface net.neoforged.neoforgespi.earlywindow.ImmediateWindowProvider extends net.neoforged.fml.loading.EarlyLoadingScreenController {
+  public abstract java.lang.String name();
+
+  public abstract void initialize(net.neoforged.fml.loading.ProgramArgs);
+
+  public abstract void setMinecraftVersion(java.lang.String);
+
+  public abstract void setNeoForgeVersion(java.lang.String);
+
+  public abstract void crash(java.lang.String);
+
+  public abstract void displayFatalErrorAndExit(java.util.List<net.neoforged.fml.ModLoadingIssue>, java.nio.file.Path, java.nio.file.Path, java.nio.file.Path);
+}

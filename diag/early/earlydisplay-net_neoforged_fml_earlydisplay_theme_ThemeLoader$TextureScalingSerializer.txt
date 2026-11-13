@@ -1,0 +1,183 @@
+Compiled from "ThemeLoader.java"
+class net.neoforged.fml.earlydisplay.theme.ThemeLoader$TextureScalingSerializer implements com.google.gson.JsonSerializer<net.neoforged.fml.earlydisplay.theme.TextureScaling>, com.google.gson.JsonDeserializer<net.neoforged.fml.earlydisplay.theme.TextureScaling> {
+  private net.neoforged.fml.earlydisplay.theme.ThemeLoader$TextureScalingSerializer();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public net.neoforged.fml.earlydisplay.theme.TextureScaling deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext) throws com.google.gson.JsonParseException;
+    Code:
+       0: aload_1
+       1: checkcast     #7                  // class com/google/gson/JsonObject
+       4: ldc           #9                  // String type
+       6: invokevirtual #11                 // Method com/google/gson/JsonObject.getAsJsonPrimitive:(Ljava/lang/String;)Lcom/google/gson/JsonPrimitive;
+       9: invokevirtual #15                 // Method com/google/gson/JsonPrimitive.getAsString:()Ljava/lang/String;
+      12: astore        4
+      14: aload         4
+      16: astore        5
+      18: iconst_m1
+      19: istore        6
+      21: aload         5
+      23: invokevirtual #21                 // Method java/lang/String.hashCode:()I
+      26: lookupswitch  { // 3
+           -1881872635: 76
+            -237343803: 60
+               3560110: 92
+               default: 105
+          }
+      60: aload         5
+      62: ldc           #27                 // String nine_slice
+      64: invokevirtual #29                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      67: ifeq          105
+      70: iconst_0
+      71: istore        6
+      73: goto          105
+      76: aload         5
+      78: ldc           #33                 // String stretch
+      80: invokevirtual #29                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      83: ifeq          105
+      86: iconst_1
+      87: istore        6
+      89: goto          105
+      92: aload         5
+      94: ldc           #35                 // String tile
+      96: invokevirtual #29                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      99: ifeq          105
+     102: iconst_2
+     103: istore        6
+     105: iload         6
+     107: tableswitch   { // 0 to 2
+                     0: 132
+                     1: 147
+                     2: 162
+               default: 177
+          }
+     132: aload_3
+     133: aload_1
+     134: ldc           #37                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+     136: invokeinterface #39,  3           // InterfaceMethod com/google/gson/JsonDeserializationContext.deserialize:(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     141: checkcast     #45                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling
+     144: goto          192
+     147: aload_3
+     148: aload_1
+     149: ldc           #47                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Stretch
+     151: invokeinterface #39,  3           // InterfaceMethod com/google/gson/JsonDeserializationContext.deserialize:(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     156: checkcast     #45                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling
+     159: goto          192
+     162: aload_3
+     163: aload_1
+     164: ldc           #49                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Tile
+     166: invokeinterface #39,  3           // InterfaceMethod com/google/gson/JsonDeserializationContext.deserialize:(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     171: checkcast     #45                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling
+     174: goto          192
+     177: new           #51                 // class com/google/gson/JsonParseException
+     180: dup
+     181: aload         4
+     183: invokedynamic #53,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     188: invokespecial #57                 // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+     191: athrow
+     192: areturn
+
+  public com.google.gson.JsonElement serialize(net.neoforged.fml.earlydisplay.theme.TextureScaling, java.lang.reflect.Type, com.google.gson.JsonSerializationContext);
+    Code:
+       0: new           #7                  // class com/google/gson/JsonObject
+       3: dup
+       4: invokespecial #60                 // Method com/google/gson/JsonObject."<init>":()V
+       7: astore        4
+       9: aload         4
+      11: ldc           #9                  // String type
+      13: aload_1
+      14: dup
+      15: invokestatic  #61                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: astore        5
+      21: iconst_0
+      22: istore        6
+      24: aload         5
+      26: iload         6
+      28: invokedynamic #67,  0             // InvokeDynamic #1:typeSwitch:(Ljava/lang/Object;I)I
+      33: tableswitch   { // 0 to 2
+                     0: 70
+                     1: 82
+                     2: 94
+               default: 60
+          }
+      60: new           #71                 // class java/lang/MatchException
+      63: dup
+      64: aconst_null
+      65: aconst_null
+      66: invokespecial #73                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      69: athrow
+      70: aload         5
+      72: checkcast     #37                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+      75: astore        7
+      77: ldc           #27                 // String nine_slice
+      79: goto          103
+      82: aload         5
+      84: checkcast     #47                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Stretch
+      87: astore        8
+      89: ldc           #33                 // String stretch
+      91: goto          103
+      94: aload         5
+      96: checkcast     #49                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Tile
+      99: astore        9
+     101: ldc           #35                 // String tile
+     103: invokevirtual #76                 // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+     106: aload_3
+     107: aload_1
+     108: aload_1
+     109: invokeinterface #80,  1           // InterfaceMethod net/neoforged/fml/earlydisplay/theme/TextureScaling.getClass:()Ljava/lang/Class;
+     114: invokeinterface #84,  3           // InterfaceMethod com/google/gson/JsonSerializationContext.serialize:(Ljava/lang/Object;Ljava/lang/reflect/Type;)Lcom/google/gson/JsonElement;
+     119: checkcast     #7                  // class com/google/gson/JsonObject
+     122: invokevirtual #90                 // Method com/google/gson/JsonObject.entrySet:()Ljava/util/Set;
+     125: invokeinterface #94,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     130: astore        5
+     132: aload         5
+     134: invokeinterface #100,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     139: ifeq          207
+     142: aload         5
+     144: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     149: checkcast     #110                // class java/util/Map$Entry
+     152: astore        6
+     154: ldc           #9                  // String type
+     156: aload         6
+     158: invokeinterface #112,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     163: invokevirtual #29                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     166: ifeq          179
+     169: new           #115                // class java/lang/IllegalStateException
+     172: dup
+     173: ldc           #117                // String Cannot serialize texture scaling with \'type\' property
+     175: invokespecial #119                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     178: athrow
+     179: aload         4
+     181: aload         6
+     183: invokeinterface #112,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     188: checkcast     #22                 // class java/lang/String
+     191: aload         6
+     193: invokeinterface #120,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     198: checkcast     #123                // class com/google/gson/JsonElement
+     201: invokevirtual #125                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+     204: goto          132
+     207: aload         4
+     209: areturn
+
+  public com.google.gson.JsonElement serialize(java.lang.Object, java.lang.reflect.Type, com.google.gson.JsonSerializationContext);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #45                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling
+       5: aload_2
+       6: aload_3
+       7: invokevirtual #129                // Method serialize:(Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+      10: areturn
+
+  public java.lang.Object deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext) throws com.google.gson.JsonParseException;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokevirtual #134                // Method deserialize:(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;
+       7: areturn
+}

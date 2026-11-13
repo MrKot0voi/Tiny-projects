@@ -1,0 +1,994 @@
+Compiled from "SimpleBufferBuilder.java"
+public class net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder implements java.io.Closeable {
+  private static final org.lwjgl.system.MemoryUtil$MemoryAllocator ALLOCATOR;
+
+  private static final int[] VERTEX_ARRAYS;
+
+  private static final int[] VERTEX_BUFFERS;
+
+  private static final int[] VERTEX_BUFFER_LENGTHS;
+
+  private static int elementBuffer;
+
+  private static int elementBufferVertexLength;
+
+  private final java.lang.String label;
+
+  private long bufferAddr;
+
+  private java.nio.ByteBuffer buffer;
+
+  private net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Format format;
+
+  private net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Mode mode;
+
+  private boolean building;
+
+  private int elementIndex;
+
+  private int index;
+
+  private int vertices;
+
+  static final boolean $assertionsDisabled;
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder(java.lang.String, int);
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #9                  // Field label:Ljava/lang/String;
+       9: aload_0
+      10: getstatic     #15                 // Field ALLOCATOR:Lorg/lwjgl/system/MemoryUtil$MemoryAllocator;
+      13: iload_2
+      14: i2l
+      15: invokeinterface #19,  3           // InterfaceMethod org/lwjgl/system/MemoryUtil$MemoryAllocator.malloc:(J)J
+      20: putfield      #25                 // Field bufferAddr:J
+      23: aload_0
+      24: aload_0
+      25: getfield      #25                 // Field bufferAddr:J
+      28: iload_2
+      29: invokestatic  #29                 // Method org/lwjgl/system/MemoryUtil.memByteBuffer:(JI)Ljava/nio/ByteBuffer;
+      32: putfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      35: return
+
+  public static void destroy();
+    Code:
+       0: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+       3: invokestatic  #43                 // Method org/lwjgl/opengl/GL32C.glDeleteBuffers:([I)V
+       6: getstatic     #47                 // Field elementBuffer:I
+       9: invokestatic  #51                 // Method org/lwjgl/opengl/GL32C.glDeleteBuffers:(I)V
+      12: getstatic     #54                 // Field VERTEX_ARRAYS:[I
+      15: invokestatic  #57                 // Method org/lwjgl/opengl/GL32C.glDeleteVertexArrays:([I)V
+      18: getstatic     #54                 // Field VERTEX_ARRAYS:[I
+      21: iconst_0
+      22: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      25: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+      28: iconst_0
+      29: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      32: getstatic     #66                 // Field VERTEX_BUFFER_LENGTHS:[I
+      35: iconst_0
+      36: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      39: iconst_0
+      40: putstatic     #47                 // Field elementBuffer:I
+      43: iconst_0
+      44: putstatic     #69                 // Field elementBufferVertexLength:I
+      47: return
+
+  private static void ensureElementBufferLength(int);
+    Code:
+       0: getstatic     #69                 // Field elementBufferVertexLength:I
+       3: iload_0
+       4: if_icmplt     8
+       7: return
+       8: invokestatic  #72                 // Method org/lwjgl/opengl/GL32C.glGenBuffers:()I
+      11: istore_1
+      12: sipush        1024
+      15: getstatic     #69                 // Field elementBufferVertexLength:I
+      18: invokestatic  #76                 // Method java/lang/Math.max:(II)I
+      21: istore_2
+      22: iload_2
+      23: iload_0
+      24: if_icmpge     34
+      27: iload_2
+      28: iconst_2
+      29: imul
+      30: istore_2
+      31: goto          22
+      34: getstatic     #69                 // Field elementBufferVertexLength:I
+      37: getstatic     #69                 // Field elementBufferVertexLength:I
+      40: iconst_2
+      41: idiv
+      42: iadd
+      43: istore_3
+      44: iload_2
+      45: iload_2
+      46: iconst_2
+      47: idiv
+      48: iadd
+      49: istore        4
+      51: iload_1
+      52: invokestatic  #82                 // Method net/neoforged/fml/earlydisplay/render/GlState.bindElementArrayBuffer:(I)V
+      55: iload_1
+      56: ldc           #87                 // String EarlyDisplay shared index buffer
+      58: invokestatic  #89                 // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelBuffer:(ILjava/lang/String;)V
+      61: ldc           #95                 // int 34963
+      63: iload         4
+      65: i2l
+      66: ldc2_w        #96                 // long 4l
+      69: lmul
+      70: ldc           #98                 // int 35044
+      72: invokestatic  #99                 // Method org/lwjgl/opengl/GL32C.glBufferData:(IJI)V
+      75: iload_3
+      76: iconst_4
+      77: imul
+      78: istore        5
+      80: iload         4
+      82: iload_3
+      83: isub
+      84: iconst_4
+      85: imul
+      86: istore        6
+      88: ldc           #95                 // int 34963
+      90: iload         5
+      92: i2l
+      93: iload         6
+      95: i2l
+      96: bipush        42
+      98: invokestatic  #103                // Method org/lwjgl/opengl/GL32C.glMapBufferRange:(IJJI)Ljava/nio/ByteBuffer;
+     101: astore        7
+     103: aload         7
+     105: ifnonnull     118
+     108: new           #107                // class java/lang/NullPointerException
+     111: dup
+     112: ldc           #109                // String OpenGL buffer mapping failed
+     114: invokespecial #111                // Method java/lang/NullPointerException."<init>":(Ljava/lang/String;)V
+     117: athrow
+     118: iload_2
+     119: iconst_4
+     120: idiv
+     121: istore        8
+     123: getstatic     #69                 // Field elementBufferVertexLength:I
+     126: iconst_4
+     127: idiv
+     128: istore        9
+     130: iload         9
+     132: istore        10
+     134: iload         10
+     136: iload         8
+     138: if_icmpge     207
+     141: aload         7
+     143: iload         10
+     145: iconst_4
+     146: imul
+     147: iconst_0
+     148: iadd
+     149: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     152: iload         10
+     154: iconst_4
+     155: imul
+     156: iconst_1
+     157: iadd
+     158: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     161: iload         10
+     163: iconst_4
+     164: imul
+     165: iconst_2
+     166: iadd
+     167: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     170: pop
+     171: aload         7
+     173: iload         10
+     175: iconst_4
+     176: imul
+     177: iconst_1
+     178: iadd
+     179: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     182: iload         10
+     184: iconst_4
+     185: imul
+     186: iconst_3
+     187: iadd
+     188: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     191: iload         10
+     193: iconst_4
+     194: imul
+     195: iconst_2
+     196: iadd
+     197: invokevirtual #114                // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+     200: pop
+     201: iinc          10, 1
+     204: goto          134
+     207: ldc           #95                 // int 34963
+     209: invokestatic  #120                // Method org/lwjgl/opengl/GL32C.glUnmapBuffer:(I)Z
+     212: pop
+     213: getstatic     #47                 // Field elementBuffer:I
+     216: ifeq          245
+     219: ldc           #124                // int 36662
+     221: getstatic     #47                 // Field elementBuffer:I
+     224: invokestatic  #125                // Method org/lwjgl/opengl/GL32C.glBindBuffer:(II)V
+     227: ldc           #124                // int 36662
+     229: ldc           #95                 // int 34963
+     231: lconst_0
+     232: lconst_0
+     233: iload         5
+     235: i2l
+     236: invokestatic  #129                // Method org/lwjgl/opengl/GL32C.glCopyBufferSubData:(IIJJJ)V
+     239: ldc           #124                // int 36662
+     241: iconst_0
+     242: invokestatic  #125                // Method org/lwjgl/opengl/GL32C.glBindBuffer:(II)V
+     245: iconst_0
+     246: invokestatic  #82                 // Method net/neoforged/fml/earlydisplay/render/GlState.bindElementArrayBuffer:(I)V
+     249: getstatic     #47                 // Field elementBuffer:I
+     252: invokestatic  #51                 // Method org/lwjgl/opengl/GL32C.glDeleteBuffers:(I)V
+     255: iload_1
+     256: putstatic     #47                 // Field elementBuffer:I
+     259: iload_2
+     260: putstatic     #69                 // Field elementBufferVertexLength:I
+     263: return
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder begin(net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Format, net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Mode);
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field bufferAddr:J
+       4: lconst_0
+       5: lcmp
+       6: ifne          19
+       9: new           #133                // class java/lang/IllegalStateException
+      12: dup
+      13: ldc           #135                // String Buffer has been freed.
+      15: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      18: athrow
+      19: aload_0
+      20: getfield      #138                // Field building:Z
+      23: ifeq          36
+      26: new           #133                // class java/lang/IllegalStateException
+      29: dup
+      30: ldc           #142                // String Already building.
+      32: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      35: athrow
+      36: aload_0
+      37: aload_1
+      38: putfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      41: aload_0
+      42: aload_2
+      43: putfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+      46: aload_0
+      47: iconst_1
+      48: putfield      #138                // Field building:Z
+      51: aload_0
+      52: iconst_0
+      53: putfield      #152                // Field elementIndex:I
+      56: aload_0
+      57: aload_1
+      58: getfield      #155                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.stride:I
+      61: invokevirtual #160                // Method ensureSpace:(I)V
+      64: aload_0
+      65: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      68: invokevirtual #163                // Method java/nio/ByteBuffer.rewind:()Ljava/nio/ByteBuffer;
+      71: pop
+      72: aload_0
+      73: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      76: aload_0
+      77: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      80: invokevirtual #167                // Method java/nio/ByteBuffer.capacity:()I
+      83: invokevirtual #170                // Method java/nio/ByteBuffer.limit:(I)Ljava/nio/ByteBuffer;
+      86: pop
+      87: aload_0
+      88: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder pos(float, float);
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #152                // Field elementIndex:I
+      21: aload_0
+      22: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      25: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      28: arraylength
+      29: if_icmpne     42
+      32: new           #133                // class java/lang/IllegalStateException
+      35: dup
+      36: ldc           #179                // String Expected endVertex
+      38: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      41: athrow
+      42: aload_0
+      43: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      46: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      49: aload_0
+      50: getfield      #152                // Field elementIndex:I
+      53: aaload
+      54: getstatic     #181                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.POS:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      57: if_acmpeq     88
+      60: new           #187                // class java/lang/IllegalArgumentException
+      63: dup
+      64: aload_0
+      65: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      68: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      71: aload_0
+      72: getfield      #152                // Field elementIndex:I
+      75: aaload
+      76: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      79: invokedynamic #195,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      84: invokespecial #199                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      87: athrow
+      88: aload_0
+      89: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      92: aload_0
+      93: getfield      #200                // Field index:I
+      96: iconst_0
+      97: iadd
+      98: fload_1
+      99: invokevirtual #203                // Method java/nio/ByteBuffer.putFloat:(IF)Ljava/nio/ByteBuffer;
+     102: pop
+     103: aload_0
+     104: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     107: aload_0
+     108: getfield      #200                // Field index:I
+     111: iconst_4
+     112: iadd
+     113: fload_2
+     114: invokevirtual #203                // Method java/nio/ByteBuffer.putFloat:(IF)Ljava/nio/ByteBuffer;
+     117: pop
+     118: aload_0
+     119: dup
+     120: getfield      #200                // Field index:I
+     123: aload_0
+     124: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     127: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+     130: aload_0
+     131: getfield      #152                // Field elementIndex:I
+     134: aaload
+     135: getfield      #207                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.width:I
+     138: iadd
+     139: putfield      #200                // Field index:I
+     142: aload_0
+     143: dup
+     144: getfield      #152                // Field elementIndex:I
+     147: iconst_1
+     148: iadd
+     149: putfield      #152                // Field elementIndex:I
+     152: aload_0
+     153: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder tex(float, float);
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #152                // Field elementIndex:I
+      21: aload_0
+      22: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      25: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      28: arraylength
+      29: if_icmpne     42
+      32: new           #133                // class java/lang/IllegalStateException
+      35: dup
+      36: ldc           #179                // String Expected endVertex
+      38: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      41: athrow
+      42: aload_0
+      43: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      46: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      49: aload_0
+      50: getfield      #152                // Field elementIndex:I
+      53: aaload
+      54: getstatic     #210                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.TEX:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      57: if_acmpeq     88
+      60: new           #187                // class java/lang/IllegalArgumentException
+      63: dup
+      64: aload_0
+      65: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      68: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      71: aload_0
+      72: getfield      #152                // Field elementIndex:I
+      75: aaload
+      76: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      79: invokedynamic #195,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      84: invokespecial #199                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      87: athrow
+      88: aload_0
+      89: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      92: aload_0
+      93: getfield      #200                // Field index:I
+      96: iconst_0
+      97: iadd
+      98: fload_1
+      99: invokevirtual #203                // Method java/nio/ByteBuffer.putFloat:(IF)Ljava/nio/ByteBuffer;
+     102: pop
+     103: aload_0
+     104: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     107: aload_0
+     108: getfield      #200                // Field index:I
+     111: iconst_4
+     112: iadd
+     113: fload_2
+     114: invokevirtual #203                // Method java/nio/ByteBuffer.putFloat:(IF)Ljava/nio/ByteBuffer;
+     117: pop
+     118: aload_0
+     119: dup
+     120: getfield      #200                // Field index:I
+     123: aload_0
+     124: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     127: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+     130: aload_0
+     131: getfield      #152                // Field elementIndex:I
+     134: aaload
+     135: getfield      #207                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.width:I
+     138: iadd
+     139: putfield      #200                // Field index:I
+     142: aload_0
+     143: dup
+     144: getfield      #152                // Field elementIndex:I
+     147: iconst_1
+     148: iadd
+     149: putfield      #152                // Field elementIndex:I
+     152: aload_0
+     153: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder colour(float, float, float, float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: ldc           #213                // float 255.0f
+       4: fmul
+       5: f2i
+       6: i2b
+       7: fload_2
+       8: ldc           #213                // float 255.0f
+      10: fmul
+      11: f2i
+      12: i2b
+      13: fload_3
+      14: ldc           #213                // float 255.0f
+      16: fmul
+      17: f2i
+      18: i2b
+      19: fload         4
+      21: ldc           #213                // float 255.0f
+      23: fmul
+      24: f2i
+      25: i2b
+      26: invokevirtual #214                // Method colour:(BBBB)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      29: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder colour(int);
+    Code:
+       0: iload_1
+       1: invokestatic  #218                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.ofArgb:(I)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       4: astore_2
+       5: aload_0
+       6: aload_2
+       7: invokevirtual #224                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.r:()F
+      10: aload_2
+      11: invokevirtual #228                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.g:()F
+      14: aload_2
+      15: invokevirtual #231                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.b:()F
+      18: aload_2
+      19: invokevirtual #234                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.a:()F
+      22: invokevirtual #237                // Method colour:(FFFF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      25: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder colour(byte, byte, byte, byte);
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #152                // Field elementIndex:I
+      21: aload_0
+      22: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      25: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      28: arraylength
+      29: if_icmpne     42
+      32: new           #133                // class java/lang/IllegalStateException
+      35: dup
+      36: ldc           #179                // String Expected endVertex
+      38: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      41: athrow
+      42: aload_0
+      43: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      46: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      49: aload_0
+      50: getfield      #152                // Field elementIndex:I
+      53: aaload
+      54: getstatic     #240                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.COLOR:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      57: if_acmpeq     88
+      60: new           #187                // class java/lang/IllegalArgumentException
+      63: dup
+      64: aload_0
+      65: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      68: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      71: aload_0
+      72: getfield      #152                // Field elementIndex:I
+      75: aaload
+      76: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      79: invokedynamic #195,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      84: invokespecial #199                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      87: athrow
+      88: aload_0
+      89: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      92: aload_0
+      93: getfield      #200                // Field index:I
+      96: iconst_0
+      97: iadd
+      98: iload_1
+      99: invokevirtual #243                // Method java/nio/ByteBuffer.put:(IB)Ljava/nio/ByteBuffer;
+     102: pop
+     103: aload_0
+     104: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     107: aload_0
+     108: getfield      #200                // Field index:I
+     111: iconst_1
+     112: iadd
+     113: iload_2
+     114: invokevirtual #243                // Method java/nio/ByteBuffer.put:(IB)Ljava/nio/ByteBuffer;
+     117: pop
+     118: aload_0
+     119: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     122: aload_0
+     123: getfield      #200                // Field index:I
+     126: iconst_2
+     127: iadd
+     128: iload_3
+     129: invokevirtual #243                // Method java/nio/ByteBuffer.put:(IB)Ljava/nio/ByteBuffer;
+     132: pop
+     133: aload_0
+     134: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     137: aload_0
+     138: getfield      #200                // Field index:I
+     141: iconst_3
+     142: iadd
+     143: iload         4
+     145: invokevirtual #243                // Method java/nio/ByteBuffer.put:(IB)Ljava/nio/ByteBuffer;
+     148: pop
+     149: aload_0
+     150: dup
+     151: getfield      #200                // Field index:I
+     154: aload_0
+     155: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     158: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+     161: aload_0
+     162: getfield      #152                // Field elementIndex:I
+     165: aaload
+     166: getfield      #207                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element.width:I
+     169: iadd
+     170: putfield      #200                // Field index:I
+     173: aload_0
+     174: dup
+     175: getfield      #152                // Field elementIndex:I
+     178: iconst_1
+     179: iadd
+     180: putfield      #152                // Field elementIndex:I
+     183: aload_0
+     184: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder endVertex();
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #152                // Field elementIndex:I
+      21: aload_0
+      22: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      25: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      28: arraylength
+      29: if_icmpeq     60
+      32: new           #133                // class java/lang/IllegalStateException
+      35: dup
+      36: aload_0
+      37: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      40: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      43: aload_0
+      44: getfield      #152                // Field elementIndex:I
+      47: aaload
+      48: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      51: invokedynamic #195,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      56: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      59: athrow
+      60: aload_0
+      61: iconst_0
+      62: putfield      #152                // Field elementIndex:I
+      65: aload_0
+      66: dup
+      67: getfield      #247                // Field vertices:I
+      70: iconst_1
+      71: iadd
+      72: putfield      #247                // Field vertices:I
+      75: aload_0
+      76: aload_0
+      77: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      80: getfield      #155                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.stride:I
+      83: invokevirtual #160                // Method ensureSpace:(I)V
+      86: aload_0
+      87: areturn
+
+  private void ensureSpace(int);
+    Code:
+       0: aload_0
+       1: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+       4: invokevirtual #167                // Method java/nio/ByteBuffer.capacity:()I
+       7: istore_2
+       8: aload_0
+       9: getfield      #200                // Field index:I
+      12: iload_1
+      13: iadd
+      14: iload_2
+      15: if_icmple     70
+      18: iconst_3
+      19: iload_2
+      20: imul
+      21: iconst_2
+      22: idiv
+      23: iconst_3
+      24: iload_1
+      25: imul
+      26: iconst_2
+      27: idiv
+      28: invokestatic  #76                 // Method java/lang/Math.max:(II)I
+      31: istore_3
+      32: aload_0
+      33: getstatic     #15                 // Field ALLOCATOR:Lorg/lwjgl/system/MemoryUtil$MemoryAllocator;
+      36: aload_0
+      37: getfield      #25                 // Field bufferAddr:J
+      40: iload_3
+      41: i2l
+      42: invokeinterface #250,  5          // InterfaceMethod org/lwjgl/system/MemoryUtil$MemoryAllocator.realloc:(JJ)J
+      47: putfield      #25                 // Field bufferAddr:J
+      50: aload_0
+      51: aload_0
+      52: getfield      #25                 // Field bufferAddr:J
+      55: iload_3
+      56: invokestatic  #29                 // Method org/lwjgl/system/MemoryUtil.memByteBuffer:(JI)Ljava/nio/ByteBuffer;
+      59: putfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      62: aload_0
+      63: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+      66: invokevirtual #163                // Method java/nio/ByteBuffer.rewind:()Ljava/nio/ByteBuffer;
+      69: pop
+      70: return
+
+  public int finishAndUpload();
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: aload_0
+      18: getfield      #152                // Field elementIndex:I
+      21: aload_0
+      22: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      25: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      28: arraylength
+      29: if_icmpne     42
+      32: new           #133                // class java/lang/IllegalStateException
+      35: dup
+      36: ldc           #179                // String Expected endVertex
+      38: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      41: athrow
+      42: aload_0
+      43: getfield      #152                // Field elementIndex:I
+      46: ifeq          77
+      49: new           #133                // class java/lang/IllegalStateException
+      52: dup
+      53: aload_0
+      54: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      57: getfield      #175                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.types:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      60: aload_0
+      61: getfield      #152                // Field elementIndex:I
+      64: aaload
+      65: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      68: invokedynamic #254,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      73: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      76: athrow
+      77: aload_0
+      78: getfield      #247                // Field vertices:I
+      81: ifne          103
+      84: iconst_0
+      85: istore_2
+      86: aload_0
+      87: iconst_0
+      88: putfield      #138                // Field building:Z
+      91: aload_0
+      92: iconst_0
+      93: putfield      #247                // Field vertices:I
+      96: aload_0
+      97: iconst_0
+      98: putfield      #200                // Field index:I
+     101: iload_2
+     102: ireturn
+     103: aload_0
+     104: getfield      #247                // Field vertices:I
+     107: aload_0
+     108: getfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     111: getfield      #255                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode.vertices:I
+     114: irem
+     115: ifeq          138
+     118: new           #133                // class java/lang/IllegalStateException
+     121: dup
+     122: aload_0
+     123: getfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     126: invokestatic  #189                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     129: invokedynamic #258,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     134: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     137: athrow
+     138: aload_0
+     139: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     142: iconst_0
+     143: invokevirtual #259                // Method java/nio/ByteBuffer.position:(I)Ljava/nio/ByteBuffer;
+     146: pop
+     147: aload_0
+     148: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     151: aload_0
+     152: getfield      #200                // Field index:I
+     155: invokevirtual #170                // Method java/nio/ByteBuffer.limit:(I)Ljava/nio/ByteBuffer;
+     158: pop
+     159: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+     162: aload_0
+     163: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     166: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+     169: iaload
+     170: istore_2
+     171: getstatic     #66                 // Field VERTEX_BUFFER_LENGTHS:[I
+     174: aload_0
+     175: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     178: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+     181: iaload
+     182: istore_3
+     183: iload_2
+     184: invokestatic  #265                // Method net/neoforged/fml/earlydisplay/render/GlState.bindArrayBuffer:(I)V
+     187: iload_3
+     188: aload_0
+     189: getfield      #200                // Field index:I
+     192: if_icmpge     247
+     195: sipush        1024
+     198: iload_3
+     199: invokestatic  #76                 // Method java/lang/Math.max:(II)I
+     202: istore        4
+     204: iload         4
+     206: aload_0
+     207: getfield      #200                // Field index:I
+     210: if_icmpge     222
+     213: iload         4
+     215: iconst_2
+     216: imul
+     217: istore        4
+     219: goto          204
+     222: ldc_w         #268                // int 34962
+     225: iload         4
+     227: i2l
+     228: ldc_w         #269                // int 35048
+     231: invokestatic  #99                 // Method org/lwjgl/opengl/GL32C.glBufferData:(IJI)V
+     234: getstatic     #66                 // Field VERTEX_BUFFER_LENGTHS:[I
+     237: aload_0
+     238: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     241: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+     244: iload         4
+     246: iastore
+     247: ldc_w         #268                // int 34962
+     250: lconst_0
+     251: aload_0
+     252: getfield      #35                 // Field buffer:Ljava/nio/ByteBuffer;
+     255: invokestatic  #270                // Method org/lwjgl/opengl/GL32C.glBufferSubData:(IJLjava/nio/ByteBuffer;)V
+     258: aload_0
+     259: getfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     262: getstatic     #274                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode.TRIANGLES:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     265: if_acmpne     275
+     268: aload_0
+     269: getfield      #247                // Field vertices:I
+     272: goto          286
+     275: aload_0
+     276: getfield      #247                // Field vertices:I
+     279: aload_0
+     280: getfield      #247                // Field vertices:I
+     283: iconst_2
+     284: idiv
+     285: iadd
+     286: istore_1
+     287: aload_0
+     288: getfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     291: getstatic     #277                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode.QUADS:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     294: if_acmpne     310
+     297: aload_0
+     298: getfield      #247                // Field vertices:I
+     301: invokestatic  #280                // Method ensureElementBufferLength:(I)V
+     304: getstatic     #47                 // Field elementBuffer:I
+     307: invokestatic  #82                 // Method net/neoforged/fml/earlydisplay/render/GlState.bindElementArrayBuffer:(I)V
+     310: iload_1
+     311: istore        4
+     313: aload_0
+     314: iconst_0
+     315: putfield      #138                // Field building:Z
+     318: aload_0
+     319: iconst_0
+     320: putfield      #247                // Field vertices:I
+     323: aload_0
+     324: iconst_0
+     325: putfield      #200                // Field index:I
+     328: iload         4
+     330: ireturn
+     331: astore        5
+     333: aload_0
+     334: iconst_0
+     335: putfield      #138                // Field building:Z
+     338: aload_0
+     339: iconst_0
+     340: putfield      #247                // Field vertices:I
+     343: aload_0
+     344: iconst_0
+     345: putfield      #200                // Field index:I
+     348: aload         5
+     350: athrow
+    Exception table:
+       from    to  target type
+          17    86   331   any
+         103   313   331   any
+         331   333   331   any
+
+  public void draw();
+    Code:
+       0: aload_0
+       1: getfield      #138                // Field building:Z
+       4: ifne          17
+       7: new           #133                // class java/lang/IllegalStateException
+      10: dup
+      11: ldc           #173                // String Not building.
+      13: invokespecial #137                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      16: athrow
+      17: getstatic     #54                 // Field VERTEX_ARRAYS:[I
+      20: aload_0
+      21: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      24: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+      27: iaload
+      28: istore_1
+      29: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+      32: aload_0
+      33: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      36: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+      39: iaload
+      40: istore_2
+      41: iload_1
+      42: ifne          133
+      45: getstatic     #283                // Field $assertionsDisabled:Z
+      48: ifne          63
+      51: iload_2
+      52: ifeq          63
+      55: new           #286                // class java/lang/AssertionError
+      58: dup
+      59: invokespecial #288                // Method java/lang/AssertionError."<init>":()V
+      62: athrow
+      63: invokestatic  #289                // Method org/lwjgl/opengl/GL32C.glGenVertexArrays:()I
+      66: istore_1
+      67: invokestatic  #72                 // Method org/lwjgl/opengl/GL32C.glGenBuffers:()I
+      70: istore_2
+      71: getstatic     #54                 // Field VERTEX_ARRAYS:[I
+      74: aload_0
+      75: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      78: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+      81: iload_1
+      82: iastore
+      83: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+      86: aload_0
+      87: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      90: invokevirtual #262                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.ordinal:()I
+      93: iload_2
+      94: iastore
+      95: iload_1
+      96: invokestatic  #292                // Method net/neoforged/fml/earlydisplay/render/GlState.bindVertexArray:(I)V
+      99: iload_2
+     100: invokestatic  #265                // Method net/neoforged/fml/earlydisplay/render/GlState.bindArrayBuffer:(I)V
+     103: iload_1
+     104: aload_0
+     105: getfield      #9                  // Field label:Ljava/lang/String;
+     108: invokestatic  #295                // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelVertexArray:(ILjava/lang/String;)V
+     111: iload_2
+     112: aload_0
+     113: getfield      #9                  // Field label:Ljava/lang/String;
+     116: invokestatic  #89                 // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelBuffer:(ILjava/lang/String;)V
+     119: aload_0
+     120: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     123: invokevirtual #298                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.bind:()V
+     126: aload_0
+     127: getfield      #144                // Field format:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+     130: invokevirtual #301                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.enable:()V
+     133: iload_1
+     134: invokestatic  #292                // Method net/neoforged/fml/earlydisplay/render/GlState.bindVertexArray:(I)V
+     137: aload_0
+     138: invokevirtual #304                // Method finishAndUpload:()I
+     141: istore_3
+     142: aload_0
+     143: getfield      #148                // Field mode:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     146: getstatic     #277                // Field net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode.QUADS:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Mode;
+     149: if_acmpne     164
+     152: iconst_4
+     153: iload_3
+     154: sipush        5125
+     157: lconst_0
+     158: invokestatic  #307                // Method org/lwjgl/opengl/GL32C.glDrawElements:(IIIJ)V
+     161: goto          170
+     164: iconst_4
+     165: iconst_0
+     166: iload_3
+     167: invokestatic  #311                // Method org/lwjgl/opengl/GL32C.glDrawArrays:(III)V
+     170: iconst_0
+     171: invokestatic  #292                // Method net/neoforged/fml/earlydisplay/render/GlState.bindVertexArray:(I)V
+     174: return
+
+  public void close();
+    Code:
+       0: getstatic     #15                 // Field ALLOCATOR:Lorg/lwjgl/system/MemoryUtil$MemoryAllocator;
+       3: aload_0
+       4: getfield      #25                 // Field bufferAddr:J
+       7: invokeinterface #315,  3          // InterfaceMethod org/lwjgl/system/MemoryUtil$MemoryAllocator.free:(J)V
+      12: aload_0
+      13: lconst_0
+      14: putfield      #25                 // Field bufferAddr:J
+      17: return
+
+  static {};
+    Code:
+       0: ldc           #10                 // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder
+       2: invokevirtual #319                // Method java/lang/Class.desiredAssertionStatus:()Z
+       5: ifne          12
+       8: iconst_1
+       9: goto          13
+      12: iconst_0
+      13: putstatic     #283                // Field $assertionsDisabled:Z
+      16: iconst_0
+      17: invokestatic  #325                // Method org/lwjgl/system/MemoryUtil.getAllocator:(Z)Lorg/lwjgl/system/MemoryUtil$MemoryAllocator;
+      20: putstatic     #15                 // Field ALLOCATOR:Lorg/lwjgl/system/MemoryUtil$MemoryAllocator;
+      23: invokestatic  #329                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.values:()[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      26: arraylength
+      27: newarray       int
+      29: putstatic     #54                 // Field VERTEX_ARRAYS:[I
+      32: invokestatic  #329                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.values:()[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      35: arraylength
+      36: newarray       int
+      38: putstatic     #39                 // Field VERTEX_BUFFERS:[I
+      41: invokestatic  #329                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format.values:()[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Format;
+      44: arraylength
+      45: newarray       int
+      47: putstatic     #66                 // Field VERTEX_BUFFER_LENGTHS:[I
+      50: iconst_0
+      51: putstatic     #47                 // Field elementBuffer:I
+      54: iconst_0
+      55: putstatic     #69                 // Field elementBufferVertexLength:I
+      58: getstatic     #54                 // Field VERTEX_ARRAYS:[I
+      61: iconst_0
+      62: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      65: getstatic     #39                 // Field VERTEX_BUFFERS:[I
+      68: iconst_0
+      69: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      72: getstatic     #66                 // Field VERTEX_BUFFER_LENGTHS:[I
+      75: iconst_0
+      76: invokestatic  #60                 // Method java/util/Arrays.fill:([II)V
+      79: return
+}

@@ -1,0 +1,192 @@
+Compiled from "SimpleFont.java"
+public final class net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph extends java.lang.Record {
+  private final char c;
+
+  private final int charwidth;
+
+  private final int[] pos;
+
+  private final float[] uv;
+
+  public net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph(char, int, int[], float[]);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #7                  // Field c:C
+       9: aload_0
+      10: iload_2
+      11: putfield      #13                 // Field charwidth:I
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field pos:[I
+      19: aload_0
+      20: aload         4
+      22: putfield      #21                 // Field uv:[F
+      25: return
+
+  net.neoforged.fml.earlydisplay.render.SimpleFont$Pos loadQuad(net.neoforged.fml.earlydisplay.render.SimpleFont$Pos, int, net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder);
+    Code:
+       0: aload_1
+       1: invokevirtual #25                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.x:()F
+       4: aload_0
+       5: invokevirtual #31                 // Method pos:()[I
+       8: iconst_0
+       9: iaload
+      10: i2f
+      11: fadd
+      12: fstore        4
+      14: aload_1
+      15: invokevirtual #34                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.y:()F
+      18: aload_0
+      19: invokevirtual #31                 // Method pos:()[I
+      22: iconst_1
+      23: iaload
+      24: i2f
+      25: fadd
+      26: fstore        5
+      28: aload_1
+      29: invokevirtual #25                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.x:()F
+      32: aload_0
+      33: invokevirtual #31                 // Method pos:()[I
+      36: iconst_2
+      37: iaload
+      38: i2f
+      39: fadd
+      40: fstore        6
+      42: aload_1
+      43: invokevirtual #34                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.y:()F
+      46: aload_0
+      47: invokevirtual #31                 // Method pos:()[I
+      50: iconst_3
+      51: iaload
+      52: i2f
+      53: fadd
+      54: fstore        7
+      56: aload_3
+      57: fload         4
+      59: fload         5
+      61: invokevirtual #37                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      64: aload_0
+      65: invokevirtual #42                 // Method uv:()[F
+      68: iconst_0
+      69: faload
+      70: aload_0
+      71: invokevirtual #42                 // Method uv:()[F
+      74: iconst_1
+      75: faload
+      76: invokevirtual #45                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      79: iload_2
+      80: invokevirtual #48                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      83: invokevirtual #52                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      86: pop
+      87: aload_3
+      88: fload         6
+      90: fload         5
+      92: invokevirtual #37                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      95: aload_0
+      96: invokevirtual #42                 // Method uv:()[F
+      99: iconst_2
+     100: faload
+     101: aload_0
+     102: invokevirtual #42                 // Method uv:()[F
+     105: iconst_1
+     106: faload
+     107: invokevirtual #45                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     110: iload_2
+     111: invokevirtual #48                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     114: invokevirtual #52                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     117: pop
+     118: aload_3
+     119: fload         4
+     121: fload         7
+     123: invokevirtual #37                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     126: aload_0
+     127: invokevirtual #42                 // Method uv:()[F
+     130: iconst_0
+     131: faload
+     132: aload_0
+     133: invokevirtual #42                 // Method uv:()[F
+     136: iconst_3
+     137: faload
+     138: invokevirtual #45                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     141: iload_2
+     142: invokevirtual #48                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     145: invokevirtual #52                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     148: pop
+     149: aload_3
+     150: fload         6
+     152: fload         7
+     154: invokevirtual #37                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.pos:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     157: aload_0
+     158: invokevirtual #42                 // Method uv:()[F
+     161: iconst_2
+     162: faload
+     163: aload_0
+     164: invokevirtual #42                 // Method uv:()[F
+     167: iconst_3
+     168: faload
+     169: invokevirtual #45                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.tex:(FF)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     172: iload_2
+     173: invokevirtual #48                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.colour:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     176: invokevirtual #52                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.endVertex:()Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     179: pop
+     180: new           #26                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$Pos
+     183: dup
+     184: aload_1
+     185: invokevirtual #25                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.x:()F
+     188: aload_0
+     189: invokevirtual #56                 // Method charwidth:()I
+     192: i2f
+     193: fadd
+     194: aload_1
+     195: invokevirtual #34                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.y:()F
+     198: aload_1
+     199: invokevirtual #59                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos.minx:()F
+     202: invokespecial #62                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos."<init>":(FFF)V
+     205: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #65,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #69,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #73,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public char c();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field c:C
+       4: ireturn
+
+  public int charwidth();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field charwidth:I
+       4: ireturn
+
+  public int[] pos();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field pos:[I
+       4: areturn
+
+  public float[] uv();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field uv:[F
+       4: areturn
+}

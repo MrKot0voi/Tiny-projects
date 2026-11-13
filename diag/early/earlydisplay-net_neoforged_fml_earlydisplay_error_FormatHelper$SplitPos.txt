@@ -1,0 +1,60 @@
+Compiled from "FormatHelper.java"
+final class net.neoforged.fml.earlydisplay.error.FormatHelper$SplitPos extends java.lang.Record {
+  private final int partIdx;
+
+  private final int charIdx;
+
+  private final boolean onSpace;
+
+  private net.neoforged.fml.earlydisplay.error.FormatHelper$SplitPos(int, int, boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #7                  // Field partIdx:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #13                 // Field charIdx:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #16                 // Field onSpace:Z
+      19: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #20,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/error/FormatHelper$SplitPos;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #24,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/error/FormatHelper$SplitPos;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #28,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/error/FormatHelper$SplitPos;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int partIdx();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field partIdx:I
+       4: ireturn
+
+  public int charIdx();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field charIdx:I
+       4: ireturn
+
+  public boolean onSpace();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field onSpace:Z
+       4: ireturn
+}

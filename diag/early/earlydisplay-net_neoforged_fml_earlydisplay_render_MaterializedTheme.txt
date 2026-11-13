@@ -1,0 +1,271 @@
+Compiled from "MaterializedTheme.java"
+public final class net.neoforged.fml.earlydisplay.render.MaterializedTheme extends java.lang.Record implements java.lang.AutoCloseable {
+  private final net.neoforged.fml.earlydisplay.theme.Theme theme;
+
+  private final java.nio.file.Path externalThemeDirectory;
+
+  private final java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont> fonts;
+
+  private final java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.ElementShader> shaders;
+
+  private final net.neoforged.fml.earlydisplay.render.MaterializedThemeSprites sprites;
+
+  public net.neoforged.fml.earlydisplay.render.MaterializedTheme(net.neoforged.fml.earlydisplay.theme.Theme, java.nio.file.Path, java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont>, java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.ElementShader>, net.neoforged.fml.earlydisplay.render.MaterializedThemeSprites);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field externalThemeDirectory:Ljava/nio/file/Path;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field fonts:Ljava/util/Map;
+      19: aload_0
+      20: aload         4
+      22: putfield      #21                 // Field shaders:Ljava/util/Map;
+      25: aload_0
+      26: aload         5
+      28: putfield      #24                 // Field sprites:Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;
+      31: return
+
+  public static net.neoforged.fml.earlydisplay.render.MaterializedTheme materialize(net.neoforged.fml.earlydisplay.theme.Theme, java.nio.file.Path);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/render/MaterializedTheme
+       3: dup
+       4: aload_0
+       5: aload_1
+       6: aload_0
+       7: invokevirtual #28                 // Method net/neoforged/fml/earlydisplay/theme/Theme.fonts:()Ljava/util/Map;
+      10: aload_1
+      11: invokestatic  #33                 // Method loadFonts:(Ljava/util/Map;Ljava/nio/file/Path;)Ljava/util/Map;
+      14: aload_0
+      15: invokevirtual #37                 // Method net/neoforged/fml/earlydisplay/theme/Theme.shaders:()Ljava/util/Map;
+      18: aload_1
+      19: invokestatic  #39                 // Method loadShaders:(Ljava/util/Map;Ljava/nio/file/Path;)Ljava/util/Map;
+      22: aload_0
+      23: invokevirtual #42                 // Method net/neoforged/fml/earlydisplay/theme/Theme.sprites:()Lnet/neoforged/fml/earlydisplay/theme/ThemeSprites;
+      26: aload_1
+      27: invokestatic  #45                 // Method loadSprites:(Lnet/neoforged/fml/earlydisplay/theme/ThemeSprites;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;
+      30: invokespecial #49                 // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/Theme;Ljava/nio/file/Path;Ljava/util/Map;Ljava/util/Map;Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;)V
+      33: areturn
+
+  private static java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.ElementShader> loadShaders(java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeShader>, java.nio.file.Path);
+    Code:
+       0: new           #52                 // class java/util/HashMap
+       3: dup
+       4: aload_0
+       5: invokeinterface #54,  1           // InterfaceMethod java/util/Map.size:()I
+      10: invokespecial #60                 // Method java/util/HashMap."<init>":(I)V
+      13: astore_2
+      14: aload_0
+      15: invokeinterface #63,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #67,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_3
+      26: aload_3
+      27: invokeinterface #73,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          108
+      35: aload_3
+      36: invokeinterface #79,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #83                 // class java/util/Map$Entry
+      44: astore        4
+      46: aload         4
+      48: invokeinterface #85,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      53: checkcast     #88                 // class java/lang/String
+      56: aload         4
+      58: invokeinterface #90,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      63: checkcast     #93                 // class net/neoforged/fml/earlydisplay/theme/ThemeShader
+      66: invokevirtual #95                 // Method net/neoforged/fml/earlydisplay/theme/ThemeShader.vertexShader:()Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+      69: aload         4
+      71: invokeinterface #90,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      76: checkcast     #93                 // class net/neoforged/fml/earlydisplay/theme/ThemeShader
+      79: invokevirtual #99                 // Method net/neoforged/fml/earlydisplay/theme/ThemeShader.fragmentShader:()Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+      82: aload_1
+      83: invokestatic  #102                // Method net/neoforged/fml/earlydisplay/render/ElementShader.create:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/ElementShader;
+      86: astore        5
+      88: aload_2
+      89: aload         4
+      91: invokeinterface #85,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      96: checkcast     #88                 // class java/lang/String
+      99: aload         5
+     101: invokevirtual #108                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     104: pop
+     105: goto          26
+     108: aload_2
+     109: areturn
+
+  private static java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont> loadFonts(java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource>, java.nio.file.Path);
+    Code:
+       0: new           #52                 // class java/util/HashMap
+       3: dup
+       4: aload_0
+       5: invokeinterface #54,  1           // InterfaceMethod java/util/Map.size:()I
+      10: invokespecial #60                 // Method java/util/HashMap."<init>":(I)V
+      13: astore_2
+      14: aload_0
+      15: invokeinterface #63,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #67,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_3
+      26: aload_3
+      27: invokeinterface #73,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          112
+      35: aload_3
+      36: invokeinterface #79,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #83                 // class java/util/Map$Entry
+      44: astore        4
+      46: aload_2
+      47: aload         4
+      49: invokeinterface #85,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      54: checkcast     #88                 // class java/lang/String
+      57: new           #112                // class net/neoforged/fml/earlydisplay/render/SimpleFont
+      60: dup
+      61: aload         4
+      63: invokeinterface #90,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      68: checkcast     #114                // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      71: aload_1
+      72: invokespecial #116                // Method net/neoforged/fml/earlydisplay/render/SimpleFont."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/nio/file/Path;)V
+      75: invokevirtual #108                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      78: pop
+      79: goto          109
+      82: astore        5
+      84: new           #121                // class java/lang/RuntimeException
+      87: dup
+      88: aload         4
+      90: invokeinterface #85,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      95: checkcast     #88                 // class java/lang/String
+      98: invokedynamic #123,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     103: aload         5
+     105: invokespecial #127                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     108: athrow
+     109: goto          26
+     112: aload_2
+     113: areturn
+    Exception table:
+       from    to  target type
+          46    79    82   Class java/io/IOException
+
+  private static net.neoforged.fml.earlydisplay.render.MaterializedThemeSprites loadSprites(net.neoforged.fml.earlydisplay.theme.ThemeSprites, java.nio.file.Path);
+    Code:
+       0: new           #130                // class net/neoforged/fml/earlydisplay/render/MaterializedThemeSprites
+       3: dup
+       4: aload_0
+       5: invokevirtual #132                // Method net/neoforged/fml/earlydisplay/theme/ThemeSprites.progressBarBackground:()Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;
+       8: aload_1
+       9: invokestatic  #138                // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+      12: aload_0
+      13: invokevirtual #143                // Method net/neoforged/fml/earlydisplay/theme/ThemeSprites.progressBarForeground:()Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;
+      16: aload_1
+      17: invokestatic  #138                // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+      20: aload_0
+      21: invokevirtual #146                // Method net/neoforged/fml/earlydisplay/theme/ThemeSprites.progressBarIndeterminate:()Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;
+      24: aload_1
+      25: invokestatic  #138                // Method net/neoforged/fml/earlydisplay/render/Texture.create:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/Texture;
+      28: invokespecial #149                // Method net/neoforged/fml/earlydisplay/render/MaterializedThemeSprites."<init>":(Lnet/neoforged/fml/earlydisplay/render/Texture;Lnet/neoforged/fml/earlydisplay/render/Texture;Lnet/neoforged/fml/earlydisplay/render/Texture;)V
+      31: areturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleFont getFont(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field fonts:Ljava/util/Map;
+       4: aload_1
+       5: aload_0
+       6: getfield      #17                 // Field fonts:Ljava/util/Map;
+       9: ldc           #152                // String default
+      11: invokeinterface #154,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      16: checkcast     #112                // class net/neoforged/fml/earlydisplay/render/SimpleFont
+      19: invokeinterface #158,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      24: checkcast     #112                // class net/neoforged/fml/earlydisplay/render/SimpleFont
+      27: astore_2
+      28: aload_2
+      29: ifnonnull     57
+      32: new           #161                // class java/lang/IllegalStateException
+      35: dup
+      36: aload_0
+      37: getfield      #17                 // Field fonts:Ljava/util/Map;
+      40: invokeinterface #163,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+      45: invokestatic  #166                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      48: invokedynamic #170,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      53: invokespecial #171                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      56: athrow
+      57: aload_2
+      58: areturn
+
+  public net.neoforged.fml.earlydisplay.render.ElementShader getShader(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field shaders:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #154,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #103                // class net/neoforged/fml/earlydisplay/render/ElementShader
+      13: astore_2
+      14: aload_2
+      15: ifnonnull     32
+      18: new           #174                // class java/lang/IllegalArgumentException
+      21: dup
+      22: aload_1
+      23: invokedynamic #176,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      28: invokespecial #177                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      31: athrow
+      32: aload_2
+      33: areturn
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field shaders:Ljava/util/Map;
+       4: invokeinterface #178,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokedynamic #182,  0            // InvokeDynamic #3:accept:()Ljava/util/function/Consumer;
+      14: invokeinterface #186,  2          // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      19: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #192,  0            // InvokeDynamic #4:toString:(Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #196,  0            // InvokeDynamic #4:hashCode:(Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #200,  0            // InvokeDynamic #4:equals:(Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.Theme theme();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field theme:Lnet/neoforged/fml/earlydisplay/theme/Theme;
+       4: areturn
+
+  public java.nio.file.Path externalThemeDirectory();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field externalThemeDirectory:Ljava/nio/file/Path;
+       4: areturn
+
+  public java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont> fonts();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field fonts:Ljava/util/Map;
+       4: areturn
+
+  public java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.render.ElementShader> shaders();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field shaders:Ljava/util/Map;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.render.MaterializedThemeSprites sprites();
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field sprites:Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;
+       4: areturn
+}

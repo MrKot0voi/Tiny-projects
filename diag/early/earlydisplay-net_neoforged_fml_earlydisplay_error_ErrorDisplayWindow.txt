@@ -1,0 +1,1288 @@
+Compiled from "ErrorDisplayWindow.java"
+final class net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow {
+  private static final int DISPLAY_WIDTH = 854;
+
+  private static final int DISPLAY_HEIGHT = 480;
+
+  private static final int BUTTON_WIDTH = 320;
+
+  private static final int BUTTON_HEIGHT = 40;
+
+  private static final int LIST_BORDER_HEIGHT = 2;
+
+  private static final int SCROLLER_WIDTH = 15;
+
+  private static final int SCROLLER_HEIGHT = 60;
+
+  private static final int ENTRY_PADDING = 10;
+
+  private static final int HEADER_Y = 10;
+
+  private static final int HEADER_LINE_HEIGHT = 18;
+
+  private static final int LEFT_BTN_X = 97;
+
+  private static final int RIGHT_BTN_X = 437;
+
+  private static final int TOP_BTN_Y = 388;
+
+  private static final int BOTTOM_BTN_Y = 433;
+
+  private static final int LIST_Y_TOP = 70;
+
+  private static final int LIST_Y_BOTTOM = 380;
+
+  private static final int LIST_CONTENT_Y_TOP = 74;
+
+  private static final int LIST_CONTENT_Y_BOTTOM = 378;
+
+  private static final int LIST_BORDER_TOP_Y2 = 68;
+
+  private static final int LIST_BORDER_TOP_Y1 = 66;
+
+  private static final int LIST_BORDER_BOTTOM_Y1 = 380;
+
+  private static final int LIST_BORDER_BOTTOM_Y2 = 382;
+
+  private static final int LIST_HEIGHT = 310;
+
+  private static final int LIST_CONTENT_HEIGHT = 304;
+
+  private static final int LIST_ENTRY_X = 30;
+
+  private static final int LIST_CONTENT_WIDTH = 794;
+
+  private static final int SCROLL_SPEED = 10;
+
+  final long windowHandle;
+
+  private final net.neoforged.fml.earlydisplay.render.MaterializedTheme theme;
+
+  private final net.neoforged.fml.earlydisplay.render.SimpleFont font;
+
+  private final int errorLineHeight;
+
+  private final net.neoforged.fml.earlydisplay.render.EarlyFramebuffer framebuffer;
+
+  private final net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder bufferBuilder;
+
+  final net.neoforged.fml.earlydisplay.render.Texture buttonTexture;
+
+  final net.neoforged.fml.earlydisplay.render.Texture buttonTextureHover;
+
+  final net.neoforged.fml.earlydisplay.render.Texture buttonTextureInactive;
+
+  private final java.util.List<net.neoforged.fml.earlydisplay.error.Button> buttons;
+
+  private final java.util.List<net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$HeaderLine> headerTextLines;
+
+  private final java.util.List<net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry> entries;
+
+  private final int totalEntryHeight;
+
+  private boolean closed;
+
+  private int offsetX;
+
+  private int offsetY;
+
+  private float scale;
+
+  private double mouseX;
+
+  private double mouseY;
+
+  private float scrollOffset;
+
+  private boolean draggingScrollbar;
+
+  net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow(long, java.lang.String, java.lang.String, java.util.List<net.neoforged.fml.ModLoadingIssue>, java.nio.file.Path, java.nio.file.Path, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #9                  // Field closed:Z
+       9: aload_0
+      10: iconst_0
+      11: putfield      #13                 // Field offsetX:I
+      14: aload_0
+      15: iconst_0
+      16: putfield      #17                 // Field offsetY:I
+      19: aload_0
+      20: fconst_1
+      21: putfield      #20                 // Field scale:F
+      24: aload_0
+      25: ldc2_w        #24                 // double -1.0d
+      28: putfield      #26                 // Field mouseX:D
+      31: aload_0
+      32: ldc2_w        #24                 // double -1.0d
+      35: putfield      #30                 // Field mouseY:D
+      38: aload_0
+      39: fconst_0
+      40: putfield      #33                 // Field scrollOffset:F
+      43: aload_0
+      44: iconst_0
+      45: putfield      #36                 // Field draggingScrollbar:Z
+      48: aload_0
+      49: lload_1
+      50: putfield      #39                 // Field windowHandle:J
+      53: aload_0
+      54: invokestatic  #43                 // Method net/neoforged/fml/earlydisplay/theme/Theme.createDefaultTheme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+      57: aconst_null
+      58: invokestatic  #49                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.materialize:(Lnet/neoforged/fml/earlydisplay/theme/Theme;Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+      61: putfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+      64: aload_3
+      65: aload         4
+      67: invokestatic  #59                 // Method net/neoforged/fml/earlydisplay/error/FontLoader.loadVanillaFont:(Ljava/lang/String;Ljava/lang/String;)Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      70: astore        9
+      72: aload_0
+      73: aload         9
+      75: ifnull        83
+      78: aload         9
+      80: goto          92
+      83: aload_0
+      84: getfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+      87: ldc           #65                 // String default
+      89: invokevirtual #67                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.getFont:(Ljava/lang/String;)Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      92: putfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+      95: aload_0
+      96: aload_0
+      97: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     100: invokevirtual #75                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont.lineSpacing:()I
+     103: iconst_5
+     104: isub
+     105: putfield      #81                 // Field errorLineHeight:I
+     108: aload_0
+     109: new           #84                 // class net/neoforged/fml/earlydisplay/render/EarlyFramebuffer
+     112: dup
+     113: sipush        854
+     116: sipush        480
+     119: invokespecial #86                 // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer."<init>":(II)V
+     122: putfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     125: aload_0
+     126: new           #93                 // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder
+     129: dup
+     130: ldc           #95                 // String shared_error
+     132: sipush        8192
+     135: invokespecial #97                 // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder."<init>":(Ljava/lang/String;I)V
+     138: putfield      #100                // Field bufferBuilder:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     141: aload_0
+     142: iconst_1
+     143: iconst_0
+     144: invokestatic  #104                // Method net/neoforged/fml/earlydisplay/error/Button.loadTexture:(ZZ)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     147: putfield      #110                // Field buttonTexture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+     150: aload_0
+     151: iconst_1
+     152: iconst_1
+     153: invokestatic  #104                // Method net/neoforged/fml/earlydisplay/error/Button.loadTexture:(ZZ)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     156: putfield      #114                // Field buttonTextureHover:Lnet/neoforged/fml/earlydisplay/render/Texture;
+     159: aload_0
+     160: iconst_0
+     161: iconst_0
+     162: invokestatic  #104                // Method net/neoforged/fml/earlydisplay/error/Button.loadTexture:(ZZ)Lnet/neoforged/fml/earlydisplay/render/Texture;
+     165: putfield      #117                // Field buttonTextureInactive:Lnet/neoforged/fml/earlydisplay/render/Texture;
+     168: aload         9
+     170: ifnull        177
+     173: iconst_1
+     174: goto          178
+     177: iconst_0
+     178: istore        10
+     180: iload         10
+     182: ifeq          193
+     185: invokedynamic #120,  0            // InvokeDynamic #0:apply:()Ljava/util/function/BiFunction;
+     190: goto          198
+     193: invokedynamic #124,  0            // InvokeDynamic #1:apply:()Ljava/util/function/BiFunction;
+     198: astore        11
+     200: invokestatic  #125                // Method net/neoforged/fml/earlydisplay/error/FileOpener.get:()Lnet/neoforged/fml/earlydisplay/error/FileOpener;
+     203: astore        12
+     205: aload         11
+     207: ldc           #131                // String fml.button.open.mods.folder
+     209: iconst_0
+     210: anewarray     #4                  // class java/lang/Object
+     213: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     218: checkcast     #138                // class java/lang/String
+     221: astore        13
+     223: aload         11
+     225: ldc           #140                // String fml.button.open.crashreport
+     227: iconst_0
+     228: anewarray     #4                  // class java/lang/Object
+     231: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     236: checkcast     #138                // class java/lang/String
+     239: astore        14
+     241: aload         11
+     243: ldc           #142                // String fml.button.open.log
+     245: iconst_0
+     246: anewarray     #4                  // class java/lang/Object
+     249: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     254: checkcast     #138                // class java/lang/String
+     257: astore        15
+     259: aload         11
+     261: ldc           #144                // String fml.button.quit
+     263: iconst_0
+     264: anewarray     #4                  // class java/lang/Object
+     267: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     272: checkcast     #138                // class java/lang/String
+     275: astore        16
+     277: aload_0
+     278: new           #105                // class net/neoforged/fml/earlydisplay/error/Button
+     281: dup
+     282: aload_0
+     283: bipush        97
+     285: sipush        388
+     288: sipush        320
+     291: bipush        40
+     293: aload         13
+     295: aload         6
+     297: ifnull        304
+     300: iconst_1
+     301: goto          305
+     304: iconst_0
+     305: aload         12
+     307: aload         6
+     309: invokedynamic #146,  0            // InvokeDynamic #2:run:(Lnet/neoforged/fml/earlydisplay/error/FileOpener;Ljava/nio/file/Path;)Ljava/lang/Runnable;
+     314: invokespecial #150                // Method net/neoforged/fml/earlydisplay/error/Button."<init>":(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;IIIILjava/lang/String;ZLjava/lang/Runnable;)V
+     317: new           #105                // class net/neoforged/fml/earlydisplay/error/Button
+     320: dup
+     321: aload_0
+     322: bipush        97
+     324: sipush        433
+     327: sipush        320
+     330: bipush        40
+     332: aload         14
+     334: aload         8
+     336: ifnull        343
+     339: iconst_1
+     340: goto          344
+     343: iconst_0
+     344: aload         12
+     346: aload         8
+     348: invokedynamic #153,  0            // InvokeDynamic #3:run:(Lnet/neoforged/fml/earlydisplay/error/FileOpener;Ljava/nio/file/Path;)Ljava/lang/Runnable;
+     353: invokespecial #150                // Method net/neoforged/fml/earlydisplay/error/Button."<init>":(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;IIIILjava/lang/String;ZLjava/lang/Runnable;)V
+     356: new           #105                // class net/neoforged/fml/earlydisplay/error/Button
+     359: dup
+     360: aload_0
+     361: sipush        437
+     364: sipush        388
+     367: sipush        320
+     370: bipush        40
+     372: aload         15
+     374: aload         7
+     376: ifnull        383
+     379: iconst_1
+     380: goto          384
+     383: iconst_0
+     384: aload         12
+     386: aload         7
+     388: invokedynamic #154,  0            // InvokeDynamic #4:run:(Lnet/neoforged/fml/earlydisplay/error/FileOpener;Ljava/nio/file/Path;)Ljava/lang/Runnable;
+     393: invokespecial #150                // Method net/neoforged/fml/earlydisplay/error/Button."<init>":(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;IIIILjava/lang/String;ZLjava/lang/Runnable;)V
+     396: new           #105                // class net/neoforged/fml/earlydisplay/error/Button
+     399: dup
+     400: aload_0
+     401: sipush        437
+     404: sipush        433
+     407: sipush        320
+     410: bipush        40
+     412: aload         16
+     414: iconst_1
+     415: aload_0
+     416: invokedynamic #155,  0            // InvokeDynamic #5:run:(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;)Ljava/lang/Runnable;
+     421: invokespecial #150                // Method net/neoforged/fml/earlydisplay/error/Button."<init>":(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;IIIILjava/lang/String;ZLjava/lang/Runnable;)V
+     424: invokestatic  #158                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     427: putfield      #164                // Field buttons:Ljava/util/List;
+     430: aload         5
+     432: invokeinterface #168,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     437: invokedynamic #172,  0            // InvokeDynamic #6:test:()Ljava/util/function/Predicate;
+     442: invokeinterface #176,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     447: invokeinterface #182,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     452: astore        17
+     454: aload         5
+     456: invokeinterface #168,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     461: invokedynamic #186,  0            // InvokeDynamic #7:test:()Ljava/util/function/Predicate;
+     466: invokeinterface #176,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     471: invokeinterface #182,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+     476: astore        18
+     478: aload         11
+     480: ldc           #187                // String fml.loadingerrorscreen.errorheader
+     482: iconst_1
+     483: anewarray     #4                  // class java/lang/Object
+     486: dup
+     487: iconst_0
+     488: aload         18
+     490: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     495: invokestatic  #192                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     498: aastore
+     499: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     504: checkcast     #138                // class java/lang/String
+     507: astore        19
+     509: aload         11
+     511: ldc           #198                // String fml.loadingerrorscreen.warningheader
+     513: iconst_1
+     514: anewarray     #4                  // class java/lang/Object
+     517: dup
+     518: iconst_0
+     519: aload         17
+     521: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     526: invokestatic  #192                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     529: aastore
+     530: invokeinterface #133,  3          // InterfaceMethod java/util/function/BiFunction.apply:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     535: checkcast     #138                // class java/lang/String
+     538: astore        20
+     540: aload         17
+     542: invokeinterface #200,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     547: ifne          564
+     550: aload         18
+     552: invokeinterface #200,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     557: ifne          564
+     560: iconst_1
+     561: goto          565
+     564: iconst_0
+     565: istore        21
+     567: iload         10
+     569: ifeq          580
+     572: invokedynamic #204,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+     577: goto          585
+     580: invokedynamic #207,  0            // InvokeDynamic #9:apply:()Ljava/util/function/Function;
+     585: astore        22
+     587: aload_0
+     588: new           #208                // class java/util/ArrayList
+     591: dup
+     592: aload         18
+     594: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     599: aload         17
+     601: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     606: iadd
+     607: invokespecial #210                // Method java/util/ArrayList."<init>":(I)V
+     610: putfield      #213                // Field entries:Ljava/util/List;
+     613: iload         21
+     615: ifeq          640
+     618: aload_0
+     619: getfield      #213                // Field entries:Ljava/util/List;
+     622: aload         19
+     624: aload_0
+     625: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     628: ldc           #216                // int -43691
+     630: iconst_1
+     631: invokestatic  #217                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.of:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;IZ)Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;
+     634: invokeinterface #222,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     639: pop
+     640: aload         18
+     642: aload_0
+     643: getfield      #213                // Field entries:Ljava/util/List;
+     646: aload_0
+     647: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     650: aload         22
+     652: invokestatic  #226                // Method translateEntries:(Ljava/util/List;Ljava/util/List;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/function/Function;)V
+     655: iload         21
+     657: ifeq          683
+     660: aload_0
+     661: getfield      #213                // Field entries:Ljava/util/List;
+     664: aload         20
+     666: aload_0
+     667: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     670: sipush        -171
+     673: iconst_1
+     674: invokestatic  #217                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.of:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;IZ)Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;
+     677: invokeinterface #222,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     682: pop
+     683: aload         17
+     685: aload_0
+     686: getfield      #213                // Field entries:Ljava/util/List;
+     689: aload_0
+     690: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     693: aload         22
+     695: invokestatic  #226                // Method translateEntries:(Ljava/util/List;Ljava/util/List;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/function/Function;)V
+     698: aload_0
+     699: getfield      #213                // Field entries:Ljava/util/List;
+     702: invokeinterface #168,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     707: invokedynamic #230,  0            // InvokeDynamic #10:applyAsInt:()Ljava/util/function/ToIntFunction;
+     712: invokeinterface #234,  2          // InterfaceMethod java/util/stream/Stream.mapToInt:(Ljava/util/function/ToIntFunction;)Ljava/util/stream/IntStream;
+     717: invokeinterface #238,  1          // InterfaceMethod java/util/stream/IntStream.sum:()I
+     722: aload_0
+     723: getfield      #81                 // Field errorLineHeight:I
+     726: imul
+     727: istore        23
+     729: aload_0
+     730: iload         23
+     732: aload_0
+     733: getfield      #213                // Field entries:Ljava/util/List;
+     736: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     741: bipush        10
+     743: imul
+     744: iadd
+     745: putfield      #243                // Field totalEntryHeight:I
+     748: aload         18
+     750: invokeinterface #200,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     755: ifne          769
+     758: aload         19
+     760: astore        24
+     762: ldc           #216                // int -43691
+     764: istore        25
+     766: goto          778
+     769: aload         20
+     771: astore        24
+     773: sipush        -171
+     776: istore        25
+     778: aload_0
+     779: aload         24
+     781: aload_0
+     782: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     785: iload         25
+     787: invokestatic  #246                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$HeaderLine.of:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;I)Ljava/util/List;
+     790: putfield      #251                // Field headerTextLines:Ljava/util/List;
+     793: return
+
+  private static void translateEntries(java.util.List<net.neoforged.fml.ModLoadingIssue>, java.util.List<net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry>, net.neoforged.fml.earlydisplay.render.SimpleFont, java.util.function.Function<net.neoforged.fml.ModLoadingIssue, java.lang.String>);
+    Code:
+       0: aload_0
+       1: invokeinterface #168,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       6: aload_3
+       7: invokeinterface #254,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      12: aload_2
+      13: invokedynamic #258,  0            // InvokeDynamic #11:apply:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont;)Ljava/util/function/Function;
+      18: invokeinterface #254,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      23: aload_1
+      24: dup
+      25: invokestatic  #261                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      28: pop
+      29: invokedynamic #267,  0            // InvokeDynamic #12:accept:(Ljava/util/List;)Ljava/util/function/Consumer;
+      34: invokeinterface #271,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      39: return
+
+  void render();
+    Code:
+       0: aload_0
+       1: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+       4: invokevirtual #275                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.activate:()V
+       7: iconst_1
+       8: newarray       int
+      10: astore_1
+      11: iconst_1
+      12: newarray       int
+      14: astore_2
+      15: aload_0
+      16: getfield      #39                 // Field windowHandle:J
+      19: aload_1
+      20: aload_2
+      21: invokestatic  #278                // Method org/lwjgl/glfw/GLFW.glfwGetFramebufferSize:(J[I[I)V
+      24: aload_0
+      25: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      28: aload_1
+      29: iconst_0
+      30: iaload
+      31: aload_2
+      32: iconst_0
+      33: iaload
+      34: invokevirtual #284                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.resize:(II)V
+      37: ldc_w         #287                // float 1.7791667f
+      40: fstore_3
+      41: aload_0
+      42: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      45: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+      48: i2f
+      49: aload_0
+      50: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      53: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+      56: i2f
+      57: fdiv
+      58: fstore        4
+      60: fload         4
+      62: fload_3
+      63: fcmpl
+      64: ifle          139
+      67: fload_3
+      68: aload_0
+      69: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      72: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+      75: i2f
+      76: fmul
+      77: fstore        5
+      79: aload_0
+      80: aload_0
+      81: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      84: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+      87: i2f
+      88: fload         5
+      90: fsub
+      91: f2i
+      92: iconst_2
+      93: idiv
+      94: putfield      #13                 // Field offsetX:I
+      97: aload_0
+      98: iconst_0
+      99: putfield      #17                 // Field offsetY:I
+     102: aload_0
+     103: aload_0
+     104: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     107: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+     110: i2f
+     111: ldc_w         #294                // float 480.0f
+     114: fdiv
+     115: putfield      #20                 // Field scale:F
+     118: aload_0
+     119: getfield      #13                 // Field offsetX:I
+     122: iconst_0
+     123: fload         5
+     125: f2i
+     126: aload_0
+     127: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     130: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+     133: invokestatic  #295                // Method net/neoforged/fml/earlydisplay/render/GlState.viewport:(IIII)V
+     136: goto          208
+     139: aload_0
+     140: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     143: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+     146: i2f
+     147: fload_3
+     148: fdiv
+     149: fstore        5
+     151: aload_0
+     152: iconst_0
+     153: putfield      #13                 // Field offsetX:I
+     156: aload_0
+     157: aload_0
+     158: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     161: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+     164: i2f
+     165: fload         5
+     167: fsub
+     168: f2i
+     169: iconst_2
+     170: idiv
+     171: putfield      #17                 // Field offsetY:I
+     174: aload_0
+     175: aload_0
+     176: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     179: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+     182: i2f
+     183: ldc_w         #301                // float 854.0f
+     186: fdiv
+     187: putfield      #20                 // Field scale:F
+     190: iconst_0
+     191: aload_0
+     192: getfield      #17                 // Field offsetY:I
+     195: aload_0
+     196: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     199: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+     202: fload         5
+     204: f2i
+     205: invokestatic  #295                // Method net/neoforged/fml/earlydisplay/render/GlState.viewport:(IIII)V
+     208: fconst_0
+     209: fconst_0
+     210: fconst_0
+     211: fconst_1
+     212: invokestatic  #302                // Method net/neoforged/fml/earlydisplay/render/GlState.clearColor:(FFFF)V
+     215: sipush        16640
+     218: invokestatic  #308                // Method org/lwjgl/opengl/GL11C.glClear:(I)V
+     221: iconst_1
+     222: invokestatic  #311                // Method net/neoforged/fml/earlydisplay/render/GlState.enableBlend:(Z)V
+     225: sipush        770
+     228: sipush        771
+     231: iconst_0
+     232: iconst_1
+     233: invokestatic  #315                // Method net/neoforged/fml/earlydisplay/render/GlState.blendFuncSeparate:(IIII)V
+     236: new           #318                // class net/neoforged/fml/earlydisplay/render/RenderContext
+     239: dup
+     240: aload_0
+     241: getfield      #100                // Field bufferBuilder:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+     244: aload_0
+     245: getfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     248: ldc_w         #301                // float 854.0f
+     251: ldc_w         #294                // float 480.0f
+     254: aload_0
+     255: getfield      #13                 // Field offsetX:I
+     258: aload_0
+     259: getfield      #17                 // Field offsetY:I
+     262: aload_0
+     263: getfield      #20                 // Field scale:F
+     266: iconst_0
+     267: invokespecial #320                // Method net/neoforged/fml/earlydisplay/render/RenderContext."<init>":(Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;FFIIFI)V
+     270: astore        5
+     272: aload_0
+     273: getfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     276: invokevirtual #323                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.shaders:()Ljava/util/Map;
+     279: invokeinterface #327,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+     284: invokeinterface #333,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+     289: astore        6
+     291: aload         6
+     293: invokeinterface #339,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     298: ifeq          346
+     301: aload         6
+     303: invokeinterface #344,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     308: checkcast     #348                // class net/neoforged/fml/earlydisplay/render/ElementShader
+     311: astore        7
+     313: aload         7
+     315: invokevirtual #350                // Method net/neoforged/fml/earlydisplay/render/ElementShader.activate:()V
+     318: aload         7
+     320: ldc_w         #351                // String screenSize
+     323: invokevirtual #353                // Method net/neoforged/fml/earlydisplay/render/ElementShader.hasUniform:(Ljava/lang/String;)Z
+     326: ifeq          343
+     329: aload         7
+     331: ldc_w         #351                // String screenSize
+     334: ldc_w         #301                // float 854.0f
+     337: ldc_w         #294                // float 480.0f
+     340: invokevirtual #357                // Method net/neoforged/fml/earlydisplay/render/ElementShader.setUniform2f:(Ljava/lang/String;FF)V
+     343: goto          291
+     346: aload_0
+     347: aload         5
+     349: invokevirtual #361                // Method renderToFramebuffer:(Lnet/neoforged/fml/earlydisplay/render/RenderContext;)V
+     352: aload_0
+     353: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     356: invokevirtual #365                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.deactivate:()V
+     359: iconst_0
+     360: iconst_0
+     361: aload_0
+     362: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     365: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+     368: aload_0
+     369: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     372: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+     375: invokestatic  #295                // Method net/neoforged/fml/earlydisplay/render/GlState.viewport:(IIII)V
+     378: aload_0
+     379: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     382: aload_0
+     383: getfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     386: invokevirtual #368                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     389: invokevirtual #370                // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+     392: invokevirtual #374                // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.screenBackground:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+     395: aload_0
+     396: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     399: invokevirtual #288                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.width:()I
+     402: aload_0
+     403: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+     406: invokevirtual #291                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.height:()I
+     409: invokevirtual #380                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.blitToScreen:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;II)V
+     412: aload_0
+     413: getfield      #39                 // Field windowHandle:J
+     416: invokestatic  #384                // Method org/lwjgl/glfw/GLFW.glfwSwapBuffers:(J)V
+     419: return
+
+  private void renderToFramebuffer(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: aload_1
+       1: fconst_0
+       2: fconst_0
+       3: ldc_w         #301                // float 854.0f
+       6: ldc_w         #294                // float 480.0f
+       9: ldc_w         #388                // int -12574688
+      12: ldc_w         #389                // int -11530224
+      15: invokevirtual #390                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFII)V
+      18: aload_1
+      19: fconst_0
+      20: ldc_w         #394                // float 66.0f
+      23: ldc_w         #301                // float 854.0f
+      26: fconst_2
+      27: ldc_w         #395                // int 872415231
+      30: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+      33: aload_1
+      34: fconst_0
+      35: ldc_w         #399                // float 68.0f
+      38: ldc_w         #301                // float 854.0f
+      41: fconst_2
+      42: ldc_w         #400                // int -1090519040
+      45: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+      48: aload_1
+      49: fconst_0
+      50: ldc_w         #401                // float 380.0f
+      53: ldc_w         #301                // float 854.0f
+      56: fconst_2
+      57: ldc_w         #400                // int -1090519040
+      60: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+      63: aload_1
+      64: fconst_0
+      65: ldc_w         #402                // float 382.0f
+      68: ldc_w         #301                // float 854.0f
+      71: fconst_2
+      72: ldc_w         #395                // int 872415231
+      75: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+      78: aload_1
+      79: fconst_0
+      80: ldc_w         #403                // float 70.0f
+      83: ldc_w         #301                // float 854.0f
+      86: ldc_w         #404                // float 310.0f
+      89: ldc_w         #405                // int 1879048192
+      92: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+      95: iconst_0
+      96: istore_2
+      97: iload_2
+      98: aload_0
+      99: getfield      #251                // Field headerTextLines:Ljava/util/List;
+     102: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     107: if_icmpge     169
+     110: aload_0
+     111: getfield      #251                // Field headerTextLines:Ljava/util/List;
+     114: iload_2
+     115: invokeinterface #406,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     120: checkcast     #247                // class net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$HeaderLine
+     123: astore_3
+     124: ldc_w         #409                // float 427.0f
+     127: aload_3
+     128: getfield      #410                // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$HeaderLine.width:I
+     131: i2f
+     132: fconst_2
+     133: fdiv
+     134: fsub
+     135: fstore        4
+     137: bipush        10
+     139: bipush        18
+     141: iload_2
+     142: imul
+     143: iadd
+     144: i2f
+     145: fstore        5
+     147: aload_1
+     148: fload         4
+     150: fload         5
+     152: aload_0
+     153: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     156: aload_3
+     157: getfield      #412                // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$HeaderLine.parts:Ljava/util/List;
+     160: invokevirtual #415                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderTextWithShadow:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     163: iinc          2, 1
+     166: goto          97
+     169: iconst_1
+     170: invokestatic  #419                // Method net/neoforged/fml/earlydisplay/render/GlState.scissorTest:(Z)V
+     173: aload_1
+     174: iconst_0
+     175: bipush        74
+     177: sipush        854
+     180: sipush        304
+     183: invokevirtual #422                // Method net/neoforged/fml/earlydisplay/render/RenderContext.scissorBox:(IIII)V
+     186: ldc_w         #403                // float 70.0f
+     189: aload_0
+     190: getfield      #33                 // Field scrollOffset:F
+     193: fsub
+     194: fstore_2
+     195: aload_0
+     196: getfield      #213                // Field entries:Ljava/util/List;
+     199: invokeinterface #425,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     204: astore_3
+     205: aload_3
+     206: invokeinterface #339,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     211: ifeq          409
+     214: aload_3
+     215: invokeinterface #344,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     220: checkcast     #218                // class net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry
+     223: astore        4
+     225: aload_0
+     226: getfield      #81                 // Field errorLineHeight:I
+     229: aload         4
+     231: invokevirtual #426                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.lineCount:()I
+     234: imul
+     235: i2f
+     236: fstore        5
+     238: fload_2
+     239: fload         5
+     241: fadd
+     242: ldc_w         #403                // float 70.0f
+     245: fcmpg
+     246: ifge          261
+     249: fload_2
+     250: fload         5
+     252: ldc_w         #429                // float 10.0f
+     255: fadd
+     256: fadd
+     257: fstore_2
+     258: goto          205
+     261: fload_2
+     262: ldc_w         #430                // float 378.0f
+     265: fcmpl
+     266: ifle          272
+     269: goto          409
+     272: aload         4
+     274: invokevirtual #431                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.lines:()Ljava/util/List;
+     277: invokeinterface #425,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     282: astore        6
+     284: aload         6
+     286: invokeinterface #339,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     291: ifeq          400
+     294: aload         6
+     296: invokeinterface #344,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     301: checkcast     #159                // class java/util/List
+     304: astore        7
+     306: aload         4
+     308: getfield      #434                // Field net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.centered:Z
+     311: ifeq          371
+     314: aload         7
+     316: invokeinterface #168,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     321: invokedynamic #437,  0            // InvokeDynamic #13:apply:()Ljava/util/function/Function;
+     326: invokeinterface #254,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     331: aload_0
+     332: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     335: dup
+     336: invokestatic  #261                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     339: pop
+     340: invokedynamic #438,  0            // InvokeDynamic #14:applyAsInt:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont;)Ljava/util/function/ToIntFunction;
+     345: invokeinterface #234,  2          // InterfaceMethod java/util/stream/Stream.mapToInt:(Ljava/util/function/ToIntFunction;)Ljava/util/stream/IntStream;
+     350: invokeinterface #238,  1          // InterfaceMethod java/util/stream/IntStream.sum:()I
+     355: istore        9
+     357: ldc_w         #409                // float 427.0f
+     360: iload         9
+     362: i2f
+     363: fconst_2
+     364: fdiv
+     365: fsub
+     366: fstore        8
+     368: goto          376
+     371: ldc_w         #441                // float 30.0f
+     374: fstore        8
+     376: aload_1
+     377: fload         8
+     379: fload_2
+     380: aload_0
+     381: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     384: aload         7
+     386: invokevirtual #442                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderText:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     389: fload_2
+     390: aload_0
+     391: getfield      #81                 // Field errorLineHeight:I
+     394: i2f
+     395: fadd
+     396: fstore_2
+     397: goto          284
+     400: fload_2
+     401: ldc_w         #429                // float 10.0f
+     404: fadd
+     405: fstore_2
+     406: goto          205
+     409: iconst_0
+     410: invokestatic  #419                // Method net/neoforged/fml/earlydisplay/render/GlState.scissorTest:(Z)V
+     413: aload_0
+     414: getfield      #243                // Field totalEntryHeight:I
+     417: sipush        304
+     420: if_icmple     469
+     423: aload_0
+     424: getfield      #33                 // Field scrollOffset:F
+     427: aload_0
+     428: getfield      #243                // Field totalEntryHeight:I
+     431: sipush        304
+     434: isub
+     435: iconst_1
+     436: isub
+     437: i2f
+     438: fdiv
+     439: fstore_3
+     440: ldc_w         #403                // float 70.0f
+     443: fload_3
+     444: ldc_w         #445                // float 249.0f
+     447: fmul
+     448: fadd
+     449: fstore        4
+     451: aload_1
+     452: ldc_w         #446                // float 839.0f
+     455: fload         4
+     457: ldc_w         #447                // float 15.0f
+     460: ldc_w         #448                // float 60.0f
+     463: ldc_w         #449                // int -5592406
+     466: invokevirtual #396                // Method net/neoforged/fml/earlydisplay/render/RenderContext.fillRect:(FFFFI)V
+     469: aload_0
+     470: getfield      #164                // Field buttons:Ljava/util/List;
+     473: aload_0
+     474: aload_1
+     475: invokedynamic #450,  0            // InvokeDynamic #15:accept:(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow;Lnet/neoforged/fml/earlydisplay/render/RenderContext;)Ljava/util/function/Consumer;
+     480: invokeinterface #453,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+     485: return
+
+  private void dragScrollbar(double);
+    Code:
+       0: aload_0
+       1: getfield      #243                // Field totalEntryHeight:I
+       4: sipush        304
+       7: isub
+       8: i2d
+       9: dstore_3
+      10: dload_1
+      11: ldc2_w        #454                // double 70.0d
+      14: dsub
+      15: ldc2_w        #456                // double 30.0d
+      18: dsub
+      19: ldc2_w        #458                // double 244.0d
+      22: ddiv
+      23: dstore        5
+      25: aload_0
+      26: dload         5
+      28: dload_3
+      29: dmul
+      30: dconst_0
+      31: dload_3
+      32: invokestatic  #460                // Method java/lang/Math.clamp:(DDD)D
+      35: d2f
+      36: putfield      #33                 // Field scrollOffset:F
+      39: return
+
+  private void scroll(double);
+    Code:
+       0: dload_1
+       1: ldc2_w        #466                // double 10.0d
+       4: dmul
+       5: d2f
+       6: fstore_3
+       7: aload_0
+       8: aload_0
+       9: getfield      #33                 // Field scrollOffset:F
+      12: fload_3
+      13: fadd
+      14: fconst_0
+      15: aload_0
+      16: getfield      #243                // Field totalEntryHeight:I
+      19: sipush        304
+      22: isub
+      23: iconst_0
+      24: invokestatic  #468                // Method java/lang/Math.max:(II)I
+      27: i2f
+      28: invokestatic  #472                // Method java/lang/Math.clamp:(FFF)F
+      31: putfield      #33                 // Field scrollOffset:F
+      34: return
+
+  void handleCursorPos(long, double, double);
+    Code:
+       0: aload_0
+       1: dload_3
+       2: aload_0
+       3: getfield      #13                 // Field offsetX:I
+       6: i2d
+       7: dsub
+       8: aload_0
+       9: getfield      #20                 // Field scale:F
+      12: f2d
+      13: ddiv
+      14: putfield      #26                 // Field mouseX:D
+      17: aload_0
+      18: dload         5
+      20: aload_0
+      21: getfield      #17                 // Field offsetY:I
+      24: i2d
+      25: dsub
+      26: aload_0
+      27: getfield      #20                 // Field scale:F
+      30: f2d
+      31: ddiv
+      32: putfield      #30                 // Field mouseY:D
+      35: aload_0
+      36: getfield      #36                 // Field draggingScrollbar:Z
+      39: ifeq          50
+      42: aload_0
+      43: aload_0
+      44: getfield      #30                 // Field mouseY:D
+      47: invokevirtual #475                // Method dragScrollbar:(D)V
+      50: return
+
+  void handleMouseScroll(long, double, double);
+    Code:
+       0: aload_0
+       1: dload         5
+       3: dneg
+       4: invokevirtual #479                // Method scroll:(D)V
+       7: return
+
+  void handleMouseButton(long, int, int, int);
+    Code:
+       0: iload_3
+       1: ifeq          5
+       4: return
+       5: iload         4
+       7: iconst_1
+       8: if_icmpne     15
+      11: iconst_1
+      12: goto          16
+      15: iconst_0
+      16: istore        6
+      18: iload         6
+      20: ifeq          97
+      23: aload_0
+      24: getfield      #164                // Field buttons:Ljava/util/List;
+      27: invokedynamic #482,  0            // InvokeDynamic #16:accept:()Ljava/util/function/Consumer;
+      32: invokeinterface #453,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      37: aload_0
+      38: getfield      #164                // Field buttons:Ljava/util/List;
+      41: invokeinterface #425,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      46: astore        7
+      48: aload         7
+      50: invokeinterface #339,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      55: ifeq          97
+      58: aload         7
+      60: invokeinterface #344,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      65: checkcast     #105                // class net/neoforged/fml/earlydisplay/error/Button
+      68: astore        8
+      70: aload         8
+      72: aload_0
+      73: getfield      #26                 // Field mouseX:D
+      76: aload_0
+      77: getfield      #30                 // Field mouseY:D
+      80: invokevirtual #485                // Method net/neoforged/fml/earlydisplay/error/Button.isMouseOver:(DD)Z
+      83: ifeq          94
+      86: aload         8
+      88: invokevirtual #489                // Method net/neoforged/fml/earlydisplay/error/Button.press:()V
+      91: goto          97
+      94: goto          48
+      97: aload_0
+      98: getfield      #243                // Field totalEntryHeight:I
+     101: sipush        304
+     104: if_icmple     171
+     107: iload         6
+     109: ifeq          161
+     112: aload_0
+     113: getfield      #26                 // Field mouseX:D
+     116: ldc2_w        #492                // double 839.0d
+     119: dcmpl
+     120: ifle          161
+     123: aload_0
+     124: getfield      #30                 // Field mouseY:D
+     127: ldc2_w        #454                // double 70.0d
+     130: dcmpl
+     131: ifle          161
+     134: aload_0
+     135: getfield      #30                 // Field mouseY:D
+     138: ldc2_w        #494                // double 380.0d
+     141: dcmpg
+     142: ifgt          161
+     145: aload_0
+     146: iconst_1
+     147: putfield      #36                 // Field draggingScrollbar:Z
+     150: aload_0
+     151: aload_0
+     152: getfield      #30                 // Field mouseY:D
+     155: invokevirtual #475                // Method dragScrollbar:(D)V
+     158: goto          171
+     161: iload         6
+     163: ifne          171
+     166: aload_0
+     167: iconst_0
+     168: putfield      #36                 // Field draggingScrollbar:Z
+     171: return
+
+  void handleKey(long, int, int, int, int);
+    Code:
+       0: iload         5
+       2: ifne          6
+       5: return
+       6: iload         5
+       8: iconst_2
+       9: if_icmpne     16
+      12: iconst_1
+      13: goto          17
+      16: iconst_0
+      17: istore        7
+      19: iload_3
+      20: lookupswitch  { // 8
+                   256: 96
+                   257: 215
+                   258: 127
+                   264: 119
+                   265: 109
+                   266: 109
+                   267: 119
+                   335: 215
+               default: 275
+          }
+      96: iload         7
+      98: ifne          275
+     101: aload_0
+     102: iconst_1
+     103: putfield      #9                  // Field closed:Z
+     106: goto          275
+     109: aload_0
+     110: ldc2_w        #24                 // double -1.0d
+     113: invokevirtual #479                // Method scroll:(D)V
+     116: goto          275
+     119: aload_0
+     120: dconst_1
+     121: invokevirtual #479                // Method scroll:(D)V
+     124: goto          275
+     127: iload         7
+     129: ifeq          135
+     132: goto          275
+     135: iconst_0
+     136: istore        8
+     138: iconst_0
+     139: istore        9
+     141: iload         9
+     143: aload_0
+     144: getfield      #164                // Field buttons:Ljava/util/List;
+     147: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+     152: if_icmpge     202
+     155: aload_0
+     156: getfield      #164                // Field buttons:Ljava/util/List;
+     159: iload         9
+     161: invokeinterface #406,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     166: checkcast     #105                // class net/neoforged/fml/earlydisplay/error/Button
+     169: astore        10
+     171: aload         10
+     173: invokevirtual #496                // Method net/neoforged/fml/earlydisplay/error/Button.isFocused:()Z
+     176: ifeq          196
+     179: aload         10
+     181: invokevirtual #499                // Method net/neoforged/fml/earlydisplay/error/Button.unfocus:()V
+     184: aload_0
+     185: iload         9
+     187: invokevirtual #502                // Method focusFirstActiveKeyAfter:(I)V
+     190: iconst_1
+     191: istore        8
+     193: goto          202
+     196: iinc          9, 1
+     199: goto          141
+     202: iload         8
+     204: ifne          212
+     207: aload_0
+     208: iconst_m1
+     209: invokevirtual #502                // Method focusFirstActiveKeyAfter:(I)V
+     212: goto          275
+     215: iload         7
+     217: ifeq          223
+     220: goto          275
+     223: aload_0
+     224: getfield      #164                // Field buttons:Ljava/util/List;
+     227: invokeinterface #425,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     232: astore        8
+     234: aload         8
+     236: invokeinterface #339,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     241: ifeq          275
+     244: aload         8
+     246: invokeinterface #344,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     251: checkcast     #105                // class net/neoforged/fml/earlydisplay/error/Button
+     254: astore        9
+     256: aload         9
+     258: invokevirtual #496                // Method net/neoforged/fml/earlydisplay/error/Button.isFocused:()Z
+     261: ifeq          272
+     264: aload         9
+     266: invokevirtual #489                // Method net/neoforged/fml/earlydisplay/error/Button.press:()V
+     269: goto          275
+     272: goto          234
+     275: return
+
+  private void focusFirstActiveKeyAfter(int);
+    Code:
+       0: iconst_1
+       1: istore_2
+       2: iload_2
+       3: aload_0
+       4: getfield      #164                // Field buttons:Ljava/util/List;
+       7: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+      12: if_icmpgt     59
+      15: aload_0
+      16: getfield      #164                // Field buttons:Ljava/util/List;
+      19: iload_1
+      20: iload_2
+      21: iadd
+      22: aload_0
+      23: getfield      #164                // Field buttons:Ljava/util/List;
+      26: invokeinterface #189,  1          // InterfaceMethod java/util/List.size:()I
+      31: irem
+      32: invokeinterface #406,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      37: checkcast     #105                // class net/neoforged/fml/earlydisplay/error/Button
+      40: astore_3
+      41: aload_3
+      42: invokevirtual #505                // Method net/neoforged/fml/earlydisplay/error/Button.isActive:()Z
+      45: ifeq          53
+      48: aload_3
+      49: invokevirtual #508                // Method net/neoforged/fml/earlydisplay/error/Button.focus:()V
+      52: return
+      53: iinc          2, 1
+      56: goto          2
+      59: return
+
+  void handleClose(long);
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: putfield      #9                  // Field closed:Z
+       5: return
+
+  boolean isClosed();
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field closed:Z
+       4: ireturn
+
+  void teardown();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+       4: invokevirtual #511                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.close:()V
+       7: aload_0
+       8: getfield      #89                 // Field framebuffer:Lnet/neoforged/fml/earlydisplay/render/EarlyFramebuffer;
+      11: invokevirtual #514                // Method net/neoforged/fml/earlydisplay/render/EarlyFramebuffer.close:()V
+      14: aload_0
+      15: getfield      #100                // Field bufferBuilder:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;
+      18: invokevirtual #515                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.close:()V
+      21: aload_0
+      22: getfield      #110                // Field buttonTexture:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      25: invokevirtual #516                // Method net/neoforged/fml/earlydisplay/render/Texture.close:()V
+      28: aload_0
+      29: getfield      #114                // Field buttonTextureHover:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      32: invokevirtual #516                // Method net/neoforged/fml/earlydisplay/render/Texture.close:()V
+      35: aload_0
+      36: getfield      #117                // Field buttonTextureInactive:Lnet/neoforged/fml/earlydisplay/render/Texture;
+      39: invokevirtual #516                // Method net/neoforged/fml/earlydisplay/render/Texture.close:()V
+      42: invokestatic  #519                // Method net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder.destroy:()V
+      45: return
+
+  private void lambda$renderToFramebuffer$7(net.neoforged.fml.earlydisplay.render.RenderContext, net.neoforged.fml.earlydisplay.error.Button);
+    Code:
+       0: aload_2
+       1: aload_1
+       2: aload_0
+       3: getfield      #71                 // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+       6: aload_0
+       7: getfield      #26                 // Field mouseX:D
+      10: aload_0
+      11: getfield      #30                 // Field mouseY:D
+      14: invokevirtual #522                // Method net/neoforged/fml/earlydisplay/error/Button.render:(Lnet/neoforged/fml/earlydisplay/render/RenderContext;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;DD)V
+      17: return
+
+  private static net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry lambda$translateEntries$6(net.neoforged.fml.earlydisplay.render.SimpleFont, java.lang.String);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokestatic  #526                // Method net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry.of:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;)Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;
+       5: areturn
+
+  private static boolean lambda$new$5(net.neoforged.fml.ModLoadingIssue);
+    Code:
+       0: aload_0
+       1: invokevirtual #529                // Method net/neoforged/fml/ModLoadingIssue.severity:()Lnet/neoforged/fml/ModLoadingIssue$Severity;
+       4: getstatic     #535                // Field net/neoforged/fml/ModLoadingIssue$Severity.ERROR:Lnet/neoforged/fml/ModLoadingIssue$Severity;
+       7: if_acmpne     14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+
+  private static boolean lambda$new$4(net.neoforged.fml.ModLoadingIssue);
+    Code:
+       0: aload_0
+       1: invokevirtual #529                // Method net/neoforged/fml/ModLoadingIssue.severity:()Lnet/neoforged/fml/ModLoadingIssue$Severity;
+       4: getstatic     #535                // Field net/neoforged/fml/ModLoadingIssue$Severity.ERROR:Lnet/neoforged/fml/ModLoadingIssue$Severity;
+       7: if_acmpeq     14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+
+  private void lambda$new$3();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: putfield      #9                  // Field closed:Z
+       5: return
+
+  private static void lambda$new$2(net.neoforged.fml.earlydisplay.error.FileOpener, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #541                // Method net/neoforged/fml/earlydisplay/error/FileOpener.open:(Ljava/nio/file/Path;)V
+       5: return
+
+  private static void lambda$new$1(net.neoforged.fml.earlydisplay.error.FileOpener, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #541                // Method net/neoforged/fml/earlydisplay/error/FileOpener.open:(Ljava/nio/file/Path;)V
+       5: return
+
+  private static void lambda$new$0(net.neoforged.fml.earlydisplay.error.FileOpener, java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #541                // Method net/neoforged/fml/earlydisplay/error/FileOpener.open:(Ljava/nio/file/Path;)V
+       5: return
+}

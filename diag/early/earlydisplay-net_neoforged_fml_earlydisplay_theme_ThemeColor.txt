@@ -1,0 +1,367 @@
+Compiled from "ThemeColor.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeColor extends java.lang.Record {
+  private final float r;
+
+  private final float g;
+
+  private final float b;
+
+  private final float a;
+
+  public static final net.neoforged.fml.earlydisplay.theme.ThemeColor WHITE;
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor(float, float, float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: fload_1
+       6: putfield      #7                  // Field r:F
+       9: aload_0
+      10: fload_2
+      11: putfield      #13                 // Field g:F
+      14: aload_0
+      15: fload_3
+      16: putfield      #16                 // Field b:F
+      19: aload_0
+      20: fload         4
+      22: putfield      #19                 // Field a:F
+      25: return
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor ofBytes(int, int, int, int);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+       3: dup
+       4: iload_0
+       5: i2f
+       6: ldc           #22                 // float 255.0f
+       8: fdiv
+       9: iload_1
+      10: i2f
+      11: ldc           #22                 // float 255.0f
+      13: fdiv
+      14: iload_2
+      15: i2f
+      16: ldc           #22                 // float 255.0f
+      18: fdiv
+      19: iload_3
+      20: i2f
+      21: ldc           #22                 // float 255.0f
+      23: fdiv
+      24: invokespecial #23                 // Method "<init>":(FFFF)V
+      27: areturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor ofBytes(int, int, int);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: iload_2
+       3: sipush        255
+       6: invokestatic  #26                 // Method ofBytes:(IIII)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+       9: areturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor ofArgb(int);
+    Code:
+       0: iload_0
+       1: bipush        24
+       3: ishr
+       4: sipush        255
+       7: iand
+       8: istore_1
+       9: iload_0
+      10: bipush        16
+      12: ishr
+      13: sipush        255
+      16: iand
+      17: istore_2
+      18: iload_0
+      19: bipush        8
+      21: ishr
+      22: sipush        255
+      25: iand
+      26: istore_3
+      27: iload_0
+      28: sipush        255
+      31: iand
+      32: istore        4
+      34: iload_2
+      35: iload_3
+      36: iload         4
+      38: iload_1
+      39: invokestatic  #26                 // Method ofBytes:(IIII)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      42: areturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor ofRgb(int);
+    Code:
+       0: iload_0
+       1: bipush        16
+       3: ishr
+       4: sipush        255
+       7: iand
+       8: istore_1
+       9: iload_0
+      10: bipush        8
+      12: ishr
+      13: sipush        255
+      16: iand
+      17: istore_2
+      18: iload_0
+      19: sipush        255
+      22: iand
+      23: istore_3
+      24: iload_1
+      25: iload_2
+      26: iload_3
+      27: invokestatic  #30                 // Method ofBytes:(III)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      30: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColor withAlpha(float);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+       3: dup
+       4: aload_0
+       5: getfield      #7                  // Field r:F
+       8: aload_0
+       9: getfield      #13                 // Field g:F
+      12: aload_0
+      13: getfield      #16                 // Field b:F
+      16: fload_1
+      17: invokespecial #23                 // Method "<init>":(FFFF)V
+      20: areturn
+
+  public int toArgb();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field a:F
+       4: ldc           #22                 // float 255.0f
+       6: fmul
+       7: f2i
+       8: sipush        255
+      11: iand
+      12: bipush        24
+      14: ishl
+      15: aload_0
+      16: getfield      #7                  // Field r:F
+      19: ldc           #22                 // float 255.0f
+      21: fmul
+      22: f2i
+      23: sipush        255
+      26: iand
+      27: bipush        16
+      29: ishl
+      30: ior
+      31: aload_0
+      32: getfield      #13                 // Field g:F
+      35: ldc           #22                 // float 255.0f
+      37: fmul
+      38: f2i
+      39: sipush        255
+      42: iand
+      43: bipush        8
+      45: ishl
+      46: ior
+      47: aload_0
+      48: getfield      #16                 // Field b:F
+      51: ldc           #22                 // float 255.0f
+      53: fmul
+      54: f2i
+      55: sipush        255
+      58: iand
+      59: ior
+      60: ireturn
+
+  public int rByte();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field r:F
+       4: ldc           #22                 // float 255.0f
+       6: fmul
+       7: f2i
+       8: ireturn
+
+  public int gByte();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field g:F
+       4: ldc           #22                 // float 255.0f
+       6: fmul
+       7: f2i
+       8: ireturn
+
+  public int bByte();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field b:F
+       4: ldc           #22                 // float 255.0f
+       6: fmul
+       7: f2i
+       8: ireturn
+
+  public int aByte();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field a:F
+       4: ldc           #22                 // float 255.0f
+       6: fmul
+       7: f2i
+       8: ireturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor lerp(net.neoforged.fml.earlydisplay.theme.ThemeColor, net.neoforged.fml.earlydisplay.theme.ThemeColor, float);
+    Code:
+       0: aload_0
+       1: invokevirtual #33                 // Method toHsb:()[F
+       4: astore_3
+       5: aload_1
+       6: invokevirtual #33                 // Method toHsb:()[F
+       9: astore        4
+      11: aload_3
+      12: iconst_0
+      13: faload
+      14: aload         4
+      16: iconst_0
+      17: faload
+      18: aload_3
+      19: iconst_0
+      20: faload
+      21: fsub
+      22: fload_2
+      23: fmul
+      24: fadd
+      25: aload_3
+      26: iconst_1
+      27: faload
+      28: aload         4
+      30: iconst_1
+      31: faload
+      32: aload_3
+      33: iconst_1
+      34: faload
+      35: fsub
+      36: fload_2
+      37: fmul
+      38: fadd
+      39: aload_3
+      40: iconst_2
+      41: faload
+      42: aload         4
+      44: iconst_2
+      45: faload
+      46: aload_3
+      47: iconst_2
+      48: faload
+      49: fsub
+      50: fload_2
+      51: fmul
+      52: fadd
+      53: invokestatic  #37                 // Method ofHsb:(FFF)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      56: areturn
+
+  public float[] toHsb();
+    Code:
+       0: aload_0
+       1: invokevirtual #41                 // Method rByte:()I
+       4: aload_0
+       5: invokevirtual #45                 // Method gByte:()I
+       8: aload_0
+       9: invokevirtual #48                 // Method bByte:()I
+      12: aconst_null
+      13: invokestatic  #51                 // Method java/awt/Color.RGBtoHSB:(III[F)[F
+      16: areturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor ofHsb(float, float, float);
+    Code:
+       0: fload_0
+       1: fload_1
+       2: fload_2
+       3: fconst_0
+       4: fconst_1
+       5: invokestatic  #57                 // Method java/lang/Math.clamp:(FFF)F
+       8: invokestatic  #63                 // Method java/awt/Color.HSBtoRGB:(FFF)I
+      11: invokestatic  #67                 // Method ofRgb:(I)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      14: areturn
+
+  public static net.neoforged.fml.earlydisplay.theme.ThemeColor scale(net.neoforged.fml.earlydisplay.theme.ThemeColor, float);
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+       3: dup
+       4: aload_0
+       5: invokevirtual #71                 // Method r:()F
+       8: fload_1
+       9: fmul
+      10: fconst_0
+      11: fconst_1
+      12: invokestatic  #57                 // Method java/lang/Math.clamp:(FFF)F
+      15: aload_0
+      16: invokevirtual #74                 // Method g:()F
+      19: fload_1
+      20: fmul
+      21: fconst_0
+      22: fconst_1
+      23: invokestatic  #57                 // Method java/lang/Math.clamp:(FFF)F
+      26: aload_0
+      27: invokevirtual #76                 // Method b:()F
+      30: fload_1
+      31: fmul
+      32: fconst_0
+      33: fconst_1
+      34: invokestatic  #57                 // Method java/lang/Math.clamp:(FFF)F
+      37: aload_0
+      38: invokevirtual #78                 // Method a:()F
+      41: invokespecial #23                 // Method "<init>":(FFFF)V
+      44: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #80,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #84,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #88,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public float r();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field r:F
+       4: freturn
+
+  public float g();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field g:F
+       4: freturn
+
+  public float b();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field b:F
+       4: freturn
+
+  public float a();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field a:F
+       4: freturn
+
+  static {};
+    Code:
+       0: new           #8                  // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+       3: dup
+       4: fconst_1
+       5: fconst_1
+       6: fconst_1
+       7: fconst_1
+       8: invokespecial #23                 // Method "<init>":(FFFF)V
+      11: putstatic     #92                 // Field WHITE:Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      14: return
+}

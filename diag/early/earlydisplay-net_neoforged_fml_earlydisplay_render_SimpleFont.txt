@@ -1,0 +1,653 @@
+Compiled from "SimpleFont.java"
+public class net.neoforged.fml.earlydisplay.render.SimpleFont implements java.lang.AutoCloseable {
+  private static final int ASCII_GLYPH_COUNT = 95;
+
+  private int textureId;
+
+  private final int lineSpacing;
+
+  private final int descent;
+
+  private final java.util.function.IntFunction<net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph> glyphGetter;
+
+  public net.neoforged.fml.earlydisplay.util.Size measureText(java.lang.CharSequence);
+    Code:
+       0: fconst_0
+       1: fstore_2
+       2: fconst_0
+       3: fstore_3
+       4: fconst_0
+       5: fstore        4
+       7: fconst_0
+       8: fstore        5
+      10: aload_1
+      11: invokeinterface #7,  1            // InterfaceMethod java/lang/CharSequence.codePoints:()Ljava/util/stream/IntStream;
+      16: invokeinterface #13,  1           // InterfaceMethod java/util/stream/IntStream.iterator:()Ljava/util/PrimitiveIterator$OfInt;
+      21: astore        6
+      23: aload         6
+      25: invokeinterface #19,  1           // InterfaceMethod java/util/PrimitiveIterator$OfInt.hasNext:()Z
+      30: ifeq          140
+      33: aload         6
+      35: invokeinterface #25,  1           // InterfaceMethod java/util/PrimitiveIterator$OfInt.nextInt:()I
+      40: istore        7
+      42: iload         7
+      44: lookupswitch  { // 2
+                     9: 95
+                    10: 72
+               default: 113
+          }
+      72: fload_2
+      73: fload         4
+      75: invokestatic  #29                 // Method java/lang/Math.max:(FF)F
+      78: fstore_2
+      79: fconst_0
+      80: fstore        4
+      82: fload         5
+      84: aload_0
+      85: invokevirtual #35                 // Method lineSpacing:()I
+      88: i2f
+      89: fadd
+      90: fstore        5
+      92: goto          137
+      95: fload         4
+      97: aload_0
+      98: invokevirtual #40                 // Method getSpaceGlyph:()Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;
+     101: invokevirtual #44                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph.charwidth:()I
+     104: iconst_4
+     105: imul
+     106: i2f
+     107: fadd
+     108: fstore        4
+     110: goto          137
+     113: aload_0
+     114: iload         7
+     116: invokevirtual #49                 // Method getGlyph:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;
+     119: astore        8
+     121: aload         8
+     123: ifnull        137
+     126: fload         4
+     128: aload         8
+     130: invokevirtual #44                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph.charwidth:()I
+     133: i2f
+     134: fadd
+     135: fstore        4
+     137: goto          23
+     140: fload_2
+     141: fload         4
+     143: invokestatic  #29                 // Method java/lang/Math.max:(FF)F
+     146: fstore_2
+     147: fload         5
+     149: aload_0
+     150: invokevirtual #53                 // Method descent:()I
+     153: i2f
+     154: fadd
+     155: fstore_3
+     156: fload         4
+     158: fconst_0
+     159: fcmpl
+     160: ifle          171
+     163: fload_3
+     164: aload_0
+     165: getfield      #56                 // Field lineSpacing:I
+     168: i2f
+     169: fadd
+     170: fstore_3
+     171: new           #59                 // class net/neoforged/fml/earlydisplay/util/Size
+     174: dup
+     175: fload_2
+     176: fload_3
+     177: invokespecial #61                 // Method net/neoforged/fml/earlydisplay/util/Size."<init>":(FF)V
+     180: areturn
+
+  public void close();
+    Code:
+       0: aload_0
+       1: getfield      #65                 // Field textureId:I
+       4: ifeq          19
+       7: aload_0
+       8: getfield      #65                 // Field textureId:I
+      11: invokestatic  #68                 // Method org/lwjgl/opengl/GL32C.glDeleteTextures:(I)V
+      14: aload_0
+      15: iconst_0
+      16: putfield      #65                 // Field textureId:I
+      19: return
+
+  public net.neoforged.fml.earlydisplay.render.SimpleFont(int, int, int, java.util.function.IntFunction<net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph>);
+    Code:
+       0: aload_0
+       1: invokespecial #72                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #56                 // Field lineSpacing:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #77                 // Field descent:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #65                 // Field textureId:I
+      19: aload_0
+      20: aload         4
+      22: putfield      #79                 // Field glyphGetter:Ljava/util/function/IntFunction;
+      25: return
+
+  public net.neoforged.fml.earlydisplay.render.SimpleFont(net.neoforged.fml.earlydisplay.theme.ThemeResource, java.nio.file.Path) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: invokespecial #72                 // Method java/lang/Object."<init>":()V
+       4: aload_1
+       5: aload_2
+       6: invokevirtual #83                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource.toNativeBuffer:(Ljava/nio/file/Path;)Lnet/neoforged/fml/earlydisplay/theme/NativeBuffer;
+       9: astore_3
+      10: aload_3
+      11: invokevirtual #89                 // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.buffer:()Ljava/nio/ByteBuffer;
+      14: astore        4
+      16: invokestatic  #95                 // Method org/lwjgl/stb/STBTTFontinfo.create:()Lorg/lwjgl/stb/STBTTFontinfo;
+      19: astore        5
+      21: aload         5
+      23: aload         4
+      25: invokestatic  #101                // Method org/lwjgl/stb/STBTruetype.stbtt_InitFont:(Lorg/lwjgl/stb/STBTTFontinfo;Ljava/nio/ByteBuffer;)Z
+      28: ifne          41
+      31: new           #107                // class java/lang/IllegalStateException
+      34: dup
+      35: ldc           #109                // String Bad font
+      37: invokespecial #111                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      40: athrow
+      41: iconst_1
+      42: newarray       float
+      44: astore        6
+      46: iconst_1
+      47: newarray       float
+      49: astore        7
+      51: iconst_1
+      52: newarray       float
+      54: astore        8
+      56: bipush        24
+      58: istore        9
+      60: aload         4
+      62: iconst_0
+      63: iload         9
+      65: i2f
+      66: aload         6
+      68: aload         7
+      70: aload         8
+      72: invokestatic  #114                // Method org/lwjgl/stb/STBTruetype.stbtt_GetScaledFontVMetrics:(Ljava/nio/ByteBuffer;IF[F[F[F)V
+      75: aload_0
+      76: aload         6
+      78: iconst_0
+      79: faload
+      80: aload         7
+      82: iconst_0
+      83: faload
+      84: fsub
+      85: aload         8
+      87: iconst_0
+      88: faload
+      89: fadd
+      90: f2i
+      91: putfield      #56                 // Field lineSpacing:I
+      94: aload_0
+      95: aload         7
+      97: iconst_0
+      98: faload
+      99: f2d
+     100: invokestatic  #118                // Method java/lang/Math.floor:(D)D
+     103: d2i
+     104: putfield      #77                 // Field descent:I
+     107: aload_0
+     108: invokestatic  #122                // Method org/lwjgl/opengl/GL32C.glGenTextures:()I
+     111: putfield      #65                 // Field textureId:I
+     114: aload_0
+     115: getfield      #65                 // Field textureId:I
+     118: invokestatic  #125                // Method net/neoforged/fml/earlydisplay/render/GlState.bindTexture2D:(I)V
+     121: aload_0
+     122: getfield      #65                 // Field textureId:I
+     125: aload_1
+     126: invokestatic  #130                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     129: invokedynamic #136,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     134: invokestatic  #140                // Method net/neoforged/fml/earlydisplay/render/GlDebug.labelTexture:(ILjava/lang/String;)V
+     137: bipush        95
+     139: invokestatic  #146                // Method org/lwjgl/stb/STBTTPackedchar.malloc:(I)Lorg/lwjgl/stb/STBTTPackedchar$Buffer;
+     142: astore        10
+     144: sipush        256
+     147: istore        11
+     149: sipush        128
+     152: istore        12
+     154: iconst_1
+     155: invokestatic  #152                // Method org/lwjgl/stb/STBTTPackRange.malloc:(I)Lorg/lwjgl/stb/STBTTPackRange$Buffer;
+     158: astore        13
+     160: iload         11
+     162: iload         12
+     164: imul
+     165: invokestatic  #157                // Method org/lwjgl/BufferUtils.createByteBuffer:(I)Ljava/nio/ByteBuffer;
+     168: astore        14
+     170: invokestatic  #163                // Method org/lwjgl/stb/STBTTPackRange.malloc:()Lorg/lwjgl/stb/STBTTPackRange;
+     173: astore        15
+     175: aload         13
+     177: aload         15
+     179: iload         9
+     181: i2f
+     182: bipush        32
+     184: aconst_null
+     185: bipush        95
+     187: aload         10
+     189: iconst_1
+     190: iconst_1
+     191: invokevirtual #166                // Method org/lwjgl/stb/STBTTPackRange.set:(FILjava/nio/IntBuffer;ILorg/lwjgl/stb/STBTTPackedchar$Buffer;BB)Lorg/lwjgl/stb/STBTTPackRange;
+     194: invokevirtual #170                // Method org/lwjgl/stb/STBTTPackRange$Buffer.put:(Lorg/lwjgl/system/Struct;)Lorg/lwjgl/system/StructBuffer;
+     197: pop
+     198: aload         13
+     200: invokevirtual #176                // Method org/lwjgl/stb/STBTTPackRange$Buffer.flip:()Lorg/lwjgl/system/CustomBuffer;
+     203: pop
+     204: aload         15
+     206: ifnull        244
+     209: aload         15
+     211: invokevirtual #180                // Method org/lwjgl/stb/STBTTPackRange.close:()V
+     214: goto          244
+     217: astore        16
+     219: aload         15
+     221: ifnull        241
+     224: aload         15
+     226: invokevirtual #180                // Method org/lwjgl/stb/STBTTPackRange.close:()V
+     229: goto          241
+     232: astore        17
+     234: aload         16
+     236: aload         17
+     238: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     241: aload         16
+     243: athrow
+     244: invokestatic  #189                // Method org/lwjgl/stb/STBTTPackContext.malloc:()Lorg/lwjgl/stb/STBTTPackContext;
+     247: astore        15
+     249: aload         15
+     251: aload         14
+     253: iload         11
+     255: iload         12
+     257: iconst_0
+     258: iconst_1
+     259: lconst_0
+     260: invokestatic  #194                // Method org/lwjgl/stb/STBTruetype.stbtt_PackBegin:(Lorg/lwjgl/stb/STBTTPackContext;Ljava/nio/ByteBuffer;IIIIJ)Z
+     263: pop
+     264: aload         15
+     266: iconst_1
+     267: iconst_1
+     268: invokestatic  #198                // Method org/lwjgl/stb/STBTruetype.stbtt_PackSetOversampling:(Lorg/lwjgl/stb/STBTTPackContext;II)V
+     271: aload         15
+     273: iconst_1
+     274: invokestatic  #202                // Method org/lwjgl/stb/STBTruetype.stbtt_PackSetSkipMissingCodepoints:(Lorg/lwjgl/stb/STBTTPackContext;Z)V
+     277: aload         15
+     279: aload         4
+     281: iconst_0
+     282: aload         13
+     284: invokestatic  #206                // Method org/lwjgl/stb/STBTruetype.stbtt_PackFontRanges:(Lorg/lwjgl/stb/STBTTPackContext;Ljava/nio/ByteBuffer;ILorg/lwjgl/stb/STBTTPackRange$Buffer;)Z
+     287: pop
+     288: aload         15
+     290: invokestatic  #210                // Method org/lwjgl/stb/STBTruetype.stbtt_PackEnd:(Lorg/lwjgl/stb/STBTTPackContext;)V
+     293: sipush        3553
+     296: iconst_0
+     297: sipush        6403
+     300: iload         11
+     302: iload         12
+     304: iconst_0
+     305: sipush        6403
+     308: sipush        5121
+     311: aload         14
+     313: invokestatic  #214                // Method org/lwjgl/opengl/GL32C.glTexImage2D:(IIIIIIIILjava/nio/ByteBuffer;)V
+     316: sipush        3553
+     319: sipush        10242
+     322: ldc           #218                // int 33071
+     324: invokestatic  #219                // Method org/lwjgl/opengl/GL32C.glTexParameteri:(III)V
+     327: sipush        3553
+     330: sipush        10243
+     333: ldc           #218                // int 33071
+     335: invokestatic  #219                // Method org/lwjgl/opengl/GL32C.glTexParameteri:(III)V
+     338: sipush        3553
+     341: sipush        10240
+     344: sipush        9728
+     347: invokestatic  #219                // Method org/lwjgl/opengl/GL32C.glTexParameteri:(III)V
+     350: sipush        3553
+     353: sipush        10241
+     356: sipush        9728
+     359: invokestatic  #219                // Method org/lwjgl/opengl/GL32C.glTexParameteri:(III)V
+     362: aload         15
+     364: ifnull        402
+     367: aload         15
+     369: invokevirtual #223                // Method org/lwjgl/stb/STBTTPackContext.close:()V
+     372: goto          402
+     375: astore        16
+     377: aload         15
+     379: ifnull        399
+     382: aload         15
+     384: invokevirtual #223                // Method org/lwjgl/stb/STBTTPackContext.close:()V
+     387: goto          399
+     390: astore        17
+     392: aload         16
+     394: aload         17
+     396: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     399: aload         16
+     401: athrow
+     402: aload         13
+     404: ifnull        442
+     407: aload         13
+     409: invokevirtual #224                // Method org/lwjgl/stb/STBTTPackRange$Buffer.close:()V
+     412: goto          442
+     415: astore        14
+     417: aload         13
+     419: ifnull        439
+     422: aload         13
+     424: invokevirtual #224                // Method org/lwjgl/stb/STBTTPackRange$Buffer.close:()V
+     427: goto          439
+     430: astore        15
+     432: aload         14
+     434: aload         15
+     436: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     439: aload         14
+     441: athrow
+     442: invokestatic  #225                // Method org/lwjgl/stb/STBTTAlignedQuad.malloc:()Lorg/lwjgl/stb/STBTTAlignedQuad;
+     445: astore        13
+     447: iconst_1
+     448: newarray       float
+     450: astore        14
+     452: iconst_1
+     453: newarray       float
+     455: astore        15
+     457: bipush        95
+     459: anewarray     #45                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph
+     462: astore        16
+     464: iconst_0
+     465: istore        17
+     467: iload         17
+     469: bipush        95
+     471: if_icmpge     609
+     474: aload         14
+     476: iconst_0
+     477: fconst_0
+     478: fastore
+     479: aload         15
+     481: iconst_0
+     482: iload         9
+     484: i2f
+     485: fastore
+     486: aload         10
+     488: iload         11
+     490: iload         12
+     492: iload         17
+     494: aload         14
+     496: aload         15
+     498: aload         13
+     500: iconst_1
+     501: invokestatic  #230                // Method org/lwjgl/stb/STBTruetype.stbtt_GetPackedQuad:(Lorg/lwjgl/stb/STBTTPackedchar$Buffer;III[F[FLorg/lwjgl/stb/STBTTAlignedQuad;Z)V
+     504: aload         16
+     506: iload         17
+     508: new           #45                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph
+     511: dup
+     512: iload         17
+     514: bipush        32
+     516: iadd
+     517: i2c
+     518: aload         14
+     520: iconst_0
+     521: faload
+     522: fconst_0
+     523: fsub
+     524: f2i
+     525: iconst_4
+     526: newarray       int
+     528: dup
+     529: iconst_0
+     530: aload         13
+     532: invokevirtual #234                // Method org/lwjgl/stb/STBTTAlignedQuad.x0:()F
+     535: f2i
+     536: iastore
+     537: dup
+     538: iconst_1
+     539: aload         13
+     541: invokevirtual #238                // Method org/lwjgl/stb/STBTTAlignedQuad.y0:()F
+     544: f2i
+     545: iastore
+     546: dup
+     547: iconst_2
+     548: aload         13
+     550: invokevirtual #241                // Method org/lwjgl/stb/STBTTAlignedQuad.x1:()F
+     553: f2i
+     554: iastore
+     555: dup
+     556: iconst_3
+     557: aload         13
+     559: invokevirtual #244                // Method org/lwjgl/stb/STBTTAlignedQuad.y1:()F
+     562: f2i
+     563: iastore
+     564: iconst_4
+     565: newarray       float
+     567: dup
+     568: iconst_0
+     569: aload         13
+     571: invokevirtual #247                // Method org/lwjgl/stb/STBTTAlignedQuad.s0:()F
+     574: fastore
+     575: dup
+     576: iconst_1
+     577: aload         13
+     579: invokevirtual #250                // Method org/lwjgl/stb/STBTTAlignedQuad.t0:()F
+     582: fastore
+     583: dup
+     584: iconst_2
+     585: aload         13
+     587: invokevirtual #253                // Method org/lwjgl/stb/STBTTAlignedQuad.s1:()F
+     590: fastore
+     591: dup
+     592: iconst_3
+     593: aload         13
+     595: invokevirtual #256                // Method org/lwjgl/stb/STBTTAlignedQuad.t1:()F
+     598: fastore
+     599: invokespecial #259                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph."<init>":(CI[I[F)V
+     602: aastore
+     603: iinc          17, 1
+     606: goto          467
+     609: aload_0
+     610: aload         16
+     612: invokedynamic #262,  0            // InvokeDynamic #1:apply:([Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;)Ljava/util/function/IntFunction;
+     617: putfield      #79                 // Field glyphGetter:Ljava/util/function/IntFunction;
+     620: aload         13
+     622: ifnull        660
+     625: aload         13
+     627: invokevirtual #266                // Method org/lwjgl/stb/STBTTAlignedQuad.close:()V
+     630: goto          660
+     633: astore        14
+     635: aload         13
+     637: ifnull        657
+     640: aload         13
+     642: invokevirtual #266                // Method org/lwjgl/stb/STBTTAlignedQuad.close:()V
+     645: goto          657
+     648: astore        15
+     650: aload         14
+     652: aload         15
+     654: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     657: aload         14
+     659: athrow
+     660: aload         10
+     662: ifnull        700
+     665: aload         10
+     667: invokevirtual #267                // Method org/lwjgl/stb/STBTTPackedchar$Buffer.close:()V
+     670: goto          700
+     673: astore        11
+     675: aload         10
+     677: ifnull        697
+     680: aload         10
+     682: invokevirtual #267                // Method org/lwjgl/stb/STBTTPackedchar$Buffer.close:()V
+     685: goto          697
+     688: astore        12
+     690: aload         11
+     692: aload         12
+     694: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     697: aload         11
+     699: athrow
+     700: aload_3
+     701: ifnull        736
+     704: aload_3
+     705: invokevirtual #270                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.close:()V
+     708: goto          736
+     711: astore        4
+     713: aload_3
+     714: ifnull        733
+     717: aload_3
+     718: invokevirtual #270                // Method net/neoforged/fml/earlydisplay/theme/NativeBuffer.close:()V
+     721: goto          733
+     724: astore        5
+     726: aload         4
+     728: aload         5
+     730: invokevirtual #185                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     733: aload         4
+     735: athrow
+     736: return
+    Exception table:
+       from    to  target type
+         175   204   217   Class java/lang/Throwable
+         224   229   232   Class java/lang/Throwable
+         249   362   375   Class java/lang/Throwable
+         382   387   390   Class java/lang/Throwable
+         160   402   415   Class java/lang/Throwable
+         422   427   430   Class java/lang/Throwable
+         447   620   633   Class java/lang/Throwable
+         640   645   648   Class java/lang/Throwable
+         144   660   673   Class java/lang/Throwable
+         680   685   688   Class java/lang/Throwable
+          10   700   711   Class java/lang/Throwable
+         717   721   724   Class java/lang/Throwable
+
+  private net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph getGlyph(int);
+    Code:
+       0: aload_0
+       1: getfield      #79                 // Field glyphGetter:Ljava/util/function/IntFunction;
+       4: iload_1
+       5: invokeinterface #271,  2          // InterfaceMethod java/util/function/IntFunction.apply:(I)Ljava/lang/Object;
+      10: checkcast     #45                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph
+      13: areturn
+
+  private net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph getSpaceGlyph();
+    Code:
+       0: aload_0
+       1: bipush        32
+       3: invokevirtual #49                 // Method getGlyph:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;
+       6: invokestatic  #276                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: checkcast     #45                 // class net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph
+      12: areturn
+
+  public int lineSpacing();
+    Code:
+       0: aload_0
+       1: getfield      #56                 // Field lineSpacing:I
+       4: ireturn
+
+  int textureId();
+    Code:
+       0: aload_0
+       1: getfield      #65                 // Field textureId:I
+       4: ireturn
+
+  public int descent();
+    Code:
+       0: aload_0
+       1: getfield      #77                 // Field descent:I
+       4: ireturn
+
+  public int stringWidth(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_0
+       3: aload_1
+       4: invokevirtual #282                // Method java/lang/String.length:()I
+       7: invokevirtual #285                // Method stringWidth:(Ljava/lang/String;II)I
+      10: ireturn
+
+  public int stringWidth(java.lang.String, int, int);
+    Code:
+       0: iconst_0
+       1: istore        4
+       3: iload_2
+       4: istore        5
+       6: iload         5
+       8: iload_3
+       9: if_icmpge     108
+      12: aload_1
+      13: iload         5
+      15: invokevirtual #289                // Method java/lang/String.codePointAt:(I)I
+      18: istore        6
+      20: iload         4
+      22: iload         6
+      24: lookupswitch  { // 3
+                     9: 60
+                    10: 60
+                    32: 64
+               default: 74
+          }
+      60: iconst_0
+      61: goto          99
+      64: aload_0
+      65: invokevirtual #40                 // Method getSpaceGlyph:()Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;
+      68: invokevirtual #44                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph.charwidth:()I
+      71: goto          99
+      74: aload_0
+      75: iload         6
+      77: invokevirtual #49                 // Method getGlyph:(I)Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Glyph;
+      80: astore        7
+      82: aload         7
+      84: ifnull        95
+      87: aload         7
+      89: invokevirtual #44                 // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Glyph.charwidth:()I
+      92: goto          99
+      95: iconst_0
+      96: goto          99
+      99: iadd
+     100: istore        4
+     102: iinc          5, 1
+     105: goto          6
+     108: iload         4
+     110: ireturn
+
+  public net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder generateVerticesForTexts(float, float, net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder, java.lang.Iterable<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>);
+    Code:
+       0: new           #293                // class net/neoforged/fml/earlydisplay/render/SimpleFont$Pos
+       3: dup
+       4: fload_1
+       5: fload_2
+       6: fload_1
+       7: invokespecial #295                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$Pos."<init>":(FFF)V
+      10: astore        5
+      12: aload         4
+      14: invokeinterface #298,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      19: astore        6
+      21: aload         6
+      23: invokeinterface #303,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      28: ifeq          57
+      31: aload         6
+      33: invokeinterface #306,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      38: checkcast     #310                // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+      41: astore        7
+      43: aload         7
+      45: aload_0
+      46: aload         5
+      48: aload_3
+      49: invokevirtual #312                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText.generateStringArray:(Lnet/neoforged/fml/earlydisplay/render/SimpleFont;Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Pos;Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder;)Lnet/neoforged/fml/earlydisplay/render/SimpleFont$Pos;
+      52: astore        5
+      54: goto          21
+      57: aload_3
+      58: areturn
+
+  private static net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph lambda$new$0(net.neoforged.fml.earlydisplay.render.SimpleFont$Glyph[], int);
+    Code:
+       0: iload_1
+       1: bipush        32
+       3: if_icmplt     15
+       6: iload_1
+       7: bipush        32
+       9: isub
+      10: bipush        95
+      12: if_icmple     17
+      15: aconst_null
+      16: areturn
+      17: aload_0
+      18: iload_1
+      19: bipush        32
+      21: isub
+      22: aaload
+      23: areturn
+}

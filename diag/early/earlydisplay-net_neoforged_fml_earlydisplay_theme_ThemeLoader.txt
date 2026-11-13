@@ -1,0 +1,604 @@
+Compiled from "ThemeLoader.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeLoader {
+  private static final org.slf4j.Logger LOG;
+
+  private static final int VERSION = 1;
+
+  private static final java.lang.String BUILTIN_PREFIX = "builtin:";
+
+  private static final com.google.gson.Gson GSON;
+
+  private net.neoforged.fml.earlydisplay.theme.ThemeLoader();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static net.neoforged.fml.earlydisplay.theme.Theme load(java.nio.file.Path, java.lang.String) throws java.io.IOException;
+    Code:
+       0: new           #7                  // class java/util/LinkedHashSet
+       3: dup
+       4: invokespecial #9                  // Method java/util/LinkedHashSet."<init>":()V
+       7: astore_2
+       8: aload_0
+       9: aload_1
+      10: aload_2
+      11: invokestatic  #10                 // Method readThemeTree:(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+      14: astore_3
+      15: getstatic     #16                 // Field GSON:Lcom/google/gson/Gson;
+      18: aload_3
+      19: ldc           #20                 // class net/neoforged/fml/earlydisplay/theme/Theme
+      21: invokevirtual #22                 // Method com/google/gson/Gson.fromJson:(Lcom/google/gson/JsonElement;Ljava/lang/Class;)Ljava/lang/Object;
+      24: checkcast     #20                 // class net/neoforged/fml/earlydisplay/theme/Theme
+      27: areturn
+      28: astore        4
+      30: new           #30                 // class java/io/IOException
+      33: dup
+      34: aload_1
+      35: invokedynamic #32,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      40: aload         4
+      42: invokespecial #36                 // Method java/io/IOException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      45: athrow
+    Exception table:
+       from    to  target type
+          15    27    28   Class java/lang/Exception
+
+  private static com.google.gson.JsonObject readThemeTree(java.nio.file.Path, java.lang.String, java.util.Set<java.lang.String>) throws java.io.IOException;
+    Code:
+       0: aload_1
+       1: ldc           #39                 // String builtin:
+       3: invokevirtual #41                 // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+       6: ifeq          26
+       9: aload_1
+      10: ldc           #39                 // String builtin:
+      12: invokevirtual #47                 // Method java/lang/String.length:()I
+      15: invokevirtual #51                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+      18: astore_1
+      19: aload_0
+      20: aload_1
+      21: aload_2
+      22: invokestatic  #55                 // Method readBuiltinThemeTree:(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+      25: areturn
+      26: aload_0
+      27: ifnull        158
+      30: aload_1
+      31: invokestatic  #58                 // Method getThemeFilename:(Ljava/lang/String;)Ljava/lang/String;
+      34: astore_3
+      35: aload_0
+      36: aload_3
+      37: invokeinterface #61,  2           // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      42: astore        4
+      44: aload         4
+      46: invokestatic  #67                 // Method openIfExists:(Ljava/nio/file/Path;)Ljava/io/InputStream;
+      49: astore        5
+      51: aload         5
+      53: ifnull        118
+      56: aload_2
+      57: aload_1
+      58: invokeinterface #71,  2           // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      63: ifne          84
+      66: new           #77                 // class java/lang/IllegalStateException
+      69: dup
+      70: aload_2
+      71: invokestatic  #79                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      74: aload_1
+      75: invokedynamic #83,  0             // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      80: invokespecial #86                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      83: athrow
+      84: getstatic     #89                 // Field LOG:Lorg/slf4j/Logger;
+      87: ldc           #93                 // String Loading theme from {}
+      89: aload         4
+      91: invokeinterface #95,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      96: aload_0
+      97: aload         5
+      99: aload_2
+     100: invokestatic  #101                // Method readThemeTree:(Ljava/nio/file/Path;Ljava/io/InputStream;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+     103: astore        6
+     105: aload         5
+     107: ifnull        115
+     110: aload         5
+     112: invokevirtual #104                // Method java/io/InputStream.close:()V
+     115: aload         6
+     117: areturn
+     118: aload         5
+     120: ifnull        158
+     123: aload         5
+     125: invokevirtual #104                // Method java/io/InputStream.close:()V
+     128: goto          158
+     131: astore        6
+     133: aload         5
+     135: ifnull        155
+     138: aload         5
+     140: invokevirtual #104                // Method java/io/InputStream.close:()V
+     143: goto          155
+     146: astore        7
+     148: aload         6
+     150: aload         7
+     152: invokevirtual #111                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     155: aload         6
+     157: athrow
+     158: aload_0
+     159: aload_1
+     160: aload_2
+     161: invokestatic  #55                 // Method readBuiltinThemeTree:(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+     164: areturn
+    Exception table:
+       from    to  target type
+          51   105   131   Class java/lang/Throwable
+         138   143   146   Class java/lang/Throwable
+
+  private static com.google.gson.JsonObject readBuiltinThemeTree(java.nio.file.Path, java.lang.String, java.util.Set<java.lang.String>) throws java.io.IOException;
+    Code:
+       0: aload_2
+       1: aload_1
+       2: invokedynamic #115,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       7: invokeinterface #71,  2           // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      12: ifne          33
+      15: new           #77                 // class java/lang/IllegalStateException
+      18: dup
+      19: aload_2
+      20: invokestatic  #79                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      23: aload_1
+      24: invokedynamic #116,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      29: invokespecial #86                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      32: athrow
+      33: aload_1
+      34: invokestatic  #58                 // Method getThemeFilename:(Ljava/lang/String;)Ljava/lang/String;
+      37: invokedynamic #117,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      42: astore_3
+      43: ldc           #11                 // class net/neoforged/fml/earlydisplay/theme/ThemeLoader
+      45: aload_3
+      46: invokevirtual #118                // Method java/lang/Class.getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
+      49: astore        4
+      51: getstatic     #89                 // Field LOG:Lorg/slf4j/Logger;
+      54: ldc           #124                // String Loading built-in theme {}
+      56: aload_1
+      57: invokeinterface #95,  3           // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      62: aload         4
+      64: ifnonnull     81
+      67: new           #126                // class java/nio/file/NoSuchFileException
+      70: dup
+      71: aload_3
+      72: invokedynamic #128,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      77: invokespecial #129                // Method java/nio/file/NoSuchFileException."<init>":(Ljava/lang/String;)V
+      80: athrow
+      81: aload_0
+      82: aload         4
+      84: aload_2
+      85: invokestatic  #101                // Method readThemeTree:(Ljava/nio/file/Path;Ljava/io/InputStream;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+      88: astore        5
+      90: aload         4
+      92: ifnull        100
+      95: aload         4
+      97: invokevirtual #104                // Method java/io/InputStream.close:()V
+     100: aload         5
+     102: areturn
+     103: astore        5
+     105: aload         4
+     107: ifnull        127
+     110: aload         4
+     112: invokevirtual #104                // Method java/io/InputStream.close:()V
+     115: goto          127
+     118: astore        6
+     120: aload         5
+     122: aload         6
+     124: invokevirtual #111                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     127: aload         5
+     129: athrow
+    Exception table:
+       from    to  target type
+          51    90   103   Class java/lang/Throwable
+         110   115   118   Class java/lang/Throwable
+
+  private static java.io.InputStream openIfExists(java.nio.file.Path) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #130                // class java/nio/file/OpenOption
+       5: invokestatic  #132                // Method java/nio/file/Files.newInputStream:(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/InputStream;
+       8: areturn
+       9: astore_1
+      10: aconst_null
+      11: areturn
+    Exception table:
+       from    to  target type
+           0     8     9   Class java/nio/file/NoSuchFileException
+
+  private static com.google.gson.JsonObject readThemeTree(java.nio.file.Path, java.io.InputStream, java.util.Set<java.lang.String>) throws java.io.IOException;
+    Code:
+       0: new           #138                // class java/io/BufferedReader
+       3: dup
+       4: new           #140                // class java/io/InputStreamReader
+       7: dup
+       8: aload_1
+       9: getstatic     #142                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      12: invokespecial #148                // Method java/io/InputStreamReader."<init>":(Ljava/io/InputStream;Ljava/nio/charset/Charset;)V
+      15: invokespecial #151                // Method java/io/BufferedReader."<init>":(Ljava/io/Reader;)V
+      18: astore_3
+      19: getstatic     #16                 // Field GSON:Lcom/google/gson/Gson;
+      22: aload_3
+      23: ldc           #154                // class com/google/gson/JsonObject
+      25: invokevirtual #156                // Method com/google/gson/Gson.fromJson:(Ljava/io/Reader;Ljava/lang/Class;)Ljava/lang/Object;
+      28: checkcast     #154                // class com/google/gson/JsonObject
+      31: astore        4
+      33: aload         4
+      35: ldc           #159                // String version
+      37: invokestatic  #161                // Method takeInt:(Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/Integer;
+      40: astore        5
+      42: aload         5
+      44: ifnull        56
+      47: aload         5
+      49: invokevirtual #165                // Method java/lang/Integer.intValue:()I
+      52: iconst_1
+      53: if_icmpeq     71
+      56: new           #170                // class com/google/gson/JsonParseException
+      59: dup
+      60: aload         5
+      62: invokedynamic #172,  0            // InvokeDynamic #6:makeConcatWithConstants:(Ljava/lang/Integer;)Ljava/lang/String;
+      67: invokespecial #175                // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+      70: athrow
+      71: aload         4
+      73: ldc           #176                // String extends
+      75: invokestatic  #178                // Method takeString:(Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/String;
+      78: astore        6
+      80: aload         6
+      82: ifnull        103
+      85: aload_0
+      86: aload         6
+      88: aload_2
+      89: invokestatic  #10                 // Method readThemeTree:(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/Set;)Lcom/google/gson/JsonObject;
+      92: astore        7
+      94: aload         7
+      96: aload         4
+      98: invokestatic  #182                // Method mergeThemeRoot:(Lcom/google/gson/JsonObject;Lcom/google/gson/JsonObject;)Lcom/google/gson/JsonObject;
+     101: astore        4
+     103: aload         4
+     105: areturn
+
+  private static com.google.gson.JsonObject mergeThemeRoot(com.google.gson.JsonObject, com.google.gson.JsonObject);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #186,  0            // InvokeDynamic #7:map:()Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;
+       7: invokestatic  #190                // Method mergeObject:(Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;)Lcom/google/gson/JsonObject;
+      10: areturn
+
+  private static com.google.gson.JsonElement mergeLoadingScreenProperty(java.lang.String, com.google.gson.JsonElement, com.google.gson.JsonElement);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokestatic  #194                // Method mergeObject:(Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;)Lcom/google/gson/JsonObject;
+       5: areturn
+
+  private static com.google.gson.JsonObject mergeObject(com.google.gson.JsonElement, com.google.gson.JsonElement);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #197,  0            // InvokeDynamic #8:map:()Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;
+       7: invokestatic  #190                // Method mergeObject:(Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;)Lcom/google/gson/JsonObject;
+      10: areturn
+
+  private static com.google.gson.JsonObject mergeObject(com.google.gson.JsonElement, com.google.gson.JsonElement, net.neoforged.fml.earlydisplay.theme.ThemeLoader$PropertyMerger);
+    Code:
+       0: aload_1
+       1: invokevirtual #198                // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+       4: astore_3
+       5: aload_0
+       6: invokevirtual #198                // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+       9: astore        4
+      11: aload_3
+      12: invokevirtual #204                // Method com/google/gson/JsonObject.entrySet:()Ljava/util/Set;
+      15: invokeinterface #208,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      20: astore        5
+      22: aload         5
+      24: invokeinterface #212,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      29: ifeq          140
+      32: aload         5
+      34: invokeinterface #218,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      39: checkcast     #222                // class java/util/Map$Entry
+      42: astore        6
+      44: aload         4
+      46: aload         6
+      48: invokeinterface #224,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      53: checkcast     #42                 // class java/lang/String
+      56: invokevirtual #227                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+      59: astore        7
+      61: aload         7
+      63: ifnonnull     94
+      66: aload         4
+      68: aload         6
+      70: invokeinterface #224,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      75: checkcast     #42                 // class java/lang/String
+      78: aload         6
+      80: invokeinterface #231,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      85: checkcast     #199                // class com/google/gson/JsonElement
+      88: invokevirtual #234                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+      91: goto          137
+      94: aload         4
+      96: aload         6
+      98: invokeinterface #224,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     103: checkcast     #42                 // class java/lang/String
+     106: aload_2
+     107: aload         6
+     109: invokeinterface #224,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     114: checkcast     #42                 // class java/lang/String
+     117: aload         7
+     119: aload         6
+     121: invokeinterface #231,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     126: checkcast     #199                // class com/google/gson/JsonElement
+     129: invokeinterface #237,  4          // InterfaceMethod net/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger.map:(Ljava/lang/String;Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;)Lcom/google/gson/JsonElement;
+     134: invokevirtual #234                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+     137: goto          22
+     140: aload         4
+     142: areturn
+
+  private static java.lang.String getThemeFilename(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokedynamic #242,  0            // InvokeDynamic #9:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       6: areturn
+
+  private static java.lang.Integer takeInt(com.google.gson.JsonElement, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #243                // Method takePrimitive:(Lcom/google/gson/JsonElement;Ljava/lang/String;)Lcom/google/gson/JsonPrimitive;
+       5: astore_2
+       6: aload_2
+       7: ifnonnull     14
+      10: aconst_null
+      11: goto          21
+      14: aload_2
+      15: invokevirtual #247                // Method com/google/gson/JsonPrimitive.getAsInt:()I
+      18: invokestatic  #252                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      21: areturn
+
+  private static java.lang.String takeString(com.google.gson.JsonElement, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #243                // Method takePrimitive:(Lcom/google/gson/JsonElement;Ljava/lang/String;)Lcom/google/gson/JsonPrimitive;
+       5: astore_2
+       6: aload_2
+       7: ifnonnull     14
+      10: aconst_null
+      11: goto          18
+      14: aload_2
+      15: invokevirtual #255                // Method com/google/gson/JsonPrimitive.getAsString:()Ljava/lang/String;
+      18: areturn
+
+  private static com.google.gson.JsonPrimitive takePrimitive(com.google.gson.JsonElement, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #259                // Method com/google/gson/JsonElement.isJsonObject:()Z
+       4: ifne          24
+       7: new           #170                // class com/google/gson/JsonParseException
+      10: dup
+      11: aload_0
+      12: invokestatic  #79                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      15: invokedynamic #262,  0            // InvokeDynamic #10:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      20: invokespecial #175                // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+      23: athrow
+      24: aload_0
+      25: checkcast     #154                // class com/google/gson/JsonObject
+      28: astore_2
+      29: aload_2
+      30: aload_1
+      31: invokevirtual #263                // Method com/google/gson/JsonObject.remove:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+      34: astore_3
+      35: aload_3
+      36: ifnonnull     41
+      39: aconst_null
+      40: areturn
+      41: aload_3
+      42: instanceof    #248                // class com/google/gson/JsonPrimitive
+      45: ifeq          57
+      48: aload_3
+      49: checkcast     #248                // class com/google/gson/JsonPrimitive
+      52: astore        4
+      54: goto          75
+      57: new           #170                // class com/google/gson/JsonParseException
+      60: dup
+      61: aload_1
+      62: aload_0
+      63: invokestatic  #79                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      66: invokedynamic #266,  0            // InvokeDynamic #11:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      71: invokespecial #175                // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+      74: athrow
+      75: aload         4
+      77: areturn
+
+  public static void save(java.nio.file.Path, net.neoforged.fml.earlydisplay.theme.Theme);
+    Code:
+       0: getstatic     #89                 // Field LOG:Lorg/slf4j/Logger;
+       3: ldc_w         #267                // String Saving theme to {}
+       6: aload_0
+       7: invokeinterface #269,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      12: getstatic     #16                 // Field GSON:Lcom/google/gson/Gson;
+      15: aload_1
+      16: invokevirtual #272                // Method com/google/gson/Gson.toJsonTree:(Ljava/lang/Object;)Lcom/google/gson/JsonElement;
+      19: checkcast     #154                // class com/google/gson/JsonObject
+      22: astore_2
+      23: new           #154                // class com/google/gson/JsonObject
+      26: dup
+      27: invokespecial #276                // Method com/google/gson/JsonObject."<init>":()V
+      30: astore_3
+      31: aload_3
+      32: ldc           #159                // String version
+      34: iconst_1
+      35: invokestatic  #252                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      38: invokevirtual #277                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Number;)V
+      41: aload_2
+      42: invokevirtual #204                // Method com/google/gson/JsonObject.entrySet:()Ljava/util/Set;
+      45: invokeinterface #208,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      50: astore        4
+      52: aload         4
+      54: invokeinterface #212,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      59: ifeq          101
+      62: aload         4
+      64: invokeinterface #218,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      69: checkcast     #222                // class java/util/Map$Entry
+      72: astore        5
+      74: aload_3
+      75: aload         5
+      77: invokeinterface #224,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      82: checkcast     #42                 // class java/lang/String
+      85: aload         5
+      87: invokeinterface #231,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      92: checkcast     #199                // class com/google/gson/JsonElement
+      95: invokevirtual #234                // Method com/google/gson/JsonObject.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V
+      98: goto          52
+     101: aload_0
+     102: getstatic     #142                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+     105: iconst_0
+     106: anewarray     #130                // class java/nio/file/OpenOption
+     109: invokestatic  #281                // Method java/nio/file/Files.newBufferedWriter:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/io/BufferedWriter;
+     112: astore        4
+     114: getstatic     #16                 // Field GSON:Lcom/google/gson/Gson;
+     117: aload_3
+     118: aload         4
+     120: invokevirtual #285                // Method com/google/gson/Gson.toJson:(Lcom/google/gson/JsonElement;Ljava/lang/Appendable;)V
+     123: aload         4
+     125: ifnull        163
+     128: aload         4
+     130: invokevirtual #289                // Method java/io/BufferedWriter.close:()V
+     133: goto          163
+     136: astore        5
+     138: aload         4
+     140: ifnull        160
+     143: aload         4
+     145: invokevirtual #289                // Method java/io/BufferedWriter.close:()V
+     148: goto          160
+     151: astore        6
+     153: aload         5
+     155: aload         6
+     157: invokevirtual #111                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     160: aload         5
+     162: athrow
+     163: goto          182
+     166: astore        4
+     168: getstatic     #89                 // Field LOG:Lorg/slf4j/Logger;
+     171: ldc_w         #292                // String Failed to save theme to {}
+     174: aload_0
+     175: aload         4
+     177: invokeinterface #294,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     182: return
+    Exception table:
+       from    to  target type
+         114   123   136   Class java/lang/Throwable
+         143   148   151   Class java/lang/Throwable
+         101   163   166   Class java/io/IOException
+
+  private static com.google.gson.JsonElement lambda$mergeObject$1(java.lang.String, com.google.gson.JsonElement, com.google.gson.JsonElement);
+    Code:
+       0: aload_2
+       1: areturn
+
+  private static com.google.gson.JsonElement lambda$mergeThemeRoot$0(java.lang.String, com.google.gson.JsonElement, com.google.gson.JsonElement);
+    Code:
+       0: aload_0
+       1: astore_3
+       2: iconst_m1
+       3: istore        4
+       5: aload_3
+       6: invokevirtual #298                // Method java/lang/String.hashCode:()I
+       9: lookupswitch  { // 5
+           -1996270002: 108
+              97615364: 60
+             459583688: 124
+             966195944: 92
+            2053801262: 76
+               default: 137
+          }
+      60: aload_3
+      61: ldc_w         #301                // String fonts
+      64: invokevirtual #303                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      67: ifeq          137
+      70: iconst_0
+      71: istore        4
+      73: goto          137
+      76: aload_3
+      77: ldc_w         #306                // String shaders
+      80: invokevirtual #303                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      83: ifeq          137
+      86: iconst_1
+      87: istore        4
+      89: goto          137
+      92: aload_3
+      93: ldc_w         #308                // String colorScheme
+      96: invokevirtual #303                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      99: ifeq          137
+     102: iconst_2
+     103: istore        4
+     105: goto          137
+     108: aload_3
+     109: ldc_w         #310                // String sprites
+     112: invokevirtual #303                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     115: ifeq          137
+     118: iconst_3
+     119: istore        4
+     121: goto          137
+     124: aload_3
+     125: ldc_w         #312                // String loadingScreen
+     128: invokevirtual #303                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     131: ifeq          137
+     134: iconst_4
+     135: istore        4
+     137: iload         4
+     139: tableswitch   { // 0 to 4
+                     0: 172
+                     1: 172
+                     2: 172
+                     3: 172
+                     4: 180
+               default: 193
+          }
+     172: aload_1
+     173: aload_2
+     174: invokestatic  #194                // Method mergeObject:(Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;)Lcom/google/gson/JsonObject;
+     177: goto          194
+     180: aload_1
+     181: aload_2
+     182: invokedynamic #314,  0            // InvokeDynamic #12:map:()Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;
+     187: invokestatic  #190                // Method mergeObject:(Lcom/google/gson/JsonElement;Lcom/google/gson/JsonElement;Lnet/neoforged/fml/earlydisplay/theme/ThemeLoader$PropertyMerger;)Lcom/google/gson/JsonObject;
+     190: goto          194
+     193: aload_2
+     194: areturn
+
+  static {};
+    Code:
+       0: ldc           #11                 // class net/neoforged/fml/earlydisplay/theme/ThemeLoader
+       2: invokestatic  #315                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #89                 // Field LOG:Lorg/slf4j/Logger;
+       8: new           #321                // class com/google/gson/GsonBuilder
+      11: dup
+      12: invokespecial #323                // Method com/google/gson/GsonBuilder."<init>":()V
+      15: invokevirtual #324                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      18: ldc_w         #328                // class net/neoforged/fml/earlydisplay/theme/TextureScaling
+      21: new           #330                // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$TextureScalingSerializer
+      24: dup
+      25: invokespecial #332                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$TextureScalingSerializer."<init>":()V
+      28: invokevirtual #333                // Method com/google/gson/GsonBuilder.registerTypeAdapter:(Ljava/lang/reflect/Type;Ljava/lang/Object;)Lcom/google/gson/GsonBuilder;
+      31: new           #337                // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory
+      34: dup
+      35: invokespecial #339                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeElementAdapterFactory."<init>":()V
+      38: invokevirtual #340                // Method com/google/gson/GsonBuilder.registerTypeAdapterFactory:(Lcom/google/gson/TypeAdapterFactory;)Lcom/google/gson/GsonBuilder;
+      41: ldc_w         #344                // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      44: new           #346                // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeResourceAdapter
+      47: dup
+      48: invokespecial #348                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeResourceAdapter."<init>":()V
+      51: invokevirtual #349                // Method com/google/gson/GsonBuilder.registerTypeHierarchyAdapter:(Ljava/lang/Class;Ljava/lang/Object;)Lcom/google/gson/GsonBuilder;
+      54: ldc_w         #353                // class net/neoforged/fml/earlydisplay/util/StyleLength
+      57: new           #355                // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$StyleLengthAdapter
+      60: dup
+      61: invokespecial #357                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$StyleLengthAdapter."<init>":()V
+      64: invokevirtual #333                // Method com/google/gson/GsonBuilder.registerTypeAdapter:(Ljava/lang/reflect/Type;Ljava/lang/Object;)Lcom/google/gson/GsonBuilder;
+      67: ldc_w         #358                // class net/neoforged/fml/earlydisplay/theme/ThemeColor
+      70: new           #360                // class net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeColorAdapter
+      73: dup
+      74: invokespecial #362                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoader$ThemeColorAdapter."<init>":()V
+      77: invokevirtual #333                // Method com/google/gson/GsonBuilder.registerTypeAdapter:(Ljava/lang/reflect/Type;Ljava/lang/Object;)Lcom/google/gson/GsonBuilder;
+      80: invokevirtual #363                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      83: putstatic     #16                 // Field GSON:Lcom/google/gson/Gson;
+      86: return
+}

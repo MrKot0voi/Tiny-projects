@@ -1,0 +1,8 @@
+Compiled from "ThemeDecorativeElement.java"
+public abstract class net.neoforged.fml.earlydisplay.theme.elements.ThemeDecorativeElement extends net.neoforged.fml.earlydisplay.theme.elements.ThemeElement {
+  public net.neoforged.fml.earlydisplay.theme.elements.ThemeDecorativeElement();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeElement."<init>":()V
+       4: return
+}

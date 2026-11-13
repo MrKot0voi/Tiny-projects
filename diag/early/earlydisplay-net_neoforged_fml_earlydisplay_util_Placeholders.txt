@@ -1,0 +1,47 @@
+Compiled from "Placeholders.java"
+public final class net.neoforged.fml.earlydisplay.util.Placeholders {
+  private static final java.util.regex.Pattern PATTERN;
+
+  private net.neoforged.fml.earlydisplay.util.Placeholders();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static java.lang.String resolve(java.lang.String, java.util.Map<java.lang.String, java.lang.String>);
+    Code:
+       0: aload_0
+       1: ldc           #7                  // String $
+       3: invokevirtual #9                  // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+       6: ifne          11
+       9: aload_0
+      10: areturn
+      11: getstatic     #15                 // Field PATTERN:Ljava/util/regex/Pattern;
+      14: aload_0
+      15: invokevirtual #21                 // Method java/util/regex/Pattern.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+      18: aload_1
+      19: invokedynamic #27,  0             // InvokeDynamic #0:apply:(Ljava/util/Map;)Ljava/util/function/Function;
+      24: invokevirtual #31                 // Method java/util/regex/Matcher.replaceAll:(Ljava/util/function/Function;)Ljava/lang/String;
+      27: areturn
+
+  private static java.lang.String lambda$resolve$0(java.util.Map, java.util.regex.MatchResult);
+    Code:
+       0: aload_1
+       1: iconst_1
+       2: invokeinterface #37,  2           // InterfaceMethod java/util/regex/MatchResult.group:(I)Ljava/lang/String;
+       7: astore_2
+       8: aload_0
+       9: aload_2
+      10: aload_2
+      11: invokedynamic #43,  0             // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      16: invokeinterface #47,  3           // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      21: checkcast     #10                 // class java/lang/String
+      24: areturn
+
+  static {};
+    Code:
+       0: ldc           #53                 // String \\$\\{(\\w+)}
+       2: invokestatic  #55                 // Method java/util/regex/Pattern.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern;
+       5: putstatic     #15                 // Field PATTERN:Ljava/util/regex/Pattern;
+       8: return
+}

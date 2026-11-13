@@ -1,0 +1,319 @@
+Compiled from "Theme.java"
+public final class net.neoforged.fml.earlydisplay.theme.Theme extends java.lang.Record {
+  private final net.neoforged.fml.earlydisplay.theme.ThemeResource windowIcon;
+
+  private final java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource> fonts;
+
+  private final java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeShader> shaders;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeColorScheme colorScheme;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeSprites sprites;
+
+  private final net.neoforged.fml.earlydisplay.theme.ThemeLoadingScreen loadingScreen;
+
+  public static final java.lang.String FONT_DEFAULT = "default";
+
+  public static final java.lang.String SHADER_GUI = "gui";
+
+  public static final java.lang.String SHADER_FONT = "font";
+
+  public static final java.lang.String SHADER_COLOR = "color";
+
+  public net.neoforged.fml.earlydisplay.theme.Theme(net.neoforged.fml.earlydisplay.theme.ThemeResource, java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource>, java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeShader>, net.neoforged.fml.earlydisplay.theme.ThemeColorScheme, net.neoforged.fml.earlydisplay.theme.ThemeSprites, net.neoforged.fml.earlydisplay.theme.ThemeLoadingScreen);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field windowIcon:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field fonts:Ljava/util/Map;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field shaders:Ljava/util/Map;
+      19: aload_0
+      20: aload         4
+      22: putfield      #20                 // Field colorScheme:Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+      25: aload_0
+      26: aload         5
+      28: putfield      #24                 // Field sprites:Lnet/neoforged/fml/earlydisplay/theme/ThemeSprites;
+      31: aload_0
+      32: aload         6
+      34: putfield      #28                 // Field loadingScreen:Lnet/neoforged/fml/earlydisplay/theme/ThemeLoadingScreen;
+      37: return
+
+  public static net.neoforged.fml.earlydisplay.theme.Theme createDefaultTheme();
+    Code:
+       0: new           #32                 // class net/neoforged/fml/earlydisplay/theme/ThemeSprites
+       3: dup
+       4: new           #34                 // class net/neoforged/fml/earlydisplay/theme/ThemeTexture
+       7: dup
+       8: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      11: dup
+      12: ldc           #38                 // String progress_bar_bg.png
+      14: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      17: new           #43                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+      20: dup
+      21: bipush        40
+      23: bipush        20
+      25: iconst_2
+      26: iconst_2
+      27: iconst_2
+      28: iconst_2
+      29: iconst_1
+      30: iconst_1
+      31: iconst_0
+      32: invokespecial #45                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice."<init>":(IIIIIIZZZ)V
+      35: invokespecial #48                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;)V
+      38: new           #34                 // class net/neoforged/fml/earlydisplay/theme/ThemeTexture
+      41: dup
+      42: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      45: dup
+      46: ldc           #51                 // String progress_bar_fg.png
+      48: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      51: new           #43                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+      54: dup
+      55: bipush        40
+      57: bipush        20
+      59: iconst_4
+      60: iconst_4
+      61: iconst_4
+      62: iconst_4
+      63: iconst_1
+      64: iconst_1
+      65: iconst_0
+      66: invokespecial #45                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice."<init>":(IIIIIIZZZ)V
+      69: invokespecial #48                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;)V
+      72: new           #34                 // class net/neoforged/fml/earlydisplay/theme/ThemeTexture
+      75: dup
+      76: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+      79: dup
+      80: ldc           #51                 // String progress_bar_fg.png
+      82: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+      85: new           #43                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice
+      88: dup
+      89: bipush        40
+      91: bipush        20
+      93: iconst_4
+      94: iconst_4
+      95: iconst_4
+      96: iconst_4
+      97: iconst_1
+      98: iconst_1
+      99: iconst_0
+     100: invokespecial #45                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$NineSlice."<init>":(IIIIIIZZZ)V
+     103: invokespecial #48                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;)V
+     106: iconst_0
+     107: invokespecial #53                 // Method net/neoforged/fml/earlydisplay/theme/ThemeSprites."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;Z)V
+     110: astore_0
+     111: new           #56                 // class net/neoforged/fml/earlydisplay/theme/elements/ThemeStartupLogElement
+     114: dup
+     115: invokespecial #58                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeStartupLogElement."<init>":()V
+     118: astore_1
+     119: aload_1
+     120: ldc           #59                 // float 10.0f
+     122: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     125: invokevirtual #66                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeStartupLogElement.setLeft:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     128: aload_1
+     129: ldc           #59                 // float 10.0f
+     131: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     134: invokevirtual #70                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeStartupLogElement.setBottom:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     137: new           #73                 // class net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement
+     140: dup
+     141: invokespecial #75                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement."<init>":()V
+     144: astore_2
+     145: aload_2
+     146: new           #34                 // class net/neoforged/fml/earlydisplay/theme/ThemeTexture
+     149: dup
+     150: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+     153: dup
+     154: ldc           #76                 // String fox_running.png
+     156: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+     159: new           #78                 // class net/neoforged/fml/earlydisplay/theme/TextureScaling$Stretch
+     162: dup
+     163: sipush        151
+     166: sipush        128
+     169: iconst_0
+     170: invokespecial #80                 // Method net/neoforged/fml/earlydisplay/theme/TextureScaling$Stretch."<init>":(IIZ)V
+     173: new           #83                 // class net/neoforged/fml/earlydisplay/theme/AnimationMetadata
+     176: dup
+     177: bipush        28
+     179: invokespecial #85                 // Method net/neoforged/fml/earlydisplay/theme/AnimationMetadata."<init>":(I)V
+     182: invokespecial #88                 // Method net/neoforged/fml/earlydisplay/theme/ThemeTexture."<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Lnet/neoforged/fml/earlydisplay/theme/TextureScaling;Lnet/neoforged/fml/earlydisplay/theme/AnimationMetadata;)V
+     185: invokevirtual #91                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement.setTexture:(Lnet/neoforged/fml/earlydisplay/theme/ThemeTexture;)V
+     188: aload_2
+     189: ldc           #59                 // float 10.0f
+     191: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     194: invokevirtual #95                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement.setRight:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     197: aload_2
+     198: fconst_1
+     199: invokestatic  #98                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofREM:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     202: invokevirtual #101                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement.setBottom:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     205: new           #102                // class net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement
+     208: dup
+     209: invokespecial #104                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement."<init>":()V
+     212: astore_3
+     213: aload_3
+     214: ldc           #105                // String ${version}
+     216: invokevirtual #107                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement.setText:(Ljava/lang/String;)V
+     219: aload_3
+     220: ldc           #59                 // float 10.0f
+     222: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     225: invokevirtual #110                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement.setBottom:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     228: aload_3
+     229: ldc           #59                 // float 10.0f
+     231: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     234: invokevirtual #111                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeLabelElement.setRight:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     237: new           #112                // class net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement
+     240: dup
+     241: invokespecial #114                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement."<init>":()V
+     244: astore        4
+     246: aload         4
+     248: iconst_4
+     249: invokevirtual #115                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setLabelGap:(I)V
+     252: aload         4
+     254: iconst_5
+     255: invokevirtual #118                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setBarGap:(I)V
+     258: aload         4
+     260: ldc           #121                // float 220.0f
+     262: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     265: invokevirtual #122                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setLeft:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     268: aload         4
+     270: ldc           #121                // float 220.0f
+     272: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     275: invokevirtual #123                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setRight:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     278: aload         4
+     280: ldc           #124                // float 250.0f
+     282: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     285: invokevirtual #125                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setTop:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     288: aload         4
+     290: iconst_0
+     291: invokevirtual #128                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement.setMaintainAspectRatio:(Z)V
+     294: new           #132                // class net/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement
+     297: dup
+     298: invokespecial #134                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement."<init>":()V
+     301: astore        5
+     303: aload         5
+     305: ldc           #121                // float 220.0f
+     307: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     310: invokevirtual #135                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement.setLeft:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     313: aload         5
+     315: ldc           #121                // float 220.0f
+     317: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     320: invokevirtual #136                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement.setRight:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     323: aload         5
+     325: ldc           #59                 // float 10.0f
+     327: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     330: invokevirtual #137                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement.setTop:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     333: new           #138                // class net/neoforged/fml/earlydisplay/theme/ThemeMojangLogoElement
+     336: dup
+     337: invokespecial #140                // Method net/neoforged/fml/earlydisplay/theme/ThemeMojangLogoElement."<init>":()V
+     340: astore        6
+     342: aload         6
+     344: iconst_1
+     345: invokevirtual #141                // Method net/neoforged/fml/earlydisplay/theme/ThemeMojangLogoElement.setCenterHorizontally:(Z)V
+     348: aload         6
+     350: ldc           #144                // float 96.0f
+     352: invokestatic  #60                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     355: invokevirtual #145                // Method net/neoforged/fml/earlydisplay/theme/ThemeMojangLogoElement.setTop:(Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+     358: new           #73                 // class net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement
+     361: dup
+     362: invokespecial #75                 // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement."<init>":()V
+     365: astore        7
+     367: aload         7
+     369: iconst_0
+     370: invokevirtual #146                // Method net/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement.setVisible:(Z)V
+     373: new           #8                  // class net/neoforged/fml/earlydisplay/theme/Theme
+     376: dup
+     377: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+     380: dup
+     381: ldc           #149                // String neoforged_icon.png
+     383: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+     386: ldc           #151                // String default
+     388: new           #36                 // class net/neoforged/fml/earlydisplay/theme/ThemeResource
+     391: dup
+     392: ldc           #153                // String Monocraft.ttf
+     394: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/theme/ThemeResource."<init>":(Ljava/lang/String;)V
+     397: invokestatic  #155                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     400: ldc           #161                // String gui
+     402: getstatic     #163                // Field net/neoforged/fml/earlydisplay/theme/ThemeShader.DEFAULT_GUI:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+     405: ldc           #169                // String font
+     407: getstatic     #171                // Field net/neoforged/fml/earlydisplay/theme/ThemeShader.DEFAULT_FONT:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+     410: ldc           #174                // String color
+     412: getstatic     #176                // Field net/neoforged/fml/earlydisplay/theme/ThemeShader.DEFAULT_COLOR:Lnet/neoforged/fml/earlydisplay/theme/ThemeShader;
+     415: invokestatic  #179                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     418: getstatic     #182                // Field net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.DEFAULT:Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+     421: aload_0
+     422: new           #187                // class net/neoforged/fml/earlydisplay/theme/ThemeLoadingScreen
+     425: dup
+     426: aload         7
+     428: aload         5
+     430: aload         4
+     432: aload_1
+     433: aload         6
+     435: ldc           #189                // String fox
+     437: aload_2
+     438: ldc           #191                // String version
+     440: aload_3
+     441: invokestatic  #193                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     444: invokespecial #196                // Method net/neoforged/fml/earlydisplay/theme/ThemeLoadingScreen."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeImageElement;Lnet/neoforged/fml/earlydisplay/theme/elements/ThemePerformanceElement;Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeProgressBarsElement;Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeStartupLogElement;Lnet/neoforged/fml/earlydisplay/theme/ThemeMojangLogoElement;Ljava/util/Map;)V
+     447: invokespecial #199                // Method "<init>":(Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;Ljava/util/Map;Ljava/util/Map;Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;Lnet/neoforged/fml/earlydisplay/theme/ThemeSprites;Lnet/neoforged/fml/earlydisplay/theme/ThemeLoadingScreen;)V
+     450: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #202,  0            // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/Theme;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #206,  0            // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/Theme;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #210,  0            // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/Theme;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeResource windowIcon();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field windowIcon:Lnet/neoforged/fml/earlydisplay/theme/ThemeResource;
+       4: areturn
+
+  public java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeResource> fonts();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field fonts:Ljava/util/Map;
+       4: areturn
+
+  public java.util.Map<java.lang.String, net.neoforged.fml.earlydisplay.theme.ThemeShader> shaders();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field shaders:Ljava/util/Map;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeColorScheme colorScheme();
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field colorScheme:Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeSprites sprites();
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field sprites:Lnet/neoforged/fml/earlydisplay/theme/ThemeSprites;
+       4: areturn
+
+  public net.neoforged.fml.earlydisplay.theme.ThemeLoadingScreen loadingScreen();
+    Code:
+       0: aload_0
+       1: getfield      #28                 // Field loadingScreen:Lnet/neoforged/fml/earlydisplay/theme/ThemeLoadingScreen;
+       4: areturn
+}

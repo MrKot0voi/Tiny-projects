@@ -1,0 +1,8 @@
+Compiled from "TextureScaling.java"
+public interface net.neoforged.fml.earlydisplay.theme.TextureScaling {
+  public abstract int width();
+
+  public abstract int height();
+
+  public abstract boolean linearScaling();
+}

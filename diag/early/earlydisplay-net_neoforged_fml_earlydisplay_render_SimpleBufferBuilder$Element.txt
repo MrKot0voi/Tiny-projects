@@ -1,0 +1,99 @@
+Compiled from "SimpleBufferBuilder.java"
+public final class net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element extends java.lang.Enum<net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element> {
+  public static final net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element POS;
+
+  public static final net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element TEX;
+
+  public static final net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element COLOR;
+
+  public final int glType;
+
+  public final int count;
+
+  public final int width;
+
+  private static final net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element[] $VALUES;
+
+  public static net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element[] values();
+    Code:
+       0: getstatic     #15                 // Field $VALUES:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+       3: invokevirtual #19                 // Method "[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;".clone:()Ljava/lang/Object;
+       6: checkcast     #20                 // class "[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;"
+       9: areturn
+
+  public static net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element valueOf(java.lang.String);
+    Code:
+       0: ldc           #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+       2: aload_0
+       3: invokestatic  #24                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+       9: areturn
+
+  private net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element(int, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #30                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: iload_3
+       8: putfield      #34                 // Field glType:I
+      11: aload_0
+      12: iload         4
+      14: putfield      #38                 // Field count:I
+      17: aload_0
+      18: iload         5
+      20: putfield      #41                 // Field width:I
+      23: return
+
+  private static net.neoforged.fml.earlydisplay.render.SimpleBufferBuilder$Element[] $values();
+    Code:
+       0: iconst_3
+       1: anewarray     #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+       4: dup
+       5: iconst_0
+       6: getstatic     #5                  // Field POS:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #9                  // Field TEX:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #12                 // Field COLOR:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      21: aastore
+      22: areturn
+
+  static {};
+    Code:
+       0: new           #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+       3: dup
+       4: ldc           #44                 // String POS
+       6: iconst_0
+       7: sipush        5126
+      10: iconst_2
+      11: bipush        8
+      13: invokespecial #45                 // Method "<init>":(Ljava/lang/String;IIII)V
+      16: putstatic     #5                  // Field POS:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      19: new           #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+      22: dup
+      23: ldc           #48                 // String TEX
+      25: iconst_1
+      26: sipush        5126
+      29: iconst_2
+      30: bipush        8
+      32: invokespecial #45                 // Method "<init>":(Ljava/lang/String;IIII)V
+      35: putstatic     #9                  // Field TEX:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      38: new           #3                  // class net/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element
+      41: dup
+      42: ldc           #49                 // String COLOR
+      44: iconst_2
+      45: sipush        5121
+      48: iconst_4
+      49: iconst_4
+      50: invokespecial #45                 // Method "<init>":(Ljava/lang/String;IIII)V
+      53: putstatic     #12                 // Field COLOR:Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      56: invokestatic  #50                 // Method $values:()[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      59: putstatic     #15                 // Field $VALUES:[Lnet/neoforged/fml/earlydisplay/render/SimpleBufferBuilder$Element;
+      62: return
+}

@@ -1,0 +1,38 @@
+Compiled from "ImageLoader.java"
+public final class net.neoforged.fml.earlydisplay.theme.ImageLoader$Result$Success extends java.lang.Record implements net.neoforged.fml.earlydisplay.theme.ImageLoader$Result {
+  private final net.neoforged.fml.earlydisplay.theme.UncompressedImage image;
+
+  public net.neoforged.fml.earlydisplay.theme.ImageLoader$Result$Success(net.neoforged.fml.earlydisplay.theme.UncompressedImage);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field image:Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+       9: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #13,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #17,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #21,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/theme/ImageLoader$Result$Success;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.neoforged.fml.earlydisplay.theme.UncompressedImage image();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field image:Lnet/neoforged/fml/earlydisplay/theme/UncompressedImage;
+       4: areturn
+}

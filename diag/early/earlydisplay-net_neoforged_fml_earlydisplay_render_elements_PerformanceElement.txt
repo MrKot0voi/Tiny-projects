@@ -1,0 +1,281 @@
+Compiled from "PerformanceElement.java"
+public class net.neoforged.fml.earlydisplay.render.elements.PerformanceElement extends net.neoforged.fml.earlydisplay.render.elements.RenderElement {
+  private static final org.slf4j.Logger LOG;
+
+  private static final long REFRESH_AFTER_NANOS;
+
+  private final com.sun.management.OperatingSystemMXBean osBean;
+
+  private final java.lang.management.MemoryMXBean memoryBean;
+
+  private java.util.concurrent.Future<java.lang.Void> performanceUpdateFuture;
+
+  private volatile net.neoforged.fml.earlydisplay.render.elements.PerformanceElement$PerformanceInfo currentPerformanceData;
+
+  public net.neoforged.fml.earlydisplay.render.elements.PerformanceElement(net.neoforged.fml.earlydisplay.theme.elements.ThemePerformanceElement, net.neoforged.fml.earlydisplay.render.MaterializedTheme);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement."<init>":(Lnet/neoforged/fml/earlydisplay/theme/elements/ThemeElement;Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;)V
+       6: aload_0
+       7: ldc           #7                  // String performance
+       9: invokevirtual #9                  // Method setId:(Ljava/lang/String;)V
+      12: aload_0
+      13: ldc           #15                 // class com/sun/management/OperatingSystemMXBean
+      15: invokestatic  #17                 // Method java/lang/management/ManagementFactory.getPlatformMXBean:(Ljava/lang/Class;)Ljava/lang/management/PlatformManagedObject;
+      18: checkcast     #15                 // class com/sun/management/OperatingSystemMXBean
+      21: putfield      #23                 // Field osBean:Lcom/sun/management/OperatingSystemMXBean;
+      24: aload_0
+      25: invokestatic  #27                 // Method java/lang/management/ManagementFactory.getMemoryMXBean:()Ljava/lang/management/MemoryMXBean;
+      28: putfield      #31                 // Field memoryBean:Ljava/lang/management/MemoryMXBean;
+      31: aload_0
+      32: aload_0
+      33: invokedynamic #35,  0             // InvokeDynamic #0:run:(Lnet/neoforged/fml/earlydisplay/render/elements/PerformanceElement;)Ljava/lang/Runnable;
+      38: invokestatic  #39                 // Method java/util/concurrent/CompletableFuture.runAsync:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      41: putfield      #45                 // Field performanceUpdateFuture:Ljava/util/concurrent/Future;
+      44: return
+
+  public void render(net.neoforged.fml.earlydisplay.render.RenderContext);
+    Code:
+       0: aload_0
+       1: getfield      #49                 // Field currentPerformanceData:Lnet/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo;
+       4: astore_2
+       5: invokestatic  #53                 // Method java/lang/System.nanoTime:()J
+       8: lstore_3
+       9: aload_2
+      10: ifnull        54
+      13: aload_2
+      14: getfield      #59                 // Field net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo.createdNanos:J
+      17: getstatic     #65                 // Field REFRESH_AFTER_NANOS:J
+      20: ladd
+      21: lload_3
+      22: lcmp
+      23: ifge          54
+      26: aload_0
+      27: getfield      #45                 // Field performanceUpdateFuture:Ljava/util/concurrent/Future;
+      30: invokeinterface #68,  1           // InterfaceMethod java/util/concurrent/Future.isDone:()Z
+      35: ifeq          54
+      38: aload_0
+      39: aload_0
+      40: invokedynamic #35,  0             // InvokeDynamic #0:run:(Lnet/neoforged/fml/earlydisplay/render/elements/PerformanceElement;)Ljava/lang/Runnable;
+      45: invokestatic  #39                 // Method java/util/concurrent/CompletableFuture.runAsync:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      48: putfield      #45                 // Field performanceUpdateFuture:Ljava/util/concurrent/Future;
+      51: goto          59
+      54: aload_2
+      55: ifnonnull     59
+      58: return
+      59: aload_0
+      60: aload_1
+      61: invokevirtual #74                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableWidth:()F
+      64: aload_1
+      65: invokevirtual #80                 // Method net/neoforged/fml/earlydisplay/render/RenderContext.availableHeight:()F
+      68: ldc           #83                 // float 250.0f
+      70: ldc           #84                 // float 50.0f
+      72: invokevirtual #85                 // Method resolveBounds:(FFFF)Lnet/neoforged/fml/earlydisplay/util/Bounds;
+      75: astore        5
+      77: aload_2
+      78: invokevirtual #89                 // Method net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo.memory:()F
+      81: fstore        6
+      83: aload_0
+      84: getfield      #92                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+      87: invokevirtual #96                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+      90: invokevirtual #101                // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+      93: invokevirtual #107                // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.memoryLowColor:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+      96: aload_0
+      97: getfield      #92                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     100: invokevirtual #96                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     103: invokevirtual #101                // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+     106: invokevirtual #113                // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.memoryHighColor:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+     109: fload         6
+     111: invokestatic  #116                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.lerp:(Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;F)Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+     114: astore        7
+     116: new           #122                // class net/neoforged/fml/earlydisplay/util/Bounds
+     119: dup
+     120: aload         5
+     122: invokevirtual #124                // Method net/neoforged/fml/earlydisplay/util/Bounds.left:()F
+     125: aload         5
+     127: invokevirtual #127                // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+     130: aload         5
+     132: invokevirtual #130                // Method net/neoforged/fml/earlydisplay/util/Bounds.right:()F
+     135: aload         5
+     137: invokevirtual #127                // Method net/neoforged/fml/earlydisplay/util/Bounds.top:()F
+     140: aload_0
+     141: getfield      #92                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     144: invokevirtual #133                // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.sprites:()Lnet/neoforged/fml/earlydisplay/render/MaterializedThemeSprites;
+     147: invokevirtual #137                // Method net/neoforged/fml/earlydisplay/render/MaterializedThemeSprites.progressBarBackground:()Lnet/neoforged/fml/earlydisplay/render/Texture;
+     150: invokevirtual #143                // Method net/neoforged/fml/earlydisplay/render/Texture.height:()I
+     153: i2f
+     154: fadd
+     155: invokespecial #149                // Method net/neoforged/fml/earlydisplay/util/Bounds."<init>":(FFFF)V
+     158: astore        8
+     160: aload_1
+     161: aload         8
+     163: fload         6
+     165: aload         7
+     167: invokevirtual #152                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.toArgb:()I
+     170: invokevirtual #155                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderProgressBar:(Lnet/neoforged/fml/earlydisplay/util/Bounds;FI)V
+     173: aload_0
+     174: getfield      #159                // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     177: aload_2
+     178: invokevirtual #163                // Method net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo.text:()Ljava/lang/String;
+     181: invokevirtual #167                // Method net/neoforged/fml/earlydisplay/render/SimpleFont.measureText:(Ljava/lang/CharSequence;)Lnet/neoforged/fml/earlydisplay/util/Size;
+     184: astore        9
+     186: aload_1
+     187: aload         5
+     189: invokevirtual #173                // Method net/neoforged/fml/earlydisplay/util/Bounds.horizontalCenter:()F
+     192: aload         9
+     194: invokevirtual #176                // Method net/neoforged/fml/earlydisplay/util/Size.width:()F
+     197: fconst_2
+     198: fdiv
+     199: fsub
+     200: f2i
+     201: i2f
+     202: aload         8
+     204: invokevirtual #181                // Method net/neoforged/fml/earlydisplay/util/Bounds.bottom:()F
+     207: aload_0
+     208: getfield      #159                // Field font:Lnet/neoforged/fml/earlydisplay/render/SimpleFont;
+     211: new           #184                // class net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText
+     214: dup
+     215: aload_2
+     216: invokevirtual #163                // Method net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo.text:()Ljava/lang/String;
+     219: aload_0
+     220: getfield      #92                 // Field theme:Lnet/neoforged/fml/earlydisplay/render/MaterializedTheme;
+     223: invokevirtual #96                 // Method net/neoforged/fml/earlydisplay/render/MaterializedTheme.theme:()Lnet/neoforged/fml/earlydisplay/theme/Theme;
+     226: invokevirtual #101                // Method net/neoforged/fml/earlydisplay/theme/Theme.colorScheme:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColorScheme;
+     229: invokevirtual #186                // Method net/neoforged/fml/earlydisplay/theme/ThemeColorScheme.text:()Lnet/neoforged/fml/earlydisplay/theme/ThemeColor;
+     232: invokevirtual #152                // Method net/neoforged/fml/earlydisplay/theme/ThemeColor.toArgb:()I
+     235: invokespecial #188                // Method net/neoforged/fml/earlydisplay/render/SimpleFont$DisplayText."<init>":(Ljava/lang/String;I)V
+     238: invokestatic  #191                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+     241: invokevirtual #197                // Method net/neoforged/fml/earlydisplay/render/RenderContext.renderText:(FFLnet/neoforged/fml/earlydisplay/render/SimpleFont;Ljava/util/List;)V
+     244: return
+
+  public void close();
+    Code:
+       0: aload_0
+       1: invokespecial #201                // Method net/neoforged/fml/earlydisplay/render/elements/RenderElement.close:()V
+       4: aload_0
+       5: getfield      #45                 // Field performanceUpdateFuture:Ljava/util/concurrent/Future;
+       8: iconst_0
+       9: invokeinterface #205,  2          // InterfaceMethod java/util/concurrent/Future.cancel:(Z)Z
+      14: pop
+      15: return
+
+  private void updatePerformanceData();
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field memoryBean:Ljava/lang/management/MemoryMXBean;
+       4: invokeinterface #209,  1          // InterfaceMethod java/lang/management/MemoryMXBean.getHeapMemoryUsage:()Ljava/lang/management/MemoryUsage;
+       9: astore_1
+      10: aload_1
+      11: invokevirtual #215                // Method java/lang/management/MemoryUsage.getUsed:()J
+      14: l2f
+      15: aload_1
+      16: invokevirtual #220                // Method java/lang/management/MemoryUsage.getMax:()J
+      19: l2f
+      20: fdiv
+      21: fstore_2
+      22: aload_0
+      23: getfield      #23                 // Field osBean:Lcom/sun/management/OperatingSystemMXBean;
+      26: invokeinterface #223,  1          // InterfaceMethod com/sun/management/OperatingSystemMXBean.getProcessCpuLoad:()D
+      31: dstore_3
+      32: dload_3
+      33: ldc2_w        #227                // double -1.0d
+      36: dcmpl
+      37: ifne          79
+      40: getstatic     #229                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      43: ldc           #235                // String *CPU: %d%%
+      45: iconst_1
+      46: anewarray     #237                // class java/lang/Object
+      49: dup
+      50: iconst_0
+      51: aload_0
+      52: getfield      #23                 // Field osBean:Lcom/sun/management/OperatingSystemMXBean;
+      55: invokeinterface #239,  1          // InterfaceMethod com/sun/management/OperatingSystemMXBean.getCpuLoad:()D
+      60: ldc2_w        #242                // double 100.0d
+      63: dmul
+      64: invokestatic  #244                // Method java/lang/Math.round:(D)J
+      67: invokestatic  #250                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      70: aastore
+      71: invokestatic  #256                // Method java/lang/String.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      74: astore        5
+      76: goto          108
+      79: getstatic     #229                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      82: ldc_w         #262                // String CPU: %d%%
+      85: iconst_1
+      86: anewarray     #237                // class java/lang/Object
+      89: dup
+      90: iconst_0
+      91: dload_3
+      92: ldc2_w        #242                // double 100.0d
+      95: dmul
+      96: invokestatic  #244                // Method java/lang/Math.round:(D)J
+      99: invokestatic  #250                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     102: aastore
+     103: invokestatic  #256                // Method java/lang/String.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     106: astore        5
+     108: getstatic     #229                // Field java/util/Locale.ROOT:Ljava/util/Locale;
+     111: ldc_w         #264                // String Memory: %d/%d MB (%d%%)  %s
+     114: iconst_4
+     115: anewarray     #237                // class java/lang/Object
+     118: dup
+     119: iconst_0
+     120: aload_1
+     121: invokevirtual #215                // Method java/lang/management/MemoryUsage.getUsed:()J
+     124: bipush        20
+     126: lshr
+     127: invokestatic  #250                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     130: aastore
+     131: dup
+     132: iconst_1
+     133: aload_1
+     134: invokevirtual #220                // Method java/lang/management/MemoryUsage.getMax:()J
+     137: bipush        20
+     139: lshr
+     140: invokestatic  #250                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     143: aastore
+     144: dup
+     145: iconst_2
+     146: fload_2
+     147: f2d
+     148: ldc2_w        #242                // double 100.0d
+     151: dmul
+     152: invokestatic  #244                // Method java/lang/Math.round:(D)J
+     155: invokestatic  #250                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     158: aastore
+     159: dup
+     160: iconst_3
+     161: aload         5
+     163: aastore
+     164: invokestatic  #256                // Method java/lang/String.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     167: astore        6
+     169: aload_0
+     170: new           #60                 // class net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo
+     173: dup
+     174: invokestatic  #53                 // Method java/lang/System.nanoTime:()J
+     177: fload_2
+     178: aload         6
+     180: invokespecial #266                // Method net/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo."<init>":(JFLjava/lang/String;)V
+     183: putfield      #49                 // Field currentPerformanceData:Lnet/neoforged/fml/earlydisplay/render/elements/PerformanceElement$PerformanceInfo;
+     186: goto          202
+     189: astore_1
+     190: getstatic     #271                // Field LOG:Lorg/slf4j/Logger;
+     193: ldc_w         #275                // String Failed to update performance data.
+     196: aload_1
+     197: invokeinterface #277,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Throwable;)V
+     202: return
+    Exception table:
+       from    to  target type
+           0   186   189   Class java/lang/Exception
+
+  static {};
+    Code:
+       0: ldc           #10                 // class net/neoforged/fml/earlydisplay/render/elements/PerformanceElement
+       2: invokestatic  #283                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #271                // Field LOG:Lorg/slf4j/Logger;
+       8: getstatic     #289                // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      11: lconst_1
+      12: invokevirtual #295                // Method java/util/concurrent/TimeUnit.toNanos:(J)J
+      15: putstatic     #65                 // Field REFRESH_AFTER_NANOS:J
+      18: return
+}

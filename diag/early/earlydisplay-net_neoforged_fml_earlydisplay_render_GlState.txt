@@ -1,0 +1,585 @@
+Compiled from "GlState.java"
+public final class net.neoforged.fml.earlydisplay.render.GlState {
+  private static int viewportX;
+
+  private static int viewportY;
+
+  private static int viewportWidth;
+
+  private static int viewportHeight;
+
+  private static float clearColorRed;
+
+  private static float clearColorGreen;
+
+  private static float clearColorBlue;
+
+  private static float clearColorAlpha;
+
+  private static boolean blendEnabled;
+
+  private static int blendSrcRGB;
+
+  private static int blendDstRGB;
+
+  private static int blendSrcAlpha;
+
+  private static int blendDstAlpha;
+
+  private static int currentProgram;
+
+  private static int boundTexture2D;
+
+  private static int boundSampler;
+
+  private static int activeTextureUnit;
+
+  private static int boundVertexArray;
+
+  private static int boundDrawFramebuffer;
+
+  private static int boundReadFramebuffer;
+
+  private static int boundElementArrayBuffer;
+
+  private static int boundArrayBuffer;
+
+  private static boolean scissorEnabled;
+
+  private static int[] scissorBox;
+
+  private net.neoforged.fml.earlydisplay.render.GlState();
+    Code:
+       0: aload_0
+       1: invokespecial #7                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void readFromOpenGL();
+    Code:
+       0: iconst_4
+       1: newarray       int
+       3: astore_0
+       4: sipush        2978
+       7: aload_0
+       8: invokestatic  #13                 // Method org/lwjgl/opengl/GL32C.glGetIntegerv:(I[I)V
+      11: aload_0
+      12: iconst_0
+      13: iaload
+      14: putstatic     #17                 // Field viewportX:I
+      17: aload_0
+      18: iconst_1
+      19: iaload
+      20: putstatic     #23                 // Field viewportY:I
+      23: aload_0
+      24: iconst_2
+      25: iaload
+      26: putstatic     #26                 // Field viewportWidth:I
+      29: aload_0
+      30: iconst_3
+      31: iaload
+      32: putstatic     #29                 // Field viewportHeight:I
+      35: iconst_4
+      36: newarray       float
+      38: astore_1
+      39: sipush        3106
+      42: aload_1
+      43: invokestatic  #32                 // Method org/lwjgl/opengl/GL32C.glGetFloatv:(I[F)V
+      46: aload_1
+      47: iconst_0
+      48: faload
+      49: putstatic     #36                 // Field clearColorRed:F
+      52: aload_1
+      53: iconst_1
+      54: faload
+      55: putstatic     #40                 // Field clearColorGreen:F
+      58: aload_1
+      59: iconst_2
+      60: faload
+      61: putstatic     #43                 // Field clearColorBlue:F
+      64: aload_1
+      65: iconst_3
+      66: faload
+      67: putstatic     #46                 // Field clearColorAlpha:F
+      70: sipush        3042
+      73: invokestatic  #49                 // Method org/lwjgl/opengl/GL32C.glIsEnabled:(I)Z
+      76: putstatic     #53                 // Field blendEnabled:Z
+      79: ldc           #57                 // int 32969
+      81: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+      84: putstatic     #62                 // Field blendSrcRGB:I
+      87: ldc           #65                 // int 32968
+      89: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+      92: putstatic     #66                 // Field blendDstRGB:I
+      95: ldc           #69                 // int 32971
+      97: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     100: putstatic     #70                 // Field blendSrcAlpha:I
+     103: ldc           #73                 // int 32970
+     105: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     108: putstatic     #74                 // Field blendDstAlpha:I
+     111: ldc           #77                 // int 35725
+     113: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     116: putstatic     #78                 // Field currentProgram:I
+     119: ldc           #81                 // int 33984
+     121: ldc           #82                 // int 34016
+     123: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     126: iadd
+     127: ldc           #81                 // int 33984
+     129: isub
+     130: putstatic     #83                 // Field activeTextureUnit:I
+     133: ldc           #81                 // int 33984
+     135: invokestatic  #86                 // Method org/lwjgl/opengl/GL32C.glActiveTexture:(I)V
+     138: ldc           #90                 // int 32873
+     140: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     143: putstatic     #91                 // Field boundTexture2D:I
+     146: ldc           #94                 // int 35097
+     148: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     151: putstatic     #95                 // Field boundSampler:I
+     154: ldc           #98                 // int 34229
+     156: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     159: putstatic     #99                 // Field boundVertexArray:I
+     162: ldc           #102                // int 36006
+     164: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     167: putstatic     #103                // Field boundDrawFramebuffer:I
+     170: ldc           #106                // int 36010
+     172: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     175: putstatic     #107                // Field boundReadFramebuffer:I
+     178: ldc           #110                // int 34965
+     180: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     183: putstatic     #111                // Field boundElementArrayBuffer:I
+     186: ldc           #114                // int 34964
+     188: invokestatic  #58                 // Method org/lwjgl/opengl/GL32C.glGetInteger:(I)I
+     191: putstatic     #115                // Field boundArrayBuffer:I
+     194: sipush        3088
+     197: getstatic     #118                // Field scissorBox:[I
+     200: invokestatic  #13                 // Method org/lwjgl/opengl/GL32C.glGetIntegerv:(I[I)V
+     203: sipush        3089
+     206: invokestatic  #49                 // Method org/lwjgl/opengl/GL32C.glIsEnabled:(I)Z
+     209: putstatic     #122                // Field scissorEnabled:Z
+     212: return
+
+  public static void viewport(int, int, int, int);
+    Code:
+       0: iload_0
+       1: getstatic     #17                 // Field viewportX:I
+       4: if_icmpne     28
+       7: iload_1
+       8: getstatic     #23                 // Field viewportY:I
+      11: if_icmpne     28
+      14: iload_2
+      15: getstatic     #26                 // Field viewportWidth:I
+      18: if_icmpne     28
+      21: iload_3
+      22: getstatic     #29                 // Field viewportHeight:I
+      25: if_icmpeq     51
+      28: iload_0
+      29: iload_1
+      30: iload_2
+      31: iload_3
+      32: invokestatic  #125                // Method org/lwjgl/opengl/GL32C.glViewport:(IIII)V
+      35: iload_0
+      36: putstatic     #17                 // Field viewportX:I
+      39: iload_1
+      40: putstatic     #23                 // Field viewportY:I
+      43: iload_2
+      44: putstatic     #26                 // Field viewportWidth:I
+      47: iload_3
+      48: putstatic     #29                 // Field viewportHeight:I
+      51: return
+
+  public static void clearColor(float, float, float, float);
+    Code:
+       0: fload_0
+       1: getstatic     #36                 // Field clearColorRed:F
+       4: fcmpl
+       5: ifne          32
+       8: fload_1
+       9: getstatic     #40                 // Field clearColorGreen:F
+      12: fcmpl
+      13: ifne          32
+      16: fload_2
+      17: getstatic     #43                 // Field clearColorBlue:F
+      20: fcmpl
+      21: ifne          32
+      24: fload_3
+      25: getstatic     #46                 // Field clearColorAlpha:F
+      28: fcmpl
+      29: ifeq          55
+      32: fload_0
+      33: fload_1
+      34: fload_2
+      35: fload_3
+      36: invokestatic  #129                // Method org/lwjgl/opengl/GL32C.glClearColor:(FFFF)V
+      39: fload_0
+      40: putstatic     #36                 // Field clearColorRed:F
+      43: fload_1
+      44: putstatic     #40                 // Field clearColorGreen:F
+      47: fload_2
+      48: putstatic     #43                 // Field clearColorBlue:F
+      51: fload_3
+      52: putstatic     #46                 // Field clearColorAlpha:F
+      55: return
+
+  public static void enableBlend(boolean);
+    Code:
+       0: iload_0
+       1: getstatic     #53                 // Field blendEnabled:Z
+       4: if_icmpeq     30
+       7: iload_0
+       8: ifeq          20
+      11: sipush        3042
+      14: invokestatic  #133                // Method org/lwjgl/opengl/GL32C.glEnable:(I)V
+      17: goto          26
+      20: sipush        3042
+      23: invokestatic  #136                // Method org/lwjgl/opengl/GL32C.glDisable:(I)V
+      26: iload_0
+      27: putstatic     #53                 // Field blendEnabled:Z
+      30: return
+
+  public static void blendFuncSeparate(int, int, int, int);
+    Code:
+       0: iload_0
+       1: getstatic     #62                 // Field blendSrcRGB:I
+       4: if_icmpne     28
+       7: iload_1
+       8: getstatic     #66                 // Field blendDstRGB:I
+      11: if_icmpne     28
+      14: iload_2
+      15: getstatic     #70                 // Field blendSrcAlpha:I
+      18: if_icmpne     28
+      21: iload_3
+      22: getstatic     #74                 // Field blendDstAlpha:I
+      25: if_icmpeq     51
+      28: iload_0
+      29: iload_1
+      30: iload_2
+      31: iload_3
+      32: invokestatic  #139                // Method org/lwjgl/opengl/GL32C.glBlendFuncSeparate:(IIII)V
+      35: iload_0
+      36: putstatic     #62                 // Field blendSrcRGB:I
+      39: iload_1
+      40: putstatic     #66                 // Field blendDstRGB:I
+      43: iload_2
+      44: putstatic     #70                 // Field blendSrcAlpha:I
+      47: iload_3
+      48: putstatic     #74                 // Field blendDstAlpha:I
+      51: return
+
+  public static void useProgram(int);
+    Code:
+       0: iload_0
+       1: getstatic     #78                 // Field currentProgram:I
+       4: if_icmpeq     15
+       7: iload_0
+       8: invokestatic  #142                // Method org/lwjgl/opengl/GL32C.glUseProgram:(I)V
+      11: iload_0
+      12: putstatic     #78                 // Field currentProgram:I
+      15: return
+
+  private static void activeTexture(int);
+    Code:
+       0: iload_0
+       1: getstatic     #83                 // Field activeTextureUnit:I
+       4: if_icmpeq     15
+       7: iload_0
+       8: invokestatic  #86                 // Method org/lwjgl/opengl/GL32C.glActiveTexture:(I)V
+      11: iload_0
+      12: putstatic     #83                 // Field activeTextureUnit:I
+      15: return
+
+  public static void bindTexture2D(int);
+    Code:
+       0: iload_0
+       1: getstatic     #91                 // Field boundTexture2D:I
+       4: if_icmpeq     23
+       7: ldc           #81                 // int 33984
+       9: invokestatic  #145                // Method activeTexture:(I)V
+      12: sipush        3553
+      15: iload_0
+      16: invokestatic  #148                // Method org/lwjgl/opengl/GL32C.glBindTexture:(II)V
+      19: iload_0
+      20: putstatic     #91                 // Field boundTexture2D:I
+      23: return
+
+  public static void bindSampler(int);
+    Code:
+       0: iload_0
+       1: getstatic     #95                 // Field boundSampler:I
+       4: if_icmpeq     16
+       7: iconst_0
+       8: iload_0
+       9: invokestatic  #152                // Method org/lwjgl/opengl/GL33C.glBindSampler:(II)V
+      12: iload_0
+      13: putstatic     #95                 // Field boundSampler:I
+      16: return
+
+  public static void bindVertexArray(int);
+    Code:
+       0: iload_0
+       1: getstatic     #99                 // Field boundVertexArray:I
+       4: if_icmpeq     15
+       7: iload_0
+       8: invokestatic  #155                // Method org/lwjgl/opengl/GL32C.glBindVertexArray:(I)V
+      11: iload_0
+      12: putstatic     #99                 // Field boundVertexArray:I
+      15: return
+
+  public static void bindFramebuffer(int);
+    Code:
+       0: iload_0
+       1: getstatic     #103                // Field boundDrawFramebuffer:I
+       4: if_icmpne     14
+       7: iload_0
+       8: getstatic     #107                // Field boundReadFramebuffer:I
+      11: if_icmpeq     28
+      14: ldc           #158                // int 36160
+      16: iload_0
+      17: invokestatic  #159                // Method org/lwjgl/opengl/GL32C.glBindFramebuffer:(II)V
+      20: iload_0
+      21: putstatic     #103                // Field boundDrawFramebuffer:I
+      24: iload_0
+      25: putstatic     #107                // Field boundReadFramebuffer:I
+      28: return
+
+  public static void bindDrawFramebuffer(int);
+    Code:
+       0: iload_0
+       1: getstatic     #103                // Field boundDrawFramebuffer:I
+       4: if_icmpeq     17
+       7: ldc           #162                // int 36009
+       9: iload_0
+      10: invokestatic  #159                // Method org/lwjgl/opengl/GL32C.glBindFramebuffer:(II)V
+      13: iload_0
+      14: putstatic     #103                // Field boundDrawFramebuffer:I
+      17: return
+
+  public static void bindReadFramebuffer(int);
+    Code:
+       0: iload_0
+       1: getstatic     #107                // Field boundReadFramebuffer:I
+       4: if_icmpeq     17
+       7: ldc           #163                // int 36008
+       9: iload_0
+      10: invokestatic  #159                // Method org/lwjgl/opengl/GL32C.glBindFramebuffer:(II)V
+      13: iload_0
+      14: putstatic     #107                // Field boundReadFramebuffer:I
+      17: return
+
+  public static void bindElementArrayBuffer(int);
+    Code:
+       0: iload_0
+       1: getstatic     #111                // Field boundElementArrayBuffer:I
+       4: if_icmpeq     17
+       7: ldc           #164                // int 34963
+       9: iload_0
+      10: invokestatic  #165                // Method org/lwjgl/opengl/GL32C.glBindBuffer:(II)V
+      13: iload_0
+      14: putstatic     #111                // Field boundElementArrayBuffer:I
+      17: return
+
+  public static void bindArrayBuffer(int);
+    Code:
+       0: iload_0
+       1: getstatic     #115                // Field boundArrayBuffer:I
+       4: if_icmpeq     17
+       7: ldc           #168                // int 34962
+       9: iload_0
+      10: invokestatic  #165                // Method org/lwjgl/opengl/GL32C.glBindBuffer:(II)V
+      13: iload_0
+      14: putstatic     #115                // Field boundArrayBuffer:I
+      17: return
+
+  public static void scissorBox(int, int, int, int);
+    Code:
+       0: iload_0
+       1: getstatic     #118                // Field scissorBox:[I
+       4: iconst_0
+       5: iaload
+       6: if_icmpne     36
+       9: iload_1
+      10: getstatic     #118                // Field scissorBox:[I
+      13: iconst_1
+      14: iaload
+      15: if_icmpne     36
+      18: iload_2
+      19: getstatic     #118                // Field scissorBox:[I
+      22: iconst_2
+      23: iaload
+      24: if_icmpne     36
+      27: iload_3
+      28: getstatic     #118                // Field scissorBox:[I
+      31: iconst_3
+      32: iaload
+      33: if_icmpeq     67
+      36: iload_0
+      37: iload_1
+      38: iload_2
+      39: iload_3
+      40: invokestatic  #169                // Method org/lwjgl/opengl/GL11C.glScissor:(IIII)V
+      43: getstatic     #118                // Field scissorBox:[I
+      46: iconst_0
+      47: iload_0
+      48: iastore
+      49: getstatic     #118                // Field scissorBox:[I
+      52: iconst_1
+      53: iload_1
+      54: iastore
+      55: getstatic     #118                // Field scissorBox:[I
+      58: iconst_2
+      59: iload_2
+      60: iastore
+      61: getstatic     #118                // Field scissorBox:[I
+      64: iconst_3
+      65: iload_3
+      66: iastore
+      67: return
+
+  public static void scissorTest(boolean);
+    Code:
+       0: iload_0
+       1: getstatic     #122                // Field scissorEnabled:Z
+       4: if_icmpeq     30
+       7: iload_0
+       8: ifeq          20
+      11: sipush        3089
+      14: invokestatic  #133                // Method org/lwjgl/opengl/GL32C.glEnable:(I)V
+      17: goto          26
+      20: sipush        3089
+      23: invokestatic  #136                // Method org/lwjgl/opengl/GL32C.glDisable:(I)V
+      26: iload_0
+      27: putstatic     #122                // Field scissorEnabled:Z
+      30: return
+
+  public static net.neoforged.fml.earlydisplay.render.GlState$StateSnapshot createSnapshot();
+    Code:
+       0: new           #172                // class net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot
+       3: dup
+       4: getstatic     #17                 // Field viewportX:I
+       7: getstatic     #23                 // Field viewportY:I
+      10: getstatic     #26                 // Field viewportWidth:I
+      13: getstatic     #29                 // Field viewportHeight:I
+      16: getstatic     #36                 // Field clearColorRed:F
+      19: getstatic     #40                 // Field clearColorGreen:F
+      22: getstatic     #43                 // Field clearColorBlue:F
+      25: getstatic     #46                 // Field clearColorAlpha:F
+      28: getstatic     #53                 // Field blendEnabled:Z
+      31: getstatic     #62                 // Field blendSrcRGB:I
+      34: getstatic     #66                 // Field blendDstRGB:I
+      37: getstatic     #70                 // Field blendSrcAlpha:I
+      40: getstatic     #74                 // Field blendDstAlpha:I
+      43: getstatic     #78                 // Field currentProgram:I
+      46: getstatic     #91                 // Field boundTexture2D:I
+      49: getstatic     #95                 // Field boundSampler:I
+      52: getstatic     #83                 // Field activeTextureUnit:I
+      55: getstatic     #99                 // Field boundVertexArray:I
+      58: getstatic     #103                // Field boundDrawFramebuffer:I
+      61: getstatic     #107                // Field boundReadFramebuffer:I
+      64: getstatic     #111                // Field boundElementArrayBuffer:I
+      67: getstatic     #115                // Field boundArrayBuffer:I
+      70: getstatic     #122                // Field scissorEnabled:Z
+      73: getstatic     #118                // Field scissorBox:[I
+      76: invokespecial #174                // Method net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot."<init>":(IIIIFFFFZIIIIIIIIIIIIIZ[I)V
+      79: areturn
+
+  public static void applySnapshot(net.neoforged.fml.earlydisplay.render.GlState$StateSnapshot);
+    Code:
+       0: aload_0
+       1: getfield      #177                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.viewportX:I
+       4: aload_0
+       5: getfield      #178                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.viewportY:I
+       8: aload_0
+       9: getfield      #179                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.viewportWidth:I
+      12: aload_0
+      13: getfield      #180                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.viewportHeight:I
+      16: invokestatic  #181                // Method viewport:(IIII)V
+      19: aload_0
+      20: getfield      #184                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.clearColorRed:F
+      23: aload_0
+      24: getfield      #185                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.clearColorGreen:F
+      27: aload_0
+      28: getfield      #186                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.clearColorBlue:F
+      31: aload_0
+      32: getfield      #187                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.clearColorAlpha:F
+      35: invokestatic  #188                // Method clearColor:(FFFF)V
+      38: aload_0
+      39: getfield      #191                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.blendEnabled:Z
+      42: invokestatic  #192                // Method enableBlend:(Z)V
+      45: aload_0
+      46: getfield      #196                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.blendSrcRGB:I
+      49: aload_0
+      50: getfield      #197                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.blendDstRGB:I
+      53: aload_0
+      54: getfield      #198                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.blendSrcAlpha:I
+      57: aload_0
+      58: getfield      #199                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.blendDstAlpha:I
+      61: invokestatic  #200                // Method blendFuncSeparate:(IIII)V
+      64: aload_0
+      65: getfield      #203                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.currentProgram:I
+      68: invokestatic  #204                // Method org/lwjgl/opengl/GL20C.glIsProgram:(I)Z
+      71: ifeq          84
+      74: aload_0
+      75: getfield      #203                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.currentProgram:I
+      78: invokestatic  #209                // Method useProgram:(I)V
+      81: goto          88
+      84: iconst_0
+      85: invokestatic  #209                // Method useProgram:(I)V
+      88: aload_0
+      89: getfield      #212                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundTexture2D:I
+      92: invokestatic  #213                // Method bindTexture2D:(I)V
+      95: aload_0
+      96: getfield      #216                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundSampler:I
+      99: invokestatic  #217                // Method bindSampler:(I)V
+     102: aload_0
+     103: getfield      #220                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.activeTextureUnit:I
+     106: invokestatic  #145                // Method activeTexture:(I)V
+     109: aload_0
+     110: getfield      #221                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundVertexArray:I
+     113: invokestatic  #222                // Method bindVertexArray:(I)V
+     116: aload_0
+     117: getfield      #225                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundDrawFramebuffer:I
+     120: aload_0
+     121: getfield      #226                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundReadFramebuffer:I
+     124: if_icmpne     137
+     127: aload_0
+     128: getfield      #225                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundDrawFramebuffer:I
+     131: invokestatic  #227                // Method bindFramebuffer:(I)V
+     134: goto          151
+     137: aload_0
+     138: getfield      #225                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundDrawFramebuffer:I
+     141: invokestatic  #230                // Method bindDrawFramebuffer:(I)V
+     144: aload_0
+     145: getfield      #226                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundReadFramebuffer:I
+     148: invokestatic  #233                // Method bindReadFramebuffer:(I)V
+     151: aload_0
+     152: getfield      #236                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundElementArrayBuffer:I
+     155: invokestatic  #237                // Method bindElementArrayBuffer:(I)V
+     158: aload_0
+     159: getfield      #240                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.boundArrayBuffer:I
+     162: invokestatic  #241                // Method bindArrayBuffer:(I)V
+     165: aload_0
+     166: getfield      #244                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.scissorEnabled:Z
+     169: invokestatic  #245                // Method scissorTest:(Z)V
+     172: aload_0
+     173: getfield      #248                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.scissorBox:[I
+     176: iconst_0
+     177: iaload
+     178: aload_0
+     179: getfield      #248                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.scissorBox:[I
+     182: iconst_1
+     183: iaload
+     184: aload_0
+     185: getfield      #248                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.scissorBox:[I
+     188: iconst_2
+     189: iaload
+     190: aload_0
+     191: getfield      #248                // Field net/neoforged/fml/earlydisplay/render/GlState$StateSnapshot.scissorBox:[I
+     194: iconst_3
+     195: iaload
+     196: invokestatic  #249                // Method scissorBox:(IIII)V
+     199: return
+
+  static {};
+    Code:
+       0: iconst_4
+       1: newarray       int
+       3: putstatic     #118                // Field scissorBox:[I
+       6: return
+}

@@ -1,0 +1,16 @@
+Compiled from "ThemeIds.java"
+public final class net.neoforged.fml.earlydisplay.theme.ThemeIds {
+  public static final java.lang.String DEFAULT = "default";
+
+  public static final java.lang.String DARK_MODE = "darkmode";
+
+  public static final java.lang.String APRIL_FOOLS = "april-fools";
+
+  public static final java.lang.String APRIL_FOOLS_DARK_MODE = "april-fools-darkmode";
+
+  private net.neoforged.fml.earlydisplay.theme.ThemeIds();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+}

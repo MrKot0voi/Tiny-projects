@@ -1,0 +1,86 @@
+Compiled from "ErrorDisplayWindow.java"
+final class net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry extends java.lang.Record {
+  private final java.util.List<java.util.List<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>> lines;
+
+  private final int lineCount;
+
+  private final boolean centered;
+
+  private net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry(java.util.List<java.util.List<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>>, int, boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #3                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #9                  // Field lines:Ljava/util/List;
+       9: aload_0
+      10: iload_2
+      11: putfield      #15                 // Field lineCount:I
+      14: aload_0
+      15: iload_3
+      16: putfield      #19                 // Field centered:Z
+      19: return
+
+  static net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry of(java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_m1
+       3: iconst_0
+       4: invokestatic  #23                 // Method of:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;IZ)Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;
+       7: areturn
+
+  static net.neoforged.fml.earlydisplay.error.ErrorDisplayWindow$MessageEntry of(java.lang.String, net.neoforged.fml.earlydisplay.render.SimpleFont, int, boolean);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: sipush        794
+       6: invokestatic  #27                 // Method net/neoforged/fml/earlydisplay/error/FormatHelper.formatText:(Ljava/lang/String;Lnet/neoforged/fml/earlydisplay/render/SimpleFont;II)Ljava/util/List;
+       9: astore        4
+      11: new           #10                 // class net/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry
+      14: dup
+      15: aload         4
+      17: aload         4
+      19: invokeinterface #33,  1           // InterfaceMethod java/util/List.size:()I
+      24: iload_3
+      25: invokespecial #39                 // Method "<init>":(Ljava/util/List;IZ)V
+      28: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #42,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #46,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #50,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/error/ErrorDisplayWindow$MessageEntry;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.util.List<java.util.List<net.neoforged.fml.earlydisplay.render.SimpleFont$DisplayText>> lines();
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field lines:Ljava/util/List;
+       4: areturn
+
+  public int lineCount();
+    Code:
+       0: aload_0
+       1: getfield      #15                 // Field lineCount:I
+       4: ireturn
+
+  public boolean centered();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field centered:Z
+       4: ireturn
+}

@@ -1,0 +1,129 @@
+Compiled from "ThemeLoader.java"
+class net.neoforged.fml.earlydisplay.theme.ThemeLoader$StyleLengthAdapter extends com.google.gson.TypeAdapter<net.neoforged.fml.earlydisplay.util.StyleLength> {
+  private net.neoforged.fml.earlydisplay.theme.ThemeLoader$StyleLengthAdapter();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method com/google/gson/TypeAdapter."<init>":()V
+       4: return
+
+  public void write(com.google.gson.stream.JsonWriter, net.neoforged.fml.earlydisplay.util.StyleLength) throws java.io.IOException;
+    Code:
+       0: getstatic     #7                  // Field net/neoforged/fml/earlydisplay/theme/ThemeLoader$1.$SwitchMap$net$neoforged$fml$earlydisplay$util$StyleLength$Unit:[I
+       3: aload_2
+       4: invokevirtual #13                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.unit:()Lnet/neoforged/fml/earlydisplay/util/StyleLength$Unit;
+       7: invokevirtual #19                 // Method net/neoforged/fml/earlydisplay/util/StyleLength$Unit.ordinal:()I
+      10: iaload
+      11: tableswitch   { // 1 to 4
+                     1: 40
+                     2: 48
+                     3: 60
+                     4: 77
+               default: 91
+          }
+      40: aload_1
+      41: invokevirtual #25                 // Method com/google/gson/stream/JsonWriter.nullValue:()Lcom/google/gson/stream/JsonWriter;
+      44: pop
+      45: goto          91
+      48: aload_1
+      49: aload_2
+      50: invokevirtual #31                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.value:()F
+      53: invokevirtual #35                 // Method com/google/gson/stream/JsonWriter.value:(F)Lcom/google/gson/stream/JsonWriter;
+      56: pop
+      57: goto          91
+      60: aload_1
+      61: aload_2
+      62: invokevirtual #31                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.value:()F
+      65: invokedynamic #38,  0             // InvokeDynamic #0:makeConcatWithConstants:(F)Ljava/lang/String;
+      70: invokevirtual #42                 // Method com/google/gson/stream/JsonWriter.value:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+      73: pop
+      74: goto          91
+      77: aload_1
+      78: aload_2
+      79: invokevirtual #31                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.value:()F
+      82: invokedynamic #45,  0             // InvokeDynamic #1:makeConcatWithConstants:(F)Ljava/lang/String;
+      87: invokevirtual #42                 // Method com/google/gson/stream/JsonWriter.value:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+      90: pop
+      91: return
+
+  public net.neoforged.fml.earlydisplay.util.StyleLength read(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    Code:
+       0: getstatic     #46                 // Field net/neoforged/fml/earlydisplay/theme/ThemeLoader$1.$SwitchMap$com$google$gson$stream$JsonToken:[I
+       3: aload_1
+       4: invokevirtual #49                 // Method com/google/gson/stream/JsonReader.peek:()Lcom/google/gson/stream/JsonToken;
+       7: invokevirtual #55                 // Method com/google/gson/stream/JsonToken.ordinal:()I
+      10: iaload
+      11: tableswitch   { // 1 to 3
+                     1: 36
+                     2: 42
+                     3: 119
+               default: 130
+          }
+      36: invokestatic  #58                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofUndefined:()Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+      39: goto          147
+      42: aload_1
+      43: invokevirtual #62                 // Method com/google/gson/stream/JsonReader.nextString:()Ljava/lang/String;
+      46: astore_2
+      47: aload_2
+      48: ldc           #66                 // String %
+      50: invokevirtual #68                 // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+      53: ifeq          76
+      56: aload_2
+      57: iconst_0
+      58: aload_2
+      59: invokevirtual #74                 // Method java/lang/String.length:()I
+      62: iconst_1
+      63: isub
+      64: invokevirtual #77                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+      67: invokestatic  #81                 // Method java/lang/Float.parseFloat:(Ljava/lang/String;)F
+      70: invokestatic  #87                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPercent:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+      73: goto          147
+      76: aload_2
+      77: ldc           #91                 // String rem
+      79: invokevirtual #68                 // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+      82: ifeq          105
+      85: aload_2
+      86: iconst_0
+      87: aload_2
+      88: invokevirtual #74                 // Method java/lang/String.length:()I
+      91: iconst_3
+      92: isub
+      93: invokevirtual #77                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+      96: invokestatic  #81                 // Method java/lang/Float.parseFloat:(Ljava/lang/String;)F
+      99: invokestatic  #93                 // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofREM:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     102: goto          147
+     105: new           #96                 // class com/google/gson/JsonParseException
+     108: dup
+     109: aload_2
+     110: invokedynamic #98,  0             // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     115: invokespecial #101                // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+     118: athrow
+     119: aload_1
+     120: invokevirtual #104                // Method com/google/gson/stream/JsonReader.nextDouble:()D
+     123: d2f
+     124: invokestatic  #108                // Method net/neoforged/fml/earlydisplay/util/StyleLength.ofPoints:(F)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+     127: goto          147
+     130: new           #96                 // class com/google/gson/JsonParseException
+     133: dup
+     134: aload_1
+     135: invokevirtual #111                // Method com/google/gson/stream/JsonReader.getPath:()Ljava/lang/String;
+     138: invokedynamic #114,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     143: invokespecial #101                // Method com/google/gson/JsonParseException."<init>":(Ljava/lang/String;)V
+     146: athrow
+     147: areturn
+
+  public java.lang.Object read(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #115                // Method read:(Lcom/google/gson/stream/JsonReader;)Lnet/neoforged/fml/earlydisplay/util/StyleLength;
+       5: areturn
+
+  public void write(com.google.gson.stream.JsonWriter, java.lang.Object) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #14                 // class net/neoforged/fml/earlydisplay/util/StyleLength
+       6: invokevirtual #121                // Method write:(Lcom/google/gson/stream/JsonWriter;Lnet/neoforged/fml/earlydisplay/util/StyleLength;)V
+       9: return
+}

@@ -1,0 +1,60 @@
+Compiled from "FontLoader.java"
+final class net.neoforged.fml.earlydisplay.error.FontLoader$ProtoGlyph extends java.lang.Record {
+  private final int codepoint;
+
+  private final int width;
+
+  private final int[] lines;
+
+  private net.neoforged.fml.earlydisplay.error.FontLoader$ProtoGlyph(int, int, int[]);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #7                  // Field codepoint:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #13                 // Field width:I
+      14: aload_0
+      15: aload_3
+      16: putfield      #16                 // Field lines:[I
+      19: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #20,  0             // InvokeDynamic #0:toString:(Lnet/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #24,  0             // InvokeDynamic #0:hashCode:(Lnet/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #28,  0             // InvokeDynamic #0:equals:(Lnet/neoforged/fml/earlydisplay/error/FontLoader$ProtoGlyph;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int codepoint();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field codepoint:I
+       4: ireturn
+
+  public int width();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field width:I
+       4: ireturn
+
+  public int[] lines();
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field lines:[I
+       4: areturn
+}

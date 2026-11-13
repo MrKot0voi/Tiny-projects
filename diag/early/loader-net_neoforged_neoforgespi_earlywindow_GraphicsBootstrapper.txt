@@ -1,0 +1,6 @@
+Compiled from "GraphicsBootstrapper.java"
+public interface net.neoforged.neoforgespi.earlywindow.GraphicsBootstrapper {
+  public abstract java.lang.String name();
+
+  public abstract void bootstrap(java.lang.String[]);
+}

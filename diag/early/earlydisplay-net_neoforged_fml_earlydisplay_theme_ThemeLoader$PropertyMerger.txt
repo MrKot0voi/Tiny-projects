@@ -1,0 +1,4 @@
+Compiled from "ThemeLoader.java"
+interface net.neoforged.fml.earlydisplay.theme.ThemeLoader$PropertyMerger {
+  public abstract com.google.gson.JsonElement map(java.lang.String, com.google.gson.JsonElement, com.google.gson.JsonElement);
+}

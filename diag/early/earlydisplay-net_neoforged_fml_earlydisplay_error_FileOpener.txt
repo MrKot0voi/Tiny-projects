@@ -1,0 +1,72 @@
+Compiled from "FileOpener.java"
+abstract class net.neoforged.fml.earlydisplay.error.FileOpener {
+  private static final org.apache.logging.log4j.Logger LOGGER;
+
+  net.neoforged.fml.earlydisplay.error.FileOpener();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  static net.neoforged.fml.earlydisplay.error.FileOpener get();
+    Code:
+       0: ldc           #7                  // String os.name
+       2: invokestatic  #9                  // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+       5: getstatic     #15                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+       8: invokevirtual #21                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      11: astore_0
+      12: aload_0
+      13: ldc           #27                 // String win
+      15: invokevirtual #29                 // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      18: ifeq          29
+      21: new           #33                 // class net/neoforged/fml/earlydisplay/error/FileOpener$Windows
+      24: dup
+      25: invokespecial #35                 // Method net/neoforged/fml/earlydisplay/error/FileOpener$Windows."<init>":()V
+      28: areturn
+      29: aload_0
+      30: ldc           #36                 // String mac
+      32: invokevirtual #29                 // Method java/lang/String.contains:(Ljava/lang/CharSequence;)Z
+      35: ifeq          46
+      38: new           #38                 // class net/neoforged/fml/earlydisplay/error/FileOpener$Mac
+      41: dup
+      42: invokespecial #40                 // Method net/neoforged/fml/earlydisplay/error/FileOpener$Mac."<init>":()V
+      45: areturn
+      46: new           #41                 // class net/neoforged/fml/earlydisplay/error/FileOpener$Default
+      49: dup
+      50: invokespecial #43                 // Method net/neoforged/fml/earlydisplay/error/FileOpener$Default."<init>":()V
+      53: areturn
+
+  final void open(java.nio.file.Path);
+    Code:
+       0: aload_1
+       1: ifnonnull     5
+       4: return
+       5: aload_1
+       6: invokeinterface #44,  1           // InterfaceMethod java/nio/file/Path.toUri:()Ljava/net/URI;
+      11: astore_2
+      12: invokestatic  #50                 // Method java/lang/Runtime.getRuntime:()Ljava/lang/Runtime;
+      15: aload_0
+      16: aload_2
+      17: invokevirtual #56                 // Method getOpenParameters:(Ljava/net/URI;)[Ljava/lang/String;
+      20: invokevirtual #62                 // Method java/lang/Runtime.exec:([Ljava/lang/String;)Ljava/lang/Process;
+      23: pop
+      24: goto          40
+      27: astore_3
+      28: getstatic     #68                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+      31: ldc           #72                 // String Failed to open URI \'{}\'
+      33: aload_2
+      34: aload_3
+      35: invokeinterface #74,  4           // InterfaceMethod org/apache/logging/log4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      40: return
+    Exception table:
+       from    to  target type
+          12    24    27   Class java/io/IOException
+
+  protected abstract java.lang.String[] getOpenParameters(java.net.URI);
+
+  static {};
+    Code:
+       0: invokestatic  #80                 // Method org/apache/logging/log4j/LogManager.getLogger:()Lorg/apache/logging/log4j/Logger;
+       3: putstatic     #68                 // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       6: return
+}
