@@ -1,0 +1,65 @@
+Compiled from "DryFoliageColorReloadListener.java"
+public class net.minecraft.client.resources.DryFoliageColorReloadListener extends net.minecraft.server.packs.resources.SimplePreparableReloadListener<int[]> {
+  private static final net.minecraft.resources.Identifier LOCATION;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  public net.minecraft.client.resources.DryFoliageColorReloadListener();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/minecraft/server/packs/resources/SimplePreparableReloadListener."<init>":()V
+       4: return
+
+  protected int[] prepare(net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)[I
+    Code:
+       0: aload_1
+       1: getstatic     #7                  // Field LOCATION:Lnet/minecraft/resources/Identifier;
+       4: invokestatic  #13                 // Method net/minecraft/client/resources/LegacyStuffWrapper.getPixels:(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/resources/Identifier;)[I
+       7: areturn
+       8: astore_3
+       9: new           #21                 // class java/lang/IllegalStateException
+      12: dup
+      13: ldc           #23                 // String Failed to load dry foliage color texture
+      15: aload_3
+      16: invokespecial #25                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      19: athrow
+    Exception table:
+       from    to  target type
+           0     7     8   Class java/io/IOException
+
+  protected void apply(int[], net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: ([ILnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+    Code:
+       0: aload_1
+       1: invokestatic  #28                 // Method net/minecraft/world/level/DryFoliageColor.init:([I)V
+       4: return
+
+  protected void apply(java.lang.Object, net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Ljava/lang/Object;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #34                 // class "[I"
+       5: aload_2
+       6: aload_3
+       7: invokevirtual #36                 // Method apply:([ILnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+      10: return
+
+  protected java.lang.Object prepare(net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Ljava/lang/Object;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokevirtual #40                 // Method prepare:(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)[I
+       6: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc           #44                 // String textures/colormap/dry_foliage.png
+       2: invokestatic  #46                 // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+       5: putstatic     #7                  // Field LOCATION:Lnet/minecraft/resources/Identifier;
+       8: return
+}

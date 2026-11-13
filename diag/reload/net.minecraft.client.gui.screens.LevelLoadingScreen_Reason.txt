@@ -1,0 +1,84 @@
+Compiled from "LevelLoadingScreen.java"
+public final class net.minecraft.client.gui.screens.LevelLoadingScreen$Reason extends java.lang.Enum<net.minecraft.client.gui.screens.LevelLoadingScreen$Reason> {
+  public static final net.minecraft.client.gui.screens.LevelLoadingScreen$Reason NETHER_PORTAL;
+    descriptor: Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+
+  public static final net.minecraft.client.gui.screens.LevelLoadingScreen$Reason END_PORTAL;
+    descriptor: Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+
+  public static final net.minecraft.client.gui.screens.LevelLoadingScreen$Reason OTHER;
+    descriptor: Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+
+  private static final net.minecraft.client.gui.screens.LevelLoadingScreen$Reason[] $VALUES;
+    descriptor: [Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+
+  public static net.minecraft.client.gui.screens.LevelLoadingScreen$Reason[] values();
+    descriptor: ()[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+    Code:
+       0: getstatic     #13                 // Field $VALUES:[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+       3: invokevirtual #17                 // Method "[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;".clone:()Ljava/lang/Object;
+       6: checkcast     #18                 // class "[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;"
+       9: areturn
+
+  public static net.minecraft.client.gui.screens.LevelLoadingScreen$Reason valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+    Code:
+       0: ldc           #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+       2: aload_0
+       3: invokestatic  #22                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+       9: areturn
+
+  private net.minecraft.client.gui.screens.LevelLoadingScreen$Reason();
+    descriptor: (Ljava/lang/String;I)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #28                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  private static net.minecraft.client.gui.screens.LevelLoadingScreen$Reason[] $values();
+    descriptor: ()[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+    Code:
+       0: iconst_3
+       1: anewarray     #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+       4: dup
+       5: iconst_0
+       6: getstatic     #3                  // Field NETHER_PORTAL:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #7                  // Field END_PORTAL:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #10                 // Field OTHER:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      21: aastore
+      22: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: new           #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+       3: dup
+       4: ldc           #32                 // String NETHER_PORTAL
+       6: iconst_0
+       7: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #3                  // Field NETHER_PORTAL:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      13: new           #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+      16: dup
+      17: ldc           #34                 // String END_PORTAL
+      19: iconst_1
+      20: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #7                  // Field END_PORTAL:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      26: new           #1                  // class net/minecraft/client/gui/screens/LevelLoadingScreen$Reason
+      29: dup
+      30: ldc           #35                 // String OTHER
+      32: iconst_2
+      33: invokespecial #33                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #10                 // Field OTHER:Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      39: invokestatic  #36                 // Method $values:()[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      42: putstatic     #13                 // Field $VALUES:[Lnet/minecraft/client/gui/screens/LevelLoadingScreen$Reason;
+      45: return
+}

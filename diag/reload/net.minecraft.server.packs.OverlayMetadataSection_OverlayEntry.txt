@@ -1,0 +1,127 @@
+Compiled from "OverlayMetadataSection.java"
+public final class net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry extends java.lang.Record {
+  private final net.minecraft.util.InclusiveRange<net.minecraft.server.packs.metadata.pack.PackFormat> format;
+    descriptor: Lnet/minecraft/util/InclusiveRange;
+
+  private final java.lang.String overlay;
+    descriptor: Ljava/lang/String;
+
+  public net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry(net.minecraft.util.InclusiveRange<net.minecraft.server.packs.metadata.pack.PackFormat>, java.lang.String);
+    descriptor: (Lnet/minecraft/util/InclusiveRange;Ljava/lang/String;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field format:Lnet/minecraft/util/InclusiveRange;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field overlay:Ljava/lang/String;
+      14: return
+
+  static com.mojang.serialization.Codec<java.util.List<net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry>> listCodecForPackType(net.minecraft.server.packs.PackType);
+    descriptor: (Lnet/minecraft/server/packs/PackType;)Lcom/mojang/serialization/Codec;
+    Code:
+       0: aload_0
+       1: invokestatic  #17                 // Method net/minecraft/server/packs/metadata/pack/PackFormat.lastPreMinorVersion:(Lnet/minecraft/server/packs/PackType;)I
+       4: istore_1
+       5: getstatic     #23                 // Field net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry.CODEC:Lcom/mojang/serialization/Codec;
+       8: invokestatic  #29                 // Method net/neoforged/neoforge/common/conditions/ConditionalOps.decodeListWithElementConditions:(Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+      11: iload_1
+      12: invokedynamic #35,  0             // InvokeDynamic #0:apply:(I)Ljava/util/function/Function;
+      17: iload_1
+      18: invokedynamic #39,  0             // InvokeDynamic #1:apply:(I)Ljava/util/function/Function;
+      23: invokeinterface #40,  3           // InterfaceMethod com/mojang/serialization/Codec.flatXmap:(Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+      28: areturn
+
+  public boolean isApplicable(net.minecraft.server.packs.metadata.pack.PackFormat);
+    descriptor: (Lnet/minecraft/server/packs/metadata/pack/PackFormat;)Z
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field format:Lnet/minecraft/util/InclusiveRange;
+       4: aload_1
+       5: invokevirtual #46                 // Method net/minecraft/util/InclusiveRange.isValueInRange:(Ljava/lang/Comparable;)Z
+       8: ireturn
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #101,  0            // InvokeDynamic #4:toString:(Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #105,  0            // InvokeDynamic #4:hashCode:(Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #109,  0            // InvokeDynamic #4:equals:(Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.minecraft.util.InclusiveRange<net.minecraft.server.packs.metadata.pack.PackFormat> format();
+    descriptor: ()Lnet/minecraft/util/InclusiveRange;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field format:Lnet/minecraft/util/InclusiveRange;
+       4: areturn
+
+  public java.lang.String overlay();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field overlay:Ljava/lang/String;
+       4: areturn
+
+  private static com.mojang.serialization.DataResult lambda$listCodecForPackType$3(int, java.util.List);
+    descriptor: (ILjava/util/List;)Lcom/mojang/serialization/DataResult;
+    Code:
+       0: aload_1
+       1: invokeinterface #52,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       6: iload_0
+       7: invokedynamic #58,  0             // InvokeDynamic #2:apply:(I)Ljava/util/function/Function;
+      12: invokeinterface #59,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      17: invokeinterface #65,  1           // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      22: invokestatic  #69                 // InterfaceMethod com/mojang/serialization/DataResult.success:(Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      25: areturn
+
+  private static net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry$IntermediateEntry lambda$listCodecForPackType$2(int, net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry);
+    descriptor: (ILnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;)Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry;
+    Code:
+       0: new           #24                 // class net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry
+       3: dup
+       4: aload_1
+       5: invokevirtual #75                 // Method format:()Lnet/minecraft/util/InclusiveRange;
+       8: iload_0
+       9: invokestatic  #78                 // Method net/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat.fromRange:(Lnet/minecraft/util/InclusiveRange;I)Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;
+      12: aload_1
+      13: invokevirtual #84                 // Method overlay:()Ljava/lang/String;
+      16: invokespecial #87                 // Method net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry."<init>":(Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;Ljava/lang/String;)V
+      19: areturn
+
+  private static com.mojang.serialization.DataResult lambda$listCodecForPackType$1(int, java.util.List);
+    descriptor: (ILjava/util/List;)Lcom/mojang/serialization/DataResult;
+    Code:
+       0: aload_1
+       1: iload_0
+       2: invokedynamic #90,  0             // InvokeDynamic #3:apply:()Ljava/util/function/BiFunction;
+       7: invokestatic  #93                 // Method net/minecraft/server/packs/metadata/pack/PackFormat.validateHolderList:(Ljava/util/List;ILjava/util/function/BiFunction;)Lcom/mojang/serialization/DataResult;
+      10: areturn
+
+  private static net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry lambda$listCodecForPackType$0(net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry$IntermediateEntry, net.minecraft.util.InclusiveRange);
+    descriptor: (Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry;Lnet/minecraft/util/InclusiveRange;)Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;
+    Code:
+       0: new           #8                  // class net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry
+       3: dup
+       4: aload_1
+       5: aload_0
+       6: invokevirtual #97                 // Method net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry.overlay:()Ljava/lang/String;
+       9: invokespecial #98                 // Method "<init>":(Lnet/minecraft/util/InclusiveRange;Ljava/lang/String;)V
+      12: areturn
+}

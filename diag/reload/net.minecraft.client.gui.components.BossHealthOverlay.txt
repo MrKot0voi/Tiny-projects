@@ -1,0 +1,453 @@
+Compiled from "BossHealthOverlay.java"
+public class net.minecraft.client.gui.components.BossHealthOverlay {
+  private static final int BAR_WIDTH;
+    descriptor: I
+
+  private static final int BAR_HEIGHT;
+    descriptor: I
+
+  private static final net.minecraft.resources.Identifier[] BAR_BACKGROUND_SPRITES;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier[] BAR_PROGRESS_SPRITES;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier[] OVERLAY_BACKGROUND_SPRITES;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier[] OVERLAY_PROGRESS_SPRITES;
+    descriptor: [Lnet/minecraft/resources/Identifier;
+
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+
+  final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.LerpingBossEvent> events;
+    descriptor: Ljava/util/Map;
+
+  public net.minecraft.client.gui.components.BossHealthOverlay(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokestatic  #7                  // Method com/google/common/collect/Maps.newLinkedHashMap:()Ljava/util/LinkedHashMap;
+       8: putfield      #13                 // Field events:Ljava/util/Map;
+      11: aload_0
+      12: aload_1
+      13: putfield      #19                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      16: return
+
+  public void render(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field events:Ljava/util/Map;
+       4: invokeinterface #23,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          226
+      12: aload_1
+      13: invokevirtual #29                 // Method net/minecraft/client/gui/GuiGraphics.nextStratum:()V
+      16: invokestatic  #34                 // Method net/minecraft/util/profiling/Profiler.get:()Lnet/minecraft/util/profiling/ProfilerFiller;
+      19: astore_2
+      20: aload_2
+      21: ldc           #40                 // String bossHealth
+      23: invokeinterface #42,  2           // InterfaceMethod net/minecraft/util/profiling/ProfilerFiller.push:(Ljava/lang/String;)V
+      28: aload_1
+      29: invokevirtual #48                 // Method net/minecraft/client/gui/GuiGraphics.guiWidth:()I
+      32: istore_3
+      33: bipush        12
+      35: istore        4
+      37: aload_0
+      38: getfield      #13                 // Field events:Ljava/util/Map;
+      41: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      46: invokeinterface #56,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      51: astore        5
+      53: aload         5
+      55: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      60: ifeq          220
+      63: aload         5
+      65: invokeinterface #67,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      70: checkcast     #71                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      73: astore        6
+      75: iload_3
+      76: iconst_2
+      77: idiv
+      78: bipush        91
+      80: isub
+      81: istore        7
+      83: aload_1
+      84: aload_0
+      85: getfield      #19                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      88: invokevirtual #73                 // Method net/minecraft/client/Minecraft.getWindow:()Lcom/mojang/blaze3d/platform/Window;
+      91: aload         6
+      93: iload         7
+      95: iload         4
+      97: bipush        10
+      99: aload_0
+     100: getfield      #19                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     103: getfield      #79                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     106: invokestatic  #83                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     109: pop
+     110: bipush        9
+     112: iadd
+     113: invokestatic  #89                 // Method net/neoforged/neoforge/client/ClientHooks.onCustomizeBossEventProgress:(Lnet/minecraft/client/gui/GuiGraphics;Lcom/mojang/blaze3d/platform/Window;Lnet/minecraft/client/gui/components/LerpingBossEvent;III)Lnet/neoforged/neoforge/client/event/CustomizeGuiOverlayEvent$BossEventProgress;
+     116: astore        8
+     118: aload         8
+     120: invokevirtual #95                 // Method net/neoforged/neoforge/client/event/CustomizeGuiOverlayEvent$BossEventProgress.isCanceled:()Z
+     123: ifne          193
+     126: aload_0
+     127: aload_1
+     128: iload         7
+     130: iload         4
+     132: aload         6
+     134: invokevirtual #100                // Method drawBar:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V
+     137: aload         6
+     139: invokevirtual #104                // Method net/minecraft/client/gui/components/LerpingBossEvent.getName:()Lnet/minecraft/network/chat/Component;
+     142: astore        9
+     144: aload_0
+     145: getfield      #19                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     148: getfield      #79                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     151: aload         9
+     153: invokevirtual #108                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+     156: istore        10
+     158: iload_3
+     159: iconst_2
+     160: idiv
+     161: iload         10
+     163: iconst_2
+     164: idiv
+     165: isub
+     166: istore        11
+     168: iload         4
+     170: bipush        9
+     172: isub
+     173: istore        12
+     175: aload_1
+     176: aload_0
+     177: getfield      #19                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     180: getfield      #79                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     183: aload         9
+     185: iload         11
+     187: iload         12
+     189: iconst_m1
+     190: invokevirtual #114                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+     193: iload         4
+     195: aload         8
+     197: invokevirtual #118                // Method net/neoforged/neoforge/client/event/CustomizeGuiOverlayEvent$BossEventProgress.getIncrement:()I
+     200: iadd
+     201: istore        4
+     203: iload         4
+     205: aload_1
+     206: invokevirtual #121                // Method net/minecraft/client/gui/GuiGraphics.guiHeight:()I
+     209: iconst_3
+     210: idiv
+     211: if_icmplt     217
+     214: goto          220
+     217: goto          53
+     220: aload_2
+     221: invokeinterface #124,  1          // InterfaceMethod net/minecraft/util/profiling/ProfilerFiller.pop:()V
+     226: return
+
+  private void drawBar(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.world.BossEvent);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: iload_3
+       4: aload         4
+       6: sipush        182
+       9: getstatic     #127                // Field BAR_BACKGROUND_SPRITES:[Lnet/minecraft/resources/Identifier;
+      12: getstatic     #131                // Field OVERLAY_BACKGROUND_SPRITES:[Lnet/minecraft/resources/Identifier;
+      15: invokevirtual #134                // Method drawBar:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;I[Lnet/minecraft/resources/Identifier;[Lnet/minecraft/resources/Identifier;)V
+      18: aload         4
+      20: invokevirtual #137                // Method net/minecraft/world/BossEvent.getProgress:()F
+      23: iconst_0
+      24: sipush        182
+      27: invokestatic  #143                // Method net/minecraft/util/Mth.lerpDiscrete:(FII)I
+      30: istore        5
+      32: iload         5
+      34: ifle          54
+      37: aload_0
+      38: aload_1
+      39: iload_2
+      40: iload_3
+      41: aload         4
+      43: iload         5
+      45: getstatic     #149                // Field BAR_PROGRESS_SPRITES:[Lnet/minecraft/resources/Identifier;
+      48: getstatic     #152                // Field OVERLAY_PROGRESS_SPRITES:[Lnet/minecraft/resources/Identifier;
+      51: invokevirtual #134                // Method drawBar:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;I[Lnet/minecraft/resources/Identifier;[Lnet/minecraft/resources/Identifier;)V
+      54: return
+
+  private void drawBar(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.world.BossEvent, int, net.minecraft.resources.Identifier[], net.minecraft.resources.Identifier[]);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/world/BossEvent;I[Lnet/minecraft/resources/Identifier;[Lnet/minecraft/resources/Identifier;)V
+    Code:
+       0: aload_1
+       1: getstatic     #155                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+       4: aload         6
+       6: aload         4
+       8: invokevirtual #161                // Method net/minecraft/world/BossEvent.getColor:()Lnet/minecraft/world/BossEvent$BossBarColor;
+      11: invokevirtual #165                // Method net/minecraft/world/BossEvent$BossBarColor.ordinal:()I
+      14: aaload
+      15: sipush        182
+      18: iconst_5
+      19: iconst_0
+      20: iconst_0
+      21: iload_2
+      22: iload_3
+      23: iload         5
+      25: iconst_5
+      26: invokevirtual #170                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIIIIIII)V
+      29: aload         4
+      31: invokevirtual #174                // Method net/minecraft/world/BossEvent.getOverlay:()Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      34: getstatic     #178                // Field net/minecraft/world/BossEvent$BossBarOverlay.PROGRESS:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      37: if_acmpeq     71
+      40: aload_1
+      41: getstatic     #155                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+      44: aload         7
+      46: aload         4
+      48: invokevirtual #174                // Method net/minecraft/world/BossEvent.getOverlay:()Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      51: invokevirtual #184                // Method net/minecraft/world/BossEvent$BossBarOverlay.ordinal:()I
+      54: iconst_1
+      55: isub
+      56: aaload
+      57: sipush        182
+      60: iconst_5
+      61: iconst_0
+      62: iconst_0
+      63: iload_2
+      64: iload_3
+      65: iload         5
+      67: iconst_5
+      68: invokevirtual #170                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIIIIIII)V
+      71: return
+
+  public void update(net.minecraft.network.protocol.game.ClientboundBossEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBossEventPacket;)V
+    Code:
+       0: aload_1
+       1: new           #185                // class net/minecraft/client/gui/components/BossHealthOverlay$1
+       4: dup
+       5: aload_0
+       6: invokespecial #187                // Method net/minecraft/client/gui/components/BossHealthOverlay$1."<init>":(Lnet/minecraft/client/gui/components/BossHealthOverlay;)V
+       9: invokevirtual #190                // Method net/minecraft/network/protocol/game/ClientboundBossEventPacket.dispatch:(Lnet/minecraft/network/protocol/game/ClientboundBossEventPacket$Handler;)V
+      12: return
+
+  public void reset();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field events:Ljava/util/Map;
+       4: invokeinterface #196,  1          // InterfaceMethod java/util/Map.clear:()V
+       9: return
+
+  public boolean shouldPlayMusic();
+    descriptor: ()Z
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field events:Ljava/util/Map;
+       4: invokeinterface #23,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          58
+      12: aload_0
+      13: getfield      #13                 // Field events:Ljava/util/Map;
+      16: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      21: invokeinterface #56,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      26: astore_1
+      27: aload_1
+      28: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      33: ifeq          58
+      36: aload_1
+      37: invokeinterface #67,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      42: checkcast     #138                // class net/minecraft/world/BossEvent
+      45: astore_2
+      46: aload_2
+      47: invokevirtual #199                // Method net/minecraft/world/BossEvent.shouldPlayBossMusic:()Z
+      50: ifeq          55
+      53: iconst_1
+      54: ireturn
+      55: goto          27
+      58: iconst_0
+      59: ireturn
+
+  public boolean shouldDarkenScreen();
+    descriptor: ()Z
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field events:Ljava/util/Map;
+       4: invokeinterface #23,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          58
+      12: aload_0
+      13: getfield      #13                 // Field events:Ljava/util/Map;
+      16: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      21: invokeinterface #56,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      26: astore_1
+      27: aload_1
+      28: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      33: ifeq          58
+      36: aload_1
+      37: invokeinterface #67,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      42: checkcast     #138                // class net/minecraft/world/BossEvent
+      45: astore_2
+      46: aload_2
+      47: invokevirtual #202                // Method net/minecraft/world/BossEvent.shouldDarkenScreen:()Z
+      50: ifeq          55
+      53: iconst_1
+      54: ireturn
+      55: goto          27
+      58: iconst_0
+      59: ireturn
+
+  public boolean shouldCreateWorldFog();
+    descriptor: ()Z
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field events:Ljava/util/Map;
+       4: invokeinterface #23,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+       9: ifne          58
+      12: aload_0
+      13: getfield      #13                 // Field events:Ljava/util/Map;
+      16: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      21: invokeinterface #56,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      26: astore_1
+      27: aload_1
+      28: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      33: ifeq          58
+      36: aload_1
+      37: invokeinterface #67,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      42: checkcast     #138                // class net/minecraft/world/BossEvent
+      45: astore_2
+      46: aload_2
+      47: invokevirtual #205                // Method net/minecraft/world/BossEvent.shouldCreateWorldFog:()Z
+      50: ifeq          55
+      53: iconst_1
+      54: ireturn
+      55: goto          27
+      58: iconst_0
+      59: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: bipush        7
+       2: anewarray     #208                // class net/minecraft/resources/Identifier
+       5: dup
+       6: iconst_0
+       7: ldc           #210                // String boss_bar/pink_background
+       9: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      12: aastore
+      13: dup
+      14: iconst_1
+      15: ldc           #216                // String boss_bar/blue_background
+      17: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      20: aastore
+      21: dup
+      22: iconst_2
+      23: ldc           #218                // String boss_bar/red_background
+      25: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      28: aastore
+      29: dup
+      30: iconst_3
+      31: ldc           #220                // String boss_bar/green_background
+      33: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      36: aastore
+      37: dup
+      38: iconst_4
+      39: ldc           #222                // String boss_bar/yellow_background
+      41: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      44: aastore
+      45: dup
+      46: iconst_5
+      47: ldc           #224                // String boss_bar/purple_background
+      49: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      52: aastore
+      53: dup
+      54: bipush        6
+      56: ldc           #226                // String boss_bar/white_background
+      58: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      61: aastore
+      62: putstatic     #127                // Field BAR_BACKGROUND_SPRITES:[Lnet/minecraft/resources/Identifier;
+      65: bipush        7
+      67: anewarray     #208                // class net/minecraft/resources/Identifier
+      70: dup
+      71: iconst_0
+      72: ldc           #228                // String boss_bar/pink_progress
+      74: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      77: aastore
+      78: dup
+      79: iconst_1
+      80: ldc           #230                // String boss_bar/blue_progress
+      82: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      85: aastore
+      86: dup
+      87: iconst_2
+      88: ldc           #232                // String boss_bar/red_progress
+      90: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      93: aastore
+      94: dup
+      95: iconst_3
+      96: ldc           #234                // String boss_bar/green_progress
+      98: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     101: aastore
+     102: dup
+     103: iconst_4
+     104: ldc           #236                // String boss_bar/yellow_progress
+     106: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     109: aastore
+     110: dup
+     111: iconst_5
+     112: ldc           #238                // String boss_bar/purple_progress
+     114: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     117: aastore
+     118: dup
+     119: bipush        6
+     121: ldc           #240                // String boss_bar/white_progress
+     123: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     126: aastore
+     127: putstatic     #149                // Field BAR_PROGRESS_SPRITES:[Lnet/minecraft/resources/Identifier;
+     130: iconst_4
+     131: anewarray     #208                // class net/minecraft/resources/Identifier
+     134: dup
+     135: iconst_0
+     136: ldc           #242                // String boss_bar/notched_6_background
+     138: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     141: aastore
+     142: dup
+     143: iconst_1
+     144: ldc           #244                // String boss_bar/notched_10_background
+     146: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     149: aastore
+     150: dup
+     151: iconst_2
+     152: ldc           #246                // String boss_bar/notched_12_background
+     154: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     157: aastore
+     158: dup
+     159: iconst_3
+     160: ldc           #248                // String boss_bar/notched_20_background
+     162: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     165: aastore
+     166: putstatic     #131                // Field OVERLAY_BACKGROUND_SPRITES:[Lnet/minecraft/resources/Identifier;
+     169: iconst_4
+     170: anewarray     #208                // class net/minecraft/resources/Identifier
+     173: dup
+     174: iconst_0
+     175: ldc           #250                // String boss_bar/notched_6_progress
+     177: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     180: aastore
+     181: dup
+     182: iconst_1
+     183: ldc           #252                // String boss_bar/notched_10_progress
+     185: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     188: aastore
+     189: dup
+     190: iconst_2
+     191: ldc           #254                // String boss_bar/notched_12_progress
+     193: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     196: aastore
+     197: dup
+     198: iconst_3
+     199: ldc_w         #256                // String boss_bar/notched_20_progress
+     202: invokestatic  #212                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     205: aastore
+     206: putstatic     #152                // Field OVERLAY_PROGRESS_SPRITES:[Lnet/minecraft/resources/Identifier;
+     209: return
+}

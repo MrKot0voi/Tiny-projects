@@ -1,0 +1,81 @@
+Compiled from "SimpleReloadInstance.java"
+class net.minecraft.server.packs.resources.SimpleReloadInstance$1 implements net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier {
+  final java.util.concurrent.Executor val$p_405684_;
+    descriptor: Ljava/util/concurrent/Executor;
+
+  final net.minecraft.server.packs.resources.PreparableReloadListener val$p_405338_;
+    descriptor: Lnet/minecraft/server/packs/resources/PreparableReloadListener;
+
+  final java.util.concurrent.CompletableFuture val$p_404885_;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
+
+  final net.minecraft.server.packs.resources.SimpleReloadInstance this$0;
+    descriptor: Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+
+  net.minecraft.server.packs.resources.SimpleReloadInstance$1();
+    descriptor: (Lnet/minecraft/server/packs/resources/SimpleReloadInstance;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/CompletableFuture;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #1                  // Field this$0:Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+       5: aload_0
+       6: aload_2
+       7: putfield      #7                  // Field val$p_405684_:Ljava/util/concurrent/Executor;
+      10: aload_0
+      11: aload_3
+      12: putfield      #11                 // Field val$p_405338_:Lnet/minecraft/server/packs/resources/PreparableReloadListener;
+      15: aload_0
+      16: aload         4
+      18: putfield      #15                 // Field val$p_404885_:Ljava/util/concurrent/CompletableFuture;
+      21: aload_0
+      22: invokespecial #19                 // Method java/lang/Object."<init>":()V
+      25: return
+
+  public <T> java.util.concurrent.CompletableFuture<T> wait(T);
+    descriptor: (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field val$p_405684_:Ljava/util/concurrent/Executor;
+       4: aload_0
+       5: aload_0
+       6: getfield      #11                 // Field val$p_405338_:Lnet/minecraft/server/packs/resources/PreparableReloadListener;
+       9: invokedynamic #25,  0             // InvokeDynamic #0:run:(Lnet/minecraft/server/packs/resources/SimpleReloadInstance$1;Lnet/minecraft/server/packs/resources/PreparableReloadListener;)Ljava/lang/Runnable;
+      14: invokeinterface #29,  2           // InterfaceMethod java/util/concurrent/Executor.execute:(Ljava/lang/Runnable;)V
+      19: aload_0
+      20: getfield      #1                  // Field this$0:Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+      23: getfield      #35                 // Field net/minecraft/server/packs/resources/SimpleReloadInstance.allPreparations:Ljava/util/concurrent/CompletableFuture;
+      26: aload_0
+      27: getfield      #15                 // Field val$p_404885_:Ljava/util/concurrent/CompletableFuture;
+      30: aload_1
+      31: invokedynamic #40,  0             // InvokeDynamic #1:apply:(Ljava/lang/Object;)Ljava/util/function/BiFunction;
+      36: invokevirtual #44                 // Method java/util/concurrent/CompletableFuture.thenCombine:(Ljava/util/concurrent/CompletionStage;Ljava/util/function/BiFunction;)Ljava/util/concurrent/CompletableFuture;
+      39: areturn
+
+  private static java.lang.Object lambda$wait$1(java.lang.Object, net.minecraft.util.Unit, java.lang.Object);
+    descriptor: (Ljava/lang/Object;Lnet/minecraft/util/Unit;Ljava/lang/Object;)Ljava/lang/Object;
+    Code:
+       0: aload_0
+       1: areturn
+
+  private void lambda$wait$0(net.minecraft.server.packs.resources.PreparableReloadListener);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+       4: getfield      #50                 // Field net/minecraft/server/packs/resources/SimpleReloadInstance.preparingListeners:Ljava/util/Set;
+       7: aload_1
+       8: invokeinterface #54,  2           // InterfaceMethod java/util/Set.remove:(Ljava/lang/Object;)Z
+      13: pop
+      14: aload_0
+      15: getfield      #1                  // Field this$0:Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+      18: getfield      #50                 // Field net/minecraft/server/packs/resources/SimpleReloadInstance.preparingListeners:Ljava/util/Set;
+      21: invokeinterface #60,  1           // InterfaceMethod java/util/Set.isEmpty:()Z
+      26: ifeq          43
+      29: aload_0
+      30: getfield      #1                  // Field this$0:Lnet/minecraft/server/packs/resources/SimpleReloadInstance;
+      33: getfield      #35                 // Field net/minecraft/server/packs/resources/SimpleReloadInstance.allPreparations:Ljava/util/concurrent/CompletableFuture;
+      36: getstatic     #64                 // Field net/minecraft/util/Unit.INSTANCE:Lnet/minecraft/util/Unit;
+      39: invokevirtual #70                 // Method java/util/concurrent/CompletableFuture.complete:(Ljava/lang/Object;)Z
+      42: pop
+      43: return
+}

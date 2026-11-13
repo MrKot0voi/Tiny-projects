@@ -1,0 +1,210 @@
+Compiled from "OverlayMetadataSection.java"
+public final class net.minecraft.server.packs.OverlayMetadataSection extends java.lang.Record {
+  private final java.util.List<net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry> overlays;
+    descriptor: Ljava/util/List;
+
+  private static final java.util.regex.Pattern DIR_VALIDATOR;
+    descriptor: Ljava/util/regex/Pattern;
+
+  public static final net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> CLIENT_TYPE;
+    descriptor: Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+
+  public static final net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> SERVER_TYPE;
+    descriptor: Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+
+  public static final net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> NEOFORGE_CLIENT_TYPE;
+    descriptor: Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+
+  public static final net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> NEOFORGE_SERVER_TYPE;
+    descriptor: Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+
+  public net.minecraft.server.packs.OverlayMetadataSection(java.util.List<net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry>);
+    descriptor: (Ljava/util/List;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field overlays:Ljava/util/List;
+       9: return
+
+  private static com.mojang.serialization.DataResult<java.lang.String> validateOverlayDir(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/mojang/serialization/DataResult;
+    Code:
+       0: getstatic     #13                 // Field DIR_VALIDATOR:Ljava/util/regex/Pattern;
+       3: aload_0
+       4: invokevirtual #17                 // Method java/util/regex/Pattern.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+       7: invokevirtual #23                 // Method java/util/regex/Matcher.matches:()Z
+      10: ifne          25
+      13: aload_0
+      14: invokedynamic #29,  0             // InvokeDynamic #0:get:(Ljava/lang/String;)Ljava/util/function/Supplier;
+      19: invokestatic  #33                 // InterfaceMethod com/mojang/serialization/DataResult.error:(Ljava/util/function/Supplier;)Lcom/mojang/serialization/DataResult;
+      22: goto          29
+      25: aload_0
+      26: invokestatic  #39                 // InterfaceMethod com/mojang/serialization/DataResult.success:(Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      29: areturn
+
+  public static com.mojang.serialization.Codec<net.minecraft.server.packs.OverlayMetadataSection> codecForPackType(net.minecraft.server.packs.PackType);
+    descriptor: (Lnet/minecraft/server/packs/PackType;)Lcom/mojang/serialization/Codec;
+    Code:
+       0: aload_0
+       1: invokedynamic #43,  0             // InvokeDynamic #1:apply:(Lnet/minecraft/server/packs/PackType;)Ljava/util/function/Function;
+       6: invokestatic  #47                 // Method com/mojang/serialization/codecs/RecordCodecBuilder.create:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+       9: areturn
+
+  public static net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> forPackType(net.minecraft.server.packs.PackType);
+    descriptor: (Lnet/minecraft/server/packs/PackType;)Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+    Code:
+       0: getstatic     #53                 // Field net/minecraft/server/packs/OverlayMetadataSection$1.$SwitchMap$net$minecraft$server$packs$PackType:[I
+       3: aload_0
+       4: invokevirtual #59                 // Method net/minecraft/server/packs/PackType.ordinal:()I
+       7: iaload
+       8: lookupswitch  { // 2
+                     1: 46
+                     2: 52
+               default: 36
+          }
+      36: new           #65                 // class java/lang/MatchException
+      39: dup
+      40: aconst_null
+      41: aconst_null
+      42: invokespecial #67                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      45: athrow
+      46: getstatic     #70                 // Field CLIENT_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      49: goto          55
+      52: getstatic     #74                 // Field SERVER_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      55: areturn
+
+  public static net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraft.server.packs.OverlayMetadataSection> forPackTypeNeoForge(net.minecraft.server.packs.PackType);
+    descriptor: (Lnet/minecraft/server/packs/PackType;)Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+    Code:
+       0: getstatic     #53                 // Field net/minecraft/server/packs/OverlayMetadataSection$1.$SwitchMap$net$minecraft$server$packs$PackType:[I
+       3: aload_0
+       4: invokevirtual #59                 // Method net/minecraft/server/packs/PackType.ordinal:()I
+       7: iaload
+       8: lookupswitch  { // 2
+                     1: 46
+                     2: 52
+               default: 36
+          }
+      36: new           #65                 // class java/lang/MatchException
+      39: dup
+      40: aconst_null
+      41: aconst_null
+      42: invokespecial #67                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      45: athrow
+      46: getstatic     #77                 // Field NEOFORGE_CLIENT_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      49: goto          55
+      52: getstatic     #80                 // Field NEOFORGE_SERVER_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      55: areturn
+
+  public java.util.List<java.lang.String> overlaysForVersion(net.minecraft.server.packs.metadata.pack.PackFormat);
+    descriptor: (Lnet/minecraft/server/packs/metadata/pack/PackFormat;)Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field overlays:Ljava/util/List;
+       4: invokeinterface #83,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+       9: aload_1
+      10: invokedynamic #89,  0             // InvokeDynamic #2:test:(Lnet/minecraft/server/packs/metadata/pack/PackFormat;)Ljava/util/function/Predicate;
+      15: invokeinterface #93,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      20: invokedynamic #99,  0             // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+      25: invokeinterface #102,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      30: invokeinterface #106,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      35: areturn
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #151,  0            // InvokeDynamic #7:toString:(Lnet/minecraft/server/packs/OverlayMetadataSection;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #155,  0            // InvokeDynamic #7:hashCode:(Lnet/minecraft/server/packs/OverlayMetadataSection;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #159,  0            // InvokeDynamic #7:equals:(Lnet/minecraft/server/packs/OverlayMetadataSection;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.util.List<net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry> overlays();
+    descriptor: ()Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field overlays:Ljava/util/List;
+       4: areturn
+
+  private static boolean lambda$overlaysForVersion$2(net.minecraft.server.packs.metadata.pack.PackFormat, net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry);
+    descriptor: (Lnet/minecraft/server/packs/metadata/pack/PackFormat;Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry;)Z
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokevirtual #110                // Method net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry.isApplicable:(Lnet/minecraft/server/packs/metadata/pack/PackFormat;)Z
+       5: ireturn
+
+  private static com.mojang.datafixers.kinds.App lambda$codecForPackType$1(net.minecraft.server.packs.PackType, com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    descriptor: (Lnet/minecraft/server/packs/PackType;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokestatic  #116                // Method net/minecraft/server/packs/OverlayMetadataSection$OverlayEntry.listCodecForPackType:(Lnet/minecraft/server/packs/PackType;)Lcom/mojang/serialization/Codec;
+       5: ldc           #120                // String entries
+       7: invokeinterface #122,  2          // InterfaceMethod com/mojang/serialization/Codec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+      12: invokedynamic #128,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+      17: invokevirtual #129                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+      20: invokevirtual #135                // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P1;
+      23: aload_1
+      24: invokedynamic #141,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+      29: invokevirtual #142                // Method com/mojang/datafixers/Products$P1.apply:(Lcom/mojang/datafixers/kinds/Applicative;Ljava/util/function/Function;)Lcom/mojang/datafixers/kinds/App;
+      32: areturn
+
+  private static java.lang.String lambda$validateOverlayDir$0(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #147,  0            // InvokeDynamic #6:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       6: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc           #163                // String [-_a-zA-Z0-9.]+
+       2: invokestatic  #165                // Method java/util/regex/Pattern.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern;
+       5: putstatic     #13                 // Field DIR_VALIDATOR:Ljava/util/regex/Pattern;
+       8: new           #169                // class net/minecraft/server/packs/metadata/MetadataSectionType
+      11: dup
+      12: ldc           #171                // String overlays
+      14: getstatic     #172                // Field net/minecraft/server/packs/PackType.CLIENT_RESOURCES:Lnet/minecraft/server/packs/PackType;
+      17: invokestatic  #176                // Method codecForPackType:(Lnet/minecraft/server/packs/PackType;)Lcom/mojang/serialization/Codec;
+      20: invokespecial #179                // Method net/minecraft/server/packs/metadata/MetadataSectionType."<init>":(Ljava/lang/String;Lcom/mojang/serialization/Codec;)V
+      23: putstatic     #70                 // Field CLIENT_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      26: new           #169                // class net/minecraft/server/packs/metadata/MetadataSectionType
+      29: dup
+      30: ldc           #171                // String overlays
+      32: getstatic     #182                // Field net/minecraft/server/packs/PackType.SERVER_DATA:Lnet/minecraft/server/packs/PackType;
+      35: invokestatic  #176                // Method codecForPackType:(Lnet/minecraft/server/packs/PackType;)Lcom/mojang/serialization/Codec;
+      38: invokespecial #179                // Method net/minecraft/server/packs/metadata/MetadataSectionType."<init>":(Ljava/lang/String;Lcom/mojang/serialization/Codec;)V
+      41: putstatic     #74                 // Field SERVER_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      44: new           #169                // class net/minecraft/server/packs/metadata/MetadataSectionType
+      47: dup
+      48: ldc           #185                // String neoforge:overlays
+      50: getstatic     #70                 // Field CLIENT_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      53: invokevirtual #187                // Method net/minecraft/server/packs/metadata/MetadataSectionType.codec:()Lcom/mojang/serialization/Codec;
+      56: invokespecial #179                // Method net/minecraft/server/packs/metadata/MetadataSectionType."<init>":(Ljava/lang/String;Lcom/mojang/serialization/Codec;)V
+      59: putstatic     #77                 // Field NEOFORGE_CLIENT_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      62: new           #169                // class net/minecraft/server/packs/metadata/MetadataSectionType
+      65: dup
+      66: ldc           #185                // String neoforge:overlays
+      68: getstatic     #74                 // Field SERVER_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      71: invokevirtual #187                // Method net/minecraft/server/packs/metadata/MetadataSectionType.codec:()Lcom/mojang/serialization/Codec;
+      74: invokespecial #179                // Method net/minecraft/server/packs/metadata/MetadataSectionType."<init>":(Ljava/lang/String;Lcom/mojang/serialization/Codec;)V
+      77: putstatic     #80                 // Field NEOFORGE_SERVER_TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      80: return
+}

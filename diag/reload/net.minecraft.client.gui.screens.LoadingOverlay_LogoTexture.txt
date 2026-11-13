@@ -1,0 +1,58 @@
+Compiled from "LoadingOverlay.java"
+class net.minecraft.client.gui.screens.LoadingOverlay$LogoTexture extends net.minecraft.client.renderer.texture.ReloadableTexture {
+  public net.minecraft.client.gui.screens.LoadingOverlay$LogoTexture();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field net/minecraft/client/gui/screens/LoadingOverlay.MOJANG_STUDIOS_LOGO_LOCATION:Lnet/minecraft/resources/Identifier;
+       4: invokespecial #7                  // Method net/minecraft/client/renderer/texture/ReloadableTexture."<init>":(Lnet/minecraft/resources/Identifier;)V
+       7: return
+
+  public net.minecraft.client.renderer.texture.TextureContents loadContents(net.minecraft.server.packs.resources.ResourceManager) throws java.io.IOException;
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)Lnet/minecraft/client/renderer/texture/TextureContents;
+    Code:
+       0: invokestatic  #13                 // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       3: invokevirtual #19                 // Method net/minecraft/client/Minecraft.getVanillaPackResources:()Lnet/minecraft/server/packs/VanillaPackResources;
+       6: invokevirtual #23                 // Method net/minecraft/server/packs/VanillaPackResources.asProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+       9: astore_2
+      10: aload_2
+      11: getstatic     #1                  // Field net/minecraft/client/gui/screens/LoadingOverlay.MOJANG_STUDIOS_LOGO_LOCATION:Lnet/minecraft/resources/Identifier;
+      14: invokeinterface #29,  2           // InterfaceMethod net/minecraft/server/packs/resources/ResourceProvider.open:(Lnet/minecraft/resources/Identifier;)Ljava/io/InputStream;
+      19: astore        4
+      21: new           #35                 // class net/minecraft/client/renderer/texture/TextureContents
+      24: dup
+      25: aload         4
+      27: invokestatic  #37                 // Method com/mojang/blaze3d/platform/NativeImage.read:(Ljava/io/InputStream;)Lcom/mojang/blaze3d/platform/NativeImage;
+      30: new           #43                 // class net/minecraft/client/resources/metadata/texture/TextureMetadataSection
+      33: dup
+      34: iconst_1
+      35: iconst_1
+      36: getstatic     #45                 // Field net/minecraft/client/renderer/texture/MipmapStrategy.MEAN:Lnet/minecraft/client/renderer/texture/MipmapStrategy;
+      39: fconst_0
+      40: invokespecial #51                 // Method net/minecraft/client/resources/metadata/texture/TextureMetadataSection."<init>":(ZZLnet/minecraft/client/renderer/texture/MipmapStrategy;F)V
+      43: invokespecial #54                 // Method net/minecraft/client/renderer/texture/TextureContents."<init>":(Lcom/mojang/blaze3d/platform/NativeImage;Lnet/minecraft/client/resources/metadata/texture/TextureMetadataSection;)V
+      46: astore_3
+      47: aload         4
+      49: ifnull        87
+      52: aload         4
+      54: invokevirtual #57                 // Method java/io/InputStream.close:()V
+      57: goto          87
+      60: astore        5
+      62: aload         4
+      64: ifnull        84
+      67: aload         4
+      69: invokevirtual #57                 // Method java/io/InputStream.close:()V
+      72: goto          84
+      75: astore        6
+      77: aload         5
+      79: aload         6
+      81: invokevirtual #65                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+      84: aload         5
+      86: athrow
+      87: aload_3
+      88: areturn
+    Exception table:
+       from    to  target type
+          21    47    60   Class java/lang/Throwable
+          67    72    75   Class java/lang/Throwable
+}

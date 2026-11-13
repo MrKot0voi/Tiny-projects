@@ -1,0 +1,103 @@
+Compiled from "PlayerTabOverlay.java"
+class net.minecraft.client.gui.components.PlayerTabOverlay$HealthState {
+  private static final long DISPLAY_UPDATE_DELAY;
+    descriptor: J
+
+  private static final long DECREASE_BLINK_DURATION;
+    descriptor: J
+
+  private static final long INCREASE_BLINK_DURATION;
+    descriptor: J
+
+  private int lastValue;
+    descriptor: I
+
+  private int displayedValue;
+    descriptor: I
+
+  private long lastUpdateTick;
+    descriptor: J
+
+  private long blinkUntilTick;
+    descriptor: J
+
+  public net.minecraft.client.gui.components.PlayerTabOverlay$HealthState(int);
+    descriptor: (I)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #7                  // Field displayedValue:I
+       9: aload_0
+      10: iload_1
+      11: putfield      #13                 // Field lastValue:I
+      14: return
+
+  public void update(int, long);
+    descriptor: (IJ)V
+    Code:
+       0: iload_1
+       1: aload_0
+       2: getfield      #13                 // Field lastValue:I
+       5: if_icmpeq     45
+       8: iload_1
+       9: aload_0
+      10: getfield      #13                 // Field lastValue:I
+      13: if_icmpge     22
+      16: ldc2_w        #16                 // long 20l
+      19: goto          25
+      22: ldc2_w        #18                 // long 10l
+      25: lstore        4
+      27: aload_0
+      28: lload_2
+      29: lload         4
+      31: ladd
+      32: putfield      #20                 // Field blinkUntilTick:J
+      35: aload_0
+      36: iload_1
+      37: putfield      #13                 // Field lastValue:I
+      40: aload_0
+      41: lload_2
+      42: putfield      #24                 // Field lastUpdateTick:J
+      45: lload_2
+      46: aload_0
+      47: getfield      #24                 // Field lastUpdateTick:J
+      50: lsub
+      51: ldc2_w        #16                 // long 20l
+      54: lcmp
+      55: ifle          63
+      58: aload_0
+      59: iload_1
+      60: putfield      #7                  // Field displayedValue:I
+      63: return
+
+  public int displayedValue();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field displayedValue:I
+       4: ireturn
+
+  public boolean isBlinking(long);
+    descriptor: (J)Z
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field blinkUntilTick:J
+       4: lload_1
+       5: lcmp
+       6: ifle          30
+       9: aload_0
+      10: getfield      #20                 // Field blinkUntilTick:J
+      13: lload_1
+      14: lsub
+      15: ldc2_w        #27                 // long 6l
+      18: lrem
+      19: ldc2_w        #29                 // long 3l
+      22: lcmp
+      23: iflt          30
+      26: iconst_1
+      27: goto          31
+      30: iconst_0
+      31: ireturn
+}

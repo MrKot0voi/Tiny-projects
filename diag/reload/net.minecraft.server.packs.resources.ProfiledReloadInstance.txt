@@ -1,0 +1,290 @@
+Compiled from "ProfiledReloadInstance.java"
+public class net.minecraft.server.packs.resources.ProfiledReloadInstance extends net.minecraft.server.packs.resources.SimpleReloadInstance<net.minecraft.server.packs.resources.ProfiledReloadInstance$State> {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  private final com.google.common.base.Stopwatch total;
+    descriptor: Lcom/google/common/base/Stopwatch;
+
+  public static net.minecraft.server.packs.resources.ReloadInstance of(net.minecraft.server.packs.resources.ResourceManager, java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener>, java.util.concurrent.Executor, java.util.concurrent.Executor, java.util.concurrent.CompletableFuture<net.minecraft.util.Unit>);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;)Lnet/minecraft/server/packs/resources/ReloadInstance;
+    Code:
+       0: new           #1                  // class net/minecraft/server/packs/resources/ProfiledReloadInstance
+       3: dup
+       4: aload_1
+       5: invokespecial #3                  // Method "<init>":(Ljava/util/List;)V
+       8: astore        5
+      10: aload         5
+      12: aload_2
+      13: aload_3
+      14: aload_0
+      15: aload_1
+      16: aload_3
+      17: invokedynamic #7,  0              // InvokeDynamic #0:create:(Ljava/util/concurrent/Executor;)Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;
+      22: aload         4
+      24: invokevirtual #11                 // Method startTasks:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;Ljava/util/concurrent/CompletableFuture;)V
+      27: aload         5
+      29: areturn
+
+  private net.minecraft.server.packs.resources.ProfiledReloadInstance(java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener>);
+    descriptor: (Ljava/util/List;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #15                 // Method net/minecraft/server/packs/resources/SimpleReloadInstance."<init>":(Ljava/util/List;)V
+       5: aload_0
+       6: invokestatic  #18                 // Method com/google/common/base/Stopwatch.createUnstarted:()Lcom/google/common/base/Stopwatch;
+       9: putfield      #24                 // Field total:Lcom/google/common/base/Stopwatch;
+      12: aload_0
+      13: getfield      #24                 // Field total:Lcom/google/common/base/Stopwatch;
+      16: invokevirtual #28                 // Method com/google/common/base/Stopwatch.start:()Lcom/google/common/base/Stopwatch;
+      19: pop
+      20: return
+
+  protected java.util.concurrent.CompletableFuture<java.util.List<net.minecraft.server.packs.resources.ProfiledReloadInstance$State>> prepareTasks(java.util.concurrent.Executor, java.util.concurrent.Executor, net.minecraft.server.packs.resources.ResourceManager, java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener>, net.minecraft.server.packs.resources.SimpleReloadInstance$StateFactory<net.minecraft.server.packs.resources.ProfiledReloadInstance$State>, java.util.concurrent.CompletableFuture<?>);
+    descriptor: (Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: aload         5
+       8: aload         6
+      10: invokespecial #31                 // Method net/minecraft/server/packs/resources/SimpleReloadInstance.prepareTasks:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletableFuture;
+      13: aload_0
+      14: invokedynamic #35,  0             // InvokeDynamic #1:apply:(Lnet/minecraft/server/packs/resources/ProfiledReloadInstance;)Ljava/util/function/Function;
+      19: aload_2
+      20: invokevirtual #39                 // Method java/util/concurrent/CompletableFuture.thenApplyAsync:(Ljava/util/function/Function;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      23: areturn
+
+  private static java.util.concurrent.Executor profiledExecutor(java.util.concurrent.Executor, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.lang.String);
+    descriptor: (Ljava/util/concurrent/Executor;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/lang/String;)Ljava/util/concurrent/Executor;
+    Code:
+       0: aload_0
+       1: aload_3
+       2: aload_1
+       3: aload_2
+       4: invokedynamic #45,  0             // InvokeDynamic #2:execute:(Ljava/util/concurrent/Executor;Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)Ljava/util/concurrent/Executor;
+       9: areturn
+
+  private java.util.List<net.minecraft.server.packs.resources.ProfiledReloadInstance$State> finish(java.util.List<net.minecraft.server.packs.resources.ProfiledReloadInstance$State>);
+    descriptor: (Ljava/util/List;)Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field total:Lcom/google/common/base/Stopwatch;
+       4: invokevirtual #49                 // Method com/google/common/base/Stopwatch.stop:()Lcom/google/common/base/Stopwatch;
+       7: pop
+       8: lconst_0
+       9: lstore_2
+      10: getstatic     #52                 // Field LOGGER:Lorg/slf4j/Logger;
+      13: ldc           #56                 // String Resource reload finished after {} ms
+      15: aload_0
+      16: getfield      #24                 // Field total:Lcom/google/common/base/Stopwatch;
+      19: getstatic     #58                 // Field java/util/concurrent/TimeUnit.MILLISECONDS:Ljava/util/concurrent/TimeUnit;
+      22: invokevirtual #64                 // Method com/google/common/base/Stopwatch.elapsed:(Ljava/util/concurrent/TimeUnit;)J
+      25: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+      28: invokeinterface #74,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+      33: aload_1
+      34: invokeinterface #80,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      39: astore        4
+      41: aload         4
+      43: invokeinterface #86,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      48: ifeq          213
+      51: aload         4
+      53: invokeinterface #92,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      58: checkcast     #96                 // class net/minecraft/server/packs/resources/ProfiledReloadInstance$State
+      61: astore        5
+      63: getstatic     #98                 // Field java/util/concurrent/TimeUnit.NANOSECONDS:Ljava/util/concurrent/TimeUnit;
+      66: aload         5
+      68: getfield      #101                // Field net/minecraft/server/packs/resources/ProfiledReloadInstance$State.preparationNanos:Ljava/util/concurrent/atomic/AtomicLong;
+      71: invokevirtual #105                // Method java/util/concurrent/atomic/AtomicLong.get:()J
+      74: invokevirtual #111                // Method java/util/concurrent/TimeUnit.toMillis:(J)J
+      77: lstore        6
+      79: aload         5
+      81: getfield      #115                // Field net/minecraft/server/packs/resources/ProfiledReloadInstance$State.preparationCount:Ljava/util/concurrent/atomic/AtomicLong;
+      84: invokevirtual #105                // Method java/util/concurrent/atomic/AtomicLong.get:()J
+      87: lstore        8
+      89: getstatic     #98                 // Field java/util/concurrent/TimeUnit.NANOSECONDS:Ljava/util/concurrent/TimeUnit;
+      92: aload         5
+      94: getfield      #118                // Field net/minecraft/server/packs/resources/ProfiledReloadInstance$State.reloadNanos:Ljava/util/concurrent/atomic/AtomicLong;
+      97: invokevirtual #105                // Method java/util/concurrent/atomic/AtomicLong.get:()J
+     100: invokevirtual #111                // Method java/util/concurrent/TimeUnit.toMillis:(J)J
+     103: lstore        10
+     105: aload         5
+     107: getfield      #121                // Field net/minecraft/server/packs/resources/ProfiledReloadInstance$State.reloadCount:Ljava/util/concurrent/atomic/AtomicLong;
+     110: invokevirtual #105                // Method java/util/concurrent/atomic/AtomicLong.get:()J
+     113: lstore        12
+     115: lload         6
+     117: lload         10
+     119: ladd
+     120: lstore        14
+     122: lload         8
+     124: lload         12
+     126: ladd
+     127: lstore        16
+     129: aload         5
+     131: getfield      #124                // Field net/minecraft/server/packs/resources/ProfiledReloadInstance$State.name:Ljava/lang/String;
+     134: astore        18
+     136: getstatic     #52                 // Field LOGGER:Lorg/slf4j/Logger;
+     139: ldc           #128                // String {} took approximately {} tasks/{} ms ({} tasks/{} ms preparing, {} tasks/{} ms applying)
+     141: bipush        7
+     143: anewarray     #130                // class java/lang/Object
+     146: dup
+     147: iconst_0
+     148: aload         18
+     150: aastore
+     151: dup
+     152: iconst_1
+     153: lload         16
+     155: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     158: aastore
+     159: dup
+     160: iconst_2
+     161: lload         14
+     163: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     166: aastore
+     167: dup
+     168: iconst_3
+     169: lload         8
+     171: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     174: aastore
+     175: dup
+     176: iconst_4
+     177: lload         6
+     179: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     182: aastore
+     183: dup
+     184: iconst_5
+     185: lload         12
+     187: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     190: aastore
+     191: dup
+     192: bipush        6
+     194: lload         10
+     196: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     199: aastore
+     200: invokeinterface #132,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+     205: lload_2
+     206: lload         10
+     208: ladd
+     209: lstore_2
+     210: goto          41
+     213: getstatic     #52                 // Field LOGGER:Lorg/slf4j/Logger;
+     216: ldc           #135                // String Total blocking time: {} ms
+     218: lload_2
+     219: invokestatic  #68                 // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+     222: invokeinterface #74,  3           // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;Ljava/lang/Object;)V
+     227: aload_1
+     228: areturn
+
+  private static void lambda$profiledExecutor$3(java.util.concurrent.Executor, java.lang.String, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.lang.Runnable);
+    descriptor: (Ljava/util/concurrent/Executor;Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/lang/Runnable;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload         4
+       4: aload_2
+       5: aload_3
+       6: invokedynamic #137,  0            // InvokeDynamic #3:run:(Ljava/lang/String;Ljava/lang/Runnable;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)Ljava/lang/Runnable;
+      11: invokeinterface #141,  2          // InterfaceMethod java/util/concurrent/Executor.execute:(Ljava/lang/Runnable;)V
+      16: return
+
+  private static void lambda$profiledExecutor$2(java.lang.String, java.lang.Runnable, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong);
+    descriptor: (Ljava/lang/String;Ljava/lang/Runnable;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)V
+    Code:
+       0: invokestatic  #146                // Method net/minecraft/util/profiling/Profiler.get:()Lnet/minecraft/util/profiling/ProfilerFiller;
+       3: astore        4
+       5: aload         4
+       7: aload_0
+       8: invokeinterface #151,  2          // InterfaceMethod net/minecraft/util/profiling/ProfilerFiller.push:(Ljava/lang/String;)V
+      13: invokestatic  #157                // Method net/minecraft/util/Util.getNanos:()J
+      16: lstore        5
+      18: aload_1
+      19: invokeinterface #162,  1          // InterfaceMethod java/lang/Runnable.run:()V
+      24: aload_2
+      25: invokestatic  #157                // Method net/minecraft/util/Util.getNanos:()J
+      28: lload         5
+      30: lsub
+      31: invokevirtual #167                // Method java/util/concurrent/atomic/AtomicLong.addAndGet:(J)J
+      34: pop2
+      35: aload_3
+      36: invokevirtual #170                // Method java/util/concurrent/atomic/AtomicLong.incrementAndGet:()J
+      39: pop2
+      40: aload         4
+      42: invokeinterface #173,  1          // InterfaceMethod net/minecraft/util/profiling/ProfilerFiller.pop:()V
+      47: return
+
+  private static java.util.concurrent.CompletableFuture lambda$of$1(java.util.concurrent.Executor, net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, net.minecraft.server.packs.resources.PreparableReloadListener, java.util.concurrent.Executor, java.util.concurrent.Executor);
+    descriptor: (Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: new           #106                // class java/util/concurrent/atomic/AtomicLong
+       3: dup
+       4: invokespecial #176                // Method java/util/concurrent/atomic/AtomicLong."<init>":()V
+       7: astore        6
+       9: new           #106                // class java/util/concurrent/atomic/AtomicLong
+      12: dup
+      13: invokespecial #176                // Method java/util/concurrent/atomic/AtomicLong."<init>":()V
+      16: astore        7
+      18: new           #106                // class java/util/concurrent/atomic/AtomicLong
+      21: dup
+      22: invokespecial #176                // Method java/util/concurrent/atomic/AtomicLong."<init>":()V
+      25: astore        8
+      27: new           #106                // class java/util/concurrent/atomic/AtomicLong
+      30: dup
+      31: invokespecial #176                // Method java/util/concurrent/atomic/AtomicLong."<init>":()V
+      34: astore        9
+      36: aload_3
+      37: aload_1
+      38: aload         4
+      40: aload         6
+      42: aload         7
+      44: aload_3
+      45: invokeinterface #178,  1          // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.getName:()Ljava/lang/String;
+      50: invokestatic  #184                // Method profiledExecutor:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/lang/String;)Ljava/util/concurrent/Executor;
+      53: aload_2
+      54: aload         5
+      56: aload         8
+      58: aload         9
+      60: aload_3
+      61: invokeinterface #178,  1          // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.getName:()Ljava/lang/String;
+      66: invokestatic  #184                // Method profiledExecutor:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/lang/String;)Ljava/util/concurrent/Executor;
+      69: invokeinterface #188,  5          // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.reload:(Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      74: astore        10
+      76: aload         10
+      78: aload_3
+      79: aload         6
+      81: aload         7
+      83: aload         8
+      85: aload         9
+      87: invokedynamic #192,  0            // InvokeDynamic #4:apply:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)Ljava/util/function/Function;
+      92: aload_0
+      93: invokevirtual #39                 // Method java/util/concurrent/CompletableFuture.thenApplyAsync:(Ljava/util/function/Function;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      96: areturn
+
+  private static net.minecraft.server.packs.resources.ProfiledReloadInstance$State lambda$of$0(net.minecraft.server.packs.resources.PreparableReloadListener, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.lang.Void);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/lang/Void;)Lnet/minecraft/server/packs/resources/ProfiledReloadInstance$State;
+    Code:
+       0: getstatic     #52                 // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc           #195                // String Finished reloading {}
+       5: aload_0
+       6: invokeinterface #178,  1          // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.getName:()Ljava/lang/String;
+      11: invokeinterface #197,  3          // InterfaceMethod org/slf4j/Logger.debug:(Ljava/lang/String;Ljava/lang/Object;)V
+      16: new           #96                 // class net/minecraft/server/packs/resources/ProfiledReloadInstance$State
+      19: dup
+      20: aload_0
+      21: invokeinterface #178,  1          // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.getName:()Ljava/lang/String;
+      26: aload_1
+      27: aload_2
+      28: aload_3
+      29: aload         4
+      31: invokespecial #200                // Method net/minecraft/server/packs/resources/ProfiledReloadInstance$State."<init>":(Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)V
+      34: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #203                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #52                 // Field LOGGER:Lorg/slf4j/Logger;
+       6: return
+}

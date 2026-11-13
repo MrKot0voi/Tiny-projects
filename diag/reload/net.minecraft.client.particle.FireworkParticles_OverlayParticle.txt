@@ -1,0 +1,68 @@
+Compiled from "FireworkParticles.java"
+public class net.minecraft.client.particle.FireworkParticles$OverlayParticle extends net.minecraft.client.particle.SingleQuadParticle {
+  public net.minecraft.client.particle.FireworkParticles$OverlayParticle(net.minecraft.client.multiplayer.ClientLevel, double, double, double, net.minecraft.client.renderer.texture.TextureAtlasSprite);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: dload_2
+       3: dload         4
+       5: dload         6
+       7: aload         8
+       9: invokespecial #1                  // Method net/minecraft/client/particle/SingleQuadParticle."<init>":(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+      12: aload_0
+      13: iconst_4
+      14: putfield      #7                  // Field lifetime:I
+      17: return
+
+  public net.minecraft.client.particle.SingleQuadParticle$Layer getLayer();
+    descriptor: ()Lnet/minecraft/client/particle/SingleQuadParticle$Layer;
+    Code:
+       0: getstatic     #13                 // Field net/minecraft/client/particle/SingleQuadParticle$Layer.TRANSLUCENT:Lnet/minecraft/client/particle/SingleQuadParticle$Layer;
+       3: areturn
+
+  public void extract(net.minecraft.client.renderer.state.QuadParticleRenderState, net.minecraft.client.Camera, float);
+    descriptor: (Lnet/minecraft/client/renderer/state/QuadParticleRenderState;Lnet/minecraft/client/Camera;F)V
+    Code:
+       0: aload_0
+       1: ldc           #19                 // float 0.6f
+       3: aload_0
+       4: getfield      #20                 // Field age:I
+       7: i2f
+       8: fload_3
+       9: fadd
+      10: fconst_1
+      11: fsub
+      12: ldc           #23                 // float 0.25f
+      14: fmul
+      15: ldc           #24                 // float 0.5f
+      17: fmul
+      18: fsub
+      19: invokevirtual #25                 // Method setAlpha:(F)V
+      22: aload_0
+      23: aload_1
+      24: aload_2
+      25: fload_3
+      26: invokespecial #29                 // Method net/minecraft/client/particle/SingleQuadParticle.extract:(Lnet/minecraft/client/renderer/state/QuadParticleRenderState;Lnet/minecraft/client/Camera;F)V
+      29: return
+
+  public float getQuadSize(float);
+    descriptor: (F)F
+    Code:
+       0: ldc           #33                 // float 7.1f
+       2: aload_0
+       3: getfield      #20                 // Field age:I
+       6: i2f
+       7: fload_1
+       8: fadd
+       9: fconst_1
+      10: fsub
+      11: ldc           #23                 // float 0.25f
+      13: fmul
+      14: ldc           #36                 // float 3.1415927f
+      16: fmul
+      17: f2d
+      18: invokestatic  #37                 // Method net/minecraft/util/Mth.sin:(D)F
+      21: fmul
+      22: freturn
+}

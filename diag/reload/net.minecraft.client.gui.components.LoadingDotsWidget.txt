@@ -1,0 +1,105 @@
+Compiled from "LoadingDotsWidget.java"
+public class net.minecraft.client.gui.components.LoadingDotsWidget extends net.minecraft.client.gui.components.AbstractWidget {
+  private final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+
+  public net.minecraft.client.gui.components.LoadingDotsWidget(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;)V
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: iconst_0
+       3: aload_1
+       4: aload_2
+       5: invokevirtual #1                  // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+       8: bipush        27
+      10: aload_2
+      11: invokespecial #7                  // Method net/minecraft/client/gui/components/AbstractWidget."<init>":(IIIILnet/minecraft/network/chat/Component;)V
+      14: aload_0
+      15: aload_1
+      16: putfield      #13                 // Field font:Lnet/minecraft/client/gui/Font;
+      19: return
+
+  protected void renderWidget(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+    Code:
+       0: aload_0
+       1: invokevirtual #19                 // Method getX:()I
+       4: aload_0
+       5: invokevirtual #23                 // Method getWidth:()I
+       8: iconst_2
+       9: idiv
+      10: iadd
+      11: istore        5
+      13: aload_0
+      14: invokevirtual #26                 // Method getY:()I
+      17: aload_0
+      18: invokevirtual #29                 // Method getHeight:()I
+      21: iconst_2
+      22: idiv
+      23: iadd
+      24: istore        6
+      26: aload_0
+      27: invokevirtual #32                 // Method getMessage:()Lnet/minecraft/network/chat/Component;
+      30: astore        7
+      32: aload_1
+      33: aload_0
+      34: getfield      #13                 // Field font:Lnet/minecraft/client/gui/Font;
+      37: aload         7
+      39: iload         5
+      41: aload_0
+      42: getfield      #13                 // Field font:Lnet/minecraft/client/gui/Font;
+      45: aload         7
+      47: invokevirtual #1                  // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+      50: iconst_2
+      51: idiv
+      52: isub
+      53: iload         6
+      55: bipush        9
+      57: isub
+      58: iconst_m1
+      59: invokevirtual #36                 // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+      62: invokestatic  #42                 // Method net/minecraft/util/Util.getMillis:()J
+      65: invokestatic  #48                 // Method net/minecraft/client/gui/screens/LoadingDotsText.get:(J)Ljava/lang/String;
+      68: astore        8
+      70: aload_1
+      71: aload_0
+      72: getfield      #13                 // Field font:Lnet/minecraft/client/gui/Font;
+      75: aload         8
+      77: iload         5
+      79: aload_0
+      80: getfield      #13                 // Field font:Lnet/minecraft/client/gui/Font;
+      83: aload         8
+      85: invokevirtual #54                 // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+      88: iconst_2
+      89: idiv
+      90: isub
+      91: iload         6
+      93: bipush        9
+      95: iadd
+      96: ldc           #57                 // int -8355712
+      98: invokevirtual #58                 // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+     101: return
+
+  protected void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+    Code:
+       0: return
+
+  public void playDownSound(net.minecraft.client.sounds.SoundManager);
+    descriptor: (Lnet/minecraft/client/sounds/SoundManager;)V
+    Code:
+       0: return
+
+  public boolean isActive();
+    descriptor: ()Z
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+    Code:
+       0: aconst_null
+       1: areturn
+}

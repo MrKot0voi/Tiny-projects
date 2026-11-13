@@ -1,0 +1,47 @@
+Compiled from "ReloadableServerRegistries.java"
+public class net.minecraft.server.ReloadableServerRegistries$Holder {
+  private final net.minecraft.core.HolderLookup$Provider registries;
+    descriptor: Lnet/minecraft/core/HolderLookup$Provider;
+
+  public net.minecraft.server.ReloadableServerRegistries$Holder(net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/core/HolderLookup$Provider;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field registries:Lnet/minecraft/core/HolderLookup$Provider;
+       9: return
+
+  public net.minecraft.core.HolderLookup$Provider lookup();
+    descriptor: ()Lnet/minecraft/core/HolderLookup$Provider;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field registries:Lnet/minecraft/core/HolderLookup$Provider;
+       4: areturn
+
+  public net.minecraft.world.level.storage.loot.LootTable getLootTable(net.minecraft.resources.ResourceKey<net.minecraft.world.level.storage.loot.LootTable>);
+    descriptor: (Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/world/level/storage/loot/LootTable;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field registries:Lnet/minecraft/core/HolderLookup$Provider;
+       4: getstatic     #13                 // Field net/minecraft/core/registries/Registries.LOOT_TABLE:Lnet/minecraft/resources/ResourceKey;
+       7: invokeinterface #19,  2           // InterfaceMethod net/minecraft/core/HolderLookup$Provider.lookup:(Lnet/minecraft/resources/ResourceKey;)Ljava/util/Optional;
+      12: aload_1
+      13: invokedynamic #25,  0             // InvokeDynamic #0:apply:(Lnet/minecraft/resources/ResourceKey;)Ljava/util/function/Function;
+      18: invokevirtual #29                 // Method java/util/Optional.flatMap:(Ljava/util/function/Function;)Ljava/util/Optional;
+      21: invokedynamic #35,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      26: invokevirtual #38                 // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+      29: getstatic     #41                 // Field net/minecraft/world/level/storage/loot/LootTable.EMPTY:Lnet/minecraft/world/level/storage/loot/LootTable;
+      32: invokevirtual #47                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      35: checkcast     #42                 // class net/minecraft/world/level/storage/loot/LootTable
+      38: areturn
+
+  private static java.util.Optional lambda$getLootTable$0(net.minecraft.resources.ResourceKey, net.minecraft.core.HolderLookup$RegistryLookup);
+    descriptor: (Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/core/HolderLookup$RegistryLookup;)Ljava/util/Optional;
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokeinterface #51,  2           // InterfaceMethod net/minecraft/core/HolderLookup$RegistryLookup.get:(Lnet/minecraft/resources/ResourceKey;)Ljava/util/Optional;
+       7: areturn
+}

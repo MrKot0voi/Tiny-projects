@@ -1,0 +1,110 @@
+Compiled from "DebugScreenOverlay.java"
+class net.minecraft.client.gui.components.DebugScreenOverlay$1 implements net.minecraft.client.gui.components.debug.DebugScreenDisplayer {
+  final java.util.List val$list2;
+    descriptor: Ljava/util/List;
+
+  final java.util.List val$list;
+    descriptor: Ljava/util/List;
+
+  final java.util.List val$list1;
+    descriptor: Ljava/util/List;
+
+  final java.util.Map val$map;
+    descriptor: Ljava/util/Map;
+
+  net.minecraft.client.gui.components.DebugScreenOverlay$1();
+    descriptor: (Lnet/minecraft/client/gui/components/DebugScreenOverlay;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/Map;)V
+    Code:
+       0: aload_0
+       1: aload_2
+       2: putfield      #1                  // Field val$list2:Ljava/util/List;
+       5: aload_0
+       6: aload_3
+       7: putfield      #7                  // Field val$list:Ljava/util/List;
+      10: aload_0
+      11: aload         4
+      13: putfield      #10                 // Field val$list1:Ljava/util/List;
+      16: aload_0
+      17: aload         5
+      19: putfield      #13                 // Field val$map:Ljava/util/Map;
+      22: aload_0
+      23: invokespecial #17                 // Method java/lang/Object."<init>":()V
+      26: return
+
+  public void addPriorityLine(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field val$list2:Ljava/util/List;
+       4: invokeinterface #23,  1           // InterfaceMethod java/util/List.size:()I
+       9: aload_0
+      10: getfield      #7                  // Field val$list:Ljava/util/List;
+      13: invokeinterface #23,  1           // InterfaceMethod java/util/List.size:()I
+      18: if_icmple     35
+      21: aload_0
+      22: getfield      #7                  // Field val$list:Ljava/util/List;
+      25: aload_1
+      26: invokeinterface #29,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      31: pop
+      32: goto          46
+      35: aload_0
+      36: getfield      #1                  // Field val$list2:Ljava/util/List;
+      39: aload_1
+      40: invokeinterface #29,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      45: pop
+      46: return
+
+  public void addLine(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field val$list1:Ljava/util/List;
+       4: aload_1
+       5: invokeinterface #29,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      10: pop
+      11: return
+
+  public void addToGroup(net.minecraft.resources.Identifier, java.util.Collection<java.lang.String>);
+    descriptor: (Lnet/minecraft/resources/Identifier;Ljava/util/Collection;)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field val$map:Ljava/util/Map;
+       4: aload_1
+       5: invokedynamic #33,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      10: invokeinterface #37,  3           // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      15: checkcast     #43                 // class java/util/Collection
+      18: aload_2
+      19: invokeinterface #45,  2           // InterfaceMethod java/util/Collection.addAll:(Ljava/util/Collection;)Z
+      24: pop
+      25: return
+
+  public void addToGroup(net.minecraft.resources.Identifier, java.lang.String);
+    descriptor: (Lnet/minecraft/resources/Identifier;Ljava/lang/String;)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field val$map:Ljava/util/Map;
+       4: aload_1
+       5: invokedynamic #49,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      10: invokeinterface #37,  3           // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      15: checkcast     #43                 // class java/util/Collection
+      18: aload_2
+      19: invokeinterface #50,  2           // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      24: pop
+      25: return
+
+  private static java.util.Collection lambda$addToGroup$1(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)Ljava/util/Collection;
+    Code:
+       0: new           #51                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #53                 // Method java/util/ArrayList."<init>":()V
+       7: areturn
+
+  private static java.util.Collection lambda$addToGroup$0(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)Ljava/util/Collection;
+    Code:
+       0: new           #51                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #53                 // Method java/util/ArrayList."<init>":()V
+       7: areturn
+}

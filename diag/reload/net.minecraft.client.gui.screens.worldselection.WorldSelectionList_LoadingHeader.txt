@@ -1,0 +1,98 @@
+Compiled from "WorldSelectionList.java"
+public class net.minecraft.client.gui.screens.worldselection.WorldSelectionList$LoadingHeader extends net.minecraft.client.gui.screens.worldselection.WorldSelectionList$Entry {
+  private static final net.minecraft.network.chat.Component LOADING_LABEL;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+
+  public net.minecraft.client.gui.screens.worldselection.WorldSelectionList$LoadingHeader(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/minecraft/client/gui/screens/worldselection/WorldSelectionList$Entry."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+       9: return
+
+  public void renderContent(net.minecraft.client.gui.GuiGraphics, int, int, boolean, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIZF)V
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+       4: getfield      #13                 // Field net/minecraft/client/Minecraft.screen:Lnet/minecraft/client/gui/screens/Screen;
+       7: getfield      #19                 // Field net/minecraft/client/gui/screens/Screen.width:I
+      10: aload_0
+      11: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+      14: getfield      #25                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      17: getstatic     #29                 // Field LOADING_LABEL:Lnet/minecraft/network/chat/Component;
+      20: invokevirtual #33                 // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+      23: isub
+      24: iconst_2
+      25: idiv
+      26: istore        6
+      28: aload_0
+      29: invokevirtual #38                 // Method getContentY:()I
+      32: aload_0
+      33: invokevirtual #42                 // Method getContentHeight:()I
+      36: bipush        9
+      38: isub
+      39: iconst_2
+      40: idiv
+      41: iadd
+      42: istore        7
+      44: aload_1
+      45: aload_0
+      46: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+      49: getfield      #25                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      52: getstatic     #29                 // Field LOADING_LABEL:Lnet/minecraft/network/chat/Component;
+      55: iload         6
+      57: iload         7
+      59: iconst_m1
+      60: invokevirtual #45                 // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+      63: invokestatic  #51                 // Method net/minecraft/util/Util.getMillis:()J
+      66: invokestatic  #57                 // Method net/minecraft/client/gui/screens/LoadingDotsText.get:(J)Ljava/lang/String;
+      69: astore        8
+      71: aload_0
+      72: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+      75: getfield      #13                 // Field net/minecraft/client/Minecraft.screen:Lnet/minecraft/client/gui/screens/Screen;
+      78: getfield      #19                 // Field net/minecraft/client/gui/screens/Screen.width:I
+      81: aload_0
+      82: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+      85: getfield      #25                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      88: aload         8
+      90: invokevirtual #63                 // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+      93: isub
+      94: iconst_2
+      95: idiv
+      96: istore        9
+      98: iload         7
+     100: bipush        9
+     102: iadd
+     103: istore        10
+     105: aload_1
+     106: aload_0
+     107: getfield      #7                  // Field minecraft:Lnet/minecraft/client/Minecraft;
+     110: getfield      #25                 // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     113: aload         8
+     115: iload         9
+     117: iload         10
+     119: ldc           #66                 // int -8355712
+     121: invokevirtual #67                 // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+     124: return
+
+  public net.minecraft.network.chat.Component getNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+       0: getstatic     #29                 // Field LOADING_LABEL:Lnet/minecraft/network/chat/Component;
+       3: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc           #70                 // String selectWorld.loading_list
+       2: invokestatic  #72                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       5: putstatic     #29                 // Field LOADING_LABEL:Lnet/minecraft/network/chat/Component;
+       8: return
+}

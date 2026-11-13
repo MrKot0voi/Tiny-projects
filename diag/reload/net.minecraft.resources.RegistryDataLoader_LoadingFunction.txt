@@ -1,0 +1,5 @@
+Compiled from "RegistryDataLoader.java"
+interface net.minecraft.resources.RegistryDataLoader$LoadingFunction {
+  public abstract void apply(net.minecraft.resources.RegistryDataLoader$Loader<?>, net.minecraft.resources.RegistryOps$RegistryInfoLookup);
+    descriptor: (Lnet/minecraft/resources/RegistryDataLoader$Loader;Lnet/minecraft/resources/RegistryOps$RegistryInfoLookup;)V
+}

@@ -1,0 +1,295 @@
+Compiled from "ReloadableServerResources.java"
+public class net.minecraft.server.ReloadableServerResources {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  private static final java.util.concurrent.CompletableFuture<net.minecraft.util.Unit> DATA_RELOAD_INITIAL_TASK;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
+
+  private final net.minecraft.server.ReloadableServerRegistries$Holder fullRegistryHolder;
+    descriptor: Lnet/minecraft/server/ReloadableServerRegistries$Holder;
+
+  private final net.minecraft.commands.Commands commands;
+    descriptor: Lnet/minecraft/commands/Commands;
+
+  private final net.minecraft.world.item.crafting.RecipeManager recipes;
+    descriptor: Lnet/minecraft/world/item/crafting/RecipeManager;
+
+  private final net.minecraft.server.ServerAdvancementManager advancements;
+    descriptor: Lnet/minecraft/server/ServerAdvancementManager;
+
+  private final net.minecraft.server.ServerFunctionLibrary functionLibrary;
+    descriptor: Lnet/minecraft/server/ServerFunctionLibrary;
+
+  private final java.util.List<net.minecraft.core.Registry$PendingTags<?>> postponedTags;
+    descriptor: Ljava/util/List;
+
+  private final net.minecraft.core.HolderLookup$Provider registryLookup;
+    descriptor: Lnet/minecraft/core/HolderLookup$Provider;
+
+  private final net.neoforged.neoforge.common.conditions.ConditionContext context;
+    descriptor: Lnet/neoforged/neoforge/common/conditions/ConditionContext;
+
+  private net.minecraft.server.ReloadableServerResources(net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, net.minecraft.core.HolderLookup$Provider, net.minecraft.world.flag.FeatureFlagSet, net.minecraft.commands.Commands$CommandSelection, java.util.List<net.minecraft.core.Registry$PendingTags<?>>, net.minecraft.server.permissions.PermissionSet);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/world/flag/FeatureFlagSet;Lnet/minecraft/commands/Commands$CommandSelection;Ljava/util/List;Lnet/minecraft/server/permissions/PermissionSet;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #7                  // class net/minecraft/server/ReloadableServerRegistries$Holder
+       8: dup
+       9: aload_1
+      10: invokevirtual #9                  // Method net/minecraft/core/LayeredRegistryAccess.compositeAccess:()Lnet/minecraft/core/RegistryAccess$Frozen;
+      13: invokespecial #15                 // Method net/minecraft/server/ReloadableServerRegistries$Holder."<init>":(Lnet/minecraft/core/HolderLookup$Provider;)V
+      16: putfield      #18                 // Field fullRegistryHolder:Lnet/minecraft/server/ReloadableServerRegistries$Holder;
+      19: aload_0
+      20: aload         5
+      22: putfield      #24                 // Field postponedTags:Ljava/util/List;
+      25: aload_0
+      26: new           #28                 // class net/minecraft/world/item/crafting/RecipeManager
+      29: dup
+      30: aload_2
+      31: invokespecial #30                 // Method net/minecraft/world/item/crafting/RecipeManager."<init>":(Lnet/minecraft/core/HolderLookup$Provider;)V
+      34: putfield      #31                 // Field recipes:Lnet/minecraft/world/item/crafting/RecipeManager;
+      37: aload_0
+      38: new           #35                 // class net/minecraft/commands/Commands
+      41: dup
+      42: aload         4
+      44: aload_2
+      45: aload_3
+      46: invokestatic  #37                 // InterfaceMethod net/minecraft/commands/CommandBuildContext.simple:(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/world/flag/FeatureFlagSet;)Lnet/minecraft/commands/CommandBuildContext;
+      49: invokespecial #43                 // Method net/minecraft/commands/Commands."<init>":(Lnet/minecraft/commands/Commands$CommandSelection;Lnet/minecraft/commands/CommandBuildContext;)V
+      52: putfield      #46                 // Field commands:Lnet/minecraft/commands/Commands;
+      55: aload_0
+      56: new           #50                 // class net/minecraft/server/ServerAdvancementManager
+      59: dup
+      60: aload_2
+      61: invokespecial #52                 // Method net/minecraft/server/ServerAdvancementManager."<init>":(Lnet/minecraft/core/HolderLookup$Provider;)V
+      64: putfield      #53                 // Field advancements:Lnet/minecraft/server/ServerAdvancementManager;
+      67: aload_0
+      68: new           #57                 // class net/minecraft/server/ServerFunctionLibrary
+      71: dup
+      72: aload         6
+      74: aload_0
+      75: getfield      #46                 // Field commands:Lnet/minecraft/commands/Commands;
+      78: invokevirtual #59                 // Method net/minecraft/commands/Commands.getDispatcher:()Lcom/mojang/brigadier/CommandDispatcher;
+      81: invokespecial #63                 // Method net/minecraft/server/ServerFunctionLibrary."<init>":(Lnet/minecraft/server/permissions/PermissionSet;Lcom/mojang/brigadier/CommandDispatcher;)V
+      84: putfield      #66                 // Field functionLibrary:Lnet/minecraft/server/ServerFunctionLibrary;
+      87: aload_0
+      88: aload_2
+      89: putfield      #70                 // Field registryLookup:Lnet/minecraft/core/HolderLookup$Provider;
+      92: aload_0
+      93: new           #74                 // class net/neoforged/neoforge/common/conditions/ConditionContext
+      96: dup
+      97: aload_0
+      98: getfield      #24                 // Field postponedTags:Ljava/util/List;
+     101: aload_1
+     102: invokevirtual #9                  // Method net/minecraft/core/LayeredRegistryAccess.compositeAccess:()Lnet/minecraft/core/RegistryAccess$Frozen;
+     105: aload_3
+     106: invokespecial #76                 // Method net/neoforged/neoforge/common/conditions/ConditionContext."<init>":(Ljava/util/List;Lnet/minecraft/core/RegistryAccess;Lnet/minecraft/world/flag/FeatureFlagSet;)V
+     109: putfield      #79                 // Field context:Lnet/neoforged/neoforge/common/conditions/ConditionContext;
+     112: return
+
+  public net.minecraft.server.ServerFunctionLibrary getFunctionLibrary();
+    descriptor: ()Lnet/minecraft/server/ServerFunctionLibrary;
+    Code:
+       0: aload_0
+       1: getfield      #66                 // Field functionLibrary:Lnet/minecraft/server/ServerFunctionLibrary;
+       4: areturn
+
+  public net.minecraft.server.ReloadableServerRegistries$Holder fullRegistries();
+    descriptor: ()Lnet/minecraft/server/ReloadableServerRegistries$Holder;
+    Code:
+       0: aload_0
+       1: getfield      #18                 // Field fullRegistryHolder:Lnet/minecraft/server/ReloadableServerRegistries$Holder;
+       4: areturn
+
+  public net.minecraft.world.item.crafting.RecipeManager getRecipeManager();
+    descriptor: ()Lnet/minecraft/world/item/crafting/RecipeManager;
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field recipes:Lnet/minecraft/world/item/crafting/RecipeManager;
+       4: areturn
+
+  public net.minecraft.commands.Commands getCommands();
+    descriptor: ()Lnet/minecraft/commands/Commands;
+    Code:
+       0: aload_0
+       1: getfield      #46                 // Field commands:Lnet/minecraft/commands/Commands;
+       4: areturn
+
+  public net.minecraft.server.ServerAdvancementManager getAdvancements();
+    descriptor: ()Lnet/minecraft/server/ServerAdvancementManager;
+    Code:
+       0: aload_0
+       1: getfield      #53                 // Field advancements:Lnet/minecraft/server/ServerAdvancementManager;
+       4: areturn
+
+  public java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener> listeners();
+    descriptor: ()Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field recipes:Lnet/minecraft/world/item/crafting/RecipeManager;
+       4: aload_0
+       5: getfield      #66                 // Field functionLibrary:Lnet/minecraft/server/ServerFunctionLibrary;
+       8: aload_0
+       9: getfield      #53                 // Field advancements:Lnet/minecraft/server/ServerAdvancementManager;
+      12: invokestatic  #83                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      15: areturn
+
+  public net.neoforged.neoforge.common.conditions.ICondition$IContext getConditionContext();
+    descriptor: ()Lnet/neoforged/neoforge/common/conditions/ICondition$IContext;
+    Code:
+       0: aload_0
+       1: getfield      #79                 // Field context:Lnet/neoforged/neoforge/common/conditions/ConditionContext;
+       4: areturn
+
+  public net.minecraft.core.HolderLookup$Provider getRegistryLookup();
+    descriptor: ()Lnet/minecraft/core/HolderLookup$Provider;
+    Code:
+       0: aload_0
+       1: getfield      #70                 // Field registryLookup:Lnet/minecraft/core/HolderLookup$Provider;
+       4: areturn
+
+  public static java.util.concurrent.CompletableFuture<net.minecraft.server.ReloadableServerResources> loadResources(net.minecraft.server.packs.resources.ResourceManager, net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, java.util.List<net.minecraft.core.Registry$PendingTags<?>>, net.minecraft.world.flag.FeatureFlagSet, net.minecraft.commands.Commands$CommandSelection, net.minecraft.server.permissions.PermissionSet, java.util.concurrent.Executor, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/core/LayeredRegistryAccess;Ljava/util/List;Lnet/minecraft/world/flag/FeatureFlagSet;Lnet/minecraft/commands/Commands$CommandSelection;Lnet/minecraft/server/permissions/PermissionSet;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_1
+       1: aload_2
+       2: aload_0
+       3: aload         6
+       5: invokestatic  #89                 // Method net/minecraft/server/ReloadableServerRegistries.reload:(Lnet/minecraft/core/LayeredRegistryAccess;Ljava/util/List;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+       8: aload_3
+       9: aload         4
+      11: aload_2
+      12: aload         5
+      14: aload_0
+      15: aload         6
+      17: aload         7
+      19: invokedynamic #95,  0             // InvokeDynamic #0:apply:(Lnet/minecraft/world/flag/FeatureFlagSet;Lnet/minecraft/commands/Commands$CommandSelection;Ljava/util/List;Lnet/minecraft/server/permissions/PermissionSet;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/function/Function;
+      24: invokevirtual #99                 // Method java/util/concurrent/CompletableFuture.thenCompose:(Ljava/util/function/Function;)Ljava/util/concurrent/CompletableFuture;
+      27: areturn
+
+  public void updateStaticRegistryTags();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field postponedTags:Ljava/util/List;
+       4: invokedynamic #105,  0            // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+       9: invokeinterface #109,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      14: getstatic     #113                // Field net/neoforged/neoforge/common/NeoForge.EVENT_BUS:Lnet/neoforged/bus/api/IEventBus;
+      17: new           #119                // class net/neoforged/neoforge/event/TagsUpdatedEvent
+      20: dup
+      21: aload_0
+      22: getfield      #70                 // Field registryLookup:Lnet/minecraft/core/HolderLookup$Provider;
+      25: iconst_0
+      26: iconst_0
+      27: invokespecial #121                // Method net/neoforged/neoforge/event/TagsUpdatedEvent."<init>":(Lnet/minecraft/core/HolderLookup$Provider;ZZ)V
+      30: invokeinterface #124,  2          // InterfaceMethod net/neoforged/bus/api/IEventBus.post:(Lnet/neoforged/bus/api/Event;)Lnet/neoforged/bus/api/Event;
+      35: pop
+      36: return
+
+  private static java.util.concurrent.CompletionStage lambda$loadResources$3(net.minecraft.world.flag.FeatureFlagSet, net.minecraft.commands.Commands$CommandSelection, java.util.List, net.minecraft.server.permissions.PermissionSet, net.minecraft.server.packs.resources.ResourceManager, java.util.concurrent.Executor, java.util.concurrent.Executor, net.minecraft.server.ReloadableServerRegistries$LoadResult);
+    descriptor: (Lnet/minecraft/world/flag/FeatureFlagSet;Lnet/minecraft/commands/Commands$CommandSelection;Ljava/util/List;Lnet/minecraft/server/permissions/PermissionSet;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;)Ljava/util/concurrent/CompletionStage;
+    Code:
+       0: new           #19                 // class net/minecraft/server/ReloadableServerResources
+       3: dup
+       4: aload         7
+       6: invokevirtual #130                // Method net/minecraft/server/ReloadableServerRegistries$LoadResult.layers:()Lnet/minecraft/core/LayeredRegistryAccess;
+       9: aload         7
+      11: invokevirtual #136                // Method net/minecraft/server/ReloadableServerRegistries$LoadResult.lookupWithUpdatedTags:()Lnet/minecraft/core/HolderLookup$Provider;
+      14: aload_0
+      15: aload_1
+      16: aload_2
+      17: aload_3
+      18: invokespecial #140                // Method "<init>":(Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/world/flag/FeatureFlagSet;Lnet/minecraft/commands/Commands$CommandSelection;Ljava/util/List;Lnet/minecraft/server/permissions/PermissionSet;)V
+      21: astore        8
+      23: aload         8
+      25: aload         7
+      27: invokevirtual #130                // Method net/minecraft/server/ReloadableServerRegistries$LoadResult.layers:()Lnet/minecraft/core/LayeredRegistryAccess;
+      30: invokevirtual #9                  // Method net/minecraft/core/LayeredRegistryAccess.compositeAccess:()Lnet/minecraft/core/RegistryAccess$Frozen;
+      33: invokestatic  #143                // Method net/neoforged/neoforge/event/EventHooks.onResourceReload:(Lnet/minecraft/server/ReloadableServerResources;Lnet/minecraft/core/RegistryAccess;)Ljava/util/List;
+      36: astore        9
+      38: aload         9
+      40: invokeinterface #149,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      45: astore        10
+      47: aload         10
+      49: invokeinterface #153,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      54: ifeq          102
+      57: aload         10
+      59: invokeinterface #159,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      64: checkcast     #163                // class net/minecraft/server/packs/resources/PreparableReloadListener
+      67: astore        11
+      69: aload         11
+      71: instanceof    #165                // class net/neoforged/neoforge/resource/ContextAwareReloadListener
+      74: ifeq          99
+      77: aload         11
+      79: checkcast     #165                // class net/neoforged/neoforge/resource/ContextAwareReloadListener
+      82: astore        12
+      84: aload         12
+      86: aload         8
+      88: getfield      #79                 // Field context:Lnet/neoforged/neoforge/common/conditions/ConditionContext;
+      91: aload         8
+      93: getfield      #70                 // Field registryLookup:Lnet/minecraft/core/HolderLookup$Provider;
+      96: invokevirtual #167                // Method net/neoforged/neoforge/resource/ContextAwareReloadListener.injectContext:(Lnet/neoforged/neoforge/common/conditions/ICondition$IContext;Lnet/minecraft/core/HolderLookup$Provider;)V
+      99: goto          47
+     102: aload         4
+     104: aload         9
+     106: aload         5
+     108: aload         6
+     110: getstatic     #171                // Field DATA_RELOAD_INITIAL_TASK:Ljava/util/concurrent/CompletableFuture;
+     113: getstatic     #175                // Field LOGGER:Lorg/slf4j/Logger;
+     116: invokeinterface #179,  1          // InterfaceMethod org/slf4j/Logger.isDebugEnabled:()Z
+     121: invokestatic  #184                // Method net/minecraft/server/packs/resources/SimpleReloadInstance.create:(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Z)Lnet/minecraft/server/packs/resources/ReloadInstance;
+     124: invokeinterface #190,  1          // InterfaceMethod net/minecraft/server/packs/resources/ReloadInstance.done:()Ljava/util/concurrent/CompletableFuture;
+     129: aload         8
+     131: aload         9
+     133: invokedynamic #196,  0            // InvokeDynamic #2:run:(Lnet/minecraft/server/ReloadableServerResources;Ljava/util/List;)Ljava/lang/Runnable;
+     138: invokevirtual #200                // Method java/util/concurrent/CompletableFuture.thenRun:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+     141: aload         8
+     143: invokedynamic #204,  0            // InvokeDynamic #3:apply:(Lnet/minecraft/server/ReloadableServerResources;)Ljava/util/function/Function;
+     148: invokevirtual #207                // Method java/util/concurrent/CompletableFuture.thenApply:(Ljava/util/function/Function;)Ljava/util/concurrent/CompletableFuture;
+     151: areturn
+
+  private static net.minecraft.server.ReloadableServerResources lambda$loadResources$2(net.minecraft.server.ReloadableServerResources, java.lang.Void);
+    descriptor: (Lnet/minecraft/server/ReloadableServerResources;Ljava/lang/Void;)Lnet/minecraft/server/ReloadableServerResources;
+    Code:
+       0: aload_0
+       1: areturn
+
+  private static void lambda$loadResources$1(net.minecraft.server.ReloadableServerResources, java.util.List);
+    descriptor: (Lnet/minecraft/server/ReloadableServerResources;Ljava/util/List;)V
+    Code:
+       0: aload_0
+       1: getfield      #79                 // Field context:Lnet/neoforged/neoforge/common/conditions/ConditionContext;
+       4: invokevirtual #210                // Method net/neoforged/neoforge/common/conditions/ConditionContext.clear:()V
+       7: aload_1
+       8: invokedynamic #213,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+      13: invokeinterface #109,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      18: return
+
+  private static void lambda$loadResources$0(net.minecraft.server.packs.resources.PreparableReloadListener);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+    Code:
+       0: aload_0
+       1: instanceof    #165                // class net/neoforged/neoforge/resource/ContextAwareReloadListener
+       4: ifeq          22
+       7: aload_0
+       8: checkcast     #165                // class net/neoforged/neoforge/resource/ContextAwareReloadListener
+      11: astore_1
+      12: aload_1
+      13: getstatic     #214                // Field net/neoforged/neoforge/common/conditions/ICondition$IContext.EMPTY:Lnet/neoforged/neoforge/common/conditions/ICondition$IContext;
+      16: getstatic     #220                // Field net/minecraft/core/RegistryAccess.EMPTY:Lnet/minecraft/core/RegistryAccess$Frozen;
+      19: invokevirtual #167                // Method net/neoforged/neoforge/resource/ContextAwareReloadListener.injectContext:(Lnet/neoforged/neoforge/common/conditions/ICondition$IContext;Lnet/minecraft/core/HolderLookup$Provider;)V
+      22: return
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #225                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #175                // Field LOGGER:Lorg/slf4j/Logger;
+       6: getstatic     #231                // Field net/minecraft/util/Unit.INSTANCE:Lnet/minecraft/util/Unit;
+       9: invokestatic  #237                // Method java/util/concurrent/CompletableFuture.completedFuture:(Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+      12: putstatic     #171                // Field DATA_RELOAD_INITIAL_TASK:Ljava/util/concurrent/CompletableFuture;
+      15: return
+}

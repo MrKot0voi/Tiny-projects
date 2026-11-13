@@ -1,0 +1,92 @@
+Compiled from "OverlayRecipeComponent.java"
+public final class net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos extends java.lang.Record {
+  private final int x;
+    descriptor: I
+
+  private final int y;
+    descriptor: I
+
+  private final java.util.List<net.minecraft.world.item.ItemStack> ingredients;
+    descriptor: Ljava/util/List;
+
+  public net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos(int, int, java.util.List<net.minecraft.world.item.ItemStack>);
+    descriptor: (IILjava/util/List;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_3
+       5: invokeinterface #7,  1            // InterfaceMethod java/util/List.isEmpty:()Z
+      10: ifeq          23
+      13: new           #13                 // class java/lang/IllegalArgumentException
+      16: dup
+      17: ldc           #15                 // String Ingredient list must be non-empty
+      19: invokespecial #17                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      22: athrow
+      23: aload_0
+      24: iload_1
+      25: putfield      #20                 // Field x:I
+      28: aload_0
+      29: iload_2
+      30: putfield      #26                 // Field y:I
+      33: aload_0
+      34: aload_3
+      35: putfield      #29                 // Field ingredients:Ljava/util/List;
+      38: return
+
+  public net.minecraft.world.item.ItemStack selectIngredient(int);
+    descriptor: (I)Lnet/minecraft/world/item/ItemStack;
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field ingredients:Ljava/util/List;
+       4: iload_1
+       5: aload_0
+       6: getfield      #29                 // Field ingredients:Ljava/util/List;
+       9: invokeinterface #33,  1           // InterfaceMethod java/util/List.size:()I
+      14: irem
+      15: invokeinterface #37,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      20: checkcast     #41                 // class net/minecraft/world/item/ItemStack
+      23: areturn
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #43,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #47,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #51,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int x();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field x:I
+       4: ireturn
+
+  public int y();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field y:I
+       4: ireturn
+
+  public java.util.List<net.minecraft.world.item.ItemStack> ingredients();
+    descriptor: ()Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field ingredients:Ljava/util/List;
+       4: areturn
+}

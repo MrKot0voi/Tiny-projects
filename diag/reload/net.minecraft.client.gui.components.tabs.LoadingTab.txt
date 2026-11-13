@@ -1,0 +1,91 @@
+Compiled from "LoadingTab.java"
+public class net.minecraft.client.gui.components.tabs.LoadingTab implements net.minecraft.client.gui.components.tabs.Tab {
+  private final net.minecraft.network.chat.Component title;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  private final net.minecraft.network.chat.Component loadingTitle;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  protected final net.minecraft.client.gui.layouts.LinearLayout layout;
+    descriptor: Lnet/minecraft/client/gui/layouts/LinearLayout;
+
+  public net.minecraft.client.gui.components.tabs.LoadingTab(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokestatic  #7                  // Method net/minecraft/client/gui/layouts/LinearLayout.vertical:()Lnet/minecraft/client/gui/layouts/LinearLayout;
+       8: putfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+      11: aload_0
+      12: aload_2
+      13: putfield      #19                 // Field title:Lnet/minecraft/network/chat/Component;
+      16: aload_0
+      17: aload_3
+      18: putfield      #23                 // Field loadingTitle:Lnet/minecraft/network/chat/Component;
+      21: new           #26                 // class net/minecraft/client/gui/components/LoadingDotsWidget
+      24: dup
+      25: aload_1
+      26: aload_3
+      27: invokespecial #28                 // Method net/minecraft/client/gui/components/LoadingDotsWidget."<init>":(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;)V
+      30: astore        4
+      32: aload_0
+      33: getfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+      36: invokevirtual #31                 // Method net/minecraft/client/gui/layouts/LinearLayout.defaultCellSetting:()Lnet/minecraft/client/gui/layouts/LayoutSettings;
+      39: invokeinterface #35,  1           // InterfaceMethod net/minecraft/client/gui/layouts/LayoutSettings.alignVerticallyMiddle:()Lnet/minecraft/client/gui/layouts/LayoutSettings;
+      44: invokeinterface #40,  1           // InterfaceMethod net/minecraft/client/gui/layouts/LayoutSettings.alignHorizontallyCenter:()Lnet/minecraft/client/gui/layouts/LayoutSettings;
+      49: pop
+      50: aload_0
+      51: getfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+      54: aload         4
+      56: invokedynamic #43,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      61: invokevirtual #47                 // Method net/minecraft/client/gui/layouts/LinearLayout.addChild:(Lnet/minecraft/client/gui/layouts/LayoutElement;Ljava/util/function/Consumer;)Lnet/minecraft/client/gui/layouts/LayoutElement;
+      64: pop
+      65: return
+
+  public net.minecraft.network.chat.Component getTabTitle();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field title:Lnet/minecraft/network/chat/Component;
+       4: areturn
+
+  public net.minecraft.network.chat.Component getTabExtraNarration();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field loadingTitle:Lnet/minecraft/network/chat/Component;
+       4: areturn
+
+  public void visitChildren(java.util.function.Consumer<net.minecraft.client.gui.components.AbstractWidget>);
+    descriptor: (Ljava/util/function/Consumer;)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+       4: aload_1
+       5: invokevirtual #51                 // Method net/minecraft/client/gui/layouts/LinearLayout.visitWidgets:(Ljava/util/function/Consumer;)V
+       8: return
+
+  public void doLayout(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+       4: invokevirtual #55                 // Method net/minecraft/client/gui/layouts/LinearLayout.arrangeElements:()V
+       7: aload_0
+       8: getfield      #13                 // Field layout:Lnet/minecraft/client/gui/layouts/LinearLayout;
+      11: aload_1
+      12: ldc           #58                 // float 0.5f
+      14: ldc           #58                 // float 0.5f
+      16: invokestatic  #59                 // Method net/minecraft/client/gui/layouts/FrameLayout.alignInRectangle:(Lnet/minecraft/client/gui/layouts/LayoutElement;Lnet/minecraft/client/gui/navigation/ScreenRectangle;FF)V
+      19: return
+
+  private static void lambda$new$0(net.minecraft.client.gui.layouts.LayoutSettings);
+    descriptor: (Lnet/minecraft/client/gui/layouts/LayoutSettings;)V
+    Code:
+       0: aload_0
+       1: bipush        30
+       3: invokeinterface #65,  2           // InterfaceMethod net/minecraft/client/gui/layouts/LayoutSettings.paddingBottom:(I)Lnet/minecraft/client/gui/layouts/LayoutSettings;
+       8: pop
+       9: return
+}

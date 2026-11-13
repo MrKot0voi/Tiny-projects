@@ -1,0 +1,96 @@
+Compiled from "ProfiledReloadInstance.java"
+public final class net.minecraft.server.packs.resources.ProfiledReloadInstance$State extends java.lang.Record {
+  private final java.lang.String name;
+    descriptor: Ljava/lang/String;
+
+  private final java.util.concurrent.atomic.AtomicLong preparationNanos;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+
+  private final java.util.concurrent.atomic.AtomicLong preparationCount;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+
+  private final java.util.concurrent.atomic.AtomicLong reloadNanos;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+
+  private final java.util.concurrent.atomic.AtomicLong reloadCount;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+
+  public net.minecraft.server.packs.resources.ProfiledReloadInstance$State(java.lang.String, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong, java.util.concurrent.atomic.AtomicLong);
+    descriptor: (Ljava/lang/String;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;Ljava/util/concurrent/atomic/AtomicLong;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field name:Ljava/lang/String;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field preparationNanos:Ljava/util/concurrent/atomic/AtomicLong;
+      14: aload_0
+      15: aload_3
+      16: putfield      #17                 // Field preparationCount:Ljava/util/concurrent/atomic/AtomicLong;
+      19: aload_0
+      20: aload         4
+      22: putfield      #20                 // Field reloadNanos:Ljava/util/concurrent/atomic/AtomicLong;
+      25: aload_0
+      26: aload         5
+      28: putfield      #23                 // Field reloadCount:Ljava/util/concurrent/atomic/AtomicLong;
+      31: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #26,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/server/packs/resources/ProfiledReloadInstance$State;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #30,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/server/packs/resources/ProfiledReloadInstance$State;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #34,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/server/packs/resources/ProfiledReloadInstance$State;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String name();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field name:Ljava/lang/String;
+       4: areturn
+
+  public java.util.concurrent.atomic.AtomicLong preparationNanos();
+    descriptor: ()Ljava/util/concurrent/atomic/AtomicLong;
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field preparationNanos:Ljava/util/concurrent/atomic/AtomicLong;
+       4: areturn
+
+  public java.util.concurrent.atomic.AtomicLong preparationCount();
+    descriptor: ()Ljava/util/concurrent/atomic/AtomicLong;
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field preparationCount:Ljava/util/concurrent/atomic/AtomicLong;
+       4: areturn
+
+  public java.util.concurrent.atomic.AtomicLong reloadNanos();
+    descriptor: ()Ljava/util/concurrent/atomic/AtomicLong;
+    Code:
+       0: aload_0
+       1: getfield      #20                 // Field reloadNanos:Ljava/util/concurrent/atomic/AtomicLong;
+       4: areturn
+
+  public java.util.concurrent.atomic.AtomicLong reloadCount();
+    descriptor: ()Ljava/util/concurrent/atomic/AtomicLong;
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field reloadCount:Ljava/util/concurrent/atomic/AtomicLong;
+       4: areturn
+}

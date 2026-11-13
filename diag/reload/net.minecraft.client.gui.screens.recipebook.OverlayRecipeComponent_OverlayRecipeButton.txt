@@ -1,0 +1,156 @@
+Compiled from "OverlayRecipeComponent.java"
+abstract class net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton extends net.minecraft.client.gui.components.AbstractWidget {
+  final net.minecraft.world.item.crafting.display.RecipeDisplayId recipe;
+    descriptor: Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+
+  private final boolean isCraftable;
+    descriptor: Z
+
+  private final java.util.List<net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos> slots;
+    descriptor: Ljava/util/List;
+
+  final net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent this$0;
+    descriptor: Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;
+
+  public net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton(int, int, net.minecraft.world.item.crafting.display.RecipeDisplayId, boolean, java.util.List<net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos>);
+    descriptor: (Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;IILnet/minecraft/world/item/crafting/display/RecipeDisplayId;ZLjava/util/List;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #1                  // Field this$0:Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;
+       5: aload_0
+       6: iload_2
+       7: iload_3
+       8: bipush        24
+      10: bipush        24
+      12: getstatic     #7                  // Field net/minecraft/network/chat/CommonComponents.EMPTY:Lnet/minecraft/network/chat/Component;
+      15: invokespecial #13                 // Method net/minecraft/client/gui/components/AbstractWidget."<init>":(IIIILnet/minecraft/network/chat/Component;)V
+      18: aload_0
+      19: aload         6
+      21: putfield      #19                 // Field slots:Ljava/util/List;
+      24: aload_0
+      25: aload         4
+      27: putfield      #23                 // Field recipe:Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+      30: aload_0
+      31: iload         5
+      33: putfield      #27                 // Field isCraftable:Z
+      36: return
+
+  protected static net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos createGridPos(int, int, java.util.List<net.minecraft.world.item.ItemStack>);
+    descriptor: (IILjava/util/List;)Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;
+    Code:
+       0: new           #31                 // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos
+       3: dup
+       4: iconst_3
+       5: iload_0
+       6: bipush        7
+       8: imul
+       9: iadd
+      10: iconst_3
+      11: iload_1
+      12: bipush        7
+      14: imul
+      15: iadd
+      16: aload_2
+      17: invokespecial #33                 // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos."<init>":(IILjava/util/List;)V
+      20: areturn
+
+  protected abstract net.minecraft.resources.Identifier getSprite(boolean);
+    descriptor: (Z)Lnet/minecraft/resources/Identifier;
+
+  public void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #36                 // Method defaultButtonNarrationText:(Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+       5: return
+
+  public void renderWidget(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+    Code:
+       0: aload_1
+       1: getstatic     #40                 // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+       4: aload_0
+       5: aload_0
+       6: getfield      #27                 // Field isCraftable:Z
+       9: invokevirtual #46                 // Method getSprite:(Z)Lnet/minecraft/resources/Identifier;
+      12: aload_0
+      13: invokevirtual #50                 // Method getX:()I
+      16: aload_0
+      17: invokevirtual #54                 // Method getY:()I
+      20: aload_0
+      21: getfield      #57                 // Field width:I
+      24: aload_0
+      25: getfield      #61                 // Field height:I
+      28: invokevirtual #64                 // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+      31: aload_0
+      32: invokevirtual #50                 // Method getX:()I
+      35: iconst_2
+      36: iadd
+      37: i2f
+      38: fstore        5
+      40: aload_0
+      41: invokevirtual #54                 // Method getY:()I
+      44: iconst_2
+      45: iadd
+      46: i2f
+      47: fstore        6
+      49: aload_0
+      50: getfield      #19                 // Field slots:Ljava/util/List;
+      53: invokeinterface #70,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      58: astore        7
+      60: aload         7
+      62: invokeinterface #76,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      67: ifeq          174
+      70: aload         7
+      72: invokeinterface #82,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      77: checkcast     #31                 // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos
+      80: astore        8
+      82: aload_1
+      83: invokevirtual #86                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+      86: invokevirtual #90                 // Method org/joml/Matrix3x2fStack.pushMatrix:()Lorg/joml/Matrix3x2fStack;
+      89: pop
+      90: aload_1
+      91: invokevirtual #86                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+      94: fload         5
+      96: aload         8
+      98: getfield      #95                 // Field net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos.x:I
+     101: i2f
+     102: fadd
+     103: fload         6
+     105: aload         8
+     107: getfield      #98                 // Field net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos.y:I
+     110: i2f
+     111: fadd
+     112: invokevirtual #101                // Method org/joml/Matrix3x2fStack.translate:(FF)Lorg/joml/Matrix3x2f;
+     115: pop
+     116: aload_1
+     117: invokevirtual #86                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+     120: ldc           #105                // float 0.375f
+     122: ldc           #105                // float 0.375f
+     124: invokevirtual #106                // Method org/joml/Matrix3x2fStack.scale:(FF)Lorg/joml/Matrix3x2f;
+     127: pop
+     128: aload_1
+     129: invokevirtual #86                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+     132: ldc           #109                // float -8.0f
+     134: ldc           #109                // float -8.0f
+     136: invokevirtual #101                // Method org/joml/Matrix3x2fStack.translate:(FF)Lorg/joml/Matrix3x2f;
+     139: pop
+     140: aload_1
+     141: aload         8
+     143: aload_0
+     144: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;
+     147: getfield      #110                // Field net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent.slotSelectTime:Lnet/minecraft/client/gui/screens/recipebook/SlotSelectTime;
+     150: invokeinterface #116,  1          // InterfaceMethod net/minecraft/client/gui/screens/recipebook/SlotSelectTime.currentIndex:()I
+     155: invokevirtual #121                // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos.selectIngredient:(I)Lnet/minecraft/world/item/ItemStack;
+     158: iconst_0
+     159: iconst_0
+     160: invokevirtual #125                // Method net/minecraft/client/gui/GuiGraphics.renderItem:(Lnet/minecraft/world/item/ItemStack;II)V
+     163: aload_1
+     164: invokevirtual #86                 // Method net/minecraft/client/gui/GuiGraphics.pose:()Lorg/joml/Matrix3x2fStack;
+     167: invokevirtual #129                // Method org/joml/Matrix3x2fStack.popMatrix:()Lorg/joml/Matrix3x2fStack;
+     170: pop
+     171: goto          60
+     174: return
+}

@@ -1,0 +1,141 @@
+Compiled from "BossEvent.java"
+public final class net.minecraft.world.BossEvent$BossBarOverlay extends java.lang.Enum<net.minecraft.world.BossEvent$BossBarOverlay> implements net.minecraft.util.StringRepresentable {
+  public static final net.minecraft.world.BossEvent$BossBarOverlay PROGRESS;
+    descriptor: Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static final net.minecraft.world.BossEvent$BossBarOverlay NOTCHED_6;
+    descriptor: Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static final net.minecraft.world.BossEvent$BossBarOverlay NOTCHED_10;
+    descriptor: Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static final net.minecraft.world.BossEvent$BossBarOverlay NOTCHED_12;
+    descriptor: Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static final net.minecraft.world.BossEvent$BossBarOverlay NOTCHED_20;
+    descriptor: Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static final com.mojang.serialization.Codec<net.minecraft.world.BossEvent$BossBarOverlay> CODEC;
+    descriptor: Lcom/mojang/serialization/Codec;
+
+  private final java.lang.String name;
+    descriptor: Ljava/lang/String;
+
+  private static final net.minecraft.world.BossEvent$BossBarOverlay[] $VALUES;
+    descriptor: [Lnet/minecraft/world/BossEvent$BossBarOverlay;
+
+  public static net.minecraft.world.BossEvent$BossBarOverlay[] values();
+    descriptor: ()[Lnet/minecraft/world/BossEvent$BossBarOverlay;
+    Code:
+       0: getstatic     #19                 // Field $VALUES:[Lnet/minecraft/world/BossEvent$BossBarOverlay;
+       3: invokevirtual #23                 // Method "[Lnet/minecraft/world/BossEvent$BossBarOverlay;".clone:()Ljava/lang/Object;
+       6: checkcast     #24                 // class "[Lnet/minecraft/world/BossEvent$BossBarOverlay;"
+       9: areturn
+
+  public static net.minecraft.world.BossEvent$BossBarOverlay valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/world/BossEvent$BossBarOverlay;
+    Code:
+       0: ldc           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+       2: aload_0
+       3: invokestatic  #28                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+       9: areturn
+
+  private net.minecraft.world.BossEvent$BossBarOverlay(java.lang.String);
+    descriptor: (Ljava/lang/String;ILjava/lang/String;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #34                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: aload_3
+       8: putfield      #38                 // Field name:Ljava/lang/String;
+      11: return
+
+  public java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field name:Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String getSerializedName();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field name:Ljava/lang/String;
+       4: areturn
+
+  private static net.minecraft.world.BossEvent$BossBarOverlay[] $values();
+    descriptor: ()[Lnet/minecraft/world/BossEvent$BossBarOverlay;
+    Code:
+       0: iconst_5
+       1: anewarray     #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+       4: dup
+       5: iconst_0
+       6: getstatic     #3                  // Field PROGRESS:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #7                  // Field NOTCHED_6:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #10                 // Field NOTCHED_10:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      21: aastore
+      22: dup
+      23: iconst_3
+      24: getstatic     #13                 // Field NOTCHED_12:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      27: aastore
+      28: dup
+      29: iconst_4
+      30: getstatic     #16                 // Field NOTCHED_20:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      33: aastore
+      34: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: new           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+       3: dup
+       4: ldc           #42                 // String PROGRESS
+       6: iconst_0
+       7: ldc           #43                 // String progress
+       9: invokespecial #45                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      12: putstatic     #3                  // Field PROGRESS:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      15: new           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+      18: dup
+      19: ldc           #48                 // String NOTCHED_6
+      21: iconst_1
+      22: ldc           #49                 // String notched_6
+      24: invokespecial #45                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      27: putstatic     #7                  // Field NOTCHED_6:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      30: new           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+      33: dup
+      34: ldc           #51                 // String NOTCHED_10
+      36: iconst_2
+      37: ldc           #52                 // String notched_10
+      39: invokespecial #45                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      42: putstatic     #10                 // Field NOTCHED_10:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      45: new           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+      48: dup
+      49: ldc           #54                 // String NOTCHED_12
+      51: iconst_3
+      52: ldc           #55                 // String notched_12
+      54: invokespecial #45                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      57: putstatic     #13                 // Field NOTCHED_12:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      60: new           #1                  // class net/minecraft/world/BossEvent$BossBarOverlay
+      63: dup
+      64: ldc           #57                 // String NOTCHED_20
+      66: iconst_4
+      67: ldc           #58                 // String notched_20
+      69: invokespecial #45                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      72: putstatic     #16                 // Field NOTCHED_20:Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      75: invokestatic  #60                 // Method $values:()[Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      78: putstatic     #19                 // Field $VALUES:[Lnet/minecraft/world/BossEvent$BossBarOverlay;
+      81: invokedynamic #64,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      86: invokestatic  #68                 // InterfaceMethod net/minecraft/util/StringRepresentable.fromEnum:(Ljava/util/function/Supplier;)Lnet/minecraft/util/StringRepresentable$EnumCodec;
+      89: putstatic     #74                 // Field CODEC:Lcom/mojang/serialization/Codec;
+      92: return
+}

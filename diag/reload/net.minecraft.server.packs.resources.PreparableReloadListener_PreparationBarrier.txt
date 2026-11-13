@@ -1,0 +1,5 @@
+Compiled from "PreparableReloadListener.java"
+public interface net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier {
+  public abstract <T> java.util.concurrent.CompletableFuture<T> wait(T);
+    descriptor: (Ljava/lang/Object;)Ljava/util/concurrent/CompletableFuture;
+}

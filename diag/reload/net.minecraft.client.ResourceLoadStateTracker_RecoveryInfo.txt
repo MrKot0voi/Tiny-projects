@@ -1,0 +1,49 @@
+Compiled from "ResourceLoadStateTracker.java"
+class net.minecraft.client.ResourceLoadStateTracker$RecoveryInfo {
+  private final java.lang.Throwable error;
+    descriptor: Ljava/lang/Throwable;
+
+  net.minecraft.client.ResourceLoadStateTracker$RecoveryInfo(java.lang.Throwable);
+    descriptor: (Ljava/lang/Throwable;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field error:Ljava/lang/Throwable;
+       9: return
+
+  public void fillCrashInfo(net.minecraft.CrashReportCategory);
+    descriptor: (Lnet/minecraft/CrashReportCategory;)V
+    Code:
+       0: aload_1
+       1: ldc           #13                 // String Recovery
+       3: ldc           #15                 // String Yes
+       5: invokevirtual #17                 // Method net/minecraft/CrashReportCategory.setDetail:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraft/CrashReportCategory;
+       8: pop
+       9: aload_1
+      10: ldc           #23                 // String Recovery reason
+      12: aload_0
+      13: invokedynamic #25,  0             // InvokeDynamic #0:call:(Lnet/minecraft/client/ResourceLoadStateTracker$RecoveryInfo;)Lnet/minecraft/CrashReportDetail;
+      18: invokevirtual #29                 // Method net/minecraft/CrashReportCategory.setDetail:(Ljava/lang/String;Lnet/minecraft/CrashReportDetail;)Lnet/minecraft/CrashReportCategory;
+      21: pop
+      22: return
+
+  private java.lang.String lambda$fillCrashInfo$0() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: new           #32                 // class java/io/StringWriter
+       3: dup
+       4: invokespecial #34                 // Method java/io/StringWriter."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: getfield      #7                  // Field error:Ljava/lang/Throwable;
+      12: new           #35                 // class java/io/PrintWriter
+      15: dup
+      16: aload_1
+      17: invokespecial #37                 // Method java/io/PrintWriter."<init>":(Ljava/io/Writer;)V
+      20: invokevirtual #40                 // Method java/lang/Throwable.printStackTrace:(Ljava/io/PrintWriter;)V
+      23: aload_1
+      24: invokevirtual #46                 // Method java/io/StringWriter.toString:()Ljava/lang/String;
+      27: areturn
+}

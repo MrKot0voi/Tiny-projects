@@ -1,0 +1,88 @@
+Compiled from "OverlayMetadataSection.java"
+public final class net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry$IntermediateEntry extends java.lang.Record implements net.minecraft.server.packs.metadata.pack.PackFormat$IntermediaryFormatHolder {
+  private final net.minecraft.server.packs.metadata.pack.PackFormat$IntermediaryFormat format;
+    descriptor: Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;
+
+  private final java.lang.String overlay;
+    descriptor: Ljava/lang/String;
+
+  public static final com.mojang.serialization.Codec<net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry$IntermediateEntry> CODEC;
+    descriptor: Lcom/mojang/serialization/Codec;
+
+  public net.minecraft.server.packs.OverlayMetadataSection$OverlayEntry$IntermediateEntry(net.minecraft.server.packs.metadata.pack.PackFormat$IntermediaryFormat, java.lang.String);
+    descriptor: (Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;Ljava/lang/String;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field format:Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field overlay:Ljava/lang/String;
+      14: return
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field overlay:Ljava/lang/String;
+       4: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #67,  0             // InvokeDynamic #4:hashCode:(Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #71,  0             // InvokeDynamic #4:equals:(Lnet/minecraft/server/packs/OverlayMetadataSection$OverlayEntry$IntermediateEntry;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.minecraft.server.packs.metadata.pack.PackFormat$IntermediaryFormat format();
+    descriptor: ()Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field format:Lnet/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat;
+       4: areturn
+
+  public java.lang.String overlay();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field overlay:Ljava/lang/String;
+       4: areturn
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    descriptor: (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+    Code:
+       0: aload_0
+       1: getstatic     #17                 // Field net/minecraft/server/packs/metadata/pack/PackFormat$IntermediaryFormat.OVERLAY_CODEC:Lcom/mojang/serialization/MapCodec;
+       4: invokedynamic #23,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+       9: invokevirtual #27                 // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+      12: getstatic     #33                 // Field com/mojang/serialization/Codec.STRING:Lcom/mojang/serialization/codecs/PrimitiveCodec;
+      15: invokedynamic #39,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      20: invokeinterface #40,  2           // InterfaceMethod com/mojang/serialization/codecs/PrimitiveCodec.validate:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+      25: ldc           #46                 // String directory
+      27: invokeinterface #48,  2           // InterfaceMethod com/mojang/serialization/Codec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+      32: invokedynamic #52,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      37: invokevirtual #27                 // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+      40: invokevirtual #53                 // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P2;
+      43: aload_0
+      44: invokedynamic #59,  0             // InvokeDynamic #3:apply:()Ljava/util/function/BiFunction;
+      49: invokevirtual #62                 // Method com/mojang/datafixers/Products$P2.apply:(Lcom/mojang/datafixers/kinds/Applicative;Ljava/util/function/BiFunction;)Lcom/mojang/datafixers/kinds/App;
+      52: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokedynamic #75,  0             // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+       5: invokestatic  #76                 // Method com/mojang/serialization/codecs/RecordCodecBuilder.create:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+       8: putstatic     #81                 // Field CODEC:Lcom/mojang/serialization/Codec;
+      11: return
+}

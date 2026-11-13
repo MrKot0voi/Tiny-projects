@@ -1,0 +1,117 @@
+Compiled from "LoadingChunkTracker.java"
+class net.minecraft.server.level.LoadingChunkTracker extends net.minecraft.server.level.ChunkTracker {
+  private static final int MAX_LEVEL;
+    descriptor: I
+
+  private final net.minecraft.server.level.DistanceManager distanceManager;
+    descriptor: Lnet/minecraft/server/level/DistanceManager;
+
+  private final net.minecraft.world.level.TicketStorage ticketStorage;
+    descriptor: Lnet/minecraft/world/level/TicketStorage;
+
+  public net.minecraft.server.level.LoadingChunkTracker(net.minecraft.server.level.DistanceManager, net.minecraft.world.level.TicketStorage);
+    descriptor: (Lnet/minecraft/server/level/DistanceManager;Lnet/minecraft/world/level/TicketStorage;)V
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field MAX_LEVEL:I
+       4: iconst_1
+       5: iadd
+       6: bipush        16
+       8: sipush        256
+      11: invokespecial #7                  // Method net/minecraft/server/level/ChunkTracker."<init>":(III)V
+      14: aload_0
+      15: aload_1
+      16: putfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+      19: aload_0
+      20: aload_2
+      21: putfield      #17                 // Field ticketStorage:Lnet/minecraft/world/level/TicketStorage;
+      24: aload_2
+      25: aload_0
+      26: invokedynamic #21,  0             // InvokeDynamic #0:update:(Lnet/minecraft/server/level/LoadingChunkTracker;)Lnet/minecraft/world/level/TicketStorage$ChunkUpdated;
+      31: invokevirtual #25                 // Method net/minecraft/world/level/TicketStorage.setLoadingChunkUpdatedListener:(Lnet/minecraft/world/level/TicketStorage$ChunkUpdated;)V
+      34: return
+
+  protected int getLevelFromSource(long);
+    descriptor: (J)I
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field ticketStorage:Lnet/minecraft/world/level/TicketStorage;
+       4: lload_1
+       5: iconst_0
+       6: invokevirtual #31                 // Method net/minecraft/world/level/TicketStorage.getTicketLevelAt:(JZ)I
+       9: ireturn
+
+  protected int getLevel(long);
+    descriptor: (J)I
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+       4: lload_1
+       5: invokevirtual #35                 // Method net/minecraft/server/level/DistanceManager.isChunkToRemove:(J)Z
+       8: ifne          29
+      11: aload_0
+      12: getfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+      15: lload_1
+      16: invokevirtual #41                 // Method net/minecraft/server/level/DistanceManager.getChunk:(J)Lnet/minecraft/server/level/ChunkHolder;
+      19: astore_3
+      20: aload_3
+      21: ifnull        29
+      24: aload_3
+      25: invokevirtual #45                 // Method net/minecraft/server/level/ChunkHolder.getTicketLevel:()I
+      28: ireturn
+      29: getstatic     #1                  // Field MAX_LEVEL:I
+      32: ireturn
+
+  protected void setLevel(long, int);
+    descriptor: (JI)V
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+       4: lload_1
+       5: invokevirtual #41                 // Method net/minecraft/server/level/DistanceManager.getChunk:(J)Lnet/minecraft/server/level/ChunkHolder;
+       8: astore        4
+      10: aload         4
+      12: ifnonnull     21
+      15: getstatic     #1                  // Field MAX_LEVEL:I
+      18: goto          26
+      21: aload         4
+      23: invokevirtual #45                 // Method net/minecraft/server/level/ChunkHolder.getTicketLevel:()I
+      26: istore        5
+      28: iload         5
+      30: iload_3
+      31: if_icmpeq     69
+      34: aload_0
+      35: getfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+      38: lload_1
+      39: iload_3
+      40: aload         4
+      42: iload         5
+      44: invokevirtual #51                 // Method net/minecraft/server/level/DistanceManager.updateChunkScheduling:(JILnet/minecraft/server/level/ChunkHolder;I)Lnet/minecraft/server/level/ChunkHolder;
+      47: astore        4
+      49: aload         4
+      51: ifnull        69
+      54: aload_0
+      55: getfield      #13                 // Field distanceManager:Lnet/minecraft/server/level/DistanceManager;
+      58: getfield      #55                 // Field net/minecraft/server/level/DistanceManager.chunksToUpdateFutures:Ljava/util/Set;
+      61: aload         4
+      63: invokeinterface #59,  2           // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      68: pop
+      69: return
+
+  public int runDistanceUpdates(int);
+    descriptor: (I)I
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokevirtual #65                 // Method runUpdates:(I)I
+       5: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: getstatic     #69                 // Field net/minecraft/server/level/ChunkLevel.MAX_LEVEL:I
+       3: iconst_1
+       4: iadd
+       5: putstatic     #1                  // Field MAX_LEVEL:I
+       8: return
+}

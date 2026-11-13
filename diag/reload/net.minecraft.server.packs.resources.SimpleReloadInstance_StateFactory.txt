@@ -1,0 +1,26 @@
+Compiled from "SimpleReloadInstance.java"
+public interface net.minecraft.server.packs.resources.SimpleReloadInstance$StateFactory<S> {
+  public static final net.minecraft.server.packs.resources.SimpleReloadInstance$StateFactory<java.lang.Void> SIMPLE;
+    descriptor: Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;
+
+  public abstract java.util.concurrent.CompletableFuture<S> create(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, net.minecraft.server.packs.resources.PreparableReloadListener, java.util.concurrent.Executor, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+
+  private static java.util.concurrent.CompletableFuture lambda$static$0(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, net.minecraft.server.packs.resources.PreparableReloadListener, java.util.concurrent.Executor, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Lnet/minecraft/server/packs/resources/PreparableReloadListener;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_2
+       1: aload_0
+       2: aload_3
+       3: aload_1
+       4: aload         4
+       6: invokeinterface #1,  5            // InterfaceMethod net/minecraft/server/packs/resources/PreparableReloadListener.reload:(Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      11: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokedynamic #7,  0              // InvokeDynamic #0:create:()Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;
+       5: putstatic     #11                 // Field SIMPLE:Lnet/minecraft/server/packs/resources/SimpleReloadInstance$StateFactory;
+       8: return
+}

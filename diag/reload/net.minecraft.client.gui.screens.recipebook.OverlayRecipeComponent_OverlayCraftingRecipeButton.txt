@@ -1,0 +1,168 @@
+Compiled from "OverlayRecipeComponent.java"
+class net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayCraftingRecipeButton extends net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton {
+  private static final net.minecraft.resources.Identifier ENABLED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HIGHLIGHTED_ENABLED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier DISABLED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HIGHLIGHTED_DISABLED_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final int GRID_WIDTH;
+    descriptor: I
+
+  private static final int GRID_HEIGHT;
+    descriptor: I
+
+  public net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayCraftingRecipeButton(net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent, int, int, net.minecraft.world.item.crafting.display.RecipeDisplayId, net.minecraft.world.item.crafting.display.RecipeDisplay, net.minecraft.util.context.ContextMap, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;IILnet/minecraft/world/item/crafting/display/RecipeDisplayId;Lnet/minecraft/world/item/crafting/display/RecipeDisplay;Lnet/minecraft/util/context/ContextMap;Z)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: iload_3
+       4: aload         4
+       6: iload         7
+       8: aload         5
+      10: aload         6
+      12: invokestatic  #1                  // Method calculateIngredientsPositions:(Lnet/minecraft/world/item/crafting/display/RecipeDisplay;Lnet/minecraft/util/context/ContextMap;)Ljava/util/List;
+      15: invokespecial #7                  // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton."<init>":(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;IILnet/minecraft/world/item/crafting/display/RecipeDisplayId;ZLjava/util/List;)V
+      18: return
+
+  private static java.util.List<net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton$Pos> calculateIngredientsPositions(net.minecraft.world.item.crafting.display.RecipeDisplay, net.minecraft.util.context.ContextMap);
+    descriptor: (Lnet/minecraft/world/item/crafting/display/RecipeDisplay;Lnet/minecraft/util/context/ContextMap;)Ljava/util/List;
+    Code:
+       0: new           #13                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #15                 // Method java/util/ArrayList."<init>":()V
+       7: astore_2
+       8: aload_0
+       9: dup
+      10: invokestatic  #18                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: pop
+      14: astore_3
+      15: iconst_0
+      16: istore        4
+      18: aload_3
+      19: iload         4
+      21: invokedynamic #24,  0             // InvokeDynamic #0:typeSwitch:(Ljava/lang/Object;I)I
+      26: lookupswitch  { // 2
+                     0: 52
+                     1: 88
+               default: 175
+          }
+      52: aload_3
+      53: checkcast     #28                 // class net/minecraft/world/item/crafting/display/ShapedCraftingRecipeDisplay
+      56: astore        5
+      58: iconst_3
+      59: iconst_3
+      60: aload         5
+      62: invokevirtual #30                 // Method net/minecraft/world/item/crafting/display/ShapedCraftingRecipeDisplay.width:()I
+      65: aload         5
+      67: invokevirtual #34                 // Method net/minecraft/world/item/crafting/display/ShapedCraftingRecipeDisplay.height:()I
+      70: aload         5
+      72: invokevirtual #37                 // Method net/minecraft/world/item/crafting/display/ShapedCraftingRecipeDisplay.ingredients:()Ljava/util/List;
+      75: aload_1
+      76: aload_2
+      77: invokedynamic #41,  0             // InvokeDynamic #1:addItemToSlot:(Lnet/minecraft/util/context/ContextMap;Ljava/util/List;)Lnet/minecraft/recipebook/PlaceRecipeHelper$Output;
+      82: invokestatic  #45                 // InterfaceMethod net/minecraft/recipebook/PlaceRecipeHelper.placeRecipe:(IIIILjava/lang/Iterable;Lnet/minecraft/recipebook/PlaceRecipeHelper$Output;)V
+      85: goto          175
+      88: aload_3
+      89: checkcast     #51                 // class net/minecraft/world/item/crafting/display/ShapelessCraftingRecipeDisplay
+      92: astore        6
+      94: aload         6
+      96: invokevirtual #53                 // Method net/minecraft/world/item/crafting/display/ShapelessCraftingRecipeDisplay.ingredients:()Ljava/util/List;
+      99: astore        7
+     101: iconst_0
+     102: istore        8
+     104: iload         8
+     106: aload         7
+     108: invokeinterface #54,  1           // InterfaceMethod java/util/List.size:()I
+     113: if_icmpge     172
+     116: aload         7
+     118: iload         8
+     120: invokeinterface #59,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     125: checkcast     #63                 // class net/minecraft/world/item/crafting/display/SlotDisplay
+     128: aload_1
+     129: invokeinterface #65,  2           // InterfaceMethod net/minecraft/world/item/crafting/display/SlotDisplay.resolveForStacks:(Lnet/minecraft/util/context/ContextMap;)Ljava/util/List;
+     134: astore        9
+     136: aload         9
+     138: invokeinterface #69,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     143: ifne          166
+     146: aload_2
+     147: iload         8
+     149: iconst_3
+     150: irem
+     151: iload         8
+     153: iconst_3
+     154: idiv
+     155: aload         9
+     157: invokestatic  #73                 // Method createGridPos:(IILjava/util/List;)Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;
+     160: invokeinterface #77,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     165: pop
+     166: iinc          8, 1
+     169: goto          104
+     172: goto          175
+     175: aload_2
+     176: areturn
+
+  protected net.minecraft.resources.Identifier getSprite(boolean);
+    descriptor: (Z)Lnet/minecraft/resources/Identifier;
+    Code:
+       0: iload_1
+       1: ifeq          21
+       4: aload_0
+       5: invokevirtual #81                 // Method isHoveredOrFocused:()Z
+       8: ifeq          17
+      11: getstatic     #84                 // Field HIGHLIGHTED_ENABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      14: goto          20
+      17: getstatic     #88                 // Field ENABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      20: areturn
+      21: aload_0
+      22: invokevirtual #81                 // Method isHoveredOrFocused:()Z
+      25: ifeq          34
+      28: getstatic     #91                 // Field HIGHLIGHTED_DISABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      31: goto          37
+      34: getstatic     #94                 // Field DISABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      37: areturn
+
+  private static void lambda$calculateIngredientsPositions$0(net.minecraft.util.context.ContextMap, java.util.List, net.minecraft.world.item.crafting.display.SlotDisplay, int, int, int);
+    descriptor: (Lnet/minecraft/util/context/ContextMap;Ljava/util/List;Lnet/minecraft/world/item/crafting/display/SlotDisplay;III)V
+    Code:
+       0: aload_2
+       1: aload_0
+       2: invokeinterface #65,  2           // InterfaceMethod net/minecraft/world/item/crafting/display/SlotDisplay.resolveForStacks:(Lnet/minecraft/util/context/ContextMap;)Ljava/util/List;
+       7: astore        6
+       9: aload         6
+      11: invokeinterface #69,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      16: ifne          35
+      19: aload_1
+      20: iload         4
+      22: iload         5
+      24: aload         6
+      26: invokestatic  #73                 // Method createGridPos:(IILjava/util/List;)Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton$Pos;
+      29: invokeinterface #77,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      34: pop
+      35: return
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc           #97                 // String recipe_book/crafting_overlay
+       2: invokestatic  #99                 // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+       5: putstatic     #88                 // Field ENABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+       8: ldc           #105                // String recipe_book/crafting_overlay_highlighted
+      10: invokestatic  #99                 // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      13: putstatic     #84                 // Field HIGHLIGHTED_ENABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      16: ldc           #107                // String recipe_book/crafting_overlay_disabled
+      18: invokestatic  #99                 // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      21: putstatic     #94                 // Field DISABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      24: ldc           #109                // String recipe_book/crafting_overlay_disabled_highlighted
+      26: invokestatic  #99                 // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      29: putstatic     #91                 // Field HIGHLIGHTED_DISABLED_SPRITE:Lnet/minecraft/resources/Identifier;
+      32: return
+}

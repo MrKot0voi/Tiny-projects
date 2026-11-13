@@ -1,0 +1,9 @@
+Compiled from "PreparableReloadListener.java"
+public final class net.minecraft.server.packs.resources.PreparableReloadListener$StateKey<T> {
+  public net.minecraft.server.packs.resources.PreparableReloadListener$StateKey();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+}

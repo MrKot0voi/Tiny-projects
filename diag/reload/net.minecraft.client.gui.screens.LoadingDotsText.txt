@@ -1,0 +1,56 @@
+Compiled from "LoadingDotsText.java"
+public class net.minecraft.client.gui.screens.LoadingDotsText {
+  private static final java.lang.String[] FRAMES;
+    descriptor: [Ljava/lang/String;
+
+  private static final long INTERVAL_MS;
+    descriptor: J
+
+  public net.minecraft.client.gui.screens.LoadingDotsText();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static java.lang.String get(long);
+    descriptor: (J)Ljava/lang/String;
+    Code:
+       0: lload_0
+       1: ldc2_w        #7                  // long 300l
+       4: ldiv
+       5: getstatic     #9                  // Field FRAMES:[Ljava/lang/String;
+       8: arraylength
+       9: i2l
+      10: lrem
+      11: l2i
+      12: istore_2
+      13: getstatic     #9                  // Field FRAMES:[Ljava/lang/String;
+      16: iload_2
+      17: aaload
+      18: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: iconst_4
+       1: anewarray     #15                 // class java/lang/String
+       4: dup
+       5: iconst_0
+       6: ldc           #17                 // String O o o
+       8: aastore
+       9: dup
+      10: iconst_1
+      11: ldc           #19                 // String o O o
+      13: aastore
+      14: dup
+      15: iconst_2
+      16: ldc           #21                 // String o o O
+      18: aastore
+      19: dup
+      20: iconst_3
+      21: ldc           #19                 // String o O o
+      23: aastore
+      24: putstatic     #9                  // Field FRAMES:[Ljava/lang/String;
+      27: return
+}

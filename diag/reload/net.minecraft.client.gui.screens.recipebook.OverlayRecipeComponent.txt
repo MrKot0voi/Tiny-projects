@@ -1,0 +1,460 @@
+Compiled from "OverlayRecipeComponent.java"
+public class net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent implements net.minecraft.client.gui.components.Renderable,net.minecraft.client.gui.components.events.GuiEventListener {
+  private static final net.minecraft.resources.Identifier OVERLAY_RECIPE_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final int MAX_ROW;
+    descriptor: I
+
+  private static final int MAX_ROW_LARGE;
+    descriptor: I
+
+  private static final float ITEM_RENDER_SCALE;
+    descriptor: F
+
+  public static final int BUTTON_SIZE;
+    descriptor: I
+
+  private final java.util.List<net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent$OverlayRecipeButton> recipeButtons;
+    descriptor: Ljava/util/List;
+
+  private boolean isVisible;
+    descriptor: Z
+
+  private int x;
+    descriptor: I
+
+  private int y;
+    descriptor: I
+
+  private net.minecraft.client.gui.screens.recipebook.RecipeCollection collection;
+    descriptor: Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+
+  private net.minecraft.world.item.crafting.display.RecipeDisplayId lastRecipeClicked;
+    descriptor: Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+
+  final net.minecraft.client.gui.screens.recipebook.SlotSelectTime slotSelectTime;
+    descriptor: Lnet/minecraft/client/gui/screens/recipebook/SlotSelectTime;
+
+  private final boolean isFurnaceMenu;
+    descriptor: Z
+
+  public net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent(net.minecraft.client.gui.screens.recipebook.SlotSelectTime, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/recipebook/SlotSelectTime;Z)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokestatic  #7                  // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+       8: putfield      #13                 // Field recipeButtons:Ljava/util/List;
+      11: aload_0
+      12: getstatic     #19                 // Field net/minecraft/client/gui/screens/recipebook/RecipeCollection.EMPTY:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+      15: putfield      #25                 // Field collection:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+      18: aload_0
+      19: aload_1
+      20: putfield      #28                 // Field slotSelectTime:Lnet/minecraft/client/gui/screens/recipebook/SlotSelectTime;
+      23: aload_0
+      24: iload_2
+      25: putfield      #32                 // Field isFurnaceMenu:Z
+      28: return
+
+  public void init(net.minecraft.client.gui.screens.recipebook.RecipeCollection, net.minecraft.util.context.ContextMap, boolean, int, int, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;Lnet/minecraft/util/context/ContextMap;ZIIIIF)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #25                 // Field collection:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+       5: aload_1
+       6: getstatic     #36                 // Field net/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus.CRAFTABLE:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus;
+       9: invokevirtual #42                 // Method net/minecraft/client/gui/screens/recipebook/RecipeCollection.getSelectedRecipes:(Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus;)Ljava/util/List;
+      12: astore        9
+      14: iload_3
+      15: ifeq          24
+      18: invokestatic  #46                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+      21: goto          31
+      24: aload_1
+      25: getstatic     #52                 // Field net/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus.NOT_CRAFTABLE:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus;
+      28: invokevirtual #42                 // Method net/minecraft/client/gui/screens/recipebook/RecipeCollection.getSelectedRecipes:(Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection$CraftableStatus;)Ljava/util/List;
+      31: astore        10
+      33: aload         9
+      35: invokeinterface #55,  1           // InterfaceMethod java/util/List.size:()I
+      40: istore        11
+      42: iload         11
+      44: aload         10
+      46: invokeinterface #55,  1           // InterfaceMethod java/util/List.size:()I
+      51: iadd
+      52: istore        12
+      54: iload         12
+      56: bipush        16
+      58: if_icmpgt     65
+      61: iconst_4
+      62: goto          66
+      65: iconst_5
+      66: istore        13
+      68: iload         12
+      70: i2f
+      71: iload         13
+      73: i2f
+      74: fdiv
+      75: f2d
+      76: invokestatic  #61                 // Method java/lang/Math.ceil:(D)D
+      79: d2i
+      80: istore        14
+      82: aload_0
+      83: iload         4
+      85: putfield      #67                 // Field x:I
+      88: aload_0
+      89: iload         5
+      91: putfield      #71                 // Field y:I
+      94: aload_0
+      95: getfield      #67                 // Field x:I
+      98: iload         12
+     100: iload         13
+     102: invokestatic  #74                 // Method java/lang/Math.min:(II)I
+     105: bipush        25
+     107: imul
+     108: iadd
+     109: i2f
+     110: fstore        15
+     112: iload         6
+     114: bipush        50
+     116: iadd
+     117: i2f
+     118: fstore        16
+     120: fload         15
+     122: fload         16
+     124: fcmpl
+     125: ifle          152
+     128: aload_0
+     129: aload_0
+     130: getfield      #67                 // Field x:I
+     133: i2f
+     134: fload         8
+     136: fload         15
+     138: fload         16
+     140: fsub
+     141: fload         8
+     143: fdiv
+     144: f2i
+     145: i2f
+     146: fmul
+     147: fsub
+     148: f2i
+     149: putfield      #67                 // Field x:I
+     152: aload_0
+     153: getfield      #71                 // Field y:I
+     156: iload         14
+     158: bipush        25
+     160: imul
+     161: iadd
+     162: i2f
+     163: fstore        17
+     165: iload         7
+     167: bipush        50
+     169: iadd
+     170: i2f
+     171: fstore        18
+     173: fload         17
+     175: fload         18
+     177: fcmpl
+     178: ifle          207
+     181: aload_0
+     182: aload_0
+     183: getfield      #71                 // Field y:I
+     186: i2f
+     187: fload         8
+     189: fload         17
+     191: fload         18
+     193: fsub
+     194: fload         8
+     196: fdiv
+     197: invokestatic  #78                 // Method net/minecraft/util/Mth.ceil:(F)I
+     200: i2f
+     201: fmul
+     202: fsub
+     203: f2i
+     204: putfield      #71                 // Field y:I
+     207: aload_0
+     208: getfield      #71                 // Field y:I
+     211: i2f
+     212: fstore        19
+     214: iload         7
+     216: bipush        100
+     218: isub
+     219: i2f
+     220: fstore        20
+     222: fload         19
+     224: fload         20
+     226: fcmpg
+     227: ifge          256
+     230: aload_0
+     231: aload_0
+     232: getfield      #71                 // Field y:I
+     235: i2f
+     236: fload         8
+     238: fload         19
+     240: fload         20
+     242: fsub
+     243: fload         8
+     245: fdiv
+     246: invokestatic  #78                 // Method net/minecraft/util/Mth.ceil:(F)I
+     249: i2f
+     250: fmul
+     251: fsub
+     252: f2i
+     253: putfield      #71                 // Field y:I
+     256: aload_0
+     257: iconst_1
+     258: putfield      #83                 // Field isVisible:Z
+     261: aload_0
+     262: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+     265: invokeinterface #86,  1           // InterfaceMethod java/util/List.clear:()V
+     270: iconst_0
+     271: istore        21
+     273: iload         21
+     275: iload         12
+     277: if_icmpge     451
+     280: iload         21
+     282: iload         11
+     284: if_icmpge     291
+     287: iconst_1
+     288: goto          292
+     291: iconst_0
+     292: istore        22
+     294: iload         22
+     296: ifeq          314
+     299: aload         9
+     301: iload         21
+     303: invokeinterface #89,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     308: checkcast     #93                 // class net/minecraft/world/item/crafting/display/RecipeDisplayEntry
+     311: goto          329
+     314: aload         10
+     316: iload         21
+     318: iload         11
+     320: isub
+     321: invokeinterface #89,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     326: checkcast     #93                 // class net/minecraft/world/item/crafting/display/RecipeDisplayEntry
+     329: astore        23
+     331: aload_0
+     332: getfield      #67                 // Field x:I
+     335: iconst_4
+     336: iadd
+     337: bipush        25
+     339: iload         21
+     341: iload         13
+     343: irem
+     344: imul
+     345: iadd
+     346: istore        24
+     348: aload_0
+     349: getfield      #71                 // Field y:I
+     352: iconst_5
+     353: iadd
+     354: bipush        25
+     356: iload         21
+     358: iload         13
+     360: idiv
+     361: imul
+     362: iadd
+     363: istore        25
+     365: aload_0
+     366: getfield      #32                 // Field isFurnaceMenu:Z
+     369: ifeq          410
+     372: aload_0
+     373: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+     376: new           #95                 // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlaySmeltingRecipeButton
+     379: dup
+     380: aload_0
+     381: iload         24
+     383: iload         25
+     385: aload         23
+     387: invokevirtual #97                 // Method net/minecraft/world/item/crafting/display/RecipeDisplayEntry.id:()Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+     390: aload         23
+     392: invokevirtual #101                // Method net/minecraft/world/item/crafting/display/RecipeDisplayEntry.display:()Lnet/minecraft/world/item/crafting/display/RecipeDisplay;
+     395: aload_2
+     396: iload         22
+     398: invokespecial #105                // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlaySmeltingRecipeButton."<init>":(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;IILnet/minecraft/world/item/crafting/display/RecipeDisplayId;Lnet/minecraft/world/item/crafting/display/RecipeDisplay;Lnet/minecraft/util/context/ContextMap;Z)V
+     401: invokeinterface #108,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     406: pop
+     407: goto          445
+     410: aload_0
+     411: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+     414: new           #112                // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayCraftingRecipeButton
+     417: dup
+     418: aload_0
+     419: iload         24
+     421: iload         25
+     423: aload         23
+     425: invokevirtual #97                 // Method net/minecraft/world/item/crafting/display/RecipeDisplayEntry.id:()Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+     428: aload         23
+     430: invokevirtual #101                // Method net/minecraft/world/item/crafting/display/RecipeDisplayEntry.display:()Lnet/minecraft/world/item/crafting/display/RecipeDisplay;
+     433: aload_2
+     434: iload         22
+     436: invokespecial #114                // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayCraftingRecipeButton."<init>":(Lnet/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent;IILnet/minecraft/world/item/crafting/display/RecipeDisplayId;Lnet/minecraft/world/item/crafting/display/RecipeDisplay;Lnet/minecraft/util/context/ContextMap;Z)V
+     439: invokeinterface #108,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     444: pop
+     445: iinc          21, 1
+     448: goto          273
+     451: aload_0
+     452: aconst_null
+     453: putfield      #115                // Field lastRecipeClicked:Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+     456: return
+
+  public net.minecraft.client.gui.screens.recipebook.RecipeCollection getRecipeCollection();
+    descriptor: ()Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field collection:Lnet/minecraft/client/gui/screens/recipebook/RecipeCollection;
+       4: areturn
+
+  public net.minecraft.world.item.crafting.display.RecipeDisplayId getLastRecipeClicked();
+    descriptor: ()Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+    Code:
+       0: aload_0
+       1: getfield      #115                // Field lastRecipeClicked:Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+       4: areturn
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+    Code:
+       0: aload_1
+       1: invokevirtual #119                // Method net/minecraft/client/input/MouseButtonEvent.button:()I
+       4: ifeq          9
+       7: iconst_0
+       8: ireturn
+       9: aload_0
+      10: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+      13: invokeinterface #124,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      18: astore_3
+      19: aload_3
+      20: invokeinterface #128,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      25: ifeq          63
+      28: aload_3
+      29: invokeinterface #134,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      34: checkcast     #138                // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton
+      37: astore        4
+      39: aload         4
+      41: aload_1
+      42: iload_2
+      43: invokevirtual #140                // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton.mouseClicked:(Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+      46: ifeq          60
+      49: aload_0
+      50: aload         4
+      52: getfield      #144                // Field net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton.recipe:Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+      55: putfield      #115                // Field lastRecipeClicked:Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;
+      58: iconst_1
+      59: ireturn
+      60: goto          19
+      63: iconst_0
+      64: ireturn
+
+  public boolean isMouseOver(double, double);
+    descriptor: (DD)Z
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+    Code:
+       0: aload_0
+       1: getfield      #83                 // Field isVisible:Z
+       4: ifeq          146
+       7: aload_0
+       8: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+      11: invokeinterface #55,  1           // InterfaceMethod java/util/List.size:()I
+      16: bipush        16
+      18: if_icmpgt     25
+      21: iconst_4
+      22: goto          26
+      25: iconst_5
+      26: istore        5
+      28: aload_0
+      29: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+      32: invokeinterface #55,  1           // InterfaceMethod java/util/List.size:()I
+      37: iload         5
+      39: invokestatic  #74                 // Method java/lang/Math.min:(II)I
+      42: istore        6
+      44: aload_0
+      45: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+      48: invokeinterface #55,  1           // InterfaceMethod java/util/List.size:()I
+      53: i2f
+      54: iload         5
+      56: i2f
+      57: fdiv
+      58: invokestatic  #78                 // Method net/minecraft/util/Mth.ceil:(F)I
+      61: istore        7
+      63: iconst_4
+      64: istore        8
+      66: aload_1
+      67: getstatic     #147                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+      70: getstatic     #153                // Field OVERLAY_RECIPE_SPRITE:Lnet/minecraft/resources/Identifier;
+      73: aload_0
+      74: getfield      #67                 // Field x:I
+      77: aload_0
+      78: getfield      #71                 // Field y:I
+      81: iload         6
+      83: bipush        25
+      85: imul
+      86: bipush        8
+      88: iadd
+      89: iload         7
+      91: bipush        25
+      93: imul
+      94: bipush        8
+      96: iadd
+      97: invokevirtual #157                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     100: aload_0
+     101: getfield      #13                 // Field recipeButtons:Ljava/util/List;
+     104: invokeinterface #124,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     109: astore        9
+     111: aload         9
+     113: invokeinterface #128,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     118: ifeq          146
+     121: aload         9
+     123: invokeinterface #134,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     128: checkcast     #138                // class net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton
+     131: astore        10
+     133: aload         10
+     135: aload_1
+     136: iload_2
+     137: iload_3
+     138: fload         4
+     140: invokevirtual #163                // Method net/minecraft/client/gui/screens/recipebook/OverlayRecipeComponent$OverlayRecipeButton.render:(Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+     143: goto          111
+     146: return
+
+  public void setVisible(boolean);
+    descriptor: (Z)V
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #83                 // Field isVisible:Z
+       5: return
+
+  public boolean isVisible();
+    descriptor: ()Z
+    Code:
+       0: aload_0
+       1: getfield      #83                 // Field isVisible:Z
+       4: ireturn
+
+  public void setFocused(boolean);
+    descriptor: (Z)V
+    Code:
+       0: return
+
+  public boolean isFocused();
+    descriptor: ()Z
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc           #167                // String recipe_book/overlay_recipe
+       2: invokestatic  #169                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+       5: putstatic     #153                // Field OVERLAY_RECIPE_SPRITE:Lnet/minecraft/resources/Identifier;
+       8: return
+}

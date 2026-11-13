@@ -1,0 +1,148 @@
+Compiled from "ReloadCommand.java"
+public class net.minecraft.server.commands.ReloadCommand {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  public net.minecraft.server.commands.ReloadCommand();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reloadPacks(java.util.Collection<java.lang.String>, net.minecraft.commands.CommandSourceStack);
+    descriptor: (Ljava/util/Collection;Lnet/minecraft/commands/CommandSourceStack;)V
+    Code:
+       0: aload_1
+       1: invokevirtual #7                  // Method net/minecraft/commands/CommandSourceStack.getServer:()Lnet/minecraft/server/MinecraftServer;
+       4: aload_0
+       5: invokevirtual #13                 // Method net/minecraft/server/MinecraftServer.reloadResources:(Ljava/util/Collection;)Ljava/util/concurrent/CompletableFuture;
+       8: aload_1
+       9: invokedynamic #19,  0             // InvokeDynamic #0:apply:(Lnet/minecraft/commands/CommandSourceStack;)Ljava/util/function/Function;
+      14: invokevirtual #23                 // Method java/util/concurrent/CompletableFuture.exceptionally:(Ljava/util/function/Function;)Ljava/util/concurrent/CompletableFuture;
+      17: pop
+      18: return
+
+  private static java.util.Collection<java.lang.String> discoverNewPacks(net.minecraft.server.packs.repository.PackRepository, net.minecraft.world.level.storage.WorldData, java.util.Collection<java.lang.String>);
+    descriptor: (Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/world/level/storage/WorldData;Ljava/util/Collection;)Ljava/util/Collection;
+    Code:
+       0: aload_0
+       1: invokevirtual #29                 // Method net/minecraft/server/packs/repository/PackRepository.reload:()V
+       4: aload_2
+       5: invokestatic  #34                 // Method com/google/common/collect/Lists.newArrayList:(Ljava/lang/Iterable;)Ljava/util/ArrayList;
+       8: astore_3
+       9: aload_1
+      10: invokeinterface #40,  1           // InterfaceMethod net/minecraft/world/level/storage/WorldData.getDataConfiguration:()Lnet/minecraft/world/level/WorldDataConfiguration;
+      15: invokevirtual #46                 // Method net/minecraft/world/level/WorldDataConfiguration.dataPacks:()Lnet/minecraft/world/level/DataPackConfig;
+      18: invokevirtual #52                 // Method net/minecraft/world/level/DataPackConfig.getDisabled:()Ljava/util/List;
+      21: astore        4
+      23: aload_0
+      24: invokevirtual #58                 // Method net/minecraft/server/packs/repository/PackRepository.getAvailableIds:()Ljava/util/Collection;
+      27: invokeinterface #62,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      32: astore        5
+      34: aload         5
+      36: invokeinterface #68,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      41: ifeq          91
+      44: aload         5
+      46: invokeinterface #74,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      51: checkcast     #78                 // class java/lang/String
+      54: astore        6
+      56: aload         4
+      58: aload         6
+      60: invokeinterface #80,  2           // InterfaceMethod java/util/Collection.contains:(Ljava/lang/Object;)Z
+      65: ifne          88
+      68: aload_3
+      69: aload         6
+      71: invokeinterface #80,  2           // InterfaceMethod java/util/Collection.contains:(Ljava/lang/Object;)Z
+      76: ifne          88
+      79: aload_3
+      80: aload         6
+      82: invokeinterface #84,  2           // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      87: pop
+      88: goto          34
+      91: aload_3
+      92: aload_2
+      93: aload_0
+      94: invokestatic  #87                 // Method net/neoforged/neoforge/resource/ResourcePackLoader.reorderNewlyDiscoveredPacks:(Ljava/util/Collection;Ljava/util/Collection;Lnet/minecraft/server/packs/repository/PackRepository;)V
+      97: aload_3
+      98: areturn
+
+  public static void register(com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack>);
+    descriptor: (Lcom/mojang/brigadier/CommandDispatcher;)V
+    Code:
+       0: aload_0
+       1: ldc           #93                 // String reload
+       3: invokestatic  #94                 // Method net/minecraft/commands/Commands.literal:(Ljava/lang/String;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;
+       6: getstatic     #100                // Field net/minecraft/commands/Commands.LEVEL_GAMEMASTERS:Lnet/minecraft/server/permissions/PermissionCheck;
+       9: invokestatic  #104                // Method net/minecraft/commands/Commands.hasPermission:(Lnet/minecraft/server/permissions/PermissionCheck;)Lnet/minecraft/server/permissions/PermissionProviderCheck;
+      12: invokevirtual #108                // Method com/mojang/brigadier/builder/LiteralArgumentBuilder.requires:(Ljava/util/function/Predicate;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+      15: checkcast     #109                // class com/mojang/brigadier/builder/LiteralArgumentBuilder
+      18: invokedynamic #114,  0            // InvokeDynamic #1:run:()Lcom/mojang/brigadier/Command;
+      23: invokevirtual #118                // Method com/mojang/brigadier/builder/LiteralArgumentBuilder.executes:(Lcom/mojang/brigadier/Command;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+      26: checkcast     #109                // class com/mojang/brigadier/builder/LiteralArgumentBuilder
+      29: invokevirtual #122                // Method com/mojang/brigadier/CommandDispatcher.register:(Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;)Lcom/mojang/brigadier/tree/LiteralCommandNode;
+      32: pop
+      33: return
+
+  private static int lambda$register$2(com.mojang.brigadier.context.CommandContext) throws com.mojang.brigadier.exceptions.CommandSyntaxException;
+    descriptor: (Lcom/mojang/brigadier/context/CommandContext;)I
+    Code:
+       0: aload_0
+       1: invokevirtual #128                // Method com/mojang/brigadier/context/CommandContext.getSource:()Ljava/lang/Object;
+       4: checkcast     #8                  // class net/minecraft/commands/CommandSourceStack
+       7: astore_1
+       8: aload_1
+       9: invokevirtual #7                  // Method net/minecraft/commands/CommandSourceStack.getServer:()Lnet/minecraft/server/MinecraftServer;
+      12: astore_2
+      13: aload_2
+      14: invokevirtual #133                // Method net/minecraft/server/MinecraftServer.getPackRepository:()Lnet/minecraft/server/packs/repository/PackRepository;
+      17: astore_3
+      18: aload_2
+      19: invokevirtual #137                // Method net/minecraft/server/MinecraftServer.getWorldData:()Lnet/minecraft/world/level/storage/WorldData;
+      22: astore        4
+      24: aload_3
+      25: invokevirtual #141                // Method net/minecraft/server/packs/repository/PackRepository.getSelectedIds:()Ljava/util/Collection;
+      28: astore        5
+      30: aload_3
+      31: aload         4
+      33: aload         5
+      35: invokestatic  #144                // Method discoverNewPacks:(Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/world/level/storage/WorldData;Ljava/util/Collection;)Ljava/util/Collection;
+      38: astore        6
+      40: aload_1
+      41: invokedynamic #150,  0            // InvokeDynamic #2:get:()Ljava/util/function/Supplier;
+      46: iconst_1
+      47: invokevirtual #154                // Method net/minecraft/commands/CommandSourceStack.sendSuccess:(Ljava/util/function/Supplier;Z)V
+      50: aload         6
+      52: aload_1
+      53: invokestatic  #158                // Method reloadPacks:(Ljava/util/Collection;Lnet/minecraft/commands/CommandSourceStack;)V
+      56: iconst_0
+      57: ireturn
+
+  private static net.minecraft.network.chat.Component lambda$register$1();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+    Code:
+       0: ldc           #162                // String commands.reload.success
+       2: invokestatic  #164                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       5: areturn
+
+  private static java.lang.Void lambda$reloadPacks$0(net.minecraft.commands.CommandSourceStack, java.lang.Throwable);
+    descriptor: (Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/Throwable;)Ljava/lang/Void;
+    Code:
+       0: getstatic     #170                // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc           #174                // String Failed to execute reload
+       5: aload_1
+       6: invokeinterface #176,  3          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      11: aload_0
+      12: ldc           #182                // String commands.reload.failure
+      14: invokestatic  #164                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      17: invokevirtual #184                // Method net/minecraft/commands/CommandSourceStack.sendFailure:(Lnet/minecraft/network/chat/Component;)V
+      20: aconst_null
+      21: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #188                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #170                // Field LOGGER:Lorg/slf4j/Logger;
+       6: return
+}

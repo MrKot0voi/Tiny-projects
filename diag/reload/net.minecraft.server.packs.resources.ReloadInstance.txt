@@ -1,0 +1,30 @@
+Compiled from "ReloadInstance.java"
+public interface net.minecraft.server.packs.resources.ReloadInstance {
+  public abstract java.util.concurrent.CompletableFuture<?> done();
+    descriptor: ()Ljava/util/concurrent/CompletableFuture;
+
+  public abstract float getActualProgress();
+    descriptor: ()F
+
+  public default boolean isDone();
+    descriptor: ()Z
+    Code:
+       0: aload_0
+       1: invokeinterface #1,  1            // InterfaceMethod done:()Ljava/util/concurrent/CompletableFuture;
+       6: invokevirtual #7                  // Method java/util/concurrent/CompletableFuture.isDone:()Z
+       9: ireturn
+
+  public default void checkExceptions();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokeinterface #1,  1            // InterfaceMethod done:()Ljava/util/concurrent/CompletableFuture;
+       6: astore_1
+       7: aload_1
+       8: invokevirtual #13                 // Method java/util/concurrent/CompletableFuture.isCompletedExceptionally:()Z
+      11: ifeq          19
+      14: aload_1
+      15: invokevirtual #16                 // Method java/util/concurrent/CompletableFuture.join:()Ljava/lang/Object;
+      18: pop
+      19: return
+}

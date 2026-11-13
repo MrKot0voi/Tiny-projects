@@ -1,0 +1,58 @@
+Compiled from "SimplePreparableReloadListener.java"
+public abstract class net.minecraft.server.packs.resources.SimplePreparableReloadListener<T> extends net.neoforged.neoforge.resource.ContextAwareReloadListener implements net.minecraft.server.packs.resources.PreparableReloadListener {
+  public net.minecraft.server.packs.resources.SimplePreparableReloadListener();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/neoforged/neoforge/resource/ContextAwareReloadListener."<init>":()V
+       4: return
+
+  public final java.util.concurrent.CompletableFuture<java.lang.Void> reload(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, java.util.concurrent.Executor, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_1
+       1: invokevirtual #7                  // Method net/minecraft/server/packs/resources/PreparableReloadListener$SharedState.resourceManager:()Lnet/minecraft/server/packs/resources/ResourceManager;
+       4: astore        5
+       6: aload_0
+       7: aload         5
+       9: invokedynamic #13,  0             // InvokeDynamic #0:get:(Lnet/minecraft/server/packs/resources/SimplePreparableReloadListener;Lnet/minecraft/server/packs/resources/ResourceManager;)Ljava/util/function/Supplier;
+      14: aload_2
+      15: invokestatic  #17                 // Method java/util/concurrent/CompletableFuture.supplyAsync:(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      18: aload_3
+      19: dup
+      20: invokestatic  #23                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      23: pop
+      24: invokedynamic #29,  0             // InvokeDynamic #1:apply:(Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;)Ljava/util/function/Function;
+      29: invokevirtual #33                 // Method java/util/concurrent/CompletableFuture.thenCompose:(Ljava/util/function/Function;)Ljava/util/concurrent/CompletableFuture;
+      32: aload_0
+      33: aload         5
+      35: invokedynamic #37,  0             // InvokeDynamic #2:accept:(Lnet/minecraft/server/packs/resources/SimplePreparableReloadListener;Lnet/minecraft/server/packs/resources/ResourceManager;)Ljava/util/function/Consumer;
+      40: aload         4
+      42: invokevirtual #41                 // Method java/util/concurrent/CompletableFuture.thenAcceptAsync:(Ljava/util/function/Consumer;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      45: areturn
+
+  protected abstract T prepare(net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Ljava/lang/Object;
+
+  protected abstract void apply(T, net.minecraft.server.packs.resources.ResourceManager, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Ljava/lang/Object;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+
+  private void lambda$reload$1(net.minecraft.server.packs.resources.ResourceManager, java.lang.Object);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/lang/Object;)V
+    Code:
+       0: aload_0
+       1: aload_2
+       2: aload_1
+       3: invokestatic  #45                 // Method net/minecraft/util/profiling/Profiler.get:()Lnet/minecraft/util/profiling/ProfilerFiller;
+       6: invokevirtual #50                 // Method apply:(Ljava/lang/Object;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+       9: return
+
+  private java.lang.Object lambda$reload$0(net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)Ljava/lang/Object;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #45                 // Method net/minecraft/util/profiling/Profiler.get:()Lnet/minecraft/util/profiling/ProfilerFiller;
+       5: invokevirtual #55                 // Method prepare:(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Ljava/lang/Object;
+       8: areturn
+}

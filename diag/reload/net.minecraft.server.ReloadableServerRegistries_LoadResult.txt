@@ -1,0 +1,57 @@
+Compiled from "ReloadableServerRegistries.java"
+public final class net.minecraft.server.ReloadableServerRegistries$LoadResult extends java.lang.Record {
+  private final net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer> layers;
+    descriptor: Lnet/minecraft/core/LayeredRegistryAccess;
+
+  private final net.minecraft.core.HolderLookup$Provider lookupWithUpdatedTags;
+    descriptor: Lnet/minecraft/core/HolderLookup$Provider;
+
+  public net.minecraft.server.ReloadableServerRegistries$LoadResult(net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field layers:Lnet/minecraft/core/LayeredRegistryAccess;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field lookupWithUpdatedTags:Lnet/minecraft/core/HolderLookup$Provider;
+      14: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokedynamic #17,  0             // InvokeDynamic #0:toString:(Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+       0: aload_0
+       1: invokedynamic #21,  0             // InvokeDynamic #0:hashCode:(Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #25,  0             // InvokeDynamic #0:equals:(Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer> layers();
+    descriptor: ()Lnet/minecraft/core/LayeredRegistryAccess;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field layers:Lnet/minecraft/core/LayeredRegistryAccess;
+       4: areturn
+
+  public net.minecraft.core.HolderLookup$Provider lookupWithUpdatedTags();
+    descriptor: ()Lnet/minecraft/core/HolderLookup$Provider;
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field lookupWithUpdatedTags:Lnet/minecraft/core/HolderLookup$Provider;
+       4: areturn
+}

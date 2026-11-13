@@ -1,0 +1,51 @@
+Compiled from "PreparableReloadListener.java"
+public final class net.minecraft.server.packs.resources.PreparableReloadListener$SharedState {
+  private final net.minecraft.server.packs.resources.ResourceManager manager;
+    descriptor: Lnet/minecraft/server/packs/resources/ResourceManager;
+
+  private final java.util.Map<net.minecraft.server.packs.resources.PreparableReloadListener$StateKey<?>, java.lang.Object> state;
+    descriptor: Ljava/util/Map;
+
+  public net.minecraft.server.packs.resources.PreparableReloadListener$SharedState(net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #7                  // class java/util/IdentityHashMap
+       8: dup
+       9: invokespecial #9                  // Method java/util/IdentityHashMap."<init>":()V
+      12: putfield      #10                 // Field state:Ljava/util/Map;
+      15: aload_0
+      16: aload_1
+      17: putfield      #16                 // Field manager:Lnet/minecraft/server/packs/resources/ResourceManager;
+      20: return
+
+  public net.minecraft.server.packs.resources.ResourceManager resourceManager();
+    descriptor: ()Lnet/minecraft/server/packs/resources/ResourceManager;
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field manager:Lnet/minecraft/server/packs/resources/ResourceManager;
+       4: areturn
+
+  public <T> void set(net.minecraft.server.packs.resources.PreparableReloadListener$StateKey<T>, T);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$StateKey;Ljava/lang/Object;)V
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field state:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: invokeinterface #20,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: return
+
+  public <T> T get(net.minecraft.server.packs.resources.PreparableReloadListener$StateKey<T>);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$StateKey;)Ljava/lang/Object;
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field state:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #26,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: invokestatic  #30                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: areturn
+}

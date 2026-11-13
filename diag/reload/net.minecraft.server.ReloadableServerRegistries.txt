@@ -1,0 +1,320 @@
+Compiled from "ReloadableServerRegistries.java"
+public class net.minecraft.server.ReloadableServerRegistries {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  private static final net.minecraft.core.RegistrationInfo DEFAULT_REGISTRATION_INFO;
+    descriptor: Lnet/minecraft/core/RegistrationInfo;
+
+  public net.minecraft.server.ReloadableServerRegistries();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static java.util.concurrent.CompletableFuture<net.minecraft.server.ReloadableServerRegistries$LoadResult> reload(net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, java.util.List<net.minecraft.core.Registry$PendingTags<?>>, net.minecraft.server.packs.resources.ResourceManager, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Ljava/util/List;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field net/minecraft/server/RegistryLayer.RELOADABLE:Lnet/minecraft/server/RegistryLayer;
+       4: invokevirtual #13                 // Method net/minecraft/core/LayeredRegistryAccess.getAccessForLoading:(Ljava/lang/Object;)Lnet/minecraft/core/RegistryAccess$Frozen;
+       7: aload_1
+       8: invokestatic  #19                 // Method net/minecraft/tags/TagLoader.buildUpdatedLookups:(Lnet/minecraft/core/RegistryAccess$Frozen;Ljava/util/List;)Ljava/util/List;
+      11: astore        4
+      13: aload         4
+      15: invokeinterface #25,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      20: invokestatic  #31                 // InterfaceMethod net/minecraft/core/HolderLookup$Provider.create:(Ljava/util/stream/Stream;)Lnet/minecraft/core/HolderLookup$Provider;
+      23: astore        5
+      25: aload         5
+      27: getstatic     #37                 // Field com/mojang/serialization/JsonOps.INSTANCE:Lcom/mojang/serialization/JsonOps;
+      30: invokeinterface #43,  2           // InterfaceMethod net/minecraft/core/HolderLookup$Provider.createSerializationContext:(Lcom/mojang/serialization/DynamicOps;)Lnet/minecraft/resources/RegistryOps;
+      35: astore        6
+      37: invokestatic  #47                 // Method net/minecraft/world/level/storage/loot/LootDataType.values:()Ljava/util/stream/Stream;
+      40: aload         6
+      42: aload_2
+      43: aload_3
+      44: invokedynamic #52,  0             // InvokeDynamic #0:apply:(Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;)Ljava/util/function/Function;
+      49: invokeinterface #56,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      54: invokeinterface #62,  1           // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      59: astore        7
+      61: aload         7
+      63: invokestatic  #66                 // Method net/minecraft/util/Util.sequence:(Ljava/util/List;)Ljava/util/concurrent/CompletableFuture;
+      66: astore        8
+      68: aload         8
+      70: aload_0
+      71: aload         5
+      73: invokedynamic #72,  0             // InvokeDynamic #1:apply:(Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;)Ljava/util/function/Function;
+      78: aload_3
+      79: invokevirtual #75                 // Method java/util/concurrent/CompletableFuture.thenApplyAsync:(Ljava/util/function/Function;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      82: areturn
+
+  private static <T> java.util.concurrent.CompletableFuture<net.minecraft.core.WritableRegistry<?>> scheduleRegistryLoad(net.minecraft.world.level.storage.loot.LootDataType<T>, net.minecraft.resources.RegistryOps<com.google.gson.JsonElement>, net.minecraft.server.packs.resources.ResourceManager, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokedynamic #81,  0             // InvokeDynamic #2:get:(Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;)Ljava/util/function/Supplier;
+       8: aload_3
+       9: invokestatic  #85                 // Method java/util/concurrent/CompletableFuture.supplyAsync:(Ljava/util/function/Supplier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+      12: areturn
+
+  private static net.minecraft.server.ReloadableServerRegistries$LoadResult createAndValidateFullContext(net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, net.minecraft.core.HolderLookup$Provider, java.util.List<net.minecraft.core.WritableRegistry<?>>);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;Ljava/util/List;)Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;
+    Code:
+       0: aload_0
+       1: aload_2
+       2: invokestatic  #89                 // Method createUpdatedRegistries:(Lnet/minecraft/core/LayeredRegistryAccess;Ljava/util/List;)Lnet/minecraft/core/LayeredRegistryAccess;
+       5: astore_3
+       6: aload_1
+       7: aload_3
+       8: getstatic     #7                  // Field net/minecraft/server/RegistryLayer.RELOADABLE:Lnet/minecraft/server/RegistryLayer;
+      11: invokevirtual #95                 // Method net/minecraft/core/LayeredRegistryAccess.getLayer:(Ljava/lang/Object;)Lnet/minecraft/core/RegistryAccess$Frozen;
+      14: invokestatic  #98                 // Method concatenateLookups:(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/core/HolderLookup$Provider;
+      17: astore        4
+      19: aload         4
+      21: invokestatic  #102                // Method validateLootRegistries:(Lnet/minecraft/core/HolderLookup$Provider;)V
+      24: new           #106                // class net/minecraft/server/ReloadableServerRegistries$LoadResult
+      27: dup
+      28: aload_3
+      29: aload         4
+      31: invokespecial #108                // Method net/minecraft/server/ReloadableServerRegistries$LoadResult."<init>":(Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;)V
+      34: areturn
+
+  private static net.minecraft.core.HolderLookup$Provider concatenateLookups(net.minecraft.core.HolderLookup$Provider, net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/core/HolderLookup$Provider;
+    Code:
+       0: aload_0
+       1: invokeinterface #111,  1          // InterfaceMethod net/minecraft/core/HolderLookup$Provider.listRegistries:()Ljava/util/stream/Stream;
+       6: aload_1
+       7: invokeinterface #111,  1          // InterfaceMethod net/minecraft/core/HolderLookup$Provider.listRegistries:()Ljava/util/stream/Stream;
+      12: invokestatic  #114                // InterfaceMethod java/util/stream/Stream.concat:(Ljava/util/stream/Stream;Ljava/util/stream/Stream;)Ljava/util/stream/Stream;
+      15: invokestatic  #31                 // InterfaceMethod net/minecraft/core/HolderLookup$Provider.create:(Ljava/util/stream/Stream;)Lnet/minecraft/core/HolderLookup$Provider;
+      18: areturn
+
+  private static void validateLootRegistries(net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/core/HolderLookup$Provider;)V
+    Code:
+       0: new           #118                // class net/minecraft/util/ProblemReporter$Collector
+       3: dup
+       4: invokespecial #120                // Method net/minecraft/util/ProblemReporter$Collector."<init>":()V
+       7: astore_1
+       8: new           #121                // class net/minecraft/world/level/storage/loot/ValidationContext
+      11: dup
+      12: aload_1
+      13: getstatic     #123                // Field net/minecraft/world/level/storage/loot/parameters/LootContextParamSets.ALL_PARAMS:Lnet/minecraft/util/context/ContextKeySet;
+      16: aload_0
+      17: invokespecial #129                // Method net/minecraft/world/level/storage/loot/ValidationContext."<init>":(Lnet/minecraft/util/ProblemReporter;Lnet/minecraft/util/context/ContextKeySet;Lnet/minecraft/core/HolderGetter$Provider;)V
+      20: astore_2
+      21: invokestatic  #47                 // Method net/minecraft/world/level/storage/loot/LootDataType.values:()Ljava/util/stream/Stream;
+      24: aload_2
+      25: aload_0
+      26: invokedynamic #132,  0            // InvokeDynamic #3:accept:(Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/core/HolderLookup$Provider;)Ljava/util/function/Consumer;
+      31: invokeinterface #136,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      36: aload_1
+      37: invokedynamic #140,  0            // InvokeDynamic #4:accept:()Ljava/util/function/BiConsumer;
+      42: invokevirtual #143                // Method net/minecraft/util/ProblemReporter$Collector.forEach:(Ljava/util/function/BiConsumer;)V
+      45: return
+
+  private static net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer> createUpdatedRegistries(net.minecraft.core.LayeredRegistryAccess<net.minecraft.server.RegistryLayer>, java.util.List<net.minecraft.core.WritableRegistry<?>>);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Ljava/util/List;)Lnet/minecraft/core/LayeredRegistryAccess;
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field net/minecraft/server/RegistryLayer.RELOADABLE:Lnet/minecraft/server/RegistryLayer;
+       4: iconst_1
+       5: anewarray     #146                // class net/minecraft/core/RegistryAccess$Frozen
+       8: dup
+       9: iconst_0
+      10: new           #148                // class net/minecraft/core/RegistryAccess$ImmutableRegistryAccess
+      13: dup
+      14: aload_1
+      15: invokespecial #150                // Method net/minecraft/core/RegistryAccess$ImmutableRegistryAccess."<init>":(Ljava/util/List;)V
+      18: invokevirtual #153                // Method net/minecraft/core/RegistryAccess$ImmutableRegistryAccess.freeze:()Lnet/minecraft/core/RegistryAccess$Frozen;
+      21: aastore
+      22: invokevirtual #157                // Method net/minecraft/core/LayeredRegistryAccess.replaceFrom:(Ljava/lang/Object;[Lnet/minecraft/core/RegistryAccess$Frozen;)Lnet/minecraft/core/LayeredRegistryAccess;
+      25: areturn
+
+  private static <T> void validateRegistry(net.minecraft.world.level.storage.loot.ValidationContext, net.minecraft.world.level.storage.loot.LootDataType<T>, net.minecraft.core.HolderLookup$Provider);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/core/HolderLookup$Provider;)V
+    Code:
+       0: aload_2
+       1: aload_1
+       2: invokevirtual #161                // Method net/minecraft/world/level/storage/loot/LootDataType.registryKey:()Lnet/minecraft/resources/ResourceKey;
+       5: invokeinterface #165,  2          // InterfaceMethod net/minecraft/core/HolderLookup$Provider.lookupOrThrow:(Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/core/HolderLookup$RegistryLookup;
+      10: astore_3
+      11: aload_3
+      12: invokeinterface #169,  1          // InterfaceMethod net/minecraft/core/HolderLookup.listElements:()Ljava/util/stream/Stream;
+      17: aload_1
+      18: aload_0
+      19: invokedynamic #174,  0            // InvokeDynamic #5:accept:(Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/world/level/storage/loot/ValidationContext;)Ljava/util/function/Consumer;
+      24: invokeinterface #136,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      29: return
+
+  private static void lambda$validateRegistry$8(net.minecraft.world.level.storage.loot.LootDataType, net.minecraft.world.level.storage.loot.ValidationContext, net.minecraft.core.Holder$Reference);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/core/Holder$Reference;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokevirtual #177                // Method net/minecraft/core/Holder$Reference.key:()Lnet/minecraft/resources/ResourceKey;
+       6: aload_2
+       7: invokevirtual #182                // Method net/minecraft/core/Holder$Reference.value:()Ljava/lang/Object;
+      10: invokevirtual #186                // Method net/minecraft/world/level/storage/loot/LootDataType.runValidation:(Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/resources/ResourceKey;Ljava/lang/Object;)V
+      13: return
+
+  private static void lambda$validateLootRegistries$7(java.lang.String, net.minecraft.util.ProblemReporter$Problem);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/util/ProblemReporter$Problem;)V
+    Code:
+       0: getstatic     #190                // Field LOGGER:Lorg/slf4j/Logger;
+       3: ldc           #194                // String Found loot table element validation problem in {}: {}
+       5: aload_0
+       6: aload_1
+       7: invokeinterface #196,  1          // InterfaceMethod net/minecraft/util/ProblemReporter$Problem.description:()Ljava/lang/String;
+      12: invokeinterface #202,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      17: return
+
+  private static void lambda$validateLootRegistries$6(net.minecraft.world.level.storage.loot.ValidationContext, net.minecraft.core.HolderLookup$Provider, net.minecraft.world.level.storage.loot.LootDataType);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/world/level/storage/loot/LootDataType;)V
+    Code:
+       0: aload_0
+       1: aload_2
+       2: aload_1
+       3: invokestatic  #208                // Method validateRegistry:(Lnet/minecraft/world/level/storage/loot/ValidationContext;Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/core/HolderLookup$Provider;)V
+       6: return
+
+  private static net.minecraft.core.WritableRegistry lambda$scheduleRegistryLoad$5(net.minecraft.world.level.storage.loot.LootDataType, net.minecraft.resources.RegistryOps, net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;)Lnet/minecraft/core/WritableRegistry;
+    Code:
+       0: new           #212                // class net/minecraft/core/MappedRegistry
+       3: dup
+       4: aload_0
+       5: invokevirtual #161                // Method net/minecraft/world/level/storage/loot/LootDataType.registryKey:()Lnet/minecraft/resources/ResourceKey;
+       8: invokestatic  #214                // Method com/mojang/serialization/Lifecycle.experimental:()Lcom/mojang/serialization/Lifecycle;
+      11: invokespecial #220                // Method net/minecraft/core/MappedRegistry."<init>":(Lnet/minecraft/resources/ResourceKey;Lcom/mojang/serialization/Lifecycle;)V
+      14: astore_3
+      15: new           #223                // class java/util/HashMap
+      18: dup
+      19: invokespecial #225                // Method java/util/HashMap."<init>":()V
+      22: astore        4
+      24: aload_1
+      25: invokestatic  #226                // Method net/neoforged/neoforge/common/CommonHooks.extractLookupProvider:(Lnet/minecraft/resources/RegistryOps;)Lnet/minecraft/core/HolderLookup$Provider;
+      28: astore        5
+      30: new           #223                // class java/util/HashMap
+      33: dup
+      34: invokespecial #225                // Method java/util/HashMap."<init>":()V
+      37: astore        6
+      39: aload_2
+      40: aload_0
+      41: invokevirtual #161                // Method net/minecraft/world/level/storage/loot/LootDataType.registryKey:()Lnet/minecraft/resources/ResourceKey;
+      44: aload_1
+      45: aload_0
+      46: invokevirtual #232                // Method net/minecraft/world/level/storage/loot/LootDataType.conditionalCodec:()Lcom/mojang/serialization/Codec;
+      49: aload         6
+      51: invokestatic  #236                // Method net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener.scanDirectoryWithOptionalValues:(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/resources/ResourceKey;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/Codec;Ljava/util/Map;)V
+      54: aload         6
+      56: aload_0
+      57: aload         5
+      59: aload         4
+      61: invokedynamic #242,  0            // InvokeDynamic #6:accept:(Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/core/HolderLookup$Provider;Ljava/util/Map;)Ljava/util/function/BiConsumer;
+      66: invokeinterface #245,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      71: aload         4
+      73: aload_3
+      74: aload_0
+      75: invokedynamic #248,  0            // InvokeDynamic #7:accept:(Lnet/minecraft/core/WritableRegistry;Lnet/minecraft/world/level/storage/loot/LootDataType;)Ljava/util/function/BiConsumer;
+      80: invokeinterface #245,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      85: aload_2
+      86: aload_3
+      87: invokestatic  #251                // Method net/minecraft/tags/TagLoader.loadTagsForRegistry:(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/core/WritableRegistry;)V
+      90: aload_3
+      91: areturn
+
+  private static void lambda$scheduleRegistryLoad$4(net.minecraft.core.WritableRegistry, net.minecraft.world.level.storage.loot.LootDataType, net.minecraft.resources.Identifier, java.lang.Object);
+    descriptor: (Lnet/minecraft/core/WritableRegistry;Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/Identifier;Ljava/lang/Object;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #161                // Method net/minecraft/world/level/storage/loot/LootDataType.registryKey:()Lnet/minecraft/resources/ResourceKey;
+       5: aload_2
+       6: invokestatic  #255                // Method net/minecraft/resources/ResourceKey.create:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/Identifier;)Lnet/minecraft/resources/ResourceKey;
+       9: aload_3
+      10: getstatic     #260                // Field DEFAULT_REGISTRATION_INFO:Lnet/minecraft/core/RegistrationInfo;
+      13: invokeinterface #264,  4          // InterfaceMethod net/minecraft/core/WritableRegistry.register:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/Object;Lnet/minecraft/core/RegistrationInfo;)Lnet/minecraft/core/Holder$Reference;
+      18: pop
+      19: return
+
+  private static void lambda$scheduleRegistryLoad$3(net.minecraft.world.level.storage.loot.LootDataType, net.minecraft.core.HolderLookup$Provider, java.util.Map, net.minecraft.resources.Identifier, java.util.Optional);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/core/HolderLookup$Provider;Ljava/util/Map;Lnet/minecraft/resources/Identifier;Ljava/util/Optional;)V
+    Code:
+       0: aload         4
+       2: aload_0
+       3: aload_3
+       4: invokedynamic #270,  0            // InvokeDynamic #8:accept:(Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/Identifier;)Ljava/util/function/Consumer;
+       9: invokevirtual #273                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      12: aload         4
+      14: aload_0
+      15: invokevirtual #278                // Method net/minecraft/world/level/storage/loot/LootDataType.defaultValue:()Ljava/lang/Object;
+      18: invokevirtual #281                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      21: astore        5
+      23: aload         5
+      25: instanceof    #285                // class net/minecraft/world/level/storage/loot/LootTable
+      28: ifeq          47
+      31: aload         5
+      33: checkcast     #285                // class net/minecraft/world/level/storage/loot/LootTable
+      36: astore        6
+      38: aload_1
+      39: aload_3
+      40: aload         6
+      42: invokestatic  #287                // Method net/neoforged/neoforge/event/EventHooks.loadLootTable:(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/level/storage/loot/LootTable;)Lnet/minecraft/world/level/storage/loot/LootTable;
+      45: astore        5
+      47: aload         5
+      49: ifnull        62
+      52: aload_2
+      53: aload_3
+      54: aload         5
+      56: invokeinterface #293,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      61: pop
+      62: return
+
+  private static void lambda$scheduleRegistryLoad$2(net.minecraft.world.level.storage.loot.LootDataType, net.minecraft.resources.Identifier, java.lang.Object);
+    descriptor: (Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/Identifier;Ljava/lang/Object;)V
+    Code:
+       0: aload_0
+       1: invokevirtual #297                // Method net/minecraft/world/level/storage/loot/LootDataType.idSetter:()Ljava/util/function/BiConsumer;
+       4: aload_2
+       5: aload_1
+       6: invokeinterface #300,  3          // InterfaceMethod java/util/function/BiConsumer.accept:(Ljava/lang/Object;Ljava/lang/Object;)V
+      11: return
+
+  private static net.minecraft.server.ReloadableServerRegistries$LoadResult lambda$reload$1(net.minecraft.core.LayeredRegistryAccess, net.minecraft.core.HolderLookup$Provider, java.util.List);
+    descriptor: (Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;Ljava/util/List;)Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokestatic  #305                // Method createAndValidateFullContext:(Lnet/minecraft/core/LayeredRegistryAccess;Lnet/minecraft/core/HolderLookup$Provider;Ljava/util/List;)Lnet/minecraft/server/ReloadableServerRegistries$LoadResult;
+       6: areturn
+
+  private static java.util.concurrent.CompletableFuture lambda$reload$0(net.minecraft.resources.RegistryOps, net.minecraft.server.packs.resources.ResourceManager, java.util.concurrent.Executor, net.minecraft.world.level.storage.loot.LootDataType);
+    descriptor: (Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;Lnet/minecraft/world/level/storage/loot/LootDataType;)Ljava/util/concurrent/CompletableFuture;
+    Code:
+       0: aload_3
+       1: aload_0
+       2: aload_1
+       3: aload_2
+       4: invokestatic  #309                // Method scheduleRegistryLoad:(Lnet/minecraft/world/level/storage/loot/LootDataType;Lnet/minecraft/resources/RegistryOps;Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+       7: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #313                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #190                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #319                // class net/minecraft/core/RegistrationInfo
+       9: dup
+      10: invokestatic  #321                // Method java/util/Optional.empty:()Ljava/util/Optional;
+      13: invokestatic  #214                // Method com/mojang/serialization/Lifecycle.experimental:()Lcom/mojang/serialization/Lifecycle;
+      16: invokespecial #325                // Method net/minecraft/core/RegistrationInfo."<init>":(Ljava/util/Optional;Lcom/mojang/serialization/Lifecycle;)V
+      19: putstatic     #260                // Field DEFAULT_REGISTRATION_INFO:Lnet/minecraft/core/RegistrationInfo;
+      22: return
+}

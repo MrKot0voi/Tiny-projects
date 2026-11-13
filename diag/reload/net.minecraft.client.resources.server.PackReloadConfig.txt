@@ -1,0 +1,5 @@
+Compiled from "PackReloadConfig.java"
+public interface net.minecraft.client.resources.server.PackReloadConfig {
+  public abstract void scheduleReload(net.minecraft.client.resources.server.PackReloadConfig$Callbacks);
+    descriptor: (Lnet/minecraft/client/resources/server/PackReloadConfig$Callbacks;)V
+}

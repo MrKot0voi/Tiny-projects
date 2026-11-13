@@ -1,0 +1,32 @@
+Compiled from "OverlayMetadataSection.java"
+class net.minecraft.server.packs.OverlayMetadataSection$1 {
+  static final int[] $SwitchMap$net$minecraft$server$packs$PackType;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #1                  // Method net/minecraft/server/packs/PackType.values:()[Lnet/minecraft/server/packs/PackType;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #7                  // Field $SwitchMap$net$minecraft$server$packs$PackType:[I
+       9: getstatic     #7                  // Field $SwitchMap$net$minecraft$server$packs$PackType:[I
+      12: getstatic     #13                 // Field net/minecraft/server/packs/PackType.CLIENT_RESOURCES:Lnet/minecraft/server/packs/PackType;
+      15: invokevirtual #17                 // Method net/minecraft/server/packs/PackType.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: goto          24
+      23: astore_0
+      24: getstatic     #7                  // Field $SwitchMap$net$minecraft$server$packs$PackType:[I
+      27: getstatic     #23                 // Field net/minecraft/server/packs/PackType.SERVER_DATA:Lnet/minecraft/server/packs/PackType;
+      30: invokevirtual #17                 // Method net/minecraft/server/packs/PackType.ordinal:()I
+      33: iconst_2
+      34: iastore
+      35: goto          39
+      38: astore_0
+      39: return
+    Exception table:
+       from    to  target type
+           9    20    23   Class java/lang/NoSuchFieldError
+          24    35    38   Class java/lang/NoSuchFieldError
+}

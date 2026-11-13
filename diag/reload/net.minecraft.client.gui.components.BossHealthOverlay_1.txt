@@ -1,0 +1,116 @@
+Compiled from "BossHealthOverlay.java"
+class net.minecraft.client.gui.components.BossHealthOverlay$1 implements net.minecraft.network.protocol.game.ClientboundBossEventPacket$Handler {
+  final net.minecraft.client.gui.components.BossHealthOverlay this$0;
+    descriptor: Lnet/minecraft/client/gui/components/BossHealthOverlay;
+
+  net.minecraft.client.gui.components.BossHealthOverlay$1(net.minecraft.client.gui.components.BossHealthOverlay);
+    descriptor: (Lnet/minecraft/client/gui/components/BossHealthOverlay;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       5: aload_0
+       6: invokespecial #7                  // Method java/lang/Object."<init>":()V
+       9: return
+
+  public void add(java.util.UUID, net.minecraft.network.chat.Component, float, net.minecraft.world.BossEvent$BossBarColor, net.minecraft.world.BossEvent$BossBarOverlay, boolean, boolean, boolean);
+    descriptor: (Ljava/util/UUID;Lnet/minecraft/network/chat/Component;FLnet/minecraft/world/BossEvent$BossBarColor;Lnet/minecraft/world/BossEvent$BossBarOverlay;ZZZ)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: new           #19                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      11: dup
+      12: aload_1
+      13: aload_2
+      14: fload_3
+      15: aload         4
+      17: aload         5
+      19: iload         6
+      21: iload         7
+      23: iload         8
+      25: invokespecial #21                 // Method net/minecraft/client/gui/components/LerpingBossEvent."<init>":(Ljava/util/UUID;Lnet/minecraft/network/chat/Component;FLnet/minecraft/world/BossEvent$BossBarColor;Lnet/minecraft/world/BossEvent$BossBarOverlay;ZZZ)V
+      28: invokeinterface #24,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      33: pop
+      34: return
+
+  public void remove(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: invokeinterface #30,  2           // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: pop
+      14: return
+
+  public void updateProgress(java.util.UUID, float);
+    descriptor: (Ljava/util/UUID;F)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: invokeinterface #34,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #19                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      16: fload_2
+      17: invokevirtual #37                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setProgress:(F)V
+      20: return
+
+  public void updateName(java.util.UUID, net.minecraft.network.chat.Component);
+    descriptor: (Ljava/util/UUID;Lnet/minecraft/network/chat/Component;)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: invokeinterface #34,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #19                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      16: aload_2
+      17: invokevirtual #41                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setName:(Lnet/minecraft/network/chat/Component;)V
+      20: return
+
+  public void updateStyle(java.util.UUID, net.minecraft.world.BossEvent$BossBarColor, net.minecraft.world.BossEvent$BossBarOverlay);
+    descriptor: (Ljava/util/UUID;Lnet/minecraft/world/BossEvent$BossBarColor;Lnet/minecraft/world/BossEvent$BossBarOverlay;)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: invokeinterface #34,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #19                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      16: astore        4
+      18: aload         4
+      20: aload_2
+      21: invokevirtual #45                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setColor:(Lnet/minecraft/world/BossEvent$BossBarColor;)V
+      24: aload         4
+      26: aload_3
+      27: invokevirtual #49                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setOverlay:(Lnet/minecraft/world/BossEvent$BossBarOverlay;)V
+      30: return
+
+  public void updateProperties(java.util.UUID, boolean, boolean, boolean);
+    descriptor: (Ljava/util/UUID;ZZZ)V
+    Code:
+       0: aload_0
+       1: getfield      #1                  // Field this$0:Lnet/minecraft/client/gui/components/BossHealthOverlay;
+       4: getfield      #13                 // Field net/minecraft/client/gui/components/BossHealthOverlay.events:Ljava/util/Map;
+       7: aload_1
+       8: invokeinterface #34,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      13: checkcast     #19                 // class net/minecraft/client/gui/components/LerpingBossEvent
+      16: astore        5
+      18: aload         5
+      20: iload_2
+      21: invokevirtual #53                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setDarkenScreen:(Z)Lnet/minecraft/world/BossEvent;
+      24: pop
+      25: aload         5
+      27: iload_3
+      28: invokevirtual #57                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setPlayBossMusic:(Z)Lnet/minecraft/world/BossEvent;
+      31: pop
+      32: aload         5
+      34: iload         4
+      36: invokevirtual #60                 // Method net/minecraft/client/gui/components/LerpingBossEvent.setCreateWorldFog:(Z)Lnet/minecraft/world/BossEvent;
+      39: pop
+      40: return
+}

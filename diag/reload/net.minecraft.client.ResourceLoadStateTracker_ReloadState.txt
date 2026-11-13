@@ -1,0 +1,71 @@
+Compiled from "ResourceLoadStateTracker.java"
+class net.minecraft.client.ResourceLoadStateTracker$ReloadState {
+  private final net.minecraft.client.ResourceLoadStateTracker$ReloadReason reloadReason;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+
+  private final java.util.List<java.lang.String> packs;
+    descriptor: Ljava/util/List;
+
+  net.minecraft.client.ResourceLoadStateTracker$RecoveryInfo recoveryReloadInfo;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker$RecoveryInfo;
+
+  boolean finished;
+    descriptor: Z
+
+  net.minecraft.client.ResourceLoadStateTracker$ReloadState(net.minecraft.client.ResourceLoadStateTracker$ReloadReason, java.util.List<java.lang.String>);
+    descriptor: (Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;Ljava/util/List;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field reloadReason:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+       9: aload_0
+      10: aload_2
+      11: putfield      #13                 // Field packs:Ljava/util/List;
+      14: return
+
+  public void fillCrashInfo(net.minecraft.CrashReportCategory);
+    descriptor: (Lnet/minecraft/CrashReportCategory;)V
+    Code:
+       0: aload_1
+       1: ldc           #17                 // String Reload reason
+       3: aload_0
+       4: getfield      #7                  // Field reloadReason:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+       7: getfield      #19                 // Field net/minecraft/client/ResourceLoadStateTracker$ReloadReason.name:Ljava/lang/String;
+      10: invokevirtual #25                 // Method net/minecraft/CrashReportCategory.setDetail:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraft/CrashReportCategory;
+      13: pop
+      14: aload_1
+      15: ldc           #31                 // String Finished
+      17: aload_0
+      18: getfield      #33                 // Field finished:Z
+      21: ifeq          29
+      24: ldc           #37                 // String Yes
+      26: goto          31
+      29: ldc           #39                 // String No
+      31: invokevirtual #25                 // Method net/minecraft/CrashReportCategory.setDetail:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraft/CrashReportCategory;
+      34: pop
+      35: aload_1
+      36: ldc           #41                 // String Packs
+      38: aload_0
+      39: invokedynamic #43,  0             // InvokeDynamic #0:call:(Lnet/minecraft/client/ResourceLoadStateTracker$ReloadState;)Lnet/minecraft/CrashReportDetail;
+      44: invokevirtual #47                 // Method net/minecraft/CrashReportCategory.setDetail:(Ljava/lang/String;Lnet/minecraft/CrashReportDetail;)Lnet/minecraft/CrashReportCategory;
+      47: pop
+      48: aload_0
+      49: getfield      #50                 // Field recoveryReloadInfo:Lnet/minecraft/client/ResourceLoadStateTracker$RecoveryInfo;
+      52: ifnull        63
+      55: aload_0
+      56: getfield      #50                 // Field recoveryReloadInfo:Lnet/minecraft/client/ResourceLoadStateTracker$RecoveryInfo;
+      59: aload_1
+      60: invokevirtual #54                 // Method net/minecraft/client/ResourceLoadStateTracker$RecoveryInfo.fillCrashInfo:(Lnet/minecraft/CrashReportCategory;)V
+      63: return
+
+  private java.lang.String lambda$fillCrashInfo$0() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: ldc           #60                 // String ,
+       2: aload_0
+       3: getfield      #13                 // Field packs:Ljava/util/List;
+       6: invokestatic  #62                 // Method java/lang/String.join:(Ljava/lang/CharSequence;Ljava/lang/Iterable;)Ljava/lang/String;
+       9: areturn
+}

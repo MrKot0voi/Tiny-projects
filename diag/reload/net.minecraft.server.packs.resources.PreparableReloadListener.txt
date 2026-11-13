@@ -1,0 +1,18 @@
+Compiled from "PreparableReloadListener.java"
+public interface net.minecraft.server.packs.resources.PreparableReloadListener {
+  public abstract java.util.concurrent.CompletableFuture<java.lang.Void> reload(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, java.util.concurrent.Executor, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;Ljava/util/concurrent/Executor;Lnet/minecraft/server/packs/resources/PreparableReloadListener$PreparationBarrier;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+
+  public default void prepareSharedState(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState);
+    descriptor: (Lnet/minecraft/server/packs/resources/PreparableReloadListener$SharedState;)V
+    Code:
+       0: return
+
+  public default java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokeinterface #1,  1            // InterfaceMethod getClass:()Ljava/lang/Class;
+       6: invokevirtual #7                  // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+       9: areturn
+}

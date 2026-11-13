@@ -1,0 +1,93 @@
+Compiled from "ResourceLoadStateTracker.java"
+public final class net.minecraft.client.ResourceLoadStateTracker$ReloadReason extends java.lang.Enum<net.minecraft.client.ResourceLoadStateTracker$ReloadReason> {
+  public static final net.minecraft.client.ResourceLoadStateTracker$ReloadReason INITIAL;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+
+  public static final net.minecraft.client.ResourceLoadStateTracker$ReloadReason MANUAL;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+
+  public static final net.minecraft.client.ResourceLoadStateTracker$ReloadReason UNKNOWN;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+
+  final java.lang.String name;
+    descriptor: Ljava/lang/String;
+
+  private static final net.minecraft.client.ResourceLoadStateTracker$ReloadReason[] $VALUES;
+    descriptor: [Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+
+  public static net.minecraft.client.ResourceLoadStateTracker$ReloadReason[] values();
+    descriptor: ()[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+    Code:
+       0: getstatic     #13                 // Field $VALUES:[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+       3: invokevirtual #17                 // Method "[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;".clone:()Ljava/lang/Object;
+       6: checkcast     #18                 // class "[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;"
+       9: areturn
+
+  public static net.minecraft.client.ResourceLoadStateTracker$ReloadReason valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+    Code:
+       0: ldc           #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+       2: aload_0
+       3: invokestatic  #22                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+       9: areturn
+
+  private net.minecraft.client.ResourceLoadStateTracker$ReloadReason(java.lang.String);
+    descriptor: (Ljava/lang/String;ILjava/lang/String;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #28                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: aload_3
+       8: putfield      #32                 // Field name:Ljava/lang/String;
+      11: return
+
+  private static net.minecraft.client.ResourceLoadStateTracker$ReloadReason[] $values();
+    descriptor: ()[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+    Code:
+       0: iconst_3
+       1: anewarray     #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+       4: dup
+       5: iconst_0
+       6: getstatic     #3                  // Field INITIAL:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #7                  // Field MANUAL:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #10                 // Field UNKNOWN:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      21: aastore
+      22: areturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: new           #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+       3: dup
+       4: ldc           #36                 // String INITIAL
+       6: iconst_0
+       7: ldc           #37                 // String initial
+       9: invokespecial #39                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      12: putstatic     #3                  // Field INITIAL:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      15: new           #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+      18: dup
+      19: ldc           #42                 // String MANUAL
+      21: iconst_1
+      22: ldc           #43                 // String manual
+      24: invokespecial #39                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      27: putstatic     #7                  // Field MANUAL:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      30: new           #1                  // class net/minecraft/client/ResourceLoadStateTracker$ReloadReason
+      33: dup
+      34: ldc           #45                 // String UNKNOWN
+      36: iconst_2
+      37: ldc           #46                 // String unknown
+      39: invokespecial #39                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      42: putstatic     #10                 // Field UNKNOWN:Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      45: invokestatic  #48                 // Method $values:()[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      48: putstatic     #13                 // Field $VALUES:[Lnet/minecraft/client/ResourceLoadStateTracker$ReloadReason;
+      51: return
+}

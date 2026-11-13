@@ -1,0 +1,1304 @@
+Compiled from "PlayerTabOverlay.java"
+public class net.minecraft.client.gui.components.PlayerTabOverlay {
+  private static final net.minecraft.resources.Identifier PING_UNKNOWN_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier PING_1_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier PING_2_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier PING_3_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier PING_4_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier PING_5_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_FULL_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_HALF_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_FULL_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_HALF_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final net.minecraft.resources.Identifier HEART_HALF_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  private static final java.util.Comparator<net.minecraft.client.multiplayer.PlayerInfo> PLAYER_COMPARATOR;
+    descriptor: Ljava/util/Comparator;
+
+  public static final int MAX_ROWS_PER_COL;
+    descriptor: I
+
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+
+  private final net.minecraft.client.gui.Gui gui;
+    descriptor: Lnet/minecraft/client/gui/Gui;
+
+  private net.minecraft.network.chat.Component footer;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  private net.minecraft.network.chat.Component header;
+    descriptor: Lnet/minecraft/network/chat/Component;
+
+  private boolean visible;
+    descriptor: Z
+
+  private final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.PlayerTabOverlay$HealthState> healthStates;
+    descriptor: Ljava/util/Map;
+
+  public net.minecraft.client.gui.components.PlayerTabOverlay(net.minecraft.client.Minecraft, net.minecraft.client.gui.Gui);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/Gui;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #7                  // class it/unimi/dsi/fastutil/objects/Object2ObjectOpenHashMap
+       8: dup
+       9: invokespecial #9                  // Method it/unimi/dsi/fastutil/objects/Object2ObjectOpenHashMap."<init>":()V
+      12: putfield      #10                 // Field healthStates:Ljava/util/Map;
+      15: aload_0
+      16: aload_1
+      17: putfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      20: aload_0
+      21: aload_2
+      22: putfield      #20                 // Field gui:Lnet/minecraft/client/gui/Gui;
+      25: return
+
+  public net.minecraft.network.chat.Component getNameForDisplay(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Lnet/minecraft/network/chat/Component;
+    Code:
+       0: aload_1
+       1: invokevirtual #24                 // Method net/minecraft/client/multiplayer/PlayerInfo.getTabListDisplayName:()Lnet/minecraft/network/chat/Component;
+       4: ifnull        24
+       7: aload_0
+       8: aload_1
+       9: aload_1
+      10: invokevirtual #24                 // Method net/minecraft/client/multiplayer/PlayerInfo.getTabListDisplayName:()Lnet/minecraft/network/chat/Component;
+      13: invokeinterface #30,  1           // InterfaceMethod net/minecraft/network/chat/Component.copy:()Lnet/minecraft/network/chat/MutableComponent;
+      18: invokevirtual #36                 // Method decorateName:(Lnet/minecraft/client/multiplayer/PlayerInfo;Lnet/minecraft/network/chat/MutableComponent;)Lnet/minecraft/network/chat/Component;
+      21: goto          46
+      24: aload_0
+      25: aload_1
+      26: aload_1
+      27: invokevirtual #40                 // Method net/minecraft/client/multiplayer/PlayerInfo.getTeam:()Lnet/minecraft/world/scores/PlayerTeam;
+      30: aload_1
+      31: invokevirtual #44                 // Method net/minecraft/client/multiplayer/PlayerInfo.getProfile:()Lcom/mojang/authlib/GameProfile;
+      34: invokevirtual #48                 // Method com/mojang/authlib/GameProfile.name:()Ljava/lang/String;
+      37: invokestatic  #54                 // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      40: invokestatic  #58                 // Method net/minecraft/world/scores/PlayerTeam.formatNameForTeam:(Lnet/minecraft/world/scores/Team;Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;
+      43: invokevirtual #36                 // Method decorateName:(Lnet/minecraft/client/multiplayer/PlayerInfo;Lnet/minecraft/network/chat/MutableComponent;)Lnet/minecraft/network/chat/Component;
+      46: areturn
+
+  private net.minecraft.network.chat.Component decorateName(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.network.chat.MutableComponent);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;Lnet/minecraft/network/chat/MutableComponent;)Lnet/minecraft/network/chat/Component;
+    Code:
+       0: aload_1
+       1: invokevirtual #64                 // Method net/minecraft/client/multiplayer/PlayerInfo.getGameMode:()Lnet/minecraft/world/level/GameType;
+       4: getstatic     #68                 // Field net/minecraft/world/level/GameType.SPECTATOR:Lnet/minecraft/world/level/GameType;
+       7: if_acmpne     20
+      10: aload_2
+      11: getstatic     #74                 // Field net/minecraft/ChatFormatting.ITALIC:Lnet/minecraft/ChatFormatting;
+      14: invokevirtual #80                 // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;
+      17: goto          21
+      20: aload_2
+      21: areturn
+
+  public void setVisible(boolean);
+    descriptor: (Z)V
+    Code:
+       0: aload_0
+       1: getfield      #86                 // Field visible:Z
+       4: iload_1
+       5: if_icmpeq     68
+       8: aload_0
+       9: getfield      #10                 // Field healthStates:Ljava/util/Map;
+      12: invokeinterface #90,  1           // InterfaceMethod java/util/Map.clear:()V
+      17: aload_0
+      18: iload_1
+      19: putfield      #86                 // Field visible:Z
+      22: iload_1
+      23: ifeq          68
+      26: aload_0
+      27: invokevirtual #95                 // Method getPlayerInfos:()Ljava/util/List;
+      30: ldc           #99                 // String ,
+      32: invokestatic  #54                 // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      35: aload_0
+      36: invokedynamic #101,  0            // InvokeDynamic #0:apply:(Lnet/minecraft/client/gui/components/PlayerTabOverlay;)Ljava/util/function/Function;
+      41: invokestatic  #105                // Method net/minecraft/network/chat/ComponentUtils.formatList:(Ljava/util/Collection;Lnet/minecraft/network/chat/Component;Ljava/util/function/Function;)Lnet/minecraft/network/chat/MutableComponent;
+      44: astore_2
+      45: aload_0
+      46: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      49: invokevirtual #111                // Method net/minecraft/client/Minecraft.getNarrator:()Lnet/minecraft/client/GameNarrator;
+      52: ldc           #117                // String multiplayer.player.list.narration
+      54: iconst_1
+      55: anewarray     #2                  // class java/lang/Object
+      58: dup
+      59: iconst_0
+      60: aload_2
+      61: aastore
+      62: invokestatic  #119                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;
+      65: invokevirtual #123                // Method net/minecraft/client/GameNarrator.saySystemNow:(Lnet/minecraft/network/chat/Component;)V
+      68: return
+
+  private java.util.List<net.minecraft.client.multiplayer.PlayerInfo> getPlayerInfos();
+    descriptor: ()Ljava/util/List;
+    Code:
+       0: aload_0
+       1: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+       4: getfield      #129                // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+       7: getfield      #133                // Field net/minecraft/client/player/LocalPlayer.connection:Lnet/minecraft/client/multiplayer/ClientPacketListener;
+      10: invokevirtual #139                // Method net/minecraft/client/multiplayer/ClientPacketListener.getListedOnlinePlayers:()Ljava/util/Collection;
+      13: invokeinterface #145,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+      18: getstatic     #151                // Field PLAYER_COMPARATOR:Ljava/util/Comparator;
+      21: invokeinterface #155,  2          // InterfaceMethod java/util/stream/Stream.sorted:(Ljava/util/Comparator;)Ljava/util/stream/Stream;
+      26: ldc2_w        #161                // long 80l
+      29: invokeinterface #163,  3          // InterfaceMethod java/util/stream/Stream.limit:(J)Ljava/util/stream/Stream;
+      34: invokeinterface #167,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      39: areturn
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, net.minecraft.world.scores.Scoreboard, net.minecraft.world.scores.Objective);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;ILnet/minecraft/world/scores/Scoreboard;Lnet/minecraft/world/scores/Objective;)V
+    Code:
+       0: aload_0
+       1: invokevirtual #95                 // Method getPlayerInfos:()Ljava/util/List;
+       4: astore        5
+       6: new           #170                // class java/util/ArrayList
+       9: dup
+      10: aload         5
+      12: invokeinterface #172,  1          // InterfaceMethod java/util/List.size:()I
+      17: invokespecial #178                // Method java/util/ArrayList."<init>":(I)V
+      20: astore        6
+      22: aload_0
+      23: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      26: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      29: ldc           #185                // String
+      31: invokevirtual #187                // Method net/minecraft/client/gui/Font.width:(Ljava/lang/String;)I
+      34: istore        7
+      36: iconst_0
+      37: istore        8
+      39: iconst_0
+      40: istore        9
+      42: aload         5
+      44: invokeinterface #193,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      49: astore        10
+      51: aload         10
+      53: invokeinterface #197,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      58: ifeq          239
+      61: aload         10
+      63: invokeinterface #203,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      68: checkcast     #25                 // class net/minecraft/client/multiplayer/PlayerInfo
+      71: astore        11
+      73: aload_0
+      74: aload         11
+      76: invokevirtual #207                // Method getNameForDisplay:(Lnet/minecraft/client/multiplayer/PlayerInfo;)Lnet/minecraft/network/chat/Component;
+      79: astore        12
+      81: iload         8
+      83: aload_0
+      84: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      87: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      90: aload         12
+      92: invokevirtual #211                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+      95: invokestatic  #214                // Method java/lang/Math.max:(II)I
+      98: istore        8
+     100: iconst_0
+     101: istore        13
+     103: aconst_null
+     104: astore        14
+     106: iconst_0
+     107: istore        15
+     109: aload         4
+     111: ifnull        213
+     114: aload         11
+     116: invokevirtual #44                 // Method net/minecraft/client/multiplayer/PlayerInfo.getProfile:()Lcom/mojang/authlib/GameProfile;
+     119: invokestatic  #220                // InterfaceMethod net/minecraft/world/scores/ScoreHolder.fromGameProfile:(Lcom/mojang/authlib/GameProfile;)Lnet/minecraft/world/scores/ScoreHolder;
+     122: astore        16
+     124: aload_3
+     125: aload         16
+     127: aload         4
+     129: invokevirtual #226                // Method net/minecraft/world/scores/Scoreboard.getPlayerScoreInfo:(Lnet/minecraft/world/scores/ScoreHolder;Lnet/minecraft/world/scores/Objective;)Lnet/minecraft/world/scores/ReadOnlyScoreInfo;
+     132: astore        17
+     134: aload         17
+     136: ifnull        148
+     139: aload         17
+     141: invokeinterface #232,  1          // InterfaceMethod net/minecraft/world/scores/ReadOnlyScoreInfo.value:()I
+     146: istore        13
+     148: aload         4
+     150: invokevirtual #237                // Method net/minecraft/world/scores/Objective.getRenderType:()Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+     153: getstatic     #243                // Field net/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType.HEARTS:Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+     156: if_acmpeq     213
+     159: aload         4
+     161: getstatic     #249                // Field net/minecraft/network/chat/numbers/StyledFormat.PLAYER_LIST_DEFAULT:Lnet/minecraft/network/chat/numbers/StyledFormat;
+     164: invokevirtual #255                // Method net/minecraft/world/scores/Objective.numberFormatOrDefault:(Lnet/minecraft/network/chat/numbers/NumberFormat;)Lnet/minecraft/network/chat/numbers/NumberFormat;
+     167: astore        18
+     169: aload         17
+     171: aload         18
+     173: invokestatic  #259                // InterfaceMethod net/minecraft/world/scores/ReadOnlyScoreInfo.safeFormatValue:(Lnet/minecraft/world/scores/ReadOnlyScoreInfo;Lnet/minecraft/network/chat/numbers/NumberFormat;)Lnet/minecraft/network/chat/MutableComponent;
+     176: astore        14
+     178: aload_0
+     179: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     182: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     185: aload         14
+     187: invokevirtual #211                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+     190: istore        15
+     192: iload         9
+     194: iload         15
+     196: ifle          207
+     199: iload         7
+     201: iload         15
+     203: iadd
+     204: goto          208
+     207: iconst_0
+     208: invokestatic  #214                // Method java/lang/Math.max:(II)I
+     211: istore        9
+     213: aload         6
+     215: new           #263                // class net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry
+     218: dup
+     219: aload         12
+     221: iload         13
+     223: aload         14
+     225: iload         15
+     227: invokespecial #265                // Method net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry."<init>":(Lnet/minecraft/network/chat/Component;ILnet/minecraft/network/chat/Component;I)V
+     230: invokeinterface #268,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     235: pop
+     236: goto          51
+     239: aload_0
+     240: getfield      #10                 // Field healthStates:Ljava/util/Map;
+     243: invokeinterface #272,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+     248: ifne          303
+     251: aload         5
+     253: invokeinterface #275,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+     258: invokedynamic #276,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     263: invokeinterface #279,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+     268: invokestatic  #283                // Method java/util/stream/Collectors.toSet:()Ljava/util/stream/Collector;
+     271: invokeinterface #289,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     276: checkcast     #293                // class java/util/Set
+     279: astore        10
+     281: aload_0
+     282: getfield      #10                 // Field healthStates:Ljava/util/Map;
+     285: invokeinterface #295,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+     290: aload         10
+     292: invokedynamic #299,  0            // InvokeDynamic #2:test:(Ljava/util/Set;)Ljava/util/function/Predicate;
+     297: invokeinterface #303,  2          // InterfaceMethod java/util/Set.removeIf:(Ljava/util/function/Predicate;)Z
+     302: pop
+     303: aload         5
+     305: invokeinterface #172,  1          // InterfaceMethod java/util/List.size:()I
+     310: istore        10
+     312: iload         10
+     314: istore        11
+     316: iconst_1
+     317: istore        12
+     319: iload         11
+     321: bipush        20
+     323: if_icmple     344
+     326: iinc          12, 1
+     329: iload         10
+     331: iload         12
+     333: iadd
+     334: iconst_1
+     335: isub
+     336: iload         12
+     338: idiv
+     339: istore        11
+     341: goto          319
+     344: aload_0
+     345: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     348: invokevirtual #307                // Method net/minecraft/client/Minecraft.isLocalServer:()Z
+     351: ifne          370
+     354: aload_0
+     355: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     358: invokevirtual #310                // Method net/minecraft/client/Minecraft.getConnection:()Lnet/minecraft/client/multiplayer/ClientPacketListener;
+     361: invokevirtual #314                // Method net/minecraft/client/multiplayer/ClientPacketListener.getConnection:()Lnet/minecraft/network/Connection;
+     364: invokevirtual #317                // Method net/minecraft/network/Connection.isEncrypted:()Z
+     367: ifeq          374
+     370: iconst_1
+     371: goto          375
+     374: iconst_0
+     375: istore        13
+     377: aload         4
+     379: ifnull        407
+     382: aload         4
+     384: invokevirtual #237                // Method net/minecraft/world/scores/Objective.getRenderType:()Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+     387: getstatic     #243                // Field net/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType.HEARTS:Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+     390: if_acmpne     400
+     393: bipush        90
+     395: istore        14
+     397: goto          410
+     400: iload         9
+     402: istore        14
+     404: goto          410
+     407: iconst_0
+     408: istore        14
+     410: iload         12
+     412: iload         13
+     414: ifeq          422
+     417: bipush        9
+     419: goto          423
+     422: iconst_0
+     423: iload         8
+     425: iadd
+     426: iload         14
+     428: iadd
+     429: bipush        13
+     431: iadd
+     432: imul
+     433: iload_2
+     434: bipush        50
+     436: isub
+     437: invokestatic  #322                // Method java/lang/Math.min:(II)I
+     440: iload         12
+     442: idiv
+     443: istore        15
+     445: iload_2
+     446: iconst_2
+     447: idiv
+     448: iload         15
+     450: iload         12
+     452: imul
+     453: iload         12
+     455: iconst_1
+     456: isub
+     457: iconst_5
+     458: imul
+     459: iadd
+     460: iconst_2
+     461: idiv
+     462: isub
+     463: istore        16
+     465: bipush        10
+     467: istore        17
+     469: iload         15
+     471: iload         12
+     473: imul
+     474: iload         12
+     476: iconst_1
+     477: isub
+     478: iconst_5
+     479: imul
+     480: iadd
+     481: istore        18
+     483: aconst_null
+     484: astore        19
+     486: aload_0
+     487: getfield      #325                // Field header:Lnet/minecraft/network/chat/Component;
+     490: ifnull        566
+     493: aload_0
+     494: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     497: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     500: aload_0
+     501: getfield      #325                // Field header:Lnet/minecraft/network/chat/Component;
+     504: iload_2
+     505: bipush        50
+     507: isub
+     508: invokevirtual #329                // Method net/minecraft/client/gui/Font.split:(Lnet/minecraft/network/chat/FormattedText;I)Ljava/util/List;
+     511: astore        19
+     513: aload         19
+     515: invokeinterface #193,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     520: astore        20
+     522: aload         20
+     524: invokeinterface #197,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     529: ifeq          566
+     532: aload         20
+     534: invokeinterface #203,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     539: checkcast     #333                // class net/minecraft/util/FormattedCharSequence
+     542: astore        21
+     544: iload         18
+     546: aload_0
+     547: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     550: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     553: aload         21
+     555: invokevirtual #335                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/util/FormattedCharSequence;)I
+     558: invokestatic  #214                // Method java/lang/Math.max:(II)I
+     561: istore        18
+     563: goto          522
+     566: aconst_null
+     567: astore        20
+     569: aload_0
+     570: getfield      #338                // Field footer:Lnet/minecraft/network/chat/Component;
+     573: ifnull        649
+     576: aload_0
+     577: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     580: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     583: aload_0
+     584: getfield      #338                // Field footer:Lnet/minecraft/network/chat/Component;
+     587: iload_2
+     588: bipush        50
+     590: isub
+     591: invokevirtual #329                // Method net/minecraft/client/gui/Font.split:(Lnet/minecraft/network/chat/FormattedText;I)Ljava/util/List;
+     594: astore        20
+     596: aload         20
+     598: invokeinterface #193,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     603: astore        21
+     605: aload         21
+     607: invokeinterface #197,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     612: ifeq          649
+     615: aload         21
+     617: invokeinterface #203,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     622: checkcast     #333                // class net/minecraft/util/FormattedCharSequence
+     625: astore        22
+     627: iload         18
+     629: aload_0
+     630: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     633: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     636: aload         22
+     638: invokevirtual #335                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/util/FormattedCharSequence;)I
+     641: invokestatic  #214                // Method java/lang/Math.max:(II)I
+     644: istore        18
+     646: goto          605
+     649: aload         19
+     651: ifnull        776
+     654: aload_1
+     655: iload_2
+     656: iconst_2
+     657: idiv
+     658: iload         18
+     660: iconst_2
+     661: idiv
+     662: isub
+     663: iconst_1
+     664: isub
+     665: iload         17
+     667: iconst_1
+     668: isub
+     669: iload_2
+     670: iconst_2
+     671: idiv
+     672: iload         18
+     674: iconst_2
+     675: idiv
+     676: iadd
+     677: iconst_1
+     678: iadd
+     679: iload         17
+     681: aload         19
+     683: invokeinterface #172,  1          // InterfaceMethod java/util/List.size:()I
+     688: bipush        9
+     690: imul
+     691: iadd
+     692: ldc_w         #343                // int -2147483648
+     695: invokevirtual #344                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+     698: aload         19
+     700: invokeinterface #193,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     705: astore        21
+     707: aload         21
+     709: invokeinterface #197,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     714: ifeq          773
+     717: aload         21
+     719: invokeinterface #203,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     724: checkcast     #333                // class net/minecraft/util/FormattedCharSequence
+     727: astore        22
+     729: aload_0
+     730: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     733: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     736: aload         22
+     738: invokevirtual #335                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/util/FormattedCharSequence;)I
+     741: istore        23
+     743: aload_1
+     744: aload_0
+     745: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     748: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     751: aload         22
+     753: iload_2
+     754: iconst_2
+     755: idiv
+     756: iload         23
+     758: iconst_2
+     759: idiv
+     760: isub
+     761: iload         17
+     763: iconst_m1
+     764: invokevirtual #350                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V
+     767: iinc          17, 9
+     770: goto          707
+     773: iinc          17, 1
+     776: aload_1
+     777: iload_2
+     778: iconst_2
+     779: idiv
+     780: iload         18
+     782: iconst_2
+     783: idiv
+     784: isub
+     785: iconst_1
+     786: isub
+     787: iload         17
+     789: iconst_1
+     790: isub
+     791: iload_2
+     792: iconst_2
+     793: idiv
+     794: iload         18
+     796: iconst_2
+     797: idiv
+     798: iadd
+     799: iconst_1
+     800: iadd
+     801: iload         17
+     803: iload         11
+     805: bipush        9
+     807: imul
+     808: iadd
+     809: ldc_w         #343                // int -2147483648
+     812: invokevirtual #344                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+     815: aload_0
+     816: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     819: getfield      #354                // Field net/minecraft/client/Minecraft.options:Lnet/minecraft/client/Options;
+     822: ldc_w         #358                // int 553648127
+     825: invokevirtual #359                // Method net/minecraft/client/Options.getBackgroundColor:(I)I
+     828: istore        21
+     830: iconst_0
+     831: istore        22
+     833: iload         22
+     835: iload         10
+     837: if_icmpge     1152
+     840: iload         22
+     842: iload         11
+     844: idiv
+     845: istore        23
+     847: iload         22
+     849: iload         11
+     851: irem
+     852: istore        24
+     854: iload         16
+     856: iload         23
+     858: iload         15
+     860: imul
+     861: iadd
+     862: iload         23
+     864: iconst_5
+     865: imul
+     866: iadd
+     867: istore        25
+     869: iload         17
+     871: iload         24
+     873: bipush        9
+     875: imul
+     876: iadd
+     877: istore        26
+     879: aload_1
+     880: iload         25
+     882: iload         26
+     884: iload         25
+     886: iload         15
+     888: iadd
+     889: iload         26
+     891: bipush        8
+     893: iadd
+     894: iload         21
+     896: invokevirtual #344                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+     899: iload         22
+     901: aload         5
+     903: invokeinterface #172,  1          // InterfaceMethod java/util/List.size:()I
+     908: if_icmpge     1146
+     911: aload         5
+     913: iload         22
+     915: invokeinterface #365,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     920: checkcast     #25                 // class net/minecraft/client/multiplayer/PlayerInfo
+     923: astore        27
+     925: aload         6
+     927: iload         22
+     929: invokeinterface #365,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     934: checkcast     #263                // class net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry
+     937: astore        28
+     939: aload         27
+     941: invokevirtual #44                 // Method net/minecraft/client/multiplayer/PlayerInfo.getProfile:()Lcom/mojang/authlib/GameProfile;
+     944: astore        29
+     946: iload         13
+     948: ifeq          1022
+     951: aload_0
+     952: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     955: getfield      #369                // Field net/minecraft/client/Minecraft.level:Lnet/minecraft/client/multiplayer/ClientLevel;
+     958: aload         29
+     960: invokevirtual #373                // Method com/mojang/authlib/GameProfile.id:()Ljava/util/UUID;
+     963: invokevirtual #377                // Method net/minecraft/client/multiplayer/ClientLevel.getPlayerByUUID:(Ljava/util/UUID;)Lnet/minecraft/world/entity/player/Player;
+     966: astore        30
+     968: aload         30
+     970: ifnull        985
+     973: aload         30
+     975: invokestatic  #383                // Method net/minecraft/client/renderer/entity/player/AvatarRenderer.isPlayerUpsideDown:(Lnet/minecraft/world/entity/player/Player;)Z
+     978: ifeq          985
+     981: iconst_1
+     982: goto          986
+     985: iconst_0
+     986: istore        31
+     988: aload_1
+     989: aload         27
+     991: invokevirtual #389                // Method net/minecraft/client/multiplayer/PlayerInfo.getSkin:()Lnet/minecraft/world/entity/player/PlayerSkin;
+     994: invokevirtual #393                // Method net/minecraft/world/entity/player/PlayerSkin.body:()Lnet/minecraft/core/ClientAsset$Texture;
+     997: invokeinterface #399,  1          // InterfaceMethod net/minecraft/core/ClientAsset$Texture.texturePath:()Lnet/minecraft/resources/Identifier;
+    1002: iload         25
+    1004: iload         26
+    1006: bipush        8
+    1008: aload         27
+    1010: invokevirtual #405                // Method net/minecraft/client/multiplayer/PlayerInfo.showHat:()Z
+    1013: iload         31
+    1015: iconst_m1
+    1016: invokestatic  #408                // Method net/minecraft/client/gui/components/PlayerFaceRenderer.draw:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/Identifier;IIIZZI)V
+    1019: iinc          25, 9
+    1022: aload_1
+    1023: aload_0
+    1024: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+    1027: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+    1030: aload         28
+    1032: getfield      #414                // Field net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry.name:Lnet/minecraft/network/chat/Component;
+    1035: iload         25
+    1037: iload         26
+    1039: aload         27
+    1041: invokevirtual #64                 // Method net/minecraft/client/multiplayer/PlayerInfo.getGameMode:()Lnet/minecraft/world/level/GameType;
+    1044: getstatic     #68                 // Field net/minecraft/world/level/GameType.SPECTATOR:Lnet/minecraft/world/level/GameType;
+    1047: if_acmpne     1056
+    1050: ldc_w         #416                // int -1862270977
+    1053: goto          1057
+    1056: iconst_m1
+    1057: invokevirtual #417                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+    1060: aload         4
+    1062: ifnull        1121
+    1065: aload         27
+    1067: invokevirtual #64                 // Method net/minecraft/client/multiplayer/PlayerInfo.getGameMode:()Lnet/minecraft/world/level/GameType;
+    1070: getstatic     #68                 // Field net/minecraft/world/level/GameType.SPECTATOR:Lnet/minecraft/world/level/GameType;
+    1073: if_acmpeq     1121
+    1076: iload         25
+    1078: iload         8
+    1080: iadd
+    1081: iconst_1
+    1082: iadd
+    1083: istore        30
+    1085: iload         30
+    1087: iload         14
+    1089: iadd
+    1090: istore        31
+    1092: iload         31
+    1094: iload         30
+    1096: isub
+    1097: iconst_5
+    1098: if_icmple     1121
+    1101: aload_0
+    1102: aload         4
+    1104: iload         26
+    1106: aload         28
+    1108: iload         30
+    1110: iload         31
+    1112: aload         29
+    1114: invokevirtual #373                // Method com/mojang/authlib/GameProfile.id:()Ljava/util/UUID;
+    1117: aload_1
+    1118: invokevirtual #420                // Method renderTablistScore:(Lnet/minecraft/world/scores/Objective;ILnet/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry;IILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;)V
+    1121: aload_0
+    1122: aload_1
+    1123: iload         15
+    1125: iload         25
+    1127: iload         13
+    1129: ifeq          1137
+    1132: bipush        9
+    1134: goto          1138
+    1137: iconst_0
+    1138: isub
+    1139: iload         26
+    1141: aload         27
+    1143: invokevirtual #424                // Method renderPingIcon:(Lnet/minecraft/client/gui/GuiGraphics;IIILnet/minecraft/client/multiplayer/PlayerInfo;)V
+    1146: iinc          22, 1
+    1149: goto          833
+    1152: aload         20
+    1154: ifnull        1288
+    1157: iload         17
+    1159: iload         11
+    1161: bipush        9
+    1163: imul
+    1164: iconst_1
+    1165: iadd
+    1166: iadd
+    1167: istore        17
+    1169: aload_1
+    1170: iload_2
+    1171: iconst_2
+    1172: idiv
+    1173: iload         18
+    1175: iconst_2
+    1176: idiv
+    1177: isub
+    1178: iconst_1
+    1179: isub
+    1180: iload         17
+    1182: iconst_1
+    1183: isub
+    1184: iload_2
+    1185: iconst_2
+    1186: idiv
+    1187: iload         18
+    1189: iconst_2
+    1190: idiv
+    1191: iadd
+    1192: iconst_1
+    1193: iadd
+    1194: iload         17
+    1196: aload         20
+    1198: invokeinterface #172,  1          // InterfaceMethod java/util/List.size:()I
+    1203: bipush        9
+    1205: imul
+    1206: iadd
+    1207: ldc_w         #343                // int -2147483648
+    1210: invokevirtual #344                // Method net/minecraft/client/gui/GuiGraphics.fill:(IIIII)V
+    1213: aload         20
+    1215: invokeinterface #193,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+    1220: astore        22
+    1222: aload         22
+    1224: invokeinterface #197,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+    1229: ifeq          1288
+    1232: aload         22
+    1234: invokeinterface #203,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+    1239: checkcast     #333                // class net/minecraft/util/FormattedCharSequence
+    1242: astore        23
+    1244: aload_0
+    1245: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+    1248: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+    1251: aload         23
+    1253: invokevirtual #335                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/util/FormattedCharSequence;)I
+    1256: istore        24
+    1258: aload_1
+    1259: aload_0
+    1260: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+    1263: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+    1266: aload         23
+    1268: iload_2
+    1269: iconst_2
+    1270: idiv
+    1271: iload         24
+    1273: iconst_2
+    1274: idiv
+    1275: isub
+    1276: iload         17
+    1278: iconst_m1
+    1279: invokevirtual #350                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V
+    1282: iinc          17, 9
+    1285: goto          1222
+    1288: return
+
+  protected void renderPingIcon(net.minecraft.client.gui.GuiGraphics, int, int, int, net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIILnet/minecraft/client/multiplayer/PlayerInfo;)V
+    Code:
+       0: aload         5
+       2: invokevirtual #428                // Method net/minecraft/client/multiplayer/PlayerInfo.getLatency:()I
+       5: ifge          16
+       8: getstatic     #431                // Field PING_UNKNOWN_SPRITE:Lnet/minecraft/resources/Identifier;
+      11: astore        6
+      13: goto          97
+      16: aload         5
+      18: invokevirtual #428                // Method net/minecraft/client/multiplayer/PlayerInfo.getLatency:()I
+      21: sipush        150
+      24: if_icmpge     35
+      27: getstatic     #435                // Field PING_5_SPRITE:Lnet/minecraft/resources/Identifier;
+      30: astore        6
+      32: goto          97
+      35: aload         5
+      37: invokevirtual #428                // Method net/minecraft/client/multiplayer/PlayerInfo.getLatency:()I
+      40: sipush        300
+      43: if_icmpge     54
+      46: getstatic     #438                // Field PING_4_SPRITE:Lnet/minecraft/resources/Identifier;
+      49: astore        6
+      51: goto          97
+      54: aload         5
+      56: invokevirtual #428                // Method net/minecraft/client/multiplayer/PlayerInfo.getLatency:()I
+      59: sipush        600
+      62: if_icmpge     73
+      65: getstatic     #441                // Field PING_3_SPRITE:Lnet/minecraft/resources/Identifier;
+      68: astore        6
+      70: goto          97
+      73: aload         5
+      75: invokevirtual #428                // Method net/minecraft/client/multiplayer/PlayerInfo.getLatency:()I
+      78: sipush        1000
+      81: if_icmpge     92
+      84: getstatic     #444                // Field PING_2_SPRITE:Lnet/minecraft/resources/Identifier;
+      87: astore        6
+      89: goto          97
+      92: getstatic     #447                // Field PING_1_SPRITE:Lnet/minecraft/resources/Identifier;
+      95: astore        6
+      97: aload_1
+      98: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     101: aload         6
+     103: iload_3
+     104: iload_2
+     105: iadd
+     106: bipush        11
+     108: isub
+     109: iload         4
+     111: bipush        10
+     113: bipush        8
+     115: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     118: return
+
+  private void renderTablistScore(net.minecraft.world.scores.Objective, int, net.minecraft.client.gui.components.PlayerTabOverlay$ScoreDisplayEntry, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/world/scores/Objective;ILnet/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry;IILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;)V
+    Code:
+       0: aload_1
+       1: invokevirtual #237                // Method net/minecraft/world/scores/Objective.getRenderType:()Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+       4: getstatic     #243                // Field net/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType.HEARTS:Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+       7: if_acmpne     30
+      10: aload_0
+      11: iload_2
+      12: iload         4
+      14: iload         5
+      16: aload         6
+      18: aload         7
+      20: aload_3
+      21: getfield      #460                // Field net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry.score:I
+      24: invokevirtual #464                // Method renderTablistHearts:(IIILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;I)V
+      27: goto          62
+      30: aload_3
+      31: getfield      #468                // Field net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry.formattedScore:Lnet/minecraft/network/chat/Component;
+      34: ifnull        62
+      37: aload         7
+      39: aload_0
+      40: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+      43: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+      46: aload_3
+      47: getfield      #468                // Field net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry.formattedScore:Lnet/minecraft/network/chat/Component;
+      50: iload         5
+      52: aload_3
+      53: getfield      #471                // Field net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry.scoreWidth:I
+      56: isub
+      57: iload_2
+      58: iconst_m1
+      59: invokevirtual #417                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+      62: return
+
+  private void renderTablistHearts(int, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics, int);
+    descriptor: (IIILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;I)V
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field healthStates:Ljava/util/Map;
+       4: aload         4
+       6: iload         6
+       8: invokedynamic #474,  0            // InvokeDynamic #3:apply:(I)Ljava/util/function/Function;
+      13: invokeinterface #477,  3          // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      18: checkcast     #481                // class net/minecraft/client/gui/components/PlayerTabOverlay$HealthState
+      21: astore        7
+      23: aload         7
+      25: iload         6
+      27: aload_0
+      28: getfield      #20                 // Field gui:Lnet/minecraft/client/gui/Gui;
+      31: invokevirtual #483                // Method net/minecraft/client/gui/Gui.getGuiTicks:()I
+      34: i2l
+      35: invokevirtual #488                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.update:(IJ)V
+      38: iload         6
+      40: aload         7
+      42: invokevirtual #492                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.displayedValue:()I
+      45: invokestatic  #214                // Method java/lang/Math.max:(II)I
+      48: iconst_2
+      49: invokestatic  #495                // Method net/minecraft/util/Mth.positiveCeilDiv:(II)I
+      52: istore        8
+      54: iload         6
+      56: aload         7
+      58: invokevirtual #492                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.displayedValue:()I
+      61: bipush        20
+      63: invokestatic  #214                // Method java/lang/Math.max:(II)I
+      66: invokestatic  #214                // Method java/lang/Math.max:(II)I
+      69: iconst_2
+      70: idiv
+      71: istore        9
+      73: aload         7
+      75: aload_0
+      76: getfield      #20                 // Field gui:Lnet/minecraft/client/gui/Gui;
+      79: invokevirtual #483                // Method net/minecraft/client/gui/Gui.getGuiTicks:()I
+      82: i2l
+      83: invokevirtual #500                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.isBlinking:(J)Z
+      86: istore        10
+      88: iload         8
+      90: ifle          528
+      93: iload_3
+      94: iload_2
+      95: isub
+      96: iconst_4
+      97: isub
+      98: i2f
+      99: iload         9
+     101: i2f
+     102: fdiv
+     103: ldc_w         #504                // float 9.0f
+     106: invokestatic  #505                // Method java/lang/Math.min:(FF)F
+     109: invokestatic  #508                // Method net/minecraft/util/Mth.floor:(F)I
+     112: istore        11
+     114: iload         11
+     116: iconst_3
+     117: if_icmpgt     262
+     120: iload         6
+     122: i2f
+     123: ldc_w         #512                // float 20.0f
+     126: fdiv
+     127: fconst_0
+     128: fconst_1
+     129: invokestatic  #513                // Method net/minecraft/util/Mth.clamp:(FFF)F
+     132: fstore        12
+     134: fconst_1
+     135: fload         12
+     137: fsub
+     138: ldc_w         #517                // float 255.0f
+     141: fmul
+     142: f2i
+     143: bipush        16
+     145: ishl
+     146: fload         12
+     148: ldc_w         #517                // float 255.0f
+     151: fmul
+     152: f2i
+     153: bipush        8
+     155: ishl
+     156: ior
+     157: istore        13
+     159: iload         6
+     161: i2f
+     162: fconst_2
+     163: fdiv
+     164: fstore        14
+     166: ldc_w         #518                // String multiplayer.player.list.hp
+     169: iconst_1
+     170: anewarray     #2                  // class java/lang/Object
+     173: dup
+     174: iconst_0
+     175: fload         14
+     177: invokestatic  #520                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     180: aastore
+     181: invokestatic  #119                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;
+     184: astore        15
+     186: iload_3
+     187: aload_0
+     188: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     191: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     194: aload         15
+     196: invokevirtual #211                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+     199: isub
+     200: iload_2
+     201: if_icmplt     211
+     204: aload         15
+     206: astore        16
+     208: goto          221
+     211: fload         14
+     213: invokestatic  #526                // Method java/lang/Float.toString:(F)Ljava/lang/String;
+     216: invokestatic  #54                 // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     219: astore        16
+     221: aload         5
+     223: aload_0
+     224: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     227: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     230: aload         16
+     232: iload_3
+     233: iload_2
+     234: iadd
+     235: aload_0
+     236: getfield      #16                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+     239: getfield      #181                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     242: aload         16
+     244: invokevirtual #211                // Method net/minecraft/client/gui/Font.width:(Lnet/minecraft/network/chat/FormattedText;)I
+     247: isub
+     248: iconst_2
+     249: idiv
+     250: iload_1
+     251: iload         13
+     253: invokestatic  #530                // Method net/minecraft/util/ARGB.opaque:(I)I
+     256: invokevirtual #417                // Method net/minecraft/client/gui/GuiGraphics.drawString:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+     259: goto          528
+     262: iload         10
+     264: ifeq          273
+     267: getstatic     #535                // Field HEART_CONTAINER_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     270: goto          276
+     273: getstatic     #538                // Field HEART_CONTAINER_SPRITE:Lnet/minecraft/resources/Identifier;
+     276: astore        12
+     278: iload         8
+     280: istore        13
+     282: iload         13
+     284: iload         9
+     286: if_icmpge     317
+     289: aload         5
+     291: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     294: aload         12
+     296: iload_2
+     297: iload         13
+     299: iload         11
+     301: imul
+     302: iadd
+     303: iload_1
+     304: bipush        9
+     306: bipush        9
+     308: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     311: iinc          13, 1
+     314: goto          282
+     317: iconst_0
+     318: istore        13
+     320: iload         13
+     322: iload         8
+     324: if_icmpge     528
+     327: aload         5
+     329: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     332: aload         12
+     334: iload_2
+     335: iload         13
+     337: iload         11
+     339: imul
+     340: iadd
+     341: iload_1
+     342: bipush        9
+     344: bipush        9
+     346: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     349: iload         10
+     351: ifeq          428
+     354: iload         13
+     356: iconst_2
+     357: imul
+     358: iconst_1
+     359: iadd
+     360: aload         7
+     362: invokevirtual #492                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.displayedValue:()I
+     365: if_icmpge     391
+     368: aload         5
+     370: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     373: getstatic     #541                // Field HEART_FULL_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     376: iload_2
+     377: iload         13
+     379: iload         11
+     381: imul
+     382: iadd
+     383: iload_1
+     384: bipush        9
+     386: bipush        9
+     388: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     391: iload         13
+     393: iconst_2
+     394: imul
+     395: iconst_1
+     396: iadd
+     397: aload         7
+     399: invokevirtual #492                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState.displayedValue:()I
+     402: if_icmpne     428
+     405: aload         5
+     407: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     410: getstatic     #544                // Field HEART_HALF_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     413: iload_2
+     414: iload         13
+     416: iload         11
+     418: imul
+     419: iadd
+     420: iload_1
+     421: bipush        9
+     423: bipush        9
+     425: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     428: iload         13
+     430: iconst_2
+     431: imul
+     432: iconst_1
+     433: iadd
+     434: iload         6
+     436: if_icmpge     475
+     439: aload         5
+     441: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     444: iload         13
+     446: bipush        10
+     448: if_icmplt     457
+     451: getstatic     #547                // Field HEART_ABSORBING_FULL_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     454: goto          460
+     457: getstatic     #550                // Field HEART_FULL_SPRITE:Lnet/minecraft/resources/Identifier;
+     460: iload_2
+     461: iload         13
+     463: iload         11
+     465: imul
+     466: iadd
+     467: iload_1
+     468: bipush        9
+     470: bipush        9
+     472: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     475: iload         13
+     477: iconst_2
+     478: imul
+     479: iconst_1
+     480: iadd
+     481: iload         6
+     483: if_icmpne     522
+     486: aload         5
+     488: getstatic     #450                // Field net/minecraft/client/renderer/RenderPipelines.GUI_TEXTURED:Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+     491: iload         13
+     493: bipush        10
+     495: if_icmplt     504
+     498: getstatic     #553                // Field HEART_ABSORBING_HALF_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     501: goto          507
+     504: getstatic     #556                // Field HEART_HALF_SPRITE:Lnet/minecraft/resources/Identifier;
+     507: iload_2
+     508: iload         13
+     510: iload         11
+     512: imul
+     513: iadd
+     514: iload_1
+     515: bipush        9
+     517: bipush        9
+     519: invokevirtual #456                // Method net/minecraft/client/gui/GuiGraphics.blitSprite:(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V
+     522: iinc          13, 1
+     525: goto          320
+     528: return
+
+  public void setFooter(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #338                // Field footer:Lnet/minecraft/network/chat/Component;
+       5: return
+
+  public void setHeader(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #325                // Field header:Lnet/minecraft/network/chat/Component;
+       5: return
+
+  public void reset();
+    descriptor: ()V
+    Code:
+       0: aload_0
+       1: aconst_null
+       2: putfield      #325                // Field header:Lnet/minecraft/network/chat/Component;
+       5: aload_0
+       6: aconst_null
+       7: putfield      #338                // Field footer:Lnet/minecraft/network/chat/Component;
+      10: return
+
+  private static net.minecraft.client.gui.components.PlayerTabOverlay$HealthState lambda$renderTablistHearts$6(int, java.util.UUID);
+    descriptor: (ILjava/util/UUID;)Lnet/minecraft/client/gui/components/PlayerTabOverlay$HealthState;
+    Code:
+       0: new           #481                // class net/minecraft/client/gui/components/PlayerTabOverlay$HealthState
+       3: dup
+       4: iload_0
+       5: invokespecial #559                // Method net/minecraft/client/gui/components/PlayerTabOverlay$HealthState."<init>":(I)V
+       8: areturn
+
+  private static boolean lambda$render$5(java.util.Set, java.util.UUID);
+    descriptor: (Ljava/util/Set;Ljava/util/UUID;)Z
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #560,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       7: ifne          14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+
+  private static java.util.UUID lambda$render$4(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/util/UUID;
+    Code:
+       0: aload_0
+       1: invokevirtual #44                 // Method net/minecraft/client/multiplayer/PlayerInfo.getProfile:()Lcom/mojang/authlib/GameProfile;
+       4: invokevirtual #373                // Method com/mojang/authlib/GameProfile.id:()Ljava/util/UUID;
+       7: areturn
+
+  private static java.lang.String lambda$static$3(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokevirtual #44                 // Method net/minecraft/client/multiplayer/PlayerInfo.getProfile:()Lcom/mojang/authlib/GameProfile;
+       4: invokevirtual #48                 // Method com/mojang/authlib/GameProfile.name:()Ljava/lang/String;
+       7: areturn
+
+  private static java.lang.String lambda$static$2(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+    Code:
+       0: aload_0
+       1: invokevirtual #40                 // Method net/minecraft/client/multiplayer/PlayerInfo.getTeam:()Lnet/minecraft/world/scores/PlayerTeam;
+       4: invokedynamic #563,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+       9: ldc_w         #564                // String
+      12: invokestatic  #566                // Method net/minecraft/Optionull.mapOrDefault:(Ljava/lang/Object;Ljava/util/function/Function;Ljava/lang/Object;)Ljava/lang/Object;
+      15: checkcast     #572                // class java/lang/String
+      18: areturn
+
+  private static int lambda$static$1(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)I
+    Code:
+       0: aload_0
+       1: invokevirtual #64                 // Method net/minecraft/client/multiplayer/PlayerInfo.getGameMode:()Lnet/minecraft/world/level/GameType;
+       4: getstatic     #68                 // Field net/minecraft/world/level/GameType.SPECTATOR:Lnet/minecraft/world/level/GameType;
+       7: if_acmpne     14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+
+  private static int lambda$static$0(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)I
+    Code:
+       0: aload_0
+       1: invokevirtual #574                // Method net/minecraft/client/multiplayer/PlayerInfo.getTabListOrder:()I
+       4: ineg
+       5: ireturn
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: ldc_w         #577                // String icon/ping_unknown
+       3: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+       6: putstatic     #431                // Field PING_UNKNOWN_SPRITE:Lnet/minecraft/resources/Identifier;
+       9: ldc_w         #585                // String icon/ping_1
+      12: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      15: putstatic     #447                // Field PING_1_SPRITE:Lnet/minecraft/resources/Identifier;
+      18: ldc_w         #587                // String icon/ping_2
+      21: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      24: putstatic     #444                // Field PING_2_SPRITE:Lnet/minecraft/resources/Identifier;
+      27: ldc_w         #589                // String icon/ping_3
+      30: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      33: putstatic     #441                // Field PING_3_SPRITE:Lnet/minecraft/resources/Identifier;
+      36: ldc_w         #591                // String icon/ping_4
+      39: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      42: putstatic     #438                // Field PING_4_SPRITE:Lnet/minecraft/resources/Identifier;
+      45: ldc_w         #593                // String icon/ping_5
+      48: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      51: putstatic     #435                // Field PING_5_SPRITE:Lnet/minecraft/resources/Identifier;
+      54: ldc_w         #595                // String hud/heart/container_blinking
+      57: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      60: putstatic     #535                // Field HEART_CONTAINER_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+      63: ldc_w         #597                // String hud/heart/container
+      66: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      69: putstatic     #538                // Field HEART_CONTAINER_SPRITE:Lnet/minecraft/resources/Identifier;
+      72: ldc_w         #599                // String hud/heart/full_blinking
+      75: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      78: putstatic     #541                // Field HEART_FULL_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+      81: ldc_w         #601                // String hud/heart/half_blinking
+      84: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      87: putstatic     #544                // Field HEART_HALF_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+      90: ldc_w         #603                // String hud/heart/absorbing_full_blinking
+      93: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+      96: putstatic     #547                // Field HEART_ABSORBING_FULL_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+      99: ldc_w         #605                // String hud/heart/full
+     102: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     105: putstatic     #550                // Field HEART_FULL_SPRITE:Lnet/minecraft/resources/Identifier;
+     108: ldc_w         #607                // String hud/heart/absorbing_half_blinking
+     111: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     114: putstatic     #553                // Field HEART_ABSORBING_HALF_BLINKING_SPRITE:Lnet/minecraft/resources/Identifier;
+     117: ldc_w         #609                // String hud/heart/half
+     120: invokestatic  #579                // Method net/minecraft/resources/Identifier.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;
+     123: putstatic     #556                // Field HEART_HALF_SPRITE:Lnet/minecraft/resources/Identifier;
+     126: invokedynamic #611,  0            // InvokeDynamic #5:applyAsInt:()Ljava/util/function/ToIntFunction;
+     131: invokestatic  #615                // InterfaceMethod java/util/Comparator.comparingInt:(Ljava/util/function/ToIntFunction;)Ljava/util/Comparator;
+     134: invokedynamic #621,  0            // InvokeDynamic #6:applyAsInt:()Ljava/util/function/ToIntFunction;
+     139: invokeinterface #622,  2          // InterfaceMethod java/util/Comparator.thenComparingInt:(Ljava/util/function/ToIntFunction;)Ljava/util/Comparator;
+     144: invokedynamic #625,  0            // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+     149: invokeinterface #626,  2          // InterfaceMethod java/util/Comparator.thenComparing:(Ljava/util/function/Function;)Ljava/util/Comparator;
+     154: invokedynamic #630,  0            // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+     159: invokedynamic #631,  0            // InvokeDynamic #9:compare:()Ljava/util/Comparator;
+     164: invokeinterface #635,  3          // InterfaceMethod java/util/Comparator.thenComparing:(Ljava/util/function/Function;Ljava/util/Comparator;)Ljava/util/Comparator;
+     169: putstatic     #151                // Field PLAYER_COMPARATOR:Ljava/util/Comparator;
+     172: return
+}

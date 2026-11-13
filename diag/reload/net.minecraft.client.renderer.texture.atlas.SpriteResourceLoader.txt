@@ -1,0 +1,176 @@
+Compiled from "SpriteResourceLoader.java"
+public interface net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader {
+  public static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+
+  public static net.minecraft.client.renderer.texture.atlas.SpriteResourceLoader create(java.util.Set<net.minecraft.server.packs.metadata.MetadataSectionType<?>>);
+    descriptor: (Ljava/util/Set;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;
+    Code:
+       0: aload_0
+       1: invokedynamic #1,  0              // InvokeDynamic #0:loadSprite:(Ljava/util/Set;)Lnet/minecraft/client/renderer/texture/atlas/SpriteResourceLoader;
+       6: areturn
+
+  public default net.minecraft.client.renderer.texture.SpriteContents loadSprite(net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource);
+    descriptor: (Lnet/minecraft/resources/Identifier;Lnet/minecraft/server/packs/resources/Resource;)Lnet/minecraft/client/renderer/texture/SpriteContents;
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokedynamic #5,  0              // InvokeDynamic #1:create:()Lnet/neoforged/neoforge/client/textures/SpriteContentsConstructor;
+       8: invokeinterface #9,  4            // InterfaceMethod loadSprite:(Lnet/minecraft/resources/Identifier;Lnet/minecraft/server/packs/resources/Resource;Lnet/neoforged/neoforge/client/textures/SpriteContentsConstructor;)Lnet/minecraft/client/renderer/texture/SpriteContents;
+      13: areturn
+
+  public abstract net.minecraft.client.renderer.texture.SpriteContents loadSprite(net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource, net.neoforged.neoforge.client.textures.SpriteContentsConstructor);
+    descriptor: (Lnet/minecraft/resources/Identifier;Lnet/minecraft/server/packs/resources/Resource;Lnet/neoforged/neoforge/client/textures/SpriteContentsConstructor;)Lnet/minecraft/client/renderer/texture/SpriteContents;
+
+  private static net.minecraft.client.renderer.texture.SpriteContents lambda$create$0(java.util.Set, net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource, net.neoforged.neoforge.client.textures.SpriteContentsConstructor);
+    descriptor: (Ljava/util/Set;Lnet/minecraft/resources/Identifier;Lnet/minecraft/server/packs/resources/Resource;Lnet/neoforged/neoforge/client/textures/SpriteContentsConstructor;)Lnet/minecraft/client/renderer/texture/SpriteContents;
+    Code:
+       0: aload_2
+       1: invokevirtual #14                 // Method net/minecraft/server/packs/resources/Resource.metadata:()Lnet/minecraft/server/packs/resources/ResourceMetadata;
+       4: astore        7
+       6: aload         7
+       8: getstatic     #20                 // Field net/minecraft/client/resources/metadata/animation/AnimationMetadataSection.TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      11: invokeinterface #26,  2           // InterfaceMethod net/minecraft/server/packs/resources/ResourceMetadata.getSection:(Lnet/minecraft/server/packs/metadata/MetadataSectionType;)Ljava/util/Optional;
+      16: astore        4
+      18: aload         7
+      20: getstatic     #32                 // Field net/minecraft/client/resources/metadata/texture/TextureMetadataSection.TYPE:Lnet/minecraft/server/packs/metadata/MetadataSectionType;
+      23: invokeinterface #26,  2           // InterfaceMethod net/minecraft/server/packs/resources/ResourceMetadata.getSection:(Lnet/minecraft/server/packs/metadata/MetadataSectionType;)Ljava/util/Optional;
+      28: astore        5
+      30: aload         7
+      32: aload_0
+      33: invokeinterface #35,  2           // InterfaceMethod net/minecraft/server/packs/resources/ResourceMetadata.getTypedSections:(Ljava/util/Collection;)Ljava/util/List;
+      38: astore        6
+      40: goto          60
+      43: astore        7
+      45: getstatic     #41                 // Field LOGGER:Lorg/slf4j/Logger;
+      48: ldc           #45                 // String Unable to parse metadata from {}
+      50: aload_1
+      51: aload         7
+      53: invokeinterface #47,  4           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      58: aconst_null
+      59: areturn
+      60: aload_2
+      61: invokevirtual #53                 // Method net/minecraft/server/packs/resources/Resource.open:()Ljava/io/InputStream;
+      64: astore        8
+      66: aload         8
+      68: invokestatic  #57                 // Method com/mojang/blaze3d/platform/NativeImage.read:(Ljava/io/InputStream;)Lcom/mojang/blaze3d/platform/NativeImage;
+      71: astore        7
+      73: aload         8
+      75: ifnull        113
+      78: aload         8
+      80: invokevirtual #63                 // Method java/io/InputStream.close:()V
+      83: goto          113
+      86: astore        9
+      88: aload         8
+      90: ifnull        110
+      93: aload         8
+      95: invokevirtual #63                 // Method java/io/InputStream.close:()V
+      98: goto          110
+     101: astore        10
+     103: aload         9
+     105: aload         10
+     107: invokevirtual #71                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     110: aload         9
+     112: athrow
+     113: goto          133
+     116: astore        8
+     118: getstatic     #41                 // Field LOGGER:Lorg/slf4j/Logger;
+     121: ldc           #77                 // String Using missing texture, unable to load {}
+     123: aload_1
+     124: aload         8
+     126: invokeinterface #47,  4           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     131: aconst_null
+     132: areturn
+     133: aload         4
+     135: invokevirtual #79                 // Method java/util/Optional.isPresent:()Z
+     138: ifeq          265
+     141: aload         4
+     143: invokevirtual #85                 // Method java/util/Optional.get:()Ljava/lang/Object;
+     146: checkcast     #21                 // class net/minecraft/client/resources/metadata/animation/AnimationMetadataSection
+     149: aload         7
+     151: invokevirtual #89                 // Method com/mojang/blaze3d/platform/NativeImage.getWidth:()I
+     154: aload         7
+     156: invokevirtual #93                 // Method com/mojang/blaze3d/platform/NativeImage.getHeight:()I
+     159: invokevirtual #96                 // Method net/minecraft/client/resources/metadata/animation/AnimationMetadataSection.calculateFrameSize:(II)Lnet/minecraft/client/resources/metadata/animation/FrameSize;
+     162: astore        8
+     164: aload         7
+     166: invokevirtual #89                 // Method com/mojang/blaze3d/platform/NativeImage.getWidth:()I
+     169: aload         8
+     171: invokevirtual #100                // Method net/minecraft/client/resources/metadata/animation/FrameSize.width:()I
+     174: invokestatic  #105                // Method net/minecraft/util/Mth.isMultipleOf:(II)Z
+     177: ifeq          196
+     180: aload         7
+     182: invokevirtual #93                 // Method com/mojang/blaze3d/platform/NativeImage.getHeight:()I
+     185: aload         8
+     187: invokevirtual #111                // Method net/minecraft/client/resources/metadata/animation/FrameSize.height:()I
+     190: invokestatic  #105                // Method net/minecraft/util/Mth.isMultipleOf:(II)Z
+     193: ifne          284
+     196: getstatic     #41                 // Field LOGGER:Lorg/slf4j/Logger;
+     199: ldc           #114                // String Image {} size {},{} is not multiple of frame size {},{}
+     201: iconst_5
+     202: anewarray     #116                // class java/lang/Object
+     205: dup
+     206: iconst_0
+     207: aload_1
+     208: aastore
+     209: dup
+     210: iconst_1
+     211: aload         7
+     213: invokevirtual #89                 // Method com/mojang/blaze3d/platform/NativeImage.getWidth:()I
+     216: invokestatic  #118                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     219: aastore
+     220: dup
+     221: iconst_2
+     222: aload         7
+     224: invokevirtual #93                 // Method com/mojang/blaze3d/platform/NativeImage.getHeight:()I
+     227: invokestatic  #118                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     230: aastore
+     231: dup
+     232: iconst_3
+     233: aload         8
+     235: invokevirtual #100                // Method net/minecraft/client/resources/metadata/animation/FrameSize.width:()I
+     238: invokestatic  #118                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     241: aastore
+     242: dup
+     243: iconst_4
+     244: aload         8
+     246: invokevirtual #111                // Method net/minecraft/client/resources/metadata/animation/FrameSize.height:()I
+     249: invokestatic  #118                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     252: aastore
+     253: invokeinterface #124,  3          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+     258: aload         7
+     260: invokevirtual #127                // Method com/mojang/blaze3d/platform/NativeImage.close:()V
+     263: aconst_null
+     264: areturn
+     265: new           #101                // class net/minecraft/client/resources/metadata/animation/FrameSize
+     268: dup
+     269: aload         7
+     271: invokevirtual #89                 // Method com/mojang/blaze3d/platform/NativeImage.getWidth:()I
+     274: aload         7
+     276: invokevirtual #93                 // Method com/mojang/blaze3d/platform/NativeImage.getHeight:()I
+     279: invokespecial #128                // Method net/minecraft/client/resources/metadata/animation/FrameSize."<init>":(II)V
+     282: astore        8
+     284: aload_3
+     285: aload_1
+     286: aload         8
+     288: aload         7
+     290: aload         4
+     292: aload         6
+     294: aload         5
+     296: invokeinterface #132,  7          // InterfaceMethod net/neoforged/neoforge/client/textures/SpriteContentsConstructor.create:(Lnet/minecraft/resources/Identifier;Lnet/minecraft/client/resources/metadata/animation/FrameSize;Lcom/mojang/blaze3d/platform/NativeImage;Ljava/util/Optional;Ljava/util/List;Ljava/util/Optional;)Lnet/minecraft/client/renderer/texture/SpriteContents;
+     301: areturn
+    Exception table:
+       from    to  target type
+           0    40    43   Class java/lang/Exception
+          66    73    86   Class java/lang/Throwable
+          93    98   101   Class java/lang/Throwable
+          60   113   116   Class java/io/IOException
+
+  static {};
+    descriptor: ()V
+    Code:
+       0: invokestatic  #137                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #41                 // Field LOGGER:Lorg/slf4j/Logger;
+       6: return
+}

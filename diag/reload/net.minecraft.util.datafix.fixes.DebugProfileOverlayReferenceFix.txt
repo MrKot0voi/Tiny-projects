@@ -1,0 +1,74 @@
+Compiled from "DebugProfileOverlayReferenceFix.java"
+public class net.minecraft.util.datafix.fixes.DebugProfileOverlayReferenceFix extends com.mojang.datafixers.DataFix {
+  public net.minecraft.util.datafix.fixes.DebugProfileOverlayReferenceFix(com.mojang.datafixers.schemas.Schema);
+    descriptor: (Lcom/mojang/datafixers/schemas/Schema;)V
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iconst_0
+       3: invokespecial #1                  // Method com/mojang/datafixers/DataFix."<init>":(Lcom/mojang/datafixers/schemas/Schema;Z)V
+       6: return
+
+  protected com.mojang.datafixers.TypeRewriteRule makeRule();
+    descriptor: ()Lcom/mojang/datafixers/TypeRewriteRule;
+    Code:
+       0: aload_0
+       1: ldc           #7                  // String DebugProfileOverlayReferenceFix
+       3: aload_0
+       4: invokevirtual #9                  // Method getInputSchema:()Lcom/mojang/datafixers/schemas/Schema;
+       7: getstatic     #15                 // Field net/minecraft/util/datafix/fixes/References.DEBUG_PROFILE:Lcom/mojang/datafixers/DSL$TypeReference;
+      10: invokevirtual #21                 // Method com/mojang/datafixers/schemas/Schema.getType:(Lcom/mojang/datafixers/DSL$TypeReference;)Lcom/mojang/datafixers/types/Type;
+      13: invokedynamic #27,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      18: invokevirtual #31                 // Method fixTypeEverywhereTyped:(Ljava/lang/String;Lcom/mojang/datafixers/types/Type;Ljava/util/function/Function;)Lcom/mojang/datafixers/TypeRewriteRule;
+      21: areturn
+
+  private static com.mojang.datafixers.Typed lambda$makeRule$4(com.mojang.datafixers.Typed);
+    descriptor: (Lcom/mojang/datafixers/Typed;)Lcom/mojang/datafixers/Typed;
+    Code:
+       0: aload_0
+       1: invokestatic  #35                 // InterfaceMethod com/mojang/datafixers/DSL.remainderFinder:()Lcom/mojang/datafixers/OpticFinder;
+       4: invokedynamic #41,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+       9: invokevirtual #42                 // Method com/mojang/datafixers/Typed.update:(Lcom/mojang/datafixers/OpticFinder;Ljava/util/function/Function;)Lcom/mojang/datafixers/Typed;
+      12: areturn
+
+  private static com.mojang.serialization.Dynamic lambda$makeRule$3(com.mojang.serialization.Dynamic);
+    descriptor: (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+    Code:
+       0: aload_0
+       1: ldc           #48                 // String custom
+       3: invokedynamic #50,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+       8: invokevirtual #51                 // Method com/mojang/serialization/Dynamic.update:(Ljava/lang/String;Ljava/util/function/Function;)Lcom/mojang/serialization/Dynamic;
+      11: areturn
+
+  private static com.mojang.serialization.Dynamic lambda$makeRule$2(com.mojang.serialization.Dynamic);
+    descriptor: (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+    Code:
+       0: aload_0
+       1: invokedynamic #56,  0             // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+       6: invokevirtual #57                 // Method com/mojang/serialization/Dynamic.updateMapValues:(Ljava/util/function/Function;)Lcom/mojang/serialization/Dynamic;
+       9: areturn
+
+  private static com.mojang.datafixers.util.Pair lambda$makeRule$1(com.mojang.datafixers.util.Pair);
+    descriptor: (Lcom/mojang/datafixers/util/Pair;)Lcom/mojang/datafixers/util/Pair;
+    Code:
+       0: aload_0
+       1: invokedynamic #61,  0             // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+       6: invokevirtual #62                 // Method com/mojang/datafixers/util/Pair.mapSecond:(Ljava/util/function/Function;)Lcom/mojang/datafixers/util/Pair;
+       9: areturn
+
+  private static com.mojang.serialization.Dynamic lambda$makeRule$0(com.mojang.serialization.Dynamic);
+    descriptor: (Lcom/mojang/serialization/Dynamic;)Lcom/mojang/serialization/Dynamic;
+    Code:
+       0: aload_0
+       1: ldc           #68                 // String
+       3: invokevirtual #70                 // Method com/mojang/serialization/Dynamic.asString:(Ljava/lang/String;)Ljava/lang/String;
+       6: ldc           #74                 // String inF3
+       8: invokevirtual #76                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      11: ifeq          23
+      14: aload_0
+      15: ldc           #82                 // String inOverlay
+      17: invokevirtual #84                 // Method com/mojang/serialization/Dynamic.createString:(Ljava/lang/String;)Lcom/mojang/serialization/Dynamic;
+      20: goto          24
+      23: aload_0
+      24: areturn
+}

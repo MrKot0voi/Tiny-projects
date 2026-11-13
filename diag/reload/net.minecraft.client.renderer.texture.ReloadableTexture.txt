@@ -1,0 +1,123 @@
+Compiled from "ReloadableTexture.java"
+public abstract class net.minecraft.client.renderer.texture.ReloadableTexture extends net.minecraft.client.renderer.texture.AbstractTexture {
+  private final net.minecraft.resources.Identifier resourceId;
+    descriptor: Lnet/minecraft/resources/Identifier;
+
+  public net.minecraft.client.renderer.texture.ReloadableTexture(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)V
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method net/minecraft/client/renderer/texture/AbstractTexture."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field resourceId:Lnet/minecraft/resources/Identifier;
+       9: return
+
+  public net.minecraft.resources.Identifier resourceId();
+    descriptor: ()Lnet/minecraft/resources/Identifier;
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field resourceId:Lnet/minecraft/resources/Identifier;
+       4: areturn
+
+  public void apply(net.minecraft.client.renderer.texture.TextureContents);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureContents;)V
+    Code:
+       0: aload_1
+       1: invokevirtual #13                 // Method net/minecraft/client/renderer/texture/TextureContents.clamp:()Z
+       4: istore_2
+       5: aload_1
+       6: invokevirtual #19                 // Method net/minecraft/client/renderer/texture/TextureContents.blur:()Z
+       9: istore_3
+      10: iload_2
+      11: ifeq          20
+      14: getstatic     #22                 // Field com/mojang/blaze3d/textures/AddressMode.CLAMP_TO_EDGE:Lcom/mojang/blaze3d/textures/AddressMode;
+      17: goto          23
+      20: getstatic     #28                 // Field com/mojang/blaze3d/textures/AddressMode.REPEAT:Lcom/mojang/blaze3d/textures/AddressMode;
+      23: astore        4
+      25: iload_3
+      26: ifeq          35
+      29: getstatic     #31                 // Field com/mojang/blaze3d/textures/FilterMode.LINEAR:Lcom/mojang/blaze3d/textures/FilterMode;
+      32: goto          38
+      35: getstatic     #37                 // Field com/mojang/blaze3d/textures/FilterMode.NEAREST:Lcom/mojang/blaze3d/textures/FilterMode;
+      38: astore        5
+      40: aload_0
+      41: invokestatic  #40                 // Method com/mojang/blaze3d/systems/RenderSystem.getSamplerCache:()Lcom/mojang/blaze3d/systems/SamplerCache;
+      44: aload         4
+      46: aload         4
+      48: aload         5
+      50: aload         5
+      52: iconst_0
+      53: invokevirtual #46                 // Method com/mojang/blaze3d/systems/SamplerCache.getSampler:(Lcom/mojang/blaze3d/textures/AddressMode;Lcom/mojang/blaze3d/textures/AddressMode;Lcom/mojang/blaze3d/textures/FilterMode;Lcom/mojang/blaze3d/textures/FilterMode;Z)Lcom/mojang/blaze3d/textures/GpuSampler;
+      56: putfield      #52                 // Field sampler:Lcom/mojang/blaze3d/textures/GpuSampler;
+      59: aload_1
+      60: invokevirtual #56                 // Method net/minecraft/client/renderer/texture/TextureContents.image:()Lcom/mojang/blaze3d/platform/NativeImage;
+      63: astore        6
+      65: aload_0
+      66: aload         6
+      68: invokevirtual #60                 // Method doLoad:(Lcom/mojang/blaze3d/platform/NativeImage;)V
+      71: aload         6
+      73: ifnull        111
+      76: aload         6
+      78: invokevirtual #64                 // Method com/mojang/blaze3d/platform/NativeImage.close:()V
+      81: goto          111
+      84: astore        7
+      86: aload         6
+      88: ifnull        108
+      91: aload         6
+      93: invokevirtual #64                 // Method com/mojang/blaze3d/platform/NativeImage.close:()V
+      96: goto          108
+      99: astore        8
+     101: aload         7
+     103: aload         8
+     105: invokevirtual #71                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     108: aload         7
+     110: athrow
+     111: return
+    Exception table:
+       from    to  target type
+          65    71    84   Class java/lang/Throwable
+          91    96    99   Class java/lang/Throwable
+
+  protected void doLoad(com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage;)V
+    Code:
+       0: invokestatic  #75                 // Method com/mojang/blaze3d/systems/RenderSystem.getDevice:()Lcom/mojang/blaze3d/systems/GpuDevice;
+       3: astore_2
+       4: aload_0
+       5: invokevirtual #79                 // Method close:()V
+       8: aload_0
+       9: aload_2
+      10: aload_0
+      11: getfield      #7                  // Field resourceId:Lnet/minecraft/resources/Identifier;
+      14: dup
+      15: invokestatic  #80                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: invokedynamic #86,  0             // InvokeDynamic #0:get:(Lnet/minecraft/resources/Identifier;)Ljava/util/function/Supplier;
+      24: iconst_5
+      25: getstatic     #90                 // Field com/mojang/blaze3d/textures/TextureFormat.RGBA8:Lcom/mojang/blaze3d/textures/TextureFormat;
+      28: aload_1
+      29: invokevirtual #96                 // Method com/mojang/blaze3d/platform/NativeImage.getWidth:()I
+      32: aload_1
+      33: invokevirtual #100                // Method com/mojang/blaze3d/platform/NativeImage.getHeight:()I
+      36: iconst_1
+      37: iconst_1
+      38: invokeinterface #103,  8          // InterfaceMethod com/mojang/blaze3d/systems/GpuDevice.createTexture:(Ljava/util/function/Supplier;ILcom/mojang/blaze3d/textures/TextureFormat;IIII)Lcom/mojang/blaze3d/textures/GpuTexture;
+      43: putfield      #109                // Field texture:Lcom/mojang/blaze3d/textures/GpuTexture;
+      46: aload_0
+      47: aload_2
+      48: aload_0
+      49: getfield      #109                // Field texture:Lcom/mojang/blaze3d/textures/GpuTexture;
+      52: invokeinterface #113,  2          // InterfaceMethod com/mojang/blaze3d/systems/GpuDevice.createTextureView:(Lcom/mojang/blaze3d/textures/GpuTexture;)Lcom/mojang/blaze3d/textures/GpuTextureView;
+      57: putfield      #117                // Field textureView:Lcom/mojang/blaze3d/textures/GpuTextureView;
+      60: aload_2
+      61: invokeinterface #121,  1          // InterfaceMethod com/mojang/blaze3d/systems/GpuDevice.createCommandEncoder:()Lcom/mojang/blaze3d/systems/CommandEncoder;
+      66: aload_0
+      67: getfield      #109                // Field texture:Lcom/mojang/blaze3d/textures/GpuTexture;
+      70: aload_1
+      71: invokeinterface #125,  3          // InterfaceMethod com/mojang/blaze3d/systems/CommandEncoder.writeToTexture:(Lcom/mojang/blaze3d/textures/GpuTexture;Lcom/mojang/blaze3d/platform/NativeImage;)V
+      76: return
+
+  public abstract net.minecraft.client.renderer.texture.TextureContents loadContents(net.minecraft.server.packs.resources.ResourceManager) throws java.io.IOException;
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)Lnet/minecraft/client/renderer/texture/TextureContents;
+}
