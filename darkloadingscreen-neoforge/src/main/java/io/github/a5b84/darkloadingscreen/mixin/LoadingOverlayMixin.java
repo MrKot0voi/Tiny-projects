@@ -13,14 +13,12 @@ import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Final;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -118,13 +116,12 @@ public abstract class LoadingOverlayMixin {
     }
 
     /**
-     * Цвет фона в render() читаем из конфига напрямую, а не из статического BRAND_BACKGROUND:
-     * другие моды могут перезаписать это поле, и тогда экран перезагрузки (F3+T) снова становится красным.
+     * Перед каждым кадром ставим цвет фона из конфига. Другие моды могут перезаписать статическое
+     * BRAND_BACKGROUND (например, при перезагрузке ресурсов), тогда экран F3+T снова станет красным.
+     * Инструкции отрисовки при этом не меняются.
      */
-    @Redirect(method = "render",
-            at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screens/LoadingOverlay;BRAND_BACKGROUND:Ljava/util/function/IntSupplier;", opcode = Opcodes.GETSTATIC),
-            require = 0)
-    private static IntSupplier darkBrandBackground() {
-        return () -> config.bg;
+    @Inject(method = "render", at = @At("HEAD"))
+    private void forceBrandBackground(GuiGraphics context, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        BRAND_BACKGROUND = () -> config.bg;
     }
 }
