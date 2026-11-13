@@ -87,11 +87,11 @@ public abstract class CreativeSlotsMixin {
 
     @Unique
     private int sscLeftPos() {
-        return ((AbstractContainerScreenAccessor) (Object) this).smoothscroll$sscLeftPos();
+        return ((AbstractContainerScreenAccessor) (Object) this).smoothscroll$getLeftPos();
     }
 
     @Unique
     private int sscTopPos() {
-        return ((AbstractContainerScreenAccessor) (Object) this).smoothscroll$sscTopPos();
+        return ((AbstractContainerScreenAccessor) (Object) this).smoothscroll$getTopPos();
     }
 }
