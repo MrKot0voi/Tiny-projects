@@ -1,0 +1,58 @@
+name: diag scissor signatures
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle 9.8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+
+      - name: Dump scissor signatures
+        working-directory: smoothscroll-neoforge
+        run: |
+          gradle createMinecraftArtifacts --no-daemon -q || true
+          MC=""
+          for j in $(find build "$HOME/.gradle" -name "*.jar" 2>/dev/null); do
+            if unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/client/gui/GuiGraphics.class"; then MC="$j"; break; fi
+          done
+          mkdir -p "$GITHUB_WORKSPACE/diag"
+          OUT="$GITHUB_WORKSPACE/diag/scissor.txt"
+          {
+            echo "MC jar: $MC"
+            for c in net.minecraft.client.gui.GuiGraphics net.minecraft.client.renderer.ScreenRectangle net.minecraft.client.Minecraft net.minecraft.client.Window; do
+              echo "=== $c"; javap -p -cp "$MC" "$c" 2>&1 || echo "(not found)"
+            done
+            echo "=== bytecode enableScissor"
+            javap -p -c -cp "$MC" net.minecraft.client.gui.GuiGraphics 2>&1 | awk '/void enableScissor\(/{p=1} /^$/{p=0} p' || true
+            echo "=== bytecode ScreenRectangle.transformed / transformAxisAligned"
+            javap -p -c -cp "$MC" net.minecraft.client.renderer.ScreenRectangle 2>&1 | awk '/transform/{p=1} /^$/{p=0} p' | head -80 || true
+          } > "$OUT"
+          wc -l "$OUT"
+
+      - name: Push to diag-scissor branch
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan diag-scissor
+          git rm -rf -q --cached . || true
+          git add -f diag/scissor.txt
+          git commit -q -m "diag: scissor signatures"
+          git push -f origin diag-scissor
