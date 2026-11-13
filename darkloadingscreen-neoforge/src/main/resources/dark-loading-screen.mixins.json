@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "GlCommandEncoderMixin",
-    "LoadingOverlayMixin"
+    "LoadingOverlayMixin",
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1
