@@ -14,6 +14,7 @@
     "Chat.ChatHudMixin",
     "CreativeScreen.CreativeScreenMixin",
     "CreativeScreen.ItemPickerMenuAccessor",
-    "CreativeScreen.CreativeSlotsMixin"
+    "CreativeScreen.CreativeSlotsMixin",
+    "CreativeScreen.AbstractContainerScreenAccessor"
   ]
 }
