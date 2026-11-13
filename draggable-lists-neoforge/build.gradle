@@ -59,7 +59,9 @@ tasks.named('processResources', ProcessResources).configure {
             mod_license      : mod_license,
             mod_authors      : mod_authors,
             mod_description  : mod_description,
-            minecraft_version: minecraft_version
+            minecraft_version: minecraft_version,
+            architectury_version: architectury_version,
+            cloth_config_version: cloth_config_version
     ]
     inputs.properties replaceProperties
 
