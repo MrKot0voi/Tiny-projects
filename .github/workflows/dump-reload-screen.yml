@@ -1,0 +1,42 @@
+name: dump reload screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [darkloading-reload]
+    paths:
+      - '.github/workflows/dump-reload-screen.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: darkloadingscreen-neoforge
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+      - name: Create MC artifacts and dump reload screen classes
+        run: |
+          gradle createMinecraftArtifacts --no-daemon -q || true
+          bash tools/dump-reload-screen.sh build/reload || true
+      - name: Commit dump
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          mkdir -p diag/reload
+          cp -r darkloadingscreen-neoforge/build/reload/. diag/reload/ 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f diag/reload
+          git commit -m "[skip ci] reload screen dump" || echo "nothing"
+          for i in 1 2 3; do git pull -q --rebase origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
