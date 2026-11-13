@@ -18,3 +18,12 @@ for j in earlydisplay loader; do
   done
 done
 ls -la "$OUT" | head -40
+
+# SPI для графической инициализации (Sodium отсюда стартует раньше окна загрузки).
+curl -sfL -o "$OUT/neoforge.jar" "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.11.48/neoforge-21.11.48-universal.jar" || echo "no neoforge" >> "$OUT/errors.txt"
+if [ -f "$OUT/neoforge.jar" ]; then
+  unzip -Z1 "$OUT/neoforge.jar" > "$OUT/neoforge-entries.txt"
+  for c in $(grep -E '^net/neoforged/neoforgespi/earlywindow/.*\.class$' "$OUT/neoforge-entries.txt" | sed 's/\.class$//; s#/#.#g'); do
+    javap -p -s -cp "$OUT/neoforge.jar" "$c" > "$OUT/neoforge-$(echo "$c" | tr '.' '_').txt" 2>&1 || true
+  done
+fi
