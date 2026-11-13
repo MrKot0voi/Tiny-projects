@@ -1,5 +1,6 @@
 {
-  "no_peeking.configuration.commandsToObfuscate": "List of commands to be obfuscated",
-  "no_peeking.configuration.obfuscationChar": "The character used in text obfuscation",
-  "no_peeking.configuration.obfuscationChar.tooltip": "If you enter multiple characters, only the first one will be used."
+  "no_peeking.configuration.obfuscatedCommands": "Commands to hide",
+  "no_peeking.configuration.obfuscatedCommands.tooltip": "Commands whose arguments are hidden in the chat box while typing. Slash optional, case does not matter.",
+  "no_peeking.configuration.obfuscationChar": "Hidden character",
+  "no_peeking.configuration.obfuscationChar.tooltip": "Character shown instead of the typed password."
 }

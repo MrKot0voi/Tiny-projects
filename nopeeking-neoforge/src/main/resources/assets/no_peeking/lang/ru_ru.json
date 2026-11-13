@@ -1,0 +1,6 @@
+{
+  "no_peeking.configuration.obfuscatedCommands": "Команды для скрытия",
+  "no_peeking.configuration.obfuscatedCommands.tooltip": "Команды, аргументы которых скрываются в поле чата при вводе. Слеш необязателен, регистр не важен.",
+  "no_peeking.configuration.obfuscationChar": "Символ скрытия",
+  "no_peeking.configuration.obfuscationChar.tooltip": "Символ, которым заменяется пароль при вводе."
+}
