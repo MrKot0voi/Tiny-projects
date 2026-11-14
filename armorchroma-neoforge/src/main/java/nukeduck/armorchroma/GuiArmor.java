@@ -176,7 +176,7 @@ public class GuiArmor {
       float intensity = Minecraft.getInstance().options.glintStrength().get().floatValue() * ArmorChroma.config.glintIntensity();
       float clamped = Mth.clamp(intensity, 0.0F, 1.0F);
       int color = ARGB.colorFromFloat(1.0F, clamped, clamped, clamped);
-      context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_item_glint.png"), x, y, u, v, width, height, 256, 256, color);
+      context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_glint_item.png"), x, y, u, v, width, height, 256, 256, color);
    }
 
    private void addZOffset(GuiGraphics context, int z) {
