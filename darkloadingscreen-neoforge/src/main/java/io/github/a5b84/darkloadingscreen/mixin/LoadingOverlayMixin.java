@@ -16,27 +16,41 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Цели проверены по сигнатурам и байткоду LoadingOverlay из 1.21.11:
- * render(GuiGraphics, int, int, float), drawProgressBar(GuiGraphics, int, int, int, int, float),
- * private static final IntSupplier BRAND_BACKGROUND, константы fade в render — float (500f / 1000f).
+ * Mixin for {@link LoadingOverlay} (initial load and resource reload via F3+T / Resource Packs "Done").
  */
 @Mixin(LoadingOverlay.class)
 public abstract class LoadingOverlayMixin {
 
+    @Mutable @Shadow private static @Final int LOGO_BACKGROUND_COLOR;
+    @Mutable @Shadow private static @Final int LOGO_BACKGROUND_COLOR_DARK;
     @Mutable @Shadow private static @Final IntSupplier BRAND_BACKGROUND;
 
-    /** Changes the background color */
+    @Unique
+    private static void darkLoadingScreen$applyBrandBackground() {
+        int bg = ARGB.opaque(config.bg);
+        LOGO_BACKGROUND_COLOR = bg;
+        LOGO_BACKGROUND_COLOR_DARK = bg;
+        BRAND_BACKGROUND = () -> ARGB.opaque(config.bg);
+    }
+
+    /** Changes the background color on class init */
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void adjustBg(CallbackInfo ci) {
-        BRAND_BACKGROUND = () -> config.bg;
+        darkLoadingScreen$applyBrandBackground();
+    }
+
+    /** Ensures background color stays dark from config on every frame (including F3+T and resource pack reload) */
+    @Inject(method = "render", at = @At("HEAD"))
+    private void forceBrandBackground(GuiGraphics context, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        darkLoadingScreen$applyBrandBackground();
     }
 
     // Progress bar
@@ -44,19 +58,19 @@ public abstract class LoadingOverlayMixin {
     /** Draws the bar background, under the progress bar */
     @Inject(method = "drawProgressBar", at = @At("HEAD"))
     private void drawBarBackground(GuiGraphics context, int x1, int y1, int x2, int y2, float opacity, CallbackInfo ci) {
-        int alpha = ARGB.color(Math.round(opacity * 255), 255, 255, 255) & 0xff000000;
+        int alpha = Math.round(opacity * 255.0F) << 24;
         context.fill(x1 + 1, y1 + 1, x2 - 1, y2 - 1, config.barBg | alpha);
     }
 
-    /** The shared color local (used by the border fills) becomes the border color */
-    @ModifyVariable(method = "drawProgressBar",
-            at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/ARGB;color(IIII)I"),
-            ordinal = 0)
-    private int modifyBorderColor(int color, GuiGraphics context, int x1, int y1, int x2, int y2, float opacity) {
-        return config.border | (color & 0xff000000);
+    /** Replaces the shared white ARGB color (used by the 4 border fills) with the configured border color */
+    @WrapOperation(method = "drawProgressBar",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;color(IIII)I"))
+    private int modifyBorderColor(int alpha, int r, int g, int b, Operation<Integer> original) {
+        int orig = original.call(alpha, r, g, b);
+        return config.border | (orig & 0xff000000);
     }
 
-    /** The first fill is the progress itself, it gets the bar color */
+    /** The first fill in drawProgressBar is the progress bar fill itself; it gets the bar color */
     @WrapOperation(method = "drawProgressBar",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0))
     private void drawBarFill(GuiGraphics context, int x1, int y1, int x2, int y2, int color, Operation<Void> original) {
