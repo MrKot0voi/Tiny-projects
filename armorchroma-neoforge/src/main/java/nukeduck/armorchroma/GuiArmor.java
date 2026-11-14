@@ -114,7 +114,7 @@ public class GuiArmor {
       }
 
       if (segment.hasGlint()) {
-         this.drawTexturedGlintRect(context, left + barPoints * 4, top, left, top, stackPoints * 4 + 1, 9);
+         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
          this.addZOffset(context, -2);
       }
    }
