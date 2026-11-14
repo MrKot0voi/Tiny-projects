@@ -37,7 +37,7 @@ jobs:
           echo "MC=$MC"
           mkdir -p build/glint && (cd build/glint && unzip -q -o "$MC" '*.class' 2>/dev/null || true)
           cd "$GITHUB_WORKSPACE/armorchroma-neoforge"
-          { echo "== class strings containing enchant/glint =="; grep -rahoE "[A-Za-z0-9_/.:-]*(enchant|glint|Glint|Enchant)[A-Za-z0-9_/.:-]*" build/glint | sort | uniq -c | sort -rn | head -150; } > build/glint.txt 2>&1 || true
+          { echo "== textures/misc paths =="; grep -rahoE "textures/misc/[A-Za-z0-9_./-]*" build/glint | sort | uniq -c | sort -rn | head -80; echo "== glint strings =="; grep -rahoE "[A-Za-z0-9_/.:-]*[Gg]lint[A-Za-z0-9_/.:-]*" build/glint | sort | uniq -c | sort -rn | head -80; } > build/glint.txt 2>&1 || true
       - name: Commit result
         run: |
           cd "$GITHUB_WORKSPACE"
