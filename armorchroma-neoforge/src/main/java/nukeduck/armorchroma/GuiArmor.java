@@ -95,10 +95,6 @@ public class GuiArmor {
       if (segment.hasGlint()) {
          this.addZOffset(context, 2);
       }
-      if (segment.hasGlint()) {
-         // Свечение под иконками: иконки остаются видимыми, свечение видно на фоне вокруг них.
-         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
-      }
 
       int i = barPoints & 1;
       int x = left + barPoints * 4;
@@ -115,6 +111,11 @@ public class GuiArmor {
 
       if (i < stackPoints) {
          this.drawMaskedIcon(context, x, top, icon, segment.getTrailingMask(), 0);
+      }
+
+      if (segment.hasGlint()) {
+         // Свечение поверх иконок, полупрозрачное (альфа зависит от интенсивности).
+         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
       }
 
    }
@@ -203,7 +204,8 @@ public class GuiArmor {
       float baseGlint = (mc != null && mc.options != null) ? mc.options.glintStrength().get().floatValue() : 1.0F;
       float intensity = baseGlint * ArmorChroma.config.glintIntensity();
       float clamped = Mth.clamp(intensity, 0.0F, 1.0F);
-      int color = ARGB.colorFromFloat(1.0F, clamped, clamped, clamped);
+      // Полупрозрачное свечение: альфа = интенсивность * 0.5, цвет текстуры не меняем.
+      int color = ARGB.colorFromFloat(clamped * 0.5F, 1.0F, 1.0F, 1.0F);
       context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_glint_item.png"), x, y, u, v, width, height, 256, 256, color);
    }
 
