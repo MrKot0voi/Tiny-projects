@@ -1,5 +1,6 @@
 package walksy.shieldfixes.manager;
 
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -9,35 +10,73 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import walksy.shieldfixes.CrashGuard;
 import walksy.shieldfixes.config.ShieldFixesConfig;
 
-import java.util.List;
-
 public class EnvironmentEffectShieldManager {
-    private final Minecraft minecraft = Minecraft.getInstance();
+
+    private static Minecraft minecraft() {
+        return Minecraft.getInstance();
+    }
 
     public void onExplosion(final WorldExplosion explosion) {
-        if (!explosion.level().isClientSide() || this.minecraft.player == null) {
+        if (explosion == null || explosion.pos() == null) {
             return;
         }
-        for (final Player affectedPlayer : getNearPlayers(explosion)) {
-            if (!affectedPlayer.isAlive()) {
-                continue;
+        Minecraft mc = minecraft();
+        if (mc == null) {
+            return;
+        }
+        if (!mc.isSameThread()) {
+            Vec3 pos = explosion.pos();
+            float power = explosion.power();
+            mc.execute(() -> handleClientExplosion(pos, power));
+            return;
+        }
+        handleClientExplosion(explosion.pos(), explosion.power());
+    }
+
+    private void handleClientExplosion(final Vec3 pos, final float power) {
+        try {
+            Minecraft mc = minecraft();
+            if (mc == null || mc.level == null || mc.player == null) {
+                return;
             }
-            final double distance = Math.sqrt(affectedPlayer.distanceToSqr(explosion.pos()));
-            if (distance < explosion.getMaxDistance() && ShieldStateManager.isUsingShield(affectedPlayer, explosion.pos(), ShieldFixesConfig.factorDelay())) {
-                this.sound(affectedPlayer, shieldBlock());
+            WorldExplosion clientExplosion = new WorldExplosion(pos, mc.level, power);
+            for (final Player affectedPlayer : getNearPlayers(clientExplosion)) {
+                if (affectedPlayer == null || !affectedPlayer.isAlive()) {
+                    continue;
+                }
+                final double distance = Math.sqrt(affectedPlayer.distanceToSqr(pos));
+                if (distance < clientExplosion.getMaxDistance()
+                        && ShieldStateManager.isUsingShield(affectedPlayer, pos, ShieldFixesConfig.factorDelay())) {
+                    this.sound(affectedPlayer, shieldBlock());
+                }
             }
+        } catch (Throwable t) {
+            CrashGuard.report("EnvironmentEffectShieldManager.handleClientExplosion", t);
         }
     }
 
     public void onDisable(final LivingEntity livingEntity) {
-        this.sound(livingEntity, shieldBreak());
+        if (livingEntity == null) return;
+        try {
+            this.sound(livingEntity, shieldBreak());
+        } catch (Throwable t) {
+            CrashGuard.report("EnvironmentEffectShieldManager.onDisable", t);
+        }
     }
 
     public void onAttack(final Player target) {
-        if (ShieldStateManager.isUsingShield(target, this.minecraft.player.position(), true) && !ShieldStateManager.disablesShield(this.minecraft.player)) {
-            this.sound(target, shieldBlock());
+        if (target == null) return;
+        try {
+            Minecraft mc = minecraft();
+            if (mc == null || mc.player == null) return;
+            if (ShieldStateManager.isUsingShield(target, mc.player.position(), true) && !ShieldStateManager.disablesShield(mc.player)) {
+                this.sound(target, shieldBlock());
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("EnvironmentEffectShieldManager.onAttack", t);
         }
     }
 
@@ -50,14 +89,16 @@ public class EnvironmentEffectShieldManager {
     }
 
     private static List<Player> getNearPlayers(final WorldExplosion explosion) {
+        if (explosion.level() == null) return List.of();
         return explosion.level().getEntitiesOfClass(Player.class, explosion.getBoundingBox(), player -> true);
     }
 
     private void sound(final LivingEntity entity, final SoundEvent soundEvent) {
-        if (this.minecraft.level == null) {
+        Minecraft mc = minecraft();
+        if (mc == null || mc.level == null || entity == null || soundEvent == null) {
             return;
         }
-        this.minecraft.level.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), soundEvent, entity.getSoundSource(), 1F, 0.8F + this.minecraft.level.getRandom().nextFloat() * 0.4F);
+        mc.level.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), soundEvent, entity.getSoundSource(), 1F, 0.8F + mc.level.getRandom().nextFloat() * 0.4F);
     }
 
     public record WorldExplosion(Vec3 pos, Level level, float power) {

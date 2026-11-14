@@ -1,5 +1,6 @@
 package com.mrmelon54.DraggableLists.mixin.server;
 
+import com.mrmelon54.DraggableLists.CrashGuard;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.ServerSelectionList;
@@ -23,23 +24,35 @@ public abstract class JoinMultiplayerScreenMixin extends Screen {
 
     @Inject(method = "join(Lnet/minecraft/client/multiplayer/ServerData;)V", at = @At("HEAD"))
     private void injectedConnect(ServerData serverData, CallbackInfo ci) {
-        if (this.serverSelectionList.isDragging()) {
-            this.serverSelectionList.mouseReleased(null);
+        try {
+            if (this.serverSelectionList != null && this.serverSelectionList.isDragging()) {
+                this.serverSelectionList.mouseReleased(null);
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("JoinMultiplayerScreenMixin.injectedConnect", t);
         }
     }
 
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
-        if (this.serverSelectionList.isDragging()) {
-            this.serverSelectionList.mouseReleased(event);
+        try {
+            if (this.serverSelectionList != null && this.serverSelectionList.isDragging()) {
+                this.serverSelectionList.mouseReleased(event);
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("JoinMultiplayerScreenMixin.mouseReleased", t);
         }
         return super.mouseReleased(event);
     }
 
     @Override
     public void onClose() {
-        if (this.serverSelectionList.isDragging()) {
-            this.serverSelectionList.mouseReleased(null);
+        try {
+            if (this.serverSelectionList != null && this.serverSelectionList.isDragging()) {
+                this.serverSelectionList.mouseReleased(null);
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("JoinMultiplayerScreenMixin.onClose", t);
         }
         super.onClose();
     }

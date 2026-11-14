@@ -2,8 +2,8 @@ package net.uku3lig.totemcounter.config;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.uku3lig.totemcounter.TotemCounter;
@@ -55,13 +55,13 @@ public class DisplayPositionSelectScreen extends Screen {
             graphics.blit(RenderPipelines.GUI_TEXTURED, TotemCounter.DEFAULT_TOTEM, x, y,
                     0, 0, 16, 16, 16, 16);
         } else {
-            graphics.renderItem(TotemCounter.TOTEM, x, y);
+            graphics.renderItem(TotemCounter.getTotemStack(), x, y);
         }
     }
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        if (event.button() == 0 && event.y() > 48 && event.y() < height - 80) {
+        if (event != null && event.button() == 0 && event.y() > 48 && event.y() < height - 80) {
             config.setX((int) event.x() - 8);
             config.setY((int) event.y() - 8);
             config.save();
@@ -72,6 +72,8 @@ public class DisplayPositionSelectScreen extends Screen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        if (minecraft != null) {
+            minecraft.setScreen(parent);
+        }
     }
 }

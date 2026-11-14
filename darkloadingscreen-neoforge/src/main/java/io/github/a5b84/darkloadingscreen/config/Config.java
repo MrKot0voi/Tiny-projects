@@ -1,31 +1,22 @@
 package io.github.a5b84.darkloadingscreen.config;
 
+import io.github.a5b84.darkloadingscreen.CrashGuard;
 import io.github.a5b84.darkloadingscreen.DarkLoadingScreen;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- * Настройки мода. Раньше были в JSON через Cloth Config, теперь ModConfigSpec.
- * Цвета хранятся как строки RRGGBB (как в Cloth Config).
- */
 public class Config {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /** Factor to convert UI time (seconds) to ms */
-    // (Dividing by 2 because the game waits twice as long)
     public static final float FADE_DURATION_FACTOR = DarkLoadingScreen.VANILLA_FADE_OUT_DURATION / 2;
-    /** Maximum fade duration (just in case) */
     public static final float MAX_FADE_DURATION = 5;
 
-    // Colors
     public final int bg, bar, barBg, border, logo;
-    // RGB channels of some colors
     public final float bgR, bgG, bgB;
     public final float logoR, logoG, logoB;
 
-    // Fade durations
     public final float fadeIn, fadeOut;
     public final float fadeInMs, fadeOutMs;
 
@@ -64,10 +55,6 @@ public class Config {
         SPEC = builder.build();
     }
 
-    /**
-     * @param fadeIn Fade in time in seconds
-     * @param fadeOut Fade out time in seconds
-     */
     public Config(
             int bg, int bar, int barBg, int border, int logo,
             float fadeIn, float fadeOut
@@ -77,10 +64,9 @@ public class Config {
         this.barBg = barBg;
         this.border = border;
         this.logo = logo;
-        this.fadeIn = Math.min(fadeIn, MAX_FADE_DURATION);
-        this.fadeOut = Math.min(fadeOut, MAX_FADE_DURATION);
+        this.fadeIn = Math.clamp(fadeIn, 0.0f, MAX_FADE_DURATION);
+        this.fadeOut = Math.clamp(fadeOut, 0.0f, MAX_FADE_DURATION);
 
-        // Splitting some colors in floats
         bgR = getChannel(bg, 16);
         bgG = getChannel(bg, 8);
         bgB = getChannel(bg, 0);
@@ -88,42 +74,57 @@ public class Config {
         logoG = getChannel(logo, 8);
         logoB = getChannel(logo, 0);
 
-        // Calculate durations
         fadeInMs = this.fadeIn * FADE_DURATION_FACTOR;
         fadeOutMs = this.fadeOut * FADE_DURATION_FACTOR;
     }
 
-    /**
-     * @param offset Channel offset in bits
-     * @return the corresponding channel value between {@code 0} and {@code 1}
-     */
     private static float getChannel(int color, int offset) {
         return ((color >> offset) & 0xff) / 255f;
     }
 
-    /** Reads the current values of the config */
+    private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+        try {
+            return SPEC.isLoaded() ? val.get() : val.getDefault();
+        } catch (Throwable t) {
+            return val.getDefault();
+        }
+    }
+
     public static Config read() {
-        return new Config(
-                parseColor(BACKGROUND.get(), DEFAULT.bg, "background"),
-                parseColor(BAR.get(), DEFAULT.bar, "bar"),
-                parseColor(BAR_BACKGROUND.get(), DEFAULT.barBg, "barBackground"),
-                parseColor(BORDER.get(), DEFAULT.border, "border"),
-                parseColor(LOGO.get(), DEFAULT.logo, "logo"),
-                FADE_IN.get().floatValue(),
-                FADE_OUT.get().floatValue()
-        );
+        try {
+            if (!SPEC.isLoaded()) {
+                return DEFAULT;
+            }
+            return new Config(
+                    parseColor(getSafe(BACKGROUND), DEFAULT.bg, "background"),
+                    parseColor(getSafe(BAR), DEFAULT.bar, "bar"),
+                    parseColor(getSafe(BAR_BACKGROUND), DEFAULT.barBg, "barBackground"),
+                    parseColor(getSafe(BORDER), DEFAULT.border, "border"),
+                    parseColor(getSafe(LOGO), DEFAULT.logo, "logo"),
+                    getSafe(FADE_IN).floatValue(),
+                    getSafe(FADE_OUT).floatValue()
+            );
+        } catch (Throwable t) {
+            CrashGuard.report("Config.read", t);
+            return DEFAULT;
+        }
     }
 
     private static int parseColor(String value, int fallback, String key) {
+        if (value == null) {
+            return fallback;
+        }
+        String clean = value.trim().startsWith("#") ? value.trim().substring(1) : value.trim();
         try {
-            return Integer.parseInt(value, 16);
+            return Integer.parseInt(clean, 16) & 0xFFFFFF;
         } catch (NumberFormatException e) {
             LOGGER.warn("[Dark Loading Screen] Invalid color '{}' for option '{}'", value, key);
+            CrashGuard.warn("Config.parseColor", "Некорректный HEX-цвет '" + value + "' для '" + key + "', применён стандартный");
             return fallback;
         }
     }
 
     private static boolean isHexColor(Object value) {
-        return value instanceof String s && s.matches("[0-9a-fA-F]{6}");
+        return value instanceof String s && s.matches("#?[0-9a-fA-F]{6}");
     }
 }

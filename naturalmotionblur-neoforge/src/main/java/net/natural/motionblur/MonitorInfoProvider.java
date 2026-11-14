@@ -10,50 +10,52 @@ public class MonitorInfoProvider {
     private static long lastMonitorHandle = 0;
     private static int  lastRefreshRate   = 60;
     private static long lastCheckTime     = 0;
-    private static final long CHECK_INTERVAL_NS = 1_000_000_000L; // 1 second
+    private static final long CHECK_INTERVAL_NS = 1_000_000_000L;
 
-    // Update refresh rate detection
     public static void updateDisplayInfo() {
-        // Reduce Update Checking
         long now = System.nanoTime();
         if (now - lastCheckTime < CHECK_INTERVAL_NS) return;
         lastCheckTime = now;
 
-        Minecraft client = Minecraft.getInstance();
+        try {
+            Minecraft client = Minecraft.getInstance();
+            if (client == null || client.getWindow() == null) return;
 
-        long window = client.getWindow().handle();
-        long monitor = GLFW.glfwGetWindowMonitor(window);
+            long window = client.getWindow().handle();
+            if (window == 0L) return;
 
-        // If windowed mode, manually detect monitor from window position
-        if (monitor == 0) {
-            monitor = getMonitorFromWindowPosition(window, client.getWindow().getScreenWidth(), client.getWindow().getScreenHeight());
-        }
+            long monitor = GLFW.glfwGetWindowMonitor(window);
+            if (monitor == 0L) {
+                monitor = getMonitorFromWindowPosition(window, client.getWindow().getScreenWidth(), client.getWindow().getScreenHeight());
+            }
 
-        // If monitor changed, update refresh rate
-        if (monitor != lastMonitorHandle) {
-            lastRefreshRate   = detectRefreshRate(monitor);
-            lastMonitorHandle = monitor;
+            if (monitor != 0L && monitor != lastMonitorHandle) {
+                lastRefreshRate   = detectRefreshRate(monitor);
+                lastMonitorHandle = monitor;
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("MonitorInfoProvider.updateDisplayInfo", t);
         }
     }
 
-    // Gets the current detected refresh rate.
     public static int getRefreshRate() {
-        return lastRefreshRate;
+        return lastRefreshRate > 0 ? lastRefreshRate : 60;
     }
 
-    // Finds which monitor the window centre sits on, falls back to the primary monitor
     private static long getMonitorFromWindowPosition(long window, int windowWidth, int windowHeight) {
+        if (window == 0L) return 0L;
         int[] winX = new int[1], winY = new int[1];
         GLFW.glfwGetWindowPos(window, winX, winY);
 
         int centerX = winX[0] + windowWidth  / 2;
         int centerY = winY[0] + windowHeight / 2;
 
-        long result        = GLFW.glfwGetPrimaryMonitor();
+        long result = GLFW.glfwGetPrimaryMonitor();
         PointerBuffer monitors = GLFW.glfwGetMonitors();
         if (monitors != null) {
             for (int i = 0; i < monitors.limit(); i++) {
                 long m = monitors.get(i);
+                if (m == 0L) continue;
                 int[] mx = new int[1], my = new int[1];
                 GLFW.glfwGetMonitorPos(m, mx, my);
                 GLFWVidMode mode = GLFW.glfwGetVideoMode(m);
@@ -69,7 +71,8 @@ public class MonitorInfoProvider {
     }
 
     private static int detectRefreshRate(long monitor) {
+        if (monitor == 0L) return 60;
         GLFWVidMode vidMode = GLFW.glfwGetVideoMode(monitor);
-        return (vidMode != null) ? vidMode.refreshRate() : 60;
+        return (vidMode != null && vidMode.refreshRate() > 0) ? vidMode.refreshRate() : 60;
     }
 }

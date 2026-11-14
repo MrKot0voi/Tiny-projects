@@ -36,18 +36,85 @@ neoForge {
 
 tasks.named('processResources', ProcessResources).configure {
     def replaceProperties = [
-            mod_id          : mod_id,
-            mod_name        : mod_name,
-            mod_version     : mod_version,
-            mod_license     : mod_license,
-            mod_authors     : mod_authors,
-            mod_description : mod_description,
-            neo_version     : neo_version,
+            mod_id           : mod_id,
+            mod_name         : mod_name,
+            mod_version      : mod_version,
+            mod_license      : mod_license,
+            mod_authors      : mod_authors,
+            mod_description  : mod_description,
+            neo_version      : neo_version,
             minecraft_version: minecraft_version
     ]
     inputs.properties replaceProperties
 
     filesMatching('META-INF/neoforge.mods.toml') {
         expand replaceProperties
+    }
+}
+
+// NeoForge EarlyServiceDiscovery treats any top-level JAR in mods/ with GraphicsBootstrapper
+// as an Early Service (languages=[]), skipping neoforge.mods.toml and mixins unless the actual
+// @Mod + Mixin JAR is nested inside META-INF/jarjar/ (same architecture as Sodium on NeoForge).
+def innerModJar = tasks.register('innerModJar', Jar) {
+    dependsOn tasks.named('classes')
+    destinationDirectory = layout.buildDirectory.dir('jarjar')
+    archiveFileName = 'dark_loading_screen-mod.jar'
+
+    from(sourceSets.main.output) {
+        exclude 'io/github/a5b84/darkloadingscreen/early/**'
+        exclude 'META-INF/services/net.neoforged.neoforgespi.earlywindow.GraphicsBootstrapper'
+    }
+
+    manifest {
+        attributes(
+                'Automatic-Module-Name': 'dark_loading_screen',
+                'Implementation-Version': '1.6.17'
+        )
+    }
+
+    doLast {
+        def metaDir = layout.buildDirectory.dir('jarjar/META-INF/jarjar').get().asFile
+        metaDir.mkdirs()
+        new File(metaDir, 'metadata.json').setText('''{
+  "jars": [
+    {
+      "identifier": {
+        "group": "io.github.a5b84.darkloadingscreen",
+        "artifact": "dark_loading_screen_mod"
+      },
+      "version": {
+        "range": "[1.6.17,)",
+        "artifactVersion": "1.6.17"
+      },
+      "path": "META-INF/jarjar/dark_loading_screen-mod.jar"
+    }
+  ]
+}
+''', 'UTF-8')
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    dependsOn innerModJar
+
+    exclude 'io/github/a5b84/darkloadingscreen/*.class'
+    exclude 'io/github/a5b84/darkloadingscreen/config/**'
+    exclude 'io/github/a5b84/darkloadingscreen/mixin/**'
+    exclude 'META-INF/neoforge.mods.toml'
+    exclude 'dark-loading-screen.mixins.json'
+    exclude 'assets/**'
+
+    from(innerModJar) {
+        into 'META-INF/jarjar'
+    }
+    from(layout.buildDirectory.dir('jarjar/META-INF/jarjar')) {
+        into 'META-INF/jarjar'
+    }
+
+    manifest {
+        attributes(
+                'Automatic-Module-Name': 'dark_loading_screen.early_bootstrap',
+                'Implementation-Version': '1.6.17'
+        )
     }
 }

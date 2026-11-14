@@ -2,8 +2,13 @@ package net.natural.motionblur;
 
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.Std140Builder;
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import com.mojang.blaze3d.systems.RenderSystem;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelTargetBundle;
 import net.minecraft.client.renderer.PostChain;
@@ -20,11 +25,6 @@ import net.natural.motionblur.shader.FrameBlendingManager;
 import net.natural.motionblur.shader.FrameTimer;
 import net.natural.motionblur.util.ManagedUniformBuffer;
 import org.joml.Matrix4f;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class ShaderManager {
 
@@ -50,6 +50,7 @@ public class ShaderManager {
     public static void captureAllocator(GraphicsResourceAllocator allocator) { frameAllocator = allocator; }
     public static void clearFrameAllocator() { frameAllocator = null; }
     public static void beginFrame() {
+        CrashGuard.flushIfReady();
         frameTimer.beginFrame();
         deferredTemporalBlurApplied = false;
     }
@@ -74,72 +75,81 @@ public class ShaderManager {
     public static void applyDeferredTemporalBlur() {
         if (deferredTemporalBlurApplied || frameAllocator == null || !shouldRun()) return;
 
-        ConfigEntries config = ConfigManager.getConfig();
-        switch (config.blurAlgorithm) {
-            case FRAME_BLENDING, HYBRID_BLENDING -> {
-                applyFrameBlendingInternal();
-                deferredTemporalBlurApplied = true;
+        try {
+            ConfigEntries config = ConfigManager.getConfig();
+            switch (config.blurAlgorithm) {
+                case FRAME_BLENDING, HYBRID_BLENDING -> {
+                    applyFrameBlendingInternal();
+                    deferredTemporalBlurApplied = true;
+                }
+                case ACCUMULATION_MAX -> {
+                    FrameBlendingManager.applyAccumulationMax(
+                            frameAllocator, config.getEffectiveMotionBlurStrength());
+                    deferredTemporalBlurApplied = true;
+                }
+                case ACCUMULATION_MIX -> {
+                    FrameBlendingManager.applyAccumulationMix(
+                            frameAllocator, config.getEffectiveMotionBlurStrength());
+                    deferredTemporalBlurApplied = true;
+                }
+                default -> {}
             }
-            case ACCUMULATION_MAX -> {
-                FrameBlendingManager.applyAccumulationMax(
-                        frameAllocator, config.getEffectiveMotionBlurStrength());
-                deferredTemporalBlurApplied = true;
-            }
-            case ACCUMULATION_MIX -> {
-                FrameBlendingManager.applyAccumulationMix(
-                        frameAllocator, config.getEffectiveMotionBlurStrength());
-                deferredTemporalBlurApplied = true;
-            }
-            default -> {}
+        } catch (Throwable t) {
+            CrashGuard.report("ShaderManager.applyDeferredTemporalBlur", t);
         }
     }
 
     private static boolean shouldRun() {
         ConfigEntries config = ConfigManager.getConfig();
-        return config.enabled && config.getEffectiveMotionBlurStrength() != 0;
+        return config != null && config.enabled && config.getEffectiveMotionBlurStrength() != 0;
     }
 
     private static void applyBlurInternal(BlurPass pass, boolean includeTemporal) {
         if (frameAllocator == null) return;
 
-        ConfigEntries config = ConfigManager.getConfig();
-        Minecraft     client = Minecraft.getInstance();
+        try {
+            ConfigEntries config = ConfigManager.getConfig();
+            Minecraft client = Minecraft.getInstance();
+            if (client == null) return;
+            RenderTarget mainTarget = client.getMainRenderTarget();
+            if (mainTarget == null || mainTarget.width <= 0 || mainTarget.height <= 0) return;
 
-        // Accumulation Blur
-        if (includeTemporal) {
-            if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.FRAME_BLENDING) {return;}
-            if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.ACCUMULATION_MAX) {return;}
-            if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.ACCUMULATION_MIX) {return;}
-        } else if (!config.usesVelocityBlur()) {return;}
+            if (includeTemporal) {
+                if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.FRAME_BLENDING) {return;}
+                if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.ACCUMULATION_MAX) {return;}
+                if (config.blurAlgorithm == ConfigEntries.BlurAlgorithm.ACCUMULATION_MIX) {return;}
+            } else if (!config.usesVelocityBlur()) {return;}
 
-        // Velocity Blur
-        BlurStrengthCalculator.Result blur = calculateVelocityBlur(config);
-        float viewW = client.getMainRenderTarget().width;
-        float viewH = client.getMainRenderTarget().height;
-        int   algo  = config.blurProfile.ordinal();
+            BlurStrengthCalculator.Result blur = calculateVelocityBlur(config);
+            float viewW = mainTarget.width;
+            float viewH = mainTarget.height;
+            int algo = config.blurProfile != null ? config.blurProfile.ordinal() : 0;
 
-        switch (pass) {
-            case NORMAL_PRE -> {
-                PostChain p = getPreProcessor(client);
-                if (p != null) {
-                    writeAndRun(p, "PreEntityBlurUniforms", preEntityUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
+            switch (pass) {
+                case NORMAL_PRE -> {
+                    PostChain p = getPreProcessor(client);
+                    if (p != null) {
+                        writeAndRun(p, "PreEntityBlurUniforms", preEntityUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
+                    }
+                }
+                case SPECIAL_F5 -> {
+                    PostChain p = getF5Processor(client);
+                    if (p != null) {
+                        writeAndRun(p, "PreEntityBlurUniforms", f5EntityUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
+                    }
+                }
+                case NORMAL_POST -> {
+                    PostChain p = getPostProcessor(client);
+                    if (p != null) {
+                        writeAndRun(p, "PostRenderBlurUniforms", postRenderUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
+                    }
+                    if (includeTemporal && config.blurAlgorithm == ConfigEntries.BlurAlgorithm.HYBRID_BLENDING) {
+                        applyFrameBlendingInternal();
+                    }
                 }
             }
-            case SPECIAL_F5 -> {
-                PostChain p = getF5Processor(client);
-                if (p != null) {
-                    writeAndRun(p, "PreEntityBlurUniforms", f5EntityUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
-                }
-            }
-            case NORMAL_POST -> {
-                PostChain p = getPostProcessor(client);
-                if (p != null) {
-                    writeAndRun(p, "PostRenderBlurUniforms", postRenderUBO, blur.strength(), viewW, viewH, algo, blur.sampleAmount(), client);
-                }
-                if (includeTemporal && config.blurAlgorithm == ConfigEntries.BlurAlgorithm.HYBRID_BLENDING) {
-                    applyFrameBlendingInternal();
-                }
-            }
+        } catch (Throwable t) {
+            CrashGuard.report("ShaderManager.applyBlurInternal(" + pass + ")", t);
         }
     }
 
@@ -171,8 +181,6 @@ public class ShaderManager {
                 config.refreshRateScaling && config.allowsRefreshRateScaling());
     }
 
-    // Shader cache
-
     private static PostChain getPreProcessor(Minecraft client) {
         PostChain result = loadProcessor(client, "velocity_pre", "pre-entity");
         if (result == null) { cachedPreProcessor = null; return null; }
@@ -196,6 +204,7 @@ public class ShaderManager {
 
     private static PostChain loadProcessor(Minecraft client, String shaderName, String displayName) {
         try {
+            if (client == null || client.getShaderManager() == null) return null;
             net.minecraft.client.renderer.ShaderManager.CompilationCache cache =
                     ((ShaderManagerAccessor) client.getShaderManager()).getCompilationCache();
             if (cache == null) return null;
@@ -205,26 +214,24 @@ public class ShaderManager {
             loadErrorLogged.remove(shaderName);
             return chain;
         } catch (Exception e) {
-            if (loadErrorLogged.add(shaderName))
-                System.err.println("[NaturalMotionBlur] Failed to load " + displayName + " shader: " + e.getMessage());
+            if (loadErrorLogged.add(shaderName)) {
+                CrashGuard.report("ShaderManager.loadProcessor(" + displayName + ")", e);
+            }
             return null;
         }
     }
 
-    // UBO writing
-
     private static void writeAndRun(PostChain processor, String uboKey, ManagedUniformBuffer managedUBO, float blendFactor, float viewW, float viewH, int blurProfile, int sampleAmount, Minecraft client) {
         List<PostPass> passes = ((PostChainAccessor) processor).getPasses();
-        if (passes.isEmpty()) return;
+        if (passes == null || passes.isEmpty()) return;
 
         Map<String, GpuBuffer> uniformBuffers = ((PostPassAccessor) passes.getFirst()).getCustomUniforms();
-        if (!uniformBuffers.containsKey(uboKey)) return;
+        if (uniformBuffers == null || !uniformBuffers.containsKey(uboKey)) return;
 
-        // Replace the shader loader's placeholder buffer with ours and close the old one
         GpuBuffer ubo = managedUBO.put(processor, uniformBuffers, uboKey);
+        if (ubo == null) return;
 
         try {
-            // Write uniforms in std140 order - must match the GLSL block declaration
             try (GpuBuffer.MappedView view = RenderSystem.getDevice().createCommandEncoder().mapBuffer(ubo, false, true)) {
                 Std140Builder b = Std140Builder.intoBuffer(view.data());
                 b.putMat4f(cameraState.getMvInverse());
@@ -242,7 +249,7 @@ public class ShaderManager {
             processor.process(client.getMainRenderTarget(), frameAllocator);
         } catch (RuntimeException e) {
             if (managedUBO.resetIfClosed(e)) return;
-            throw e;
+            CrashGuard.report("ShaderManager.writeAndRun(" + uboKey + ")", e);
         }
     }
 }

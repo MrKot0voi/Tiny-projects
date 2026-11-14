@@ -81,7 +81,9 @@ public class FrameBlendingManager {
 
     public static void applyFrameBlending(GraphicsResourceAllocator allocator, float fps, int refreshRate, float strength) {
         Minecraft client = Minecraft.getInstance();
+        if (client == null) return;
         RenderTarget main = client.getMainRenderTarget();
+        if (main == null || main.width <= 0 || main.height <= 0) return;
         updateSmoothedFPS(fps);
 
         if (refreshRate <= 0 || strength <= 0.0f) {
@@ -143,6 +145,7 @@ public class FrameBlendingManager {
     }
 
     public static void invalidate() {
+        if (!RenderSystem.isOnRenderThread()) return;
         for (int i = 0; i < historyTargets.length; i++) {
             if (historyTargets[i] != null) {
                 historyTargets[i].destroyBuffers();
@@ -321,7 +324,9 @@ public class FrameBlendingManager {
     private static void applyAccumulationInternal(GraphicsResourceAllocator allocator,
                                                   float strength, String shaderName, boolean isMax) {
         Minecraft client = Minecraft.getInstance();
+        if (client == null) return;
         RenderTarget main = client.getMainRenderTarget();
+        if (main == null || main.width <= 0 || main.height <= 0) return;
         ensureTargets(main.width, main.height);
 
         if (!accumHasPrevious) {

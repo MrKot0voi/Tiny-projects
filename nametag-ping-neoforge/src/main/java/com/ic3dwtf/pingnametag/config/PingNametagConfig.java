@@ -2,10 +2,6 @@ package com.ic3dwtf.pingnametag.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * Конфиг мода. Раньше был Gson-файлом и Cloth Config под Fabric,
- * теперь ModConfigSpec. Значения по умолчанию совпадают с оригиналом.
- */
 public final class PingNametagConfig {
    public static final ModConfigSpec SPEC;
 
@@ -44,40 +40,45 @@ public final class PingNametagConfig {
    private PingNametagConfig() {
    }
 
+   private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+      try {
+         return SPEC.isLoaded() ? val.get() : val.getDefault();
+      } catch (Throwable t) {
+         return val.getDefault();
+      }
+   }
+
    public static PingNametagConfig get() {
       return INSTANCE;
    }
 
    public boolean enabled() {
-      return ENABLED.get();
+      return getSafe(ENABLED);
    }
 
    public String textFormat() {
-      return TEXT_FORMAT.get();
+      String fmt = getSafe(TEXT_FORMAT);
+      return fmt != null ? fmt : " (%ping%ms)";
    }
 
    public boolean showOwnPing() {
-      return SHOW_OWN_PING.get();
+      return getSafe(SHOW_OWN_PING);
    }
 
-   /**
-    * Пороги выстраиваются по возрастанию: каждый следующий не меньше предыдущего + 1,
-    * как и в исходном моде.
-    */
    public int colorForPing(int ping) {
-      int good = GOOD_PING_MAX.get();
-      int medium = Math.max(good + 1, MEDIUM_PING_MAX.get());
-      int bad = Math.max(medium + 1, BAD_PING_MAX.get());
+      int good = getSafe(GOOD_PING_MAX);
+      int medium = Math.max(good + 1, getSafe(MEDIUM_PING_MAX));
+      int bad = Math.max(medium + 1, getSafe(BAD_PING_MAX));
 
       if (ping <= good) {
-         return GOOD_COLOR.get();
+         return getSafe(GOOD_COLOR);
       }
       if (ping <= medium) {
-         return MEDIUM_COLOR.get();
+         return getSafe(MEDIUM_COLOR);
       }
       if (ping <= bad) {
-         return BAD_COLOR.get();
+         return getSafe(BAD_COLOR);
       }
-      return WORST_COLOR.get();
+      return getSafe(WORST_COLOR);
    }
 }

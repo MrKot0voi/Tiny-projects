@@ -1,5 +1,6 @@
 package com.mrmelon54.DraggableLists.mixin.packs;
 
+import com.mrmelon54.DraggableLists.CrashGuard;
 import com.mrmelon54.DraggableLists.DragItem;
 import com.mrmelon54.DraggableLists.DragList;
 import com.mrmelon54.DraggableLists.DragManager;
@@ -54,7 +55,9 @@ public abstract class TransferableSelectionListMixin extends ObjectSelectionList
 
     @Override
     public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-        if (DraggableLists.CONFIG.resourcePackDraggingEnabled.isEnabled()
+        if (event != null
+            && DraggableLists.CONFIG.resourcePackDraggingEnabled != null
+            && DraggableLists.CONFIG.resourcePackDraggingEnabled.isEnabled()
             && !this.draggable_lists$isMouseOverScrollbar(event.x())
             && this.draggable_lists$dragManager.mouseDragged(event.x(), event.y(), event.button(), dragX, dragY)) {
             return true;
@@ -77,6 +80,7 @@ public abstract class TransferableSelectionListMixin extends ObjectSelectionList
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public DragItem<PackSelectionModel.Entry, TransferableSelectionList.PackEntry> draggable_lists$getEntryAtPosition(double mouseX, double mouseY) {
         AbstractSelectionList.Entry<?> entry = this.getEntryAtPosition(mouseX, mouseY);
         if (entry instanceof TransferableSelectionList.PackEntry) {
@@ -87,7 +91,7 @@ public abstract class TransferableSelectionListMixin extends ObjectSelectionList
 
     @Override
     public int draggable_lists$getIndexOfEntry(DragItem<PackSelectionModel.Entry, TransferableSelectionList.PackEntry> item) {
-        return this.children().indexOf(item.draggable_lists$getUnderlyingEntry());
+        return item == null ? -1 : this.children().indexOf(item.draggable_lists$getUnderlyingEntry());
     }
 
     @Override
@@ -147,7 +151,9 @@ public abstract class TransferableSelectionListMixin extends ObjectSelectionList
 
     @Override
     public void draggable_lists$moveEntry(DragItem<PackSelectionModel.Entry, TransferableSelectionList.PackEntry> item, int index) {
-        ((AbstractPackDuckProvider) item.draggable_lists$getUnderlyingData()).draggable_lists$moveTo(index - 1);
+        if (item != null && item.draggable_lists$getUnderlyingData() instanceof AbstractPackDuckProvider duck) {
+            duck.draggable_lists$moveTo(index - 1);
+        }
     }
 
     @Override
@@ -157,10 +163,21 @@ public abstract class TransferableSelectionListMixin extends ObjectSelectionList
 
     @Override
     public void draggable_lists$renderItem(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, int index, int left, int top, int width, int height) {
+        if (index < 0 || index >= this.children().size()) {
+            return;
+        }
         TransferableSelectionList.Entry entry = this.children().get(index);
+        if (entry == null) {
+            return;
+        }
         int oldY = entry.getY();
         entry.setY(top);
-        this.renderItem(guiGraphics, mouseX, mouseY, partialTick, entry);
-        entry.setY(oldY);
+        try {
+            this.renderItem(guiGraphics, mouseX, mouseY, partialTick, entry);
+        } catch (Throwable t) {
+            CrashGuard.report("TransferableSelectionListMixin.renderItem", t);
+        } finally {
+            entry.setY(oldY);
+        }
     }
 }

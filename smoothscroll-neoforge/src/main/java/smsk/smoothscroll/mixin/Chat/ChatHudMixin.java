@@ -7,12 +7,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.Coerce;
+import smsk.smoothscroll.CrashGuard;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
 
-// Плавная прокрутка чата и анимация открытия (маска растёт снизу вверх, opening smoothness).
 @Mixin(ChatComponent.class)
 public abstract class ChatHudMixin {
     @Shadow
@@ -46,23 +46,23 @@ public abstract class ChatHudMixin {
 
     @WrapMethod(method = "render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;IIIZZ)V")
     private void renderH(GuiGraphics graphics, Font font, int mouseX, int mouseY, int ticks, boolean focused, boolean hidden, Operation<Void> operation) {
+        CrashGuard.flushIfReady();
         if (SmScCfg.chatSmoothness() == 0.0F && SmScCfg.chatOpeningSmoothness() == 0.0F) {
             operation.call(graphics, font, mouseX, mouseY, ticks, focused, hidden);
             return;
         }
 
+        int lineHeight = Math.max(1, this.getLineHeight());
         if (SmScCfg.chatSmoothness() != 0.0F) {
             this.smoothScrollPos = (this.smoothScrollPos - this.targetScrollPos) * (float) Math.pow(SmScCfg.chatSmoothness(), SmoothSc.getLastFrameDuration()) + this.targetScrollPos;
-            if (Math.abs(this.smoothScrollPos - this.targetScrollPos) < 1.0F / this.getLineHeight() / 2.0F) {
+            if (Math.abs(this.smoothScrollPos - this.targetScrollPos) < 1.0F / lineHeight / 2.0F) {
                 this.smoothScrollPos = this.targetScrollPos;
             }
 
             this.chatScrollbarPos = (int) Math.floor(this.smoothScrollPos);
         }
 
-        // Маска: строки за пределами области чата не должны вылезать (и при анимации открытия — растут снизу вверх).
         float scale = (float) this.getScale();
-        int lineHeight = this.getLineHeight();
         int bottom = graphics.guiHeight() - 40;
         int top;
         if (SmScCfg.chatOpeningSmoothness() == 0.0F) {
@@ -79,11 +79,13 @@ public abstract class ChatHudMixin {
         }
 
         graphics.enableScissor(0, top, graphics.guiWidth(), graphics.guiHeight());
-        operation.call(graphics, font, mouseX, mouseY, ticks, focused, hidden);
-        graphics.disableScissor();
+        try {
+            operation.call(graphics, font, mouseX, mouseY, ticks, focused, hidden);
+        } finally {
+            graphics.disableScissor();
+        }
     }
 
-    // Запоминаем, сколько строк реально видно (для анимации открытия).
     @WrapMethod(method = "forEachLine")
     private int forEachLineWrap(@Coerce Object calculator, @Coerce Object consumer, Operation<Integer> operation) {
         int visible = operation.call(calculator, consumer);
@@ -91,23 +93,26 @@ public abstract class ChatHudMixin {
         return visible;
     }
 
-    // Сдвиг всего содержимого чата на дробную часть прокрутки (после масштаба, как в оригинале).
     @WrapMethod(method = "render(Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IIZ)V")
     private void renderAccessWrap(ChatComponent.ChatGraphicsAccess access, int guiHeight, int mouseY, boolean focused, Operation<Void> operation) {
-        if (SmScCfg.chatSmoothness() == 0.0F) {
+        if (SmScCfg.chatSmoothness() == 0.0F || access == null) {
             operation.call(access, guiHeight, mouseY, focused);
             return;
         }
 
         int dy = (int) Math.floor(this.getDrawOffset());
         access.updatePose(pose -> pose.translate(0.0F, dy));
-        operation.call(access, guiHeight, mouseY, focused);
-        access.updatePose(pose -> pose.translate(0.0F, -dy));
+        try {
+            operation.call(access, guiHeight, mouseY, focused);
+        } finally {
+            access.updatePose(pose -> pose.translate(0.0F, -dy));
+        }
     }
 
     @WrapMethod(method = "scrollChat")
     private void scrollWrap(int amount, Operation<Void> operation) {
-        float newTarget = this.targetScrollPos + amount / 7.0F * (SmScCfg.chatAmount() != 0.0F ? SmScCfg.chatAmount() / this.getLineHeight() : 7.0F);
+        int lineHeight = Math.max(1, this.getLineHeight());
+        float newTarget = this.targetScrollPos + amount / 7.0F * (SmScCfg.chatAmount() != 0.0F ? SmScCfg.chatAmount() / lineHeight : 7.0F);
         this.chatScrollbarPos = (int) Math.ceil(newTarget);
         operation.call(0);
         if (newTarget > this.chatScrollbarPos) {
@@ -129,6 +134,6 @@ public abstract class ChatHudMixin {
 
     @Unique
     private float getDrawOffset() {
-        return -(this.chatScrollbarPos - this.smoothScrollPos) * this.getLineHeight();
+        return -(this.chatScrollbarPos - this.smoothScrollPos) * Math.max(1, this.getLineHeight());
     }
 }

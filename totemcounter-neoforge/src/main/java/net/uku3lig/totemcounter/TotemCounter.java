@@ -1,6 +1,11 @@
 package net.uku3lig.totemcounter;
 
 import com.mojang.logging.LogUtils;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -11,18 +16,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 import net.uku3lig.totemcounter.config.TotemCounterConfig;
 import org.slf4j.Logger;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Stream;
 
 import static net.minecraft.ChatFormatting.*;
 
@@ -31,12 +30,12 @@ public class TotemCounter {
     public static final String MOD_ID = "totemcounter";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final Map<UUID, Integer> POPS = new HashMap<>();
+    private static final Map<UUID, Integer> POPS = new ConcurrentHashMap<>();
     private static final List<Identifier> CUSTOM_TOTEMS = List.of(
             Identifier.fromNamespaceAndPath("voidtotem", "totem_of_void_undying")
     );
 
-    public static final ItemStack TOTEM = new ItemStack(Items.TOTEM_OF_UNDYING);
+    private static ItemStack cachedTotemStack;
     public static final Identifier DEFAULT_TOTEM = Identifier.fromNamespaceAndPath(MOD_ID, "gui/totem.png");
     public static final Identifier WHITE_BAR = Identifier.fromNamespaceAndPath(MOD_ID, "gui/bar.png");
 
@@ -54,6 +53,18 @@ public class TotemCounter {
 
     public TotemCounter(IEventBus modEventBus, ModContainer modContainer) {
         ClientSetup.initialize(modEventBus, modContainer);
+    }
+
+    public static ItemStack getTotemStack() {
+        if (cachedTotemStack == null || cachedTotemStack.isEmpty()) {
+            try {
+                cachedTotemStack = new ItemStack(Items.TOTEM_OF_UNDYING);
+            } catch (Throwable t) {
+                CrashGuard.report("TotemCounter.getTotemStack", t);
+                return ItemStack.EMPTY;
+            }
+        }
+        return cachedTotemStack;
     }
 
     public static Map<UUID, Integer> getPops() {
@@ -74,19 +85,26 @@ public class TotemCounter {
 
     public static int getCount(Player player) {
         if (player == null) return 0;
-        if (TotemCounterConfig.get().isShowPopCounter()) {
-            return POPS.getOrDefault(player.getUUID(), 0);
-        }
+        try {
+            if (TotemCounterConfig.get().isShowPopCounter()) {
+                return POPS.getOrDefault(player.getUUID(), 0);
+            }
 
-        Inventory inventory = player.getInventory();
-        ItemStack offhand = inventory.getItem(Inventory.SLOT_OFFHAND);
-        return Stream.concat(inventory.getNonEquipmentItems().stream(), Stream.of(offhand))
-                .filter(TotemCounter::isTotem)
-                .mapToInt(ItemStack::getCount)
-                .sum();
+            Inventory inventory = player.getInventory();
+            if (inventory == null) return 0;
+            ItemStack offhand = inventory.getItem(Inventory.SLOT_OFFHAND);
+            return Stream.concat(inventory.getNonEquipmentItems().stream(), Stream.of(offhand))
+                    .filter(TotemCounter::isTotem)
+                    .mapToInt(ItemStack::getCount)
+                    .sum();
+        } catch (Throwable t) {
+            CrashGuard.report("TotemCounter.getCount", t);
+            return 0;
+        }
     }
 
     public static boolean isTotem(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
         if (stack.is(Items.TOTEM_OF_UNDYING)) return true;
         Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         return CUSTOM_TOTEMS.contains(id);
@@ -119,19 +137,26 @@ public class TotemCounter {
     }
 
     public static Component showPopsInText(Player entity, Component text) {
-        TotemCounterConfig config = TotemCounterConfig.get();
-        if (POPS.containsKey(entity.getUUID()) && config.isCounterEnabled()) {
-            int popCount = POPS.get(entity.getUUID());
-            MutableComponent label = text.copy().append(" ");
-            MutableComponent counter = Component.literal("-" + popCount);
-            if (config.isSeparator()) {
-                label.append(Component.literal("| ").withStyle(style -> style.withColor(ChatFormatting.GRAY)));
+        if (entity == null || text == null) {
+            return text;
+        }
+        try {
+            TotemCounterConfig config = TotemCounterConfig.get();
+            Integer popCount = POPS.get(entity.getUUID());
+            if (popCount != null && config.isCounterEnabled()) {
+                MutableComponent label = text.copy().append(" ");
+                MutableComponent counter = Component.literal("-" + popCount);
+                if (config.isSeparator()) {
+                    label.append(Component.literal("| ").withStyle(style -> style.withColor(ChatFormatting.GRAY)));
+                }
+                if (config.isCounterColors()) {
+                    counter.setStyle(Style.EMPTY.withColor(getPopColor(popCount)));
+                }
+                label.append(counter);
+                return label;
             }
-            if (config.isCounterColors()) {
-                counter.setStyle(Style.EMPTY.withColor(getPopColor(popCount)));
-            }
-            label.append(counter);
-            return label;
+        } catch (Throwable t) {
+            CrashGuard.report("TotemCounter.showPopsInText", t);
         }
         return text;
     }
@@ -139,5 +164,4 @@ public class TotemCounter {
     public static void resetPopCounter() {
         POPS.clear();
     }
-
 }

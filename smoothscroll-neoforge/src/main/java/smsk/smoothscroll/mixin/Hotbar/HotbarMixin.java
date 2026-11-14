@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import smsk.smoothscroll.CrashGuard;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
 
@@ -35,53 +36,75 @@ public class HotbarMixin {
 
     @WrapMethod(method = "renderItemHotbar")
     private void renderHotbarWrap(GuiGraphics context, DeltaTracker tickCounter, Operation<Void> operation) {
-        this.rolloverSpace = SmScCfg.staticSelector() ? 1 : 4;
-        int target = (selectedSlot() - SmoothSc.hotbarRollover * this.slotCount) * this.slotWidth - SmoothSc.hotbarRollover * this.rolloverSpace;
-        this.smoothSelectorPos = (float) ((this.smoothSelectorPos - target) * Math.pow(SmScCfg.hotbarSmoothness(), SmoothSc.getLastFrameDuration()) + target);
-        if (Math.round(this.smoothSelectorPos) < this.rolloverSpace - this.slotWidth / 2) {
-            this.smoothSelectorPos = this.smoothSelectorPos + (this.slotCount * this.slotWidth + this.rolloverSpace);
-            SmoothSc.hotbarRollover--;
-        } else if (Math.round(this.smoothSelectorPos) > this.rolloverSpace - this.slotWidth / 2 + this.slotWidth * this.slotCount) {
-            this.smoothSelectorPos = this.smoothSelectorPos - (this.slotCount * this.slotWidth + this.rolloverSpace);
-            SmoothSc.hotbarRollover++;
+        CrashGuard.flushIfReady();
+        try {
+            this.rolloverSpace = SmScCfg.staticSelector() ? 1 : 4;
+            int target = (selectedSlot() - SmoothSc.hotbarRollover * this.slotCount) * this.slotWidth - SmoothSc.hotbarRollover * this.rolloverSpace;
+            this.smoothSelectorPos = (float) ((this.smoothSelectorPos - target) * Math.pow(SmScCfg.hotbarSmoothness(), SmoothSc.getLastFrameDuration()) + target);
+            if (Math.round(this.smoothSelectorPos) < this.rolloverSpace - this.slotWidth / 2) {
+                this.smoothSelectorPos = this.smoothSelectorPos + (this.slotCount * this.slotWidth + this.rolloverSpace);
+                SmoothSc.hotbarRollover--;
+            } else if (Math.round(this.smoothSelectorPos) > this.rolloverSpace - this.slotWidth / 2 + this.slotWidth * this.slotCount) {
+                this.smoothSelectorPos = this.smoothSelectorPos - (this.slotCount * this.slotWidth + this.rolloverSpace);
+                SmoothSc.hotbarRollover++;
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("HotbarMixin.renderHotbarWrap", t);
         }
 
-        operation.call(context, tickCounter);
+        try {
+            operation.call(context, tickCounter);
+        } finally {
+            this.endMask(context);
+        }
     }
 
-    // Выделение (второй blitSprite в renderItemHotbar).
     @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = BLIT_SPRITE, ordinal = 1))
     private void moveSelector(GuiGraphics context, RenderPipeline pipeline, Identifier texture, int x, int y, int width, int height, Operation<Void> operation) {
         int hotbarStart = x - selectedSlot() * this.slotWidth;
         if (SmScCfg.staticSelector()) {
             context.pose().pushMatrix();
-            context.pose().translate(-(x - hotbarStart) + this.slotCount / 2 * this.slotWidth, 0.0F);
-            operation.call(context, pipeline, texture, x, y, width, height);
-            context.pose().popMatrix();
-        } else {
-            if (Math.round(this.smoothSelectorPos) < 0) {
-                this.enableMask(context);
-                context.pose().pushMatrix();
-                context.pose().translate(this.smoothSelectorPos - (x - hotbarStart) + this.slotCount * this.slotWidth + this.rolloverSpace, 0.0F);
+            try {
+                context.pose().translate(-(x - hotbarStart) + this.slotCount / 2 * this.slotWidth, 0.0F);
                 operation.call(context, pipeline, texture, x, y, width, height);
-                context.pose().popMatrix();
-            } else if (Math.round(this.smoothSelectorPos) > this.slotWidth * 8) {
-                this.enableMask(context);
-                context.pose().pushMatrix();
-                context.pose().translate(this.smoothSelectorPos - (x - hotbarStart) - this.slotCount * this.slotWidth - this.rolloverSpace, 0.0F);
-                operation.call(context, pipeline, texture, x, y, width, height);
+            } finally {
                 context.pose().popMatrix();
             }
+        } else {
+            try {
+                if (Math.round(this.smoothSelectorPos) < 0) {
+                    this.enableMask(context);
+                    context.pose().pushMatrix();
+                    try {
+                        context.pose().translate(this.smoothSelectorPos - (x - hotbarStart) + this.slotCount * this.slotWidth + this.rolloverSpace, 0.0F);
+                        operation.call(context, pipeline, texture, x, y, width, height);
+                    } finally {
+                        context.pose().popMatrix();
+                    }
+                } else if (Math.round(this.smoothSelectorPos) > this.slotWidth * 8) {
+                    this.enableMask(context);
+                    context.pose().pushMatrix();
+                    try {
+                        context.pose().translate(this.smoothSelectorPos - (x - hotbarStart) - this.slotCount * this.slotWidth - this.rolloverSpace, 0.0F);
+                        operation.call(context, pipeline, texture, x, y, width, height);
+                    } finally {
+                        context.pose().popMatrix();
+                    }
+                }
 
-            context.pose().pushMatrix();
-            context.pose().translate(this.smoothSelectorPos - (x - hotbarStart), 0.0F);
-            operation.call(context, pipeline, texture, x, y, width, height);
-            context.pose().popMatrix();
-            this.endMask(context);
+                context.pose().pushMatrix();
+                try {
+                    context.pose().translate(this.smoothSelectorPos - (x - hotbarStart), 0.0F);
+                    operation.call(context, pipeline, texture, x, y, width, height);
+                } finally {
+                    context.pose().popMatrix();
+                }
+            } finally {
+                this.endMask(context);
+            }
         }
     }
 
-    // Фон хотбара (первый blitSprite в renderItemHotbar).
     @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = BLIT_SPRITE, ordinal = 0))
     private void moveHotbar(GuiGraphics context, RenderPipeline pipeline, Identifier texture, int x, int y, int width, int height, Operation<Void> operation) {
         if (!SmScCfg.staticSelector()) {
@@ -90,22 +113,33 @@ public class HotbarMixin {
         }
 
         this.enableMask(context);
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(context, pipeline, texture, x, y, width, height);
-        context.pose().popMatrix();
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos + this.slotCount * this.slotWidth + this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(context, pipeline, texture, x, y, width, height);
-        context.pose().popMatrix();
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos - this.slotCount * this.slotWidth - this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(context, pipeline, texture, x, y, width, height);
-        context.pose().popMatrix();
-        this.endMask(context);
+        try {
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(context, pipeline, texture, x, y, width, height);
+            } finally {
+                context.pose().popMatrix();
+            }
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos + this.slotCount * this.slotWidth + this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(context, pipeline, texture, x, y, width, height);
+            } finally {
+                context.pose().popMatrix();
+            }
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos - this.slotCount * this.slotWidth - this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(context, pipeline, texture, x, y, width, height);
+            } finally {
+                context.pose().popMatrix();
+            }
+        } finally {
+            this.endMask(context);
+        }
     }
 
-    // Предметы хотбара (первый вызов renderSlot в renderItemHotbar — цикл по слотам).
     @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = RENDER_SLOT, ordinal = 0))
     private void moveItems(Gui gui, GuiGraphics context, int x, int y, DeltaTracker tickCounter, Player player, ItemStack stack, int seed, Operation<Void> operation) {
         if (!SmScCfg.staticSelector()) {
@@ -114,29 +148,43 @@ public class HotbarMixin {
         }
 
         this.enableMask(context);
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(gui, context, x, y, tickCounter, player, stack, seed);
-        context.pose().popMatrix();
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos + this.slotCount * this.slotWidth + this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(gui, context, x, y, tickCounter, player, stack, seed);
-        context.pose().popMatrix();
-        context.pose().pushMatrix();
-        context.pose().translate(-this.smoothSelectorPos - this.slotCount * this.slotWidth - this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
-        operation.call(gui, context, x, y, tickCounter, player, stack, seed);
-        context.pose().popMatrix();
-        this.endMask(context);
+        try {
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(gui, context, x, y, tickCounter, player, stack, seed);
+            } finally {
+                context.pose().popMatrix();
+            }
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos + this.slotCount * this.slotWidth + this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(gui, context, x, y, tickCounter, player, stack, seed);
+            } finally {
+                context.pose().popMatrix();
+            }
+            context.pose().pushMatrix();
+            try {
+                context.pose().translate(-this.smoothSelectorPos - this.slotCount * this.slotWidth - this.rolloverSpace + this.slotCount / 2 * this.slotWidth, 0.0F);
+                operation.call(gui, context, x, y, tickCounter, player, stack, seed);
+            } finally {
+                context.pose().popMatrix();
+            }
+        } finally {
+            this.endMask(context);
+        }
     }
 
     @Unique
     private static int selectedSlot() {
-        Player player = Minecraft.getInstance().player;
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc != null ? mc.player : null;
         return player == null ? 0 : player.getInventory().getSelectedSlot();
     }
 
     @Unique
     private void enableMask(GuiGraphics context) {
+        if (this.masked || context == null) return;
         int x2 = context.guiWidth() / 2 - 91;
         int y2 = context.guiHeight() - 22;
         if (!SmScCfg.staticSelector()) {
@@ -150,7 +198,7 @@ public class HotbarMixin {
 
     @Unique
     private void endMask(GuiGraphics context) {
-        if (this.masked) {
+        if (this.masked && context != null) {
             if (SmScCfg.enableMaskDebug()) {
                 context.fill(-100, -100, context.guiWidth(), context.guiHeight(), (50 << 24) | (255 << 8) | 255);
             }

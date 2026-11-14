@@ -3,10 +3,6 @@ package me.sootysplash.box;
 import java.awt.Color;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * Конфиг мода. Раньше использовался Cloth Config (autoconfig) под Fabric,
- * теперь это ModConfigSpec. Значения по умолчанию совпадают с оригиналом.
- */
 public class Config {
    public static final ModConfigSpec SPEC;
 
@@ -68,87 +64,95 @@ public class Config {
       SPEC = builder.build();
    }
 
+   private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+      try {
+         return SPEC.isLoaded() ? val.get() : val.getDefault();
+      } catch (Throwable t) {
+         return val.getDefault();
+      }
+   }
+
    public static Config getInstance() {
       return INSTANCE;
    }
 
    public boolean enabled() {
-      return ENABLED.get();
+      return getSafe(ENABLED);
    }
 
    public boolean hideArrow() {
-      return HIDE_ARROW.get();
+      return getSafe(HIDE_ARROW);
    }
 
    public boolean hideFireworks() {
-      return HIDE_FIREWORKS.get();
+      return getSafe(HIDE_FIREWORKS);
    }
 
    public boolean hideItems() {
-      return HIDE_ITEMS.get();
+      return getSafe(HIDE_ITEMS);
    }
 
    public boolean changeTargetColor() {
-      return CHANGE_TARGET_COLOR.get();
+      return getSafe(CHANGE_TARGET_COLOR);
    }
 
    public int eyeColor() {
-      return EYE_COLOR.get();
+      return getSafe(EYE_COLOR);
    }
 
    public int lookColor() {
-      return LOOK_COLOR.get();
+      return getSafe(LOOK_COLOR);
    }
 
    public int hitBoxColor() {
-      return HITBOX_COLOR.get();
+      return getSafe(HITBOX_COLOR);
    }
 
    public int targetBoxColor() {
-      return TARGET_BOX_COLOR.get();
+      return getSafe(TARGET_BOX_COLOR);
    }
 
    public int hurtBoxColor() {
-      return HURT_BOX_COLOR.get();
+      return getSafe(HURT_BOX_COLOR);
    }
 
    public int outlineColor() {
-      return OUTLINE_COLOR.get();
+      return getSafe(OUTLINE_COLOR);
    }
 
    public boolean hitBoxHurt() {
-      return HITBOX_HURT.get();
+      return getSafe(HITBOX_HURT);
    }
 
    public boolean renderEyeHeight() {
-      return RENDER_EYE_HEIGHT.get();
+      return getSafe(RENDER_EYE_HEIGHT);
    }
 
    public boolean renderLookDir() {
-      return RENDER_LOOK_DIR.get();
+      return getSafe(RENDER_LOOK_DIR);
    }
 
    public boolean lineLookDir() {
-      return LINE_LOOK_DIR.get();
+      return getSafe(LINE_LOOK_DIR);
    }
 
    public float line1() {
-      return LINE1.get().floatValue();
+      return getSafe(LINE1).floatValue();
    }
 
    public double distFor2() {
-      return DIST_FOR_2.get();
+      return getSafe(DIST_FOR_2);
    }
 
    public float line2() {
-      return LINE2.get().floatValue();
+      return getSafe(LINE2).floatValue();
    }
 
    public boolean outlineEnabled() {
-      return OUTLINE_ENABLED.get();
+      return getSafe(OUTLINE_ENABLED);
    }
 
    public float outlineMultiplier() {
-      return OUTLINE_MULTIPLIER.get().floatValue();
+      return getSafe(OUTLINE_MULTIPLIER).floatValue();
    }
 }

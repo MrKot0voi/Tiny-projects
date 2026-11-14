@@ -2,10 +2,6 @@ package walksy.shieldfixes.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * Настройки мода. Раньше были в WalksyLib (Config.builder), теперь ModConfigSpec.
- * Значения по умолчанию совпадают с Fabric-версией.
- */
 public final class ShieldFixesConfig {
     public static final ModConfigSpec SPEC;
 
@@ -29,11 +25,19 @@ public final class ShieldFixesConfig {
     private ShieldFixesConfig() {
     }
 
+    private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+        try {
+            return SPEC.isLoaded() ? val.get() : val.getDefault();
+        } catch (Throwable t) {
+            return val.getDefault();
+        }
+    }
+
     public static boolean modEnabled() {
-        return MOD_ENABLED.get();
+        return getSafe(MOD_ENABLED);
     }
 
     public static boolean factorDelay() {
-        return FACTOR_DELAY.get();
+        return getSafe(FACTOR_DELAY);
     }
 }

@@ -1,5 +1,11 @@
 package ru.berdinskiybear.armorhud;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import lombok.Getter;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.KeyMapping;
@@ -24,13 +30,6 @@ import ru.berdinskiybear.armorhud.config.ArmorHudConfig;
 import ru.berdinskiybear.armorhud.config.ConfigManager;
 import ru.berdinskiybear.armorhud.mixin.InventoryMenuAccessor;
 
-import java.util.*;
-import java.util.stream.Stream;
-
-/**
- * Точка входа. Раньше был Fabric ModInitializer; теперь @Mod (client-only).
- * MOD_ID оставлен прежним для ресурсов (ukus-armor-hud), MODID — допустимый id для NeoForge.
- */
 @Mod(value = ArmorHudMod.MODID, dist = Dist.CLIENT)
 public final class ArmorHudMod {
     public static final String MOD_ID = "ukus-armor-hud";
@@ -48,11 +47,23 @@ public final class ArmorHudMod {
 
     public static final SoundEvent ARMOR_BREAKING_SOUND = SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(MOD_ID, "armor_breaking"));
 
-    public static final EquipmentSlot[] SLOT_IDS = InventoryMenuAccessor.getSLOT_IDS();
+    public static final EquipmentSlot[] SLOT_IDS = resolveSlotIds();
 
     private static final List<ItemStack> lastStacks = new ArrayList<>(Collections.nCopies(SLOT_IDS.length, ItemStack.EMPTY));
 
     private static KeyMapping toggleKeybinding;
+
+    private static EquipmentSlot[] resolveSlotIds() {
+        try {
+            EquipmentSlot[] slots = InventoryMenuAccessor.getSLOT_IDS();
+            if (slots != null && slots.length > 0) {
+                return slots;
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("ArmorHudMod.resolveSlotIds", t);
+        }
+        return new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD};
+    }
 
     public ArmorHudMod(IEventBus modBus) {
         manager.load();
@@ -68,27 +79,36 @@ public final class ArmorHudMod {
     }
 
     private static void onClientTickPre(ClientTickEvent.Pre event) {
-        if (toggleKeybinding != null && toggleKeybinding.consumeClick()) {
-            ArmorHudConfig config = manager.getConfig();
-            config.setEnabled(!config.isEnabled());
-            manager.save();
+        CrashGuard.flushIfReady();
+        try {
+            if (toggleKeybinding != null && toggleKeybinding.consumeClick()) {
+                ArmorHudConfig config = manager.getConfig();
+                config.setEnabled(!config.isEnabled());
+                manager.save();
 
-            Minecraft client = Minecraft.getInstance();
-            if (client.player != null) {
-                client.player.displayClientMessage(Component.translatable("armorhud.keybind.toggle.msg"), true);
+                Minecraft client = Minecraft.getInstance();
+                if (client != null && client.player != null) {
+                    client.player.displayClientMessage(Component.translatable("armorhud.keybind.toggle.msg"), true);
+                }
             }
+        } catch (Throwable t) {
+            CrashGuard.report("ArmorHudMod.onClientTickPre", t);
         }
     }
 
     @Nullable
     public static Player getCameraPlayer() {
-        return Minecraft.getInstance().getCameraEntity() instanceof Player player ? player : null;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc == null) {
+            return null;
+        }
+        return mc.getCameraEntity() instanceof Player player ? player : mc.player;
     }
 
-    /**
-     * Returns the bounding box of the widget itself, <strong>excluding</strong> "external" information like warning icon
-     */
     public static Optional<Rect2i> getWidgetRect(GuiGraphics graphics, Player player) {
+        if (graphics == null || player == null) {
+            return Optional.empty();
+        }
         ArmorHudConfig config = manager.getConfig();
         List<ItemStack> armorItems = getArmorItems(player);
 
@@ -96,8 +116,6 @@ public final class ArmorHudMod {
             return Optional.empty();
         }
 
-        // hotbar offset is relative to the bar, so when we are on the left it needs to be flipped
-        // and on the right side, we need to flip the offset, except when anchored to the hotbar
         final int sideMultiplier, sideOffsetMultiplier;
         if ((config.getAnchor() == ArmorHudConfig.Anchor.HOTBAR && config.getSide() == ArmorHudConfig.Side.LEFT)
                 || (config.getAnchor() != ArmorHudConfig.Anchor.HOTBAR && config.getSide() == ArmorHudConfig.Side.RIGHT)) {
@@ -108,14 +126,16 @@ public final class ArmorHudMod {
             sideOffsetMultiplier = 0;
         }
 
+        Minecraft mc = Minecraft.getInstance();
         final int addedHotbarOffset = switch (config.getOffhandSlotBehavior()) {
             case ALWAYS_IGNORE -> 0;
             case ALWAYS_LEAVE_SPACE ->
                     player.getMainArm() == config.getSide().asArm() ? ATTACK_INDICATOR_OFFSET : OFFHAND_OFFSET;
             case ADHERE -> {
                 if (player.getMainArm() == config.getSide().asArm()) {
-                    if (Minecraft.getInstance().options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR &&
-                            player.getAttackStrengthScale(0) < 1) {
+                    if (mc != null && mc.options != null
+                            && mc.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR
+                            && player.getAttackStrengthScale(0) < 1) {
                         yield ATTACK_INDICATOR_OFFSET;
                     }
                 } else if (!player.getOffhandItem().isEmpty()) {
@@ -145,23 +165,20 @@ public final class ArmorHudMod {
         return Optional.of(new Rect2i(armorWidgetX, armorWidgetY, widgetWidth, widgetHeight));
     }
 
-    /**
-     * Returns the effective bounding box, <strong>including</strong> "external" information like warning icon
-     */
     public static Optional<Rect2i> getEffectiveWidgetRect(GuiGraphics graphics, Player player) {
         ArmorHudConfig config = manager.getConfig();
 
         return getWidgetRect(graphics, player).map(rect -> {
-            // TODO should probably extend the bbox horizontally too
             if (config.getOrientation() == ArmorHudConfig.Orientation.HORIZONTAL) {
                 int additionalHeight = 0;
 
                 if (config.isWarningShown()) {
-                    additionalHeight += WARNING_SIZE + 2 + (config.getWarningBobIntensity() / 2);
+                    additionalHeight += WARNING_SIZE + 2 + (Math.max(0, config.getWarningBobIntensity()) / 2);
                 }
 
-                if (config.getDurabilityDisplay() != ArmorHudConfig.DurabilityDisplay.BAR) {
-                    additionalHeight += Minecraft.getInstance().font.lineHeight;
+                Minecraft mc = Minecraft.getInstance();
+                if (config.getDurabilityDisplay() != ArmorHudConfig.DurabilityDisplay.BAR && mc != null && mc.font != null) {
+                    additionalHeight += mc.font.lineHeight;
                 }
 
                 rect.setHeight(rect.getHeight() + additionalHeight);
@@ -175,6 +192,9 @@ public final class ArmorHudMod {
     }
 
     public static List<ItemStack> getArmorItems(Player player) {
+        if (player == null) {
+            return List.of();
+        }
         Stream<ItemStack> items = Arrays.stream(SLOT_IDS).map(player::getItemBySlot);
         items = switch (manager.getConfig().getWidgetShown()) {
             case ALWAYS -> items;
@@ -190,11 +210,14 @@ public final class ArmorHudMod {
     }
 
     public static boolean shouldPlayBreakSound(Player player) {
+        if (player == null) {
+            return false;
+        }
         for (int i = 0; i < SLOT_IDS.length; i++) {
             EquipmentSlot slot = SLOT_IDS[i];
             ItemStack current = player.getItemBySlot(slot);
             ItemStack last = lastStacks.set(i, current);
-            if (last.getDamageValue() != current.getDamageValue() && shouldShowWarning(current)) {
+            if (last != null && current != null && last.getDamageValue() != current.getDamageValue() && shouldShowWarning(current)) {
                 return true;
             }
         }
@@ -203,10 +226,11 @@ public final class ArmorHudMod {
     }
 
     public static boolean shouldShowWarning(ItemStack stack) {
-        if (stack.isEmpty() || !stack.isDamageableItem()) return false;
+        if (stack == null || stack.isEmpty() || !stack.isDamageableItem()) return false;
 
         final int damage = stack.getDamageValue();
         final int maxDamage = stack.getMaxDamage();
+        if (maxDamage <= 0) return false;
         double percentage = 1.0 - ((double) damage / maxDamage);
 
         return percentage <= manager.getConfig().getMinDurabilityPercentage()

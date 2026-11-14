@@ -98,7 +98,7 @@ public class ConfigManager {
             Files.createDirectories(configFile.getParent());
             Files.writeString(configFile, GSON.toJson(config), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            net.natural.motionblur.CrashGuard.report("ConfigManager.saveConfig", e);
         }
     }
 

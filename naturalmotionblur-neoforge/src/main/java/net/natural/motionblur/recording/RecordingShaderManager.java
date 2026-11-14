@@ -511,10 +511,12 @@ public class RecordingShaderManager {
     public static void destroy() {
         if (RenderSystem.isOnRenderThread()) {
             destroyRawSpoutTexture();
+            if (cleanFrameTarget != null) { cleanFrameTarget.destroyBuffers(); cleanFrameTarget = null; }
+            invalidateFrameBlending();
+        } else {
+            cleanFrameTarget = null;
         }
-        if (cleanFrameTarget != null) { cleanFrameTarget.destroyBuffers(); cleanFrameTarget = null; }
         savedAllocator = null;
-        invalidateFrameBlending();
         lastW = 0;
         lastH = 0;
         cachedGlfwHandle = 0;

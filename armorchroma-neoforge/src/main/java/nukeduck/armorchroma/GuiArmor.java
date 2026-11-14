@@ -22,27 +22,37 @@ import nukeduck.armorchroma.config.Util;
 
 public class GuiArmor {
    private static final Identifier BACKGROUND = Identifier.fromNamespaceAndPath("armorchroma", "textures/gui/background.png");
-   private static final int LEFT_HALF_U_OFFSET = 0;
-   private static final int RIGHT_HALF_U_OFFSET = 4;
-   private static final int HALF_ICON_WIDTH = 5;
    private static final int[] BG_COLORS = new int[]{-12924161, -12851878, -256, -25344, -1232384, -9359167};
    private static final int ROW_SPACING = 5;
    private static final int ARMOR_PER_ROW = 20;
    private static final AttributeSupplier FALLBACK_ATTRIBUTES = AttributeSupplier.builder().add(Attributes.ARMOR).build();
-   private final Minecraft client = Minecraft.getInstance();
 
    public void draw(GuiGraphics context, int x, int y) {
-      List<ArmorBarSegment> segments = new ArrayList<>(EquipmentSlot.VALUES.size());
-      int totalPoints = this.buildArmorSegments(this.client.player, segments);
-      if (totalPoints > 0) {
-         int barPoints = 0;
-         int compressedRows = ArmorChroma.config.compressBar() ? this.compressRows(segments, totalPoints) : 0;
-         this.drawBackground(context, x, y, compressedRows);
+      CrashGuard.flushIfReady();
+      if (context == null) {
+         return;
+      }
+      Minecraft mc = Minecraft.getInstance();
+      if (mc == null || mc.player == null) {
+         return;
+      }
+      try {
+         List<ArmorBarSegment> segments = new ArrayList<>(EquipmentSlot.VALUES.size());
+         int totalPoints = this.buildArmorSegments(mc.player, segments);
+         if (totalPoints > 0) {
+            int barPoints = 0;
+            int compressedRows = ArmorChroma.config.compressBar() ? this.compressRows(segments, totalPoints) : 0;
+            this.drawBackground(context, x, y, compressedRows);
 
-         for (ArmorBarSegment segment : segments) {
-            this.drawSegment(context, x, y, barPoints, segment);
-            barPoints += segment.getArmorPoints();
+            for (ArmorBarSegment segment : segments) {
+               if (segment != null && segment.getArmorPoints() > 0) {
+                  this.drawSegment(context, x, y, barPoints, segment);
+                  barPoints += segment.getArmorPoints();
+               }
+            }
          }
+      } catch (Throwable t) {
+         CrashGuard.report("GuiArmor.draw", t);
       }
    }
 
@@ -51,7 +61,8 @@ public class GuiArmor {
       if (ArmorChroma.config.renderBackground() || drawBorder) {
          context.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, x, y, 0.0F, 0.0F, 81, 9, 256, 256);
          if (drawBorder) {
-            int color = level <= BG_COLORS.length ? BG_COLORS[level - 1] : BG_COLORS[BG_COLORS.length - 1];
+            int idx = Math.min(Math.max(level - 1, 0), BG_COLORS.length - 1);
+            int color = BG_COLORS[idx];
             context.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, x - 1, y - 1, 81.0F, 0.0F, 83, 11, 256, 256, color);
          }
       }
@@ -62,7 +73,7 @@ public class GuiArmor {
       int stackPoints = segment.getArmorPoints();
 
       int space;
-      while ((space = ARMOR_PER_ROW - barPoints % ARMOR_PER_ROW) <= stackPoints) {
+      while ((space = ARMOR_PER_ROW - barPoints % ARMOR_PER_ROW) <= stackPoints && space > 0) {
          this.drawPartialRow(context, x, y, ARMOR_PER_ROW - space, space, segment);
          this.addZOffset(context, -3);
          y -= ROW_SPACING;
@@ -78,6 +89,9 @@ public class GuiArmor {
 
    private void drawPartialRow(GuiGraphics context, int left, int top, int barPoints, int stackPoints, ArmorBarSegment segment) {
       ArmorIcon icon = segment.getIcon();
+      if (icon == null) {
+         return;
+      }
       if (segment.hasGlint()) {
          this.addZOffset(context, 2);
       }
@@ -106,18 +120,24 @@ public class GuiArmor {
    }
 
    private int buildArmorSegments(LocalPlayer player, List<ArmorBarSegment> segments) {
+      if (player == null) {
+         return 0;
+      }
       AttributeMap attributes = new AttributeMap(FALLBACK_ATTRIBUTES);
       AttributeInstance armor = attributes.getInstance(Attributes.ARMOR);
       if (armor == null) {
          return 0;
       } else {
-         int displayedArmorCap = ArmorChroma.config.getDisplayedArmorCap();
+         int displayedArmorCap = Math.max(0, ArmorChroma.config.getDisplayedArmorCap());
          int totalPoints = (int)((EntityAttributeInstanceAccess)armor).armorChroma_getUnclampedValue();
 
          for (EquipmentSlot slot : EquipmentSlot.VALUES) {
             ItemStack stack = player.getItemBySlot(slot);
+            if (stack == null || stack.isEmpty()) {
+               continue;
+            }
             stack.forEachModifier(slot, (attribute, modifier) -> {
-               if (attribute == Attributes.ARMOR && !armor.hasModifier(modifier.id())) {
+               if (attribute == Attributes.ARMOR && modifier != null && !armor.hasModifier(modifier.id())) {
                   armor.addTransientModifier(modifier);
                }
             });
@@ -148,6 +168,9 @@ public class GuiArmor {
    }
 
    private int compressRows(List<ArmorBarSegment> segments, int totalPoints) {
+      if (segments.isEmpty() || totalPoints <= 0) {
+         return 0;
+      }
       int compressedRows = (totalPoints - 1) / ARMOR_PER_ROW;
       int compressedPoints = compressedRows * ARMOR_PER_ROW;
       int segmentsToRemove = 0;
@@ -163,20 +186,25 @@ public class GuiArmor {
          segmentsToRemove++;
       }
 
-      segments.subList(0, segmentsToRemove).clear();
+      if (segmentsToRemove > 0 && segmentsToRemove <= segments.size()) {
+         segments.subList(0, segmentsToRemove).clear();
+      }
       return compressedRows;
    }
 
    private void drawMaskedIcon(GuiGraphics context, int x, int y, ArmorIcon icon, ArmorIcon mask, int uOffset) {
-      mask.draw(context, x, y, uOffset, 5);
-      icon.drawMasked(context, x, y, uOffset, 5);
+      Identifier composite = MaskedIconCache.get(icon, mask);
+      int size = ArmorIcon.ICON_SIZE;
+      context.blit(RenderPipelines.GUI_TEXTURED, composite, x + uOffset, y, uOffset, 0, 5, size, size, size, -1);
    }
 
    private void drawTexturedGlintRect(GuiGraphics context, int x, int y, float u, float v, int width, int height) {
-      float intensity = this.client.options.glintStrength().get().floatValue() * ArmorChroma.config.glintIntensity();
+      Minecraft mc = Minecraft.getInstance();
+      float baseGlint = (mc != null && mc.options != null) ? mc.options.glintStrength().get().floatValue() : 1.0F;
+      float intensity = baseGlint * ArmorChroma.config.glintIntensity();
       float clamped = Mth.clamp(intensity, 0.0F, 1.0F);
       int color = ARGB.colorFromFloat(1.0F, clamped, clamped, clamped);
-      context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_item_glint.png"), x, y, u, v, width, height, 256, 256, color);
+      context.blit(RenderPipelines.GUI_TEXTURED, Identifier.withDefaultNamespace("textures/misc/enchanted_glint_item.png"), x, y, u, v, width, height, 256, 256, color);
    }
 
    private void addZOffset(GuiGraphics context, int z) {

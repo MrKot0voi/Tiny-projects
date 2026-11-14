@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import smsk.smoothscroll.SmoothSc;
 import smsk.smoothscroll.cfg.SmScCfg;
 
-// Плавная прокрутка списка подсказок команд (внутренний класс SuggestionsList в Mojang-именах).
 @Mixin(CommandSuggestions.SuggestionsList.class)
 public class SuggestionWindowMixin {
     @Final
@@ -53,14 +52,16 @@ public class SuggestionWindowMixin {
         }
 
         this.offset = (int) Math.floor(this.smoothScrollPos);
-        operation.call(context, mouseX, (int) Math.floor(mouseY - (int) Math.floor(this.getDrawOffset())));
-        this.tryUntranslate(context);
+        try {
+            operation.call(context, mouseX, (int) Math.floor(mouseY - (int) Math.floor(this.getDrawOffset())));
+        } finally {
+            this.tryUntranslate(context);
+        }
     }
 
-    // Перед первым чтением строки из списка включаем маску и сдвиг на дробную часть прокрутки.
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;", ordinal = 0))
     private Object translate(java.util.List<?> list, int index, Operation<Object> operation, @com.llamalad7.mixinextras.sugar.Local(argsOnly = true) GuiGraphics context) {
-        if (SmScCfg.suggestionWindowSmoothness() != 0.0F && !this.translated) {
+        if (SmScCfg.suggestionWindowSmoothness() != 0.0F && !this.translated && this.rect != null && context != null) {
             context.enableScissor(0, this.rect.getY(), context.guiWidth(), this.rect.getY() + this.rect.getHeight());
             context.pose().pushMatrix();
             context.pose().translate(0.0F, (int) Math.floor(this.getDrawOffset()));
@@ -72,7 +73,7 @@ public class SuggestionWindowMixin {
 
     @Unique
     private void tryUntranslate(GuiGraphics context) {
-        if (this.translated) {
+        if (this.translated && context != null) {
             context.pose().popMatrix();
             if (SmScCfg.enableMaskDebug()) {
                 context.fill(-100, -100, context.guiWidth(), context.guiHeight(), (50 << 24) | (255 << 8) | 255);

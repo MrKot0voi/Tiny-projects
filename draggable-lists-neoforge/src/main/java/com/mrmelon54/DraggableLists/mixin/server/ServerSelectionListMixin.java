@@ -1,5 +1,6 @@
 package com.mrmelon54.DraggableLists.mixin.server;
 
+import com.mrmelon54.DraggableLists.CrashGuard;
 import com.mrmelon54.DraggableLists.DragItem;
 import com.mrmelon54.DraggableLists.DragList;
 import com.mrmelon54.DraggableLists.DragManager;
@@ -62,7 +63,9 @@ public abstract class ServerSelectionListMixin extends ObjectSelectionList<Serve
 
     @Override
     public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-        if (DraggableLists.CONFIG.serverDraggingEnabled.isEnabled()
+        if (event != null
+            && DraggableLists.CONFIG.serverDraggingEnabled != null
+            && DraggableLists.CONFIG.serverDraggingEnabled.isEnabled()
             && this.draggable_lists$dragManager.mouseDragged(event.x(), event.y(), event.button(), dragX, dragY)) {
             return true;
         }
@@ -84,6 +87,7 @@ public abstract class ServerSelectionListMixin extends ObjectSelectionList<Serve
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public DragItem<ServerData, ServerSelectionList.OnlineServerEntry> draggable_lists$getEntryAtPosition(double mouseX, double mouseY) {
         AbstractSelectionList.Entry<?> entry = this.getEntryAtPosition(mouseX, mouseY);
         if (entry instanceof ServerSelectionList.OnlineServerEntry onlineEntry) {
@@ -94,7 +98,7 @@ public abstract class ServerSelectionListMixin extends ObjectSelectionList<Serve
 
     @Override
     public int draggable_lists$getIndexOfEntry(DragItem<ServerData, ServerSelectionList.OnlineServerEntry> item) {
-        return this.children().indexOf(item.draggable_lists$getUnderlyingEntry());
+        return item == null ? -1 : this.children().indexOf(item.draggable_lists$getUnderlyingEntry());
     }
 
     @Override
@@ -154,6 +158,7 @@ public abstract class ServerSelectionListMixin extends ObjectSelectionList<Serve
 
     @Override
     public void draggable_lists$moveEntry(DragItem<ServerData, ServerSelectionList.OnlineServerEntry> item, int index) {
+        if (this.screen == null) return;
         ServerList servers = this.screen.getServers();
         if (servers instanceof ServerListDuckProvider duck) {
             duck.draggable_lists$moveItem(item, index);
@@ -169,10 +174,21 @@ public abstract class ServerSelectionListMixin extends ObjectSelectionList<Serve
 
     @Override
     public void draggable_lists$renderItem(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, int index, int left, int top, int width, int height) {
+        if (index < 0 || index >= this.children().size()) {
+            return;
+        }
         ServerSelectionList.Entry entry = this.children().get(index);
+        if (entry == null) {
+            return;
+        }
         int oldY = entry.getY();
         entry.setY(top);
-        this.renderItem(guiGraphics, mouseX, mouseY, partialTick, entry);
-        entry.setY(oldY);
+        try {
+            this.renderItem(guiGraphics, mouseX, mouseY, partialTick, entry);
+        } catch (Throwable t) {
+            CrashGuard.report("ServerSelectionListMixin.renderItem", t);
+        } finally {
+            entry.setY(oldY);
+        }
     }
 }

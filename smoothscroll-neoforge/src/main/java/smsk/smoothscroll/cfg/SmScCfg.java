@@ -2,10 +2,6 @@ package smsk.smoothscroll.cfg;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * Конфиг Smooth Scroll на ModConfigSpec. Ключи, группы и дефолты совпадают с оригиналом 2.6.7.
- * Проценты в конфиге переводятся в коэффициенты (0..1) в геттерах.
- */
 public final class SmScCfg {
     public static final ModConfigSpec SPEC;
 
@@ -78,25 +74,33 @@ public final class SmScCfg {
     private SmScCfg() {
     }
 
-    public static float hotbarSmoothness() { return (float) (HOTBAR_SMOOTHNESS.get() / 100.0); }
-    public static boolean hotbarRollover() { return HOTBAR_ROLLOVER.get(); }
-    public static boolean staticSelector() { return HOTBAR_STATIC_SELECTOR.get(); }
+    private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+        try {
+            return SPEC.isLoaded() ? val.get() : val.getDefault();
+        } catch (Throwable t) {
+            return val.getDefault();
+        }
+    }
 
-    public static float chatSmoothness() { return (float) (CHAT_SMOOTHNESS.get() / 100.0); }
-    public static float chatOpeningSmoothness() { return (float) (CHAT_OPENING_SMOOTHNESS.get() / 100.0); }
-    public static float chatAmount() { return CHAT_SCROLLING_SPEED.get().floatValue(); }
-    public static float suggestionWindowSmoothness() { return (float) (CHAT_SUGGESTION_SMOOTHNESS.get() / 100.0); }
-    public static float suggestionWindowAmount() { return CHAT_SUGGESTION_SPEED.get().floatValue(); }
+    public static float hotbarSmoothness() { return (float) (getSafe(HOTBAR_SMOOTHNESS) / 100.0); }
+    public static boolean hotbarRollover() { return getSafe(HOTBAR_ROLLOVER); }
+    public static boolean staticSelector() { return getSafe(HOTBAR_STATIC_SELECTOR); }
 
-    public static float creativeScreenSmoothness() { return (float) (CREATIVE_SMOOTHNESS.get() / 100.0); }
+    public static float chatSmoothness() { return (float) (getSafe(CHAT_SMOOTHNESS) / 100.0); }
+    public static float chatOpeningSmoothness() { return (float) (getSafe(CHAT_OPENING_SMOOTHNESS) / 100.0); }
+    public static float chatAmount() { return getSafe(CHAT_SCROLLING_SPEED).floatValue(); }
+    public static float suggestionWindowSmoothness() { return (float) (getSafe(CHAT_SUGGESTION_SMOOTHNESS) / 100.0); }
+    public static float suggestionWindowAmount() { return getSafe(CHAT_SUGGESTION_SPEED).floatValue(); }
 
-    public static float entryListSmoothness() { return (float) (ENTRY_SMOOTHNESS.get() / 100.0); }
-    public static double entryListAmount() { return ENTRY_SPEED.get(); }
+    public static float creativeScreenSmoothness() { return (float) (getSafe(CREATIVE_SMOOTHNESS) / 100.0); }
 
-    public static float textSmoothness() { return (float) (TEXT_SMOOTHNESS.get() / 100.0); }
-    public static float textAmount() { return TEXT_SPEED.get().floatValue(); }
-    public static float textMargin() { return TEXT_CURSOR_MARGIN.get().floatValue(); }
-    public static boolean textCustomUpdate() { return TEXT_CUSTOM_CURSOR_UPDATE.get(); }
+    public static float entryListSmoothness() { return (float) (getSafe(ENTRY_SMOOTHNESS) / 100.0); }
+    public static double entryListAmount() { return getSafe(ENTRY_SPEED); }
 
-    public static boolean enableMaskDebug() { return MISC_MASK_DEBUG.get(); }
+    public static float textSmoothness() { return (float) (getSafe(TEXT_SMOOTHNESS) / 100.0); }
+    public static float textAmount() { return getSafe(TEXT_SPEED).floatValue(); }
+    public static float textMargin() { return getSafe(TEXT_CURSOR_MARGIN).floatValue(); }
+    public static boolean textCustomUpdate() { return getSafe(TEXT_CUSTOM_CURSOR_UPDATE); }
+
+    public static boolean enableMaskDebug() { return getSafe(MISC_MASK_DEBUG); }
 }

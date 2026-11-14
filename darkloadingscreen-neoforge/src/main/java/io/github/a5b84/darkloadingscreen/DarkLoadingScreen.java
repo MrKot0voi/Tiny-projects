@@ -5,6 +5,7 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
 import io.github.a5b84.darkloadingscreen.config.Config;
+import io.github.a5b84.darkloadingscreen.early.EarlyDarkBootstrap;
 import io.github.a5b84.darkloadingscreen.mixin.GlCommandEncoderMixin;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -42,7 +43,7 @@ public class DarkLoadingScreen {
 
     /**
      * Значения по умолчанию до загрузки конфига. ModConfigSpec.get() до загрузки бросает исключение,
-     * поэтому реальные значения читаются в {@link #onConfigChanged} (ModConfigEvent).
+     * поэтому реальные значения читаются в {@link #onConfigChanged} (ModConfigEvent.Loading / Reloading).
      */
     public static Config config = Config.DEFAULT;
 
@@ -50,7 +51,8 @@ public class DarkLoadingScreen {
         container.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
 
         modBus.addListener(DarkLoadingScreen::onRegisterRenderPipelines);
-        modBus.addListener(DarkLoadingScreen::onConfigChanged);
+        modBus.addListener(ModConfigEvent.Loading.class, DarkLoadingScreen::onConfigChanged);
+        modBus.addListener(ModConfigEvent.Reloading.class, DarkLoadingScreen::onConfigChanged);
     }
 
     private static void onRegisterRenderPipelines(RegisterRenderPipelinesEvent event) {
@@ -59,5 +61,11 @@ public class DarkLoadingScreen {
 
     private static void onConfigChanged(ModConfigEvent event) {
         config = Config.read();
+        try {
+            EarlyDarkBootstrap.syncWithConfig(
+                    config.bg, config.bar, config.barBg, config.border, config.logo
+            );
+        } catch (Throwable ignored) {
+        }
     }
 }

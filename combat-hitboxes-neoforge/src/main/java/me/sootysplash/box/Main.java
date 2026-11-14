@@ -13,7 +13,10 @@ import org.apache.logging.log4j.Logger;
 @Mod(value = Main.MODID, dist = Dist.CLIENT)
 public class Main {
    public static final String MODID = "combat_hitboxes";
-   public static Minecraft mc = Minecraft.getInstance();
+   // Не кешируем в static-поле: на момент создания мода Minecraft.getInstance() ещё null.
+   public static Minecraft mc() {
+      return Minecraft.getInstance();
+   }
    public static final Logger LOGGER = LogManager.getLogger("CombatHitboxes");
 
    public Main(ModContainer container) {

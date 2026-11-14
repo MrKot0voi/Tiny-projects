@@ -1,5 +1,6 @@
 package com.ic3dwtf.pingnametag.mixin;
 
+import com.ic3dwtf.pingnametag.CrashGuard;
 import com.ic3dwtf.pingnametag.config.PingNametagConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -20,67 +21,76 @@ public abstract class EntityRendererMixin {
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
     private void ping_nametag$appendPingOverlayToFinalLabel(Entity entity, EntityRenderState state, float tickProgress, CallbackInfo ci) {
-        PingNametagConfig config = PingNametagConfig.get();
-
-        if (!config.enabled()) {
+        CrashGuard.flushIfReady();
+        if (entity == null || state == null) {
             return;
         }
+        try {
+            PingNametagConfig config = PingNametagConfig.get();
 
-        if (!(entity instanceof AbstractClientPlayer self)) {
-            return;
-        }
+            if (!config.enabled()) {
+                return;
+            }
 
-        Component originalText = ((EntityRenderStateAccessor) state).ping_nametag$getDisplayName();
-        if (originalText == null || originalText.getString().isEmpty()) {
-            return;
-        }
+            if (!(entity instanceof AbstractClientPlayer self)) {
+                return;
+            }
 
-        Minecraft client = Minecraft.getInstance();
-        if (client.player == null || client.getConnection() == null) {
-            return;
-        }
+            Component originalText = ((EntityRenderStateAccessor) state).ping_nametag$getDisplayName();
+            if (originalText == null || originalText.getString().isEmpty()) {
+                return;
+            }
 
-        if (!config.showOwnPing() && self.getUUID().equals(client.player.getUUID())) {
-            return;
-        }
+            Minecraft client = Minecraft.getInstance();
+            if (client == null || client.player == null || client.getConnection() == null) {
+                return;
+            }
 
-        PlayerInfo entry = client.getConnection().getPlayerInfo(self.getUUID());
-        if (entry == null) {
-            String textFormat = config.textFormat().replace("%ping%", "??");
-            MutableComponent unknownSuffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(0xAAAAAA));
+            if (!config.showOwnPing() && self.getUUID().equals(client.player.getUUID())) {
+                return;
+            }
+
+            PlayerInfo entry = client.getConnection().getPlayerInfo(self.getUUID());
+            if (entry == null) {
+                String textFormat = config.textFormat().replace("%ping%", "??");
+                MutableComponent unknownSuffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(0xAAAAAA));
+                ((EntityRenderStateAccessor) state).ping_nametag$setDisplayName(
+                        ping_nametag$baseLabelWithoutPingSuffix(originalText).append(unknownSuffix)
+                );
+                return;
+            }
+
+            int latency = Math.max(0, entry.getLatency());
+            String textFormat = config.textFormat().replace("%ping%", String.valueOf(latency));
+            MutableComponent suffix = Component.literal(textFormat)
+                    .setStyle(Style.EMPTY.withColor(config.colorForPing(latency)));
+
             ((EntityRenderStateAccessor) state).ping_nametag$setDisplayName(
-                    ping_nametag$baseLabelWithoutPingSuffix(originalText).append(unknownSuffix)
+                    ping_nametag$baseLabelWithoutPingSuffix(originalText).append(suffix)
             );
-            return;
+        } catch (Throwable t) {
+            CrashGuard.report("EntityRendererMixin.appendPingOverlay", t);
         }
-
-        int latency = Math.max(0, entry.getLatency());
-        String textFormat = config.textFormat().replace("%ping%", String.valueOf(latency));
-        MutableComponent suffix = Component.literal(textFormat)
-                .setStyle(Style.EMPTY.withColor(config.colorForPing(latency)));
-
-        ((EntityRenderStateAccessor) state).ping_nametag$setDisplayName(
-                ping_nametag$baseLabelWithoutPingSuffix(originalText).append(suffix)
-        );
     }
 
     private static MutableComponent ping_nametag$baseLabelWithoutPingSuffix(Component originalText) {
-        MutableComponent baseText = originalText.copy();
-        var siblings = baseText.getSiblings();
+        var siblings = originalText.getSiblings();
         if (siblings.isEmpty()) {
-            return baseText;
+            return originalText.copy();
         }
 
         Component lastSibling = siblings.get(siblings.size() - 1);
-        if (ping_nametag$isPingSuffix(lastSibling.getString())) {
-            siblings.remove(siblings.size() - 1);
-        }
+        int limit = ping_nametag$isPingSuffix(lastSibling.getString()) ? siblings.size() - 1 : siblings.size();
 
-        return baseText;
+        MutableComponent rebuilt = MutableComponent.create(originalText.getContents()).setStyle(originalText.getStyle());
+        for (int i = 0; i < limit; i++) {
+            rebuilt.append(siblings.get(i));
+        }
+        return rebuilt;
     }
 
     private static boolean ping_nametag$isPingSuffix(String text) {
-        if (!text.startsWith(" (") || !text.endsWith("ms)")) {
+        if (text == null || !text.startsWith(" (") || !text.endsWith("ms)")) {
             return false;
         }
 

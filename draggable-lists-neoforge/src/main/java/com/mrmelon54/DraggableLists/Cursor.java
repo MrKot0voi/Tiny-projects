@@ -5,21 +5,41 @@ import org.lwjgl.glfw.GLFW;
 
 public class Cursor {
     private static boolean isDragging;
+    private static long vResizeCursor = 0L;
+    private static long arrowCursor = 0L;
 
     public static void setDragging() {
-        isDragging = true;
-        GLFW.glfwSetCursor(
-            Minecraft.getInstance().getWindow().handle(),
-            GLFW.glfwCreateStandardCursor(GLFW.GLFW_VRESIZE_CURSOR)
-        );
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc == null || mc.getWindow() == null || mc.getWindow().handle() == 0L) {
+                return;
+            }
+            isDragging = true;
+            if (vResizeCursor == 0L) {
+                vResizeCursor = GLFW.glfwCreateStandardCursor(GLFW.GLFW_VRESIZE_CURSOR);
+            }
+            if (vResizeCursor != 0L) {
+                GLFW.glfwSetCursor(mc.getWindow().handle(), vResizeCursor);
+            }
+        } catch (Throwable t) {
+            CrashGuard.report("Cursor.setDragging", t);
+        }
     }
 
     public static void reset() {
         if (!isDragging) return;
         isDragging = false;
-        GLFW.glfwSetCursor(
-            Minecraft.getInstance().getWindow().handle(),
-            GLFW.glfwCreateStandardCursor(GLFW.GLFW_ARROW_CURSOR)
-        );
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc == null || mc.getWindow() == null || mc.getWindow().handle() == 0L) {
+                return;
+            }
+            if (arrowCursor == 0L) {
+                arrowCursor = GLFW.glfwCreateStandardCursor(GLFW.GLFW_ARROW_CURSOR);
+            }
+            GLFW.glfwSetCursor(mc.getWindow().handle(), arrowCursor);
+        } catch (Throwable t) {
+            CrashGuard.report("Cursor.reset", t);
+        }
     }
 }

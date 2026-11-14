@@ -2,11 +2,6 @@ package nukeduck.armorchroma.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * Конфиг мода. Раньше использовался Cloth Config + ModMenu (Fabric);
- * теперь это ModConfigSpec, экран настроек открывается через стандартный
- * экран конфигов NeoForge (кнопка мода в списке модов).
- */
 public class ArmorChromaConfig {
    public static final ModConfigSpec SPEC;
    private static final ModConfigSpec.BooleanValue ENABLED;
@@ -35,35 +30,43 @@ public class ArmorChromaConfig {
       SPEC = builder.build();
    }
 
+   private static <T> T getSafe(ModConfigSpec.ConfigValue<T> val) {
+      try {
+         return SPEC.isLoaded() ? val.get() : val.getDefault();
+      } catch (Throwable t) {
+         return val.getDefault();
+      }
+   }
+
    public boolean isEnabled() {
-      return ENABLED.get();
+      return getSafe(ENABLED);
    }
 
    public boolean renderGlint() {
-      return RENDER_GLINT.get();
+      return getSafe(RENDER_GLINT);
    }
 
    public float glintIntensity() {
-      return GLINT_INTENSITY.get().floatValue();
+      return getSafe(GLINT_INTENSITY).floatValue();
    }
 
    public boolean renderBackground() {
-      return RENDER_BACKGROUND.get();
+      return getSafe(RENDER_BACKGROUND);
    }
 
    public boolean compressBar() {
-      return COMPRESS_BAR.get();
+      return getSafe(COMPRESS_BAR);
    }
 
    public int getDisplayedArmorCap() {
-      return DISPLAYED_ARMOR_CAP.get();
+      return getSafe(DISPLAYED_ARMOR_CAP);
    }
 
    public boolean reverse() {
-      return REVERSE.get();
+      return getSafe(REVERSE);
    }
 
    public boolean showMaterialInTooltip() {
-      return SHOW_MATERIAL_IN_TOOLTIP.get();
+      return getSafe(SHOW_MATERIAL_IN_TOOLTIP);
    }
 }

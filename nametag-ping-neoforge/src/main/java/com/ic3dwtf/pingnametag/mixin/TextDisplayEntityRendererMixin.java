@@ -1,5 +1,6 @@
 package com.ic3dwtf.pingnametag.mixin;
 
+import com.ic3dwtf.pingnametag.CrashGuard;
 import com.ic3dwtf.pingnametag.config.PingNametagConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -29,76 +30,84 @@ public abstract class TextDisplayEntityRendererMixin {
             at = @At("TAIL")
     )
     private void ping_nametag$appendPingToPlayerMountedTextDisplay(Display.TextDisplay entity, TextDisplayEntityRenderState renderState, float tickProgress, CallbackInfo ci) {
-        PingNametagConfig config = PingNametagConfig.get();
-
-        if (!config.enabled()) {
+        if (entity == null || renderState == null) {
             return;
         }
+        try {
+            PingNametagConfig config = PingNametagConfig.get();
 
-        Minecraft client = Minecraft.getInstance();
-        if (client.player == null || client.getConnection() == null) {
-            return;
-        }
-
-        Component baseText = ((TextDisplayAccessor) entity).ping_nametag$getText();
-        String baseTextValue = baseText == null ? "" : baseText.getString();
-        if (baseTextValue.isEmpty()) {
-            return;
-        }
-
-        int firstNewline = baseTextValue.indexOf('\n');
-        String firstLine = firstNewline >= 0 ? baseTextValue.substring(0, firstNewline) : baseTextValue;
-
-        PlayerInfo entry = null;
-        Entity vehicle = entity.getVehicle();
-
-        if (vehicle instanceof Player vehiclePlayer) {
-            if (firstNewline < 0 && !firstLine.contains(vehiclePlayer.getScoreboardName())) {
+            if (!config.enabled()) {
                 return;
             }
 
-            if (!config.showOwnPing() && vehiclePlayer.getUUID().equals(client.player.getUUID())) {
+            Minecraft client = Minecraft.getInstance();
+            if (client == null || client.player == null || client.getConnection() == null) {
                 return;
             }
 
-            entry = client.getConnection().getPlayerInfo(vehiclePlayer.getUUID());
-        } else {
-            if (!firstLine.isEmpty()) {
-                for (PlayerInfo candidate : client.getConnection().getOnlinePlayers()) {
-                    String name = candidate.getProfile().name();
+            Component baseText = ((TextDisplayAccessor) entity).ping_nametag$getText();
+            String baseTextValue = baseText == null ? "" : baseText.getString();
+            if (baseTextValue.isEmpty()) {
+                return;
+            }
 
-                    if (name != null && !name.isEmpty() && firstLine.contains(name)) {
-                        if (!config.showOwnPing() && candidate.getProfile().id().equals(client.player.getUUID())) {
-                            return;
+            int firstNewline = baseTextValue.indexOf('\n');
+            String firstLine = firstNewline >= 0 ? baseTextValue.substring(0, firstNewline) : baseTextValue;
+
+            PlayerInfo entry = null;
+            Entity vehicle = entity.getVehicle();
+
+            if (vehicle instanceof Player vehiclePlayer) {
+                if (firstNewline < 0 && !firstLine.contains(vehiclePlayer.getScoreboardName())) {
+                    return;
+                }
+
+                if (!config.showOwnPing() && vehiclePlayer.getUUID().equals(client.player.getUUID())) {
+                    return;
+                }
+
+                entry = client.getConnection().getPlayerInfo(vehiclePlayer.getUUID());
+            } else {
+                if (!firstLine.isEmpty()) {
+                    for (PlayerInfo candidate : client.getConnection().getOnlinePlayers()) {
+                        if (candidate == null || candidate.getProfile() == null) continue;
+                        String name = candidate.getProfile().name();
+
+                        if (name != null && !name.isEmpty() && firstLine.contains(name)) {
+                            if (!config.showOwnPing() && candidate.getProfile().id() != null && candidate.getProfile().id().equals(client.player.getUUID())) {
+                                return;
+                            }
+
+                            entry = candidate;
+                            break;
                         }
-
-                        entry = candidate;
-                        break;
                     }
+                }
+
+                if (entry == null) {
+                    return;
                 }
             }
 
+            MutableComponent suffix;
+
             if (entry == null) {
-                return;
+                String textFormat = config.textFormat().replace("%ping%", "??");
+                suffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(0xAAAAAA));
+            } else {
+                int latency = Math.max(0, entry.getLatency());
+                String textFormat = config.textFormat().replace("%ping%", String.valueOf(latency));
+                suffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(config.colorForPing(latency)));
             }
+
+            Component modifiedText = ping_nametag$appendSuffixToTopLine(baseText, suffix);
+
+            ((TextDisplayEntityRenderStateAccessor) renderState).ping_nametag$setTextLines(
+                    splitLines(modifiedText, ((TextDisplayAccessor) entity).ping_nametag$getLineWidth())
+            );
+        } catch (Throwable t) {
+            CrashGuard.report("TextDisplayEntityRendererMixin.appendPing", t);
         }
-
-        MutableComponent suffix;
-
-        if (entry == null) {
-            String textFormat = config.textFormat().replace("%ping%", "??");
-            suffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(0xAAAAAA));
-        } else {
-            int latency = Math.max(0, entry.getLatency());
-            String textFormat = config.textFormat().replace("%ping%", String.valueOf(latency));
-            suffix = Component.literal(textFormat).setStyle(Style.EMPTY.withColor(config.colorForPing(latency)));
-        }
-
-        Component modifiedText = ping_nametag$appendSuffixToTopLine(baseText, suffix);
-
-        ((TextDisplayEntityRenderStateAccessor) renderState).ping_nametag$setTextLines(
-                splitLines(modifiedText, ((TextDisplayAccessor) entity).ping_nametag$getLineWidth())
-        );
     }
 
     private static Component ping_nametag$appendSuffixToTopLine(Component baseText, MutableComponent suffix) {
