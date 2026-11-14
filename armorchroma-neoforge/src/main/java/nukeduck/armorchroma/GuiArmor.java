@@ -92,32 +92,46 @@ public class GuiArmor {
       if (icon == null) {
          return;
       }
-      if (segment.hasGlint()) {
-         this.addZOffset(context, 2);
-      }
+      boolean glint = segment.hasGlint();
 
       int i = barPoints & 1;
       int x = left + barPoints * 4;
       if (i == 1) {
          this.drawMaskedIcon(context, x - 4, top, icon, segment.getLeadingMask(), 4);
+         if (glint) {
+            this.drawGlint(context, x - 4, top, GlintCellCache.half(icon, segment.getLeadingMask()), 4, 5);
+         }
          x += 4;
       }
 
       while (i < stackPoints - 1) {
          icon.draw(context, x, top);
+         if (glint) {
+            this.drawGlint(context, x, top, GlintCellCache.full(icon), 0, ArmorIcon.ICON_SIZE);
+         }
          i += 2;
          x += 8;
       }
 
       if (i < stackPoints) {
          this.drawMaskedIcon(context, x, top, icon, segment.getTrailingMask(), 0);
+         if (glint) {
+            this.drawGlint(context, x, top, GlintCellCache.half(icon, segment.getTrailingMask()), 0, 5);
+         }
       }
+   }
 
-      if (segment.hasGlint()) {
-         // Свечение поверх иконок, полупрозрачное (альфа зависит от интенсивности).
-         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
+   /** Свечение по форме иконки: рисуется только поверх непрозрачных пикселей брони. */
+   private void drawGlint(GuiGraphics context, int x, int y, Identifier cell, int uOffset, int width) {
+      if (cell == null) {
+         return;
       }
-
+      Minecraft mc = Minecraft.getInstance();
+      float baseGlint = (mc != null && mc.options != null) ? mc.options.glintStrength().get().floatValue() : 1.0F;
+      float intensity = Mth.clamp(baseGlint * ArmorChroma.config.glintIntensity(), 0.0F, 1.0F);
+      int size = ArmorIcon.ICON_SIZE;
+      int color = ARGB.colorFromFloat(intensity * 0.5F, 1.0F, 1.0F, 1.0F);
+      context.blit(RenderPipelines.GUI_TEXTURED, cell, x + uOffset, y, uOffset, 0, width, size, size, size, color);
    }
 
    private int buildArmorSegments(LocalPlayer player, List<ArmorBarSegment> segments) {

@@ -77,7 +77,7 @@ public final class MaskedIconCache {
       }
    }
 
-   private static NativeImage load(Identifier texture) throws IOException {
+   static NativeImage load(Identifier texture) throws IOException {
       Minecraft mc = Minecraft.getInstance();
       if (mc == null || mc.getResourceManager() == null) {
          return null;
