@@ -14,10 +14,14 @@ import walksy.shieldfixes.config.ShieldFixesConfig;
 import java.util.List;
 
 public class EnvironmentEffectShieldManager {
-    private final Minecraft minecraft = Minecraft.getInstance();
+
+    // Не кешируем Minecraft в поле: менеджер создаётся до появления клиента, и поле осталось бы null.
+    private static Minecraft minecraft() {
+        return Minecraft.getInstance();
+    }
 
     public void onExplosion(final WorldExplosion explosion) {
-        if (!explosion.level().isClientSide() || this.minecraft.player == null) {
+        if (!explosion.level().isClientSide() || minecraft().player == null) {
             return;
         }
         for (final Player affectedPlayer : getNearPlayers(explosion)) {
@@ -36,7 +40,7 @@ public class EnvironmentEffectShieldManager {
     }
 
     public void onAttack(final Player target) {
-        if (ShieldStateManager.isUsingShield(target, this.minecraft.player.position(), true) && !ShieldStateManager.disablesShield(this.minecraft.player)) {
+        if (ShieldStateManager.isUsingShield(target, minecraft().player.position(), true) && !ShieldStateManager.disablesShield(minecraft().player)) {
             this.sound(target, shieldBlock());
         }
     }
@@ -54,10 +58,10 @@ public class EnvironmentEffectShieldManager {
     }
 
     private void sound(final LivingEntity entity, final SoundEvent soundEvent) {
-        if (this.minecraft.level == null) {
+        if (minecraft().level == null) {
             return;
         }
-        this.minecraft.level.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), soundEvent, entity.getSoundSource(), 1F, 0.8F + this.minecraft.level.getRandom().nextFloat() * 0.4F);
+        minecraft().level.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), soundEvent, entity.getSoundSource(), 1F, 0.8F + minecraft().level.getRandom().nextFloat() * 0.4F);
     }
 
     public record WorldExplosion(Vec3 pos, Level level, float power) {
