@@ -95,6 +95,10 @@ public class GuiArmor {
       if (segment.hasGlint()) {
          this.addZOffset(context, 2);
       }
+      if (segment.hasGlint()) {
+         // Свечение под иконками: иконки остаются видимыми, свечение видно на фоне вокруг них.
+         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
+      }
 
       int i = barPoints & 1;
       int x = left + barPoints * 4;
@@ -113,10 +117,6 @@ public class GuiArmor {
          this.drawMaskedIcon(context, x, top, icon, segment.getTrailingMask(), 0);
       }
 
-      if (segment.hasGlint()) {
-         this.drawTexturedGlintRect(context, left + barPoints * 4, top, barPoints * 4, 0, stackPoints * 4 + 1, 9);
-         this.addZOffset(context, -2);
-      }
    }
 
    private int buildArmorSegments(LocalPlayer player, List<ArmorBarSegment> segments) {

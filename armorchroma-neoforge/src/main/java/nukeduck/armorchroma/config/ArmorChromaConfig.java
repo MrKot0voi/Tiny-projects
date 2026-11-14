@@ -19,7 +19,7 @@ public class ArmorChromaConfig {
       ENABLED = builder.comment("Replace the vanilla armor bar with the Armor Chroma bar.").define("enabled", true);
       RENDER_GLINT = builder.comment("Show the enchantment sheen on enchanted armor.").define("renderGlint", true);
       GLINT_INTENSITY = builder.comment("Strength of the enchantment sheen, multiplied by the game's glint setting.")
-         .defineInRange("glintIntensity", 1.0, 0.0, 1.0);
+         .defineInRange("glintIntensity", 0.5, 0.0, 1.0);
       RENDER_BACKGROUND = builder.comment("Always draw the armor bar background.").define("renderBackground", true);
       COMPRESS_BAR = builder.comment("Compress armor above 20 points into overlapping rows.").define("compressBar", false);
       DISPLAYED_ARMOR_CAP = builder.comment("Maximum armor points shown on the bar.")
