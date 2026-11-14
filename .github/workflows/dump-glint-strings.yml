@@ -33,8 +33,9 @@ jobs:
           for j in $(find build "$HOME/.gradle" -name "*.jar" 2>/dev/null); do
             if unzip -l "$j" 2>/dev/null | grep -q 'net/minecraft/client/gui/Gui.class'; then MC="$j"; break; fi
           done
+          MC="$(realpath "$MC")"
           echo "MC=$MC"
-          mkdir -p build/glint && cd build/glint && unzip -q -o "$MC" '*.class' 2>/dev/null || true
+          mkdir -p build/glint && (cd build/glint && unzip -q -o "$MC" '*.class' 2>/dev/null || true)
           cd "$GITHUB_WORKSPACE/armorchroma-neoforge"
           { echo "== class strings containing enchant/glint =="; grep -rahoE "[A-Za-z0-9_/.:-]*(enchant|glint|Glint|Enchant)[A-Za-z0-9_/.:-]*" build/glint | sort | uniq -c | sort -rn | head -150; } > build/glint.txt 2>&1 || true
       - name: Commit result
